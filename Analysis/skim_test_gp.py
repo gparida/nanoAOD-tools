@@ -4,29 +4,26 @@ import ROOT
 ROOT.PyConfig.IgnoreCommandLineOptions = True  #Find out what does this do ?
 
 class mySkimAdd(Module):
-	 def __init__(self):
-        # add any arguments needed after the self and set them here
-        pass
-
-    def beginJob(self):
+	def __init__(self):
+        	# add any arguments needed after the self and set them here
+        	pass
+	def beginJob(self):
 		pass
 
 	def endJob(self):
-    	pass
+    		pass
+ 	def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
+    		self.out = wrappedOutputTree #--->Is this the name of output file
+    		self.out.branch("MET_Trigger_pt","F");
+        	self.out.branch("MET_HT_Trigger_pt","F");
+        	self.out.branch("MET_Lepton_Trigger_pt","F");
+        	self.out.branch("MET_HT_Lepton_Trigger_pt","F");
 
-    def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
-    	self.out = wrappedOutputTree #--->Is this the name of output file
-    	self.out.branch("MET_Trigger_pt","F");
-        self.out.branch("MET_HT_Trigger_pt","F");
-        self.out.branch("MET_Lepton_Trigger_pt","F");
-        self.out.branch("MET_HT_Lepton_Trigger_pt","F");
-
-    def endFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
-        pass
+    	def endFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
+        	pass
 
 
-    def analyze(self, event):
-
+    	def analyze(self, event):
 		if((event.HLT_PFMETNoMu90_PFMHTNoMu90_IDTight
 			or event.HLT_PFMETNoMu110_PFMHTNoMu110_IDTight 
 			or event.HLT_PFMETNoMu120_PFMHTNoMu120_IDTight 
@@ -109,7 +106,7 @@ class mySkimAdd(Module):
 		return True
 
 
-mySkimAdd = lambda: mySkimAdd()
+mySkimAddevents = lambda: mySkimAdd()
 
 
 
