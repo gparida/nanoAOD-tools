@@ -1,0 +1,16 @@
+# this is a comment
+keep *
+drop *FsrPhoton*
+drop GenIsolatedPhoton*
+drop nGenIsolatedPhoton
+drop SoftActivityJet*
+drop SoftActivityJetHT*
+drop SoftActivityJetHT10*
+drop SoftActivityJetHT2*
+drop SoftActivityJetHT5*
+drop genTtbarId*
+drop IsoTrack*
+drop Photon*
+drop nPhoton
+drop L1*
+
