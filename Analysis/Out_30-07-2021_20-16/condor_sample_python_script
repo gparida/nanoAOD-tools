@@ -1,0 +1,21 @@
+x509userproxy = /tmp/x509up_u10104
+universe = vanilla
+Executable = Out_30-07-2021_20-16/Job_sample_python_script.sh
+Notification         = never
+WhenToTransferOutput = On_Exit
+ShouldTransferFiles  = yes
+Requirements = (TARGET.UidDomain == "hep.wisc.edu" && TARGET.HAS_CMS_HDFS && OpSysAndVer == "CENTOS7" && TARGET.Arch == "X86_64" && (MY.RequiresSharedFS=!=true || TARGET.HasAFS_OSG) && (TARGET.OSG_major =!= undefined || TARGET.IS_GLIDEIN=?=true) && IsSlowSlot=!=true)
+on_exit_remove       = (ExitBySignal == FALSE && (ExitCode == 0 || ExitCode == 42 || NumJobStarts>3))
++IsFastQueueJob      = True
+getenv               = True
+request_memory       = 1992
+request_disk         = 2048000
+
+#OutputDestination = 
+#Initialdir = Out_sample_python_script         
+Transfer_Input_Files = /afs/hep.wisc.edu/home/parida/Physics_Tools_NanoAOD_Tools_HHbbtt/CMSSW_10_6_25/src/PhysicsTools/NanoAODTools/Analysis/runFile_skim_test_gp.py , /afs/hep.wisc.edu/home/parida/Physics_Tools_NanoAOD_Tools_HHbbtt/CMSSW_10_6_25/src/PhysicsTools/NanoAODTools/Analysis/skim_test_gp.py , /afs/hep.wisc.edu/home/parida/Physics_Tools_NanoAOD_Tools_HHbbtt/CMSSW_10_6_25/src/PhysicsTools
+
+output               = Out_30-07-2021_20-16/$(Cluster)_$(Process)_sample_python_script.out
+error                = Out_30-07-2021_20-16/$(Cluster)_$(Process)_sample_python_script.err
+Log                  = Out_30-07-2021_20-16/$(Cluster)_$(Process)_sample_python_script.log
+Queue
