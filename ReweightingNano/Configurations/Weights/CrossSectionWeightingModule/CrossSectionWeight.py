@@ -12,7 +12,7 @@ def CalculateCrossSectionWeight(self,theTree):
         LHCLumi = 19.5e15
     elif self.year == "2017":
         LHCLumi = 41.8e15
-    elif self.year= "2018":
+    elif self.year == "2018":
     	LHCLumi = 59.83e15
 
 
