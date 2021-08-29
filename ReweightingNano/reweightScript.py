@@ -65,7 +65,8 @@ class addingWeights(Module):
         self.listOfBranchesWithVariationToAdd = listOfBranchesWithVariationToAdd
         self.finalWeightBranch = finalWeightBranch
 
-        print (self.)
+        print ("Has the module transferred correctly: ", self.sampleModule)
+        print ("Has the instance of reweighting transferred correctly", self.configObject)
         # add any arguments needed after the self and set them here
         
 
