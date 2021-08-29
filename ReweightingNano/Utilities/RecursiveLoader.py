@@ -13,7 +13,9 @@ class RecursiveLoader():
                 try:
                     Module = getattr(Module,ToLoad[i])
                 except AttributeError:
-                    continue                
+                    print("oopsies")
+                    continue
+            print type(Module)                
             return Module
     def LoadFromDirectoryPath(self,PathToLoad):
         #trim the .py file extension off
