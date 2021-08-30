@@ -4,11 +4,11 @@ import argparse  ##Importing root and package to take arguments
 
 class MakeHistograms(object):
     #constructor to initialize the objects
-    def __init__(self,RootFilePath,RootFileName,Weight):
+    def __init__(self,RootFilePath,RootFileName):
         self.RootFileName = ROOT.TFile(RootFilePath+RootFileName+'.root')
         self.HistogramName = None
         self.PassFailHistogramName = ROOT.TH1F("PassFailHist","PassFailHist",1,0,1)
-        self.Weight = Weight
+        #self.Weight = Weight
 
     #Cut creating member function
     def CreateCutString(self,standardCutString,
@@ -30,7 +30,7 @@ class MakeHistograms(object):
                  standardCutString,
                  additionalSelections,
                  histogramName,
-                 theWeight):
+                 theWeight = 'FinalWeighting'):
         trig_MET_MC =["HLT_PFMETNoMu90_PFMHTNoMu90_IDTight",
             "HLT_PFMETNoMu110_PFMHTNoMu110_IDTight",
             "HLT_PFMETNoMu120_PFMHTNoMu120_IDTight",
@@ -52,10 +52,10 @@ class MakeHistograms(object):
                 "HLT_PFMET170_HBHE_BeamHaloCleaned"]
 
         theTree = theFile.Get('Events')
-        print (variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
+        print (variable+'>>'+ histogramName +'('+variableSettingDictionary[variable]+')',
                              self.CreateCutString(standardCutString,
                                              additionalSelections,theWeight)+' && '+'(' + '||'.join(trig_MET_MC) + ')'+')')
-        theTree.Draw(variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
+        theTree.Draw(variable+'>>'+ histogramName +'('+variableSettingDictionary[variable]+')',
                              self.CreateCutString(standardCutString,
                                              additionalSelections,theWeight)+' && '+'(' + '||'.join(trig_MET_MC) + ')'+')')
     #so, if the tree has no entries, root doesn't even hand back an empty histogram
@@ -180,34 +180,34 @@ variableAxisTitleDictionary = {
     #'MT':'Transverse Mass',
     }
 
-DatasetNameXSWeightDictionary={
-    "QCD_Pt_1000to1400":0.006405107,
-    "QCD_Pt_120to170":230.3234918,
-    "QCD_Pt_1400to1800":0.000997817,
-    "QCD_Pt_15to30":1058937.981,
-    "QCD_Pt_170to300":59.15251935,
-    "QCD_Pt_1800to2400":0.00026933,
-    "QCD_Pt_2400to3200":0.0000296633850303439,
-    "QCD_Pt_300to470":2.00778766,
-    "QCD_Pt_30to50":90647.48201,
-    "QCD_Pt_3200toInf":0.00000227136,
-    "QCD_Pt_470to600":0.178230811,
-    "QCD_Pt_800to1000":0.011793967,
-    "QCD_Pt_80to120":1323.643203,
-    "QCD_Pt_50to80":13473.64119,
-    "QCD_Pt_600to800":0.040118257,
-    "ST_s-channel_4f":0.009501705,
-    "TTTo2L2Nu":0.255495352,
-    "TTToHadronic":0.102523092,
-    #"TTToSemiLeptonic":0.07267512,
-    "WJetsToLNu":10.63712415,
-    "WW":0.088197968,
-    "WZ":0.060063755,
-    "ZZ":0.197924492,
-    "DYJetsToLL_M-10to50":9.15316241,
-    "DYJetsToLL_M-50":0.901934791,
-    "data":1
-    }
+#DatasetNameXSWeightDictionary={
+#    "QCD_Pt_1000to1400":0.006405107,
+#    "QCD_Pt_120to170":230.3234918,
+#    "QCD_Pt_1400to1800":0.000997817,
+#    "QCD_Pt_15to30":1058937.981,
+#    "QCD_Pt_170to300":59.15251935,
+#    "QCD_Pt_1800to2400":0.00026933,
+#    "QCD_Pt_2400to3200":0.0000296633850303439,
+#    "QCD_Pt_300to470":2.00778766,
+#    "QCD_Pt_30to50":90647.48201,
+#    "QCD_Pt_3200toInf":0.00000227136,
+#    "QCD_Pt_470to600":0.178230811,
+#    "QCD_Pt_800to1000":0.011793967,
+#    "QCD_Pt_80to120":1323.643203,
+#    "QCD_Pt_50to80":13473.64119,
+#    "QCD_Pt_600to800":0.040118257,
+#    "ST_s-channel_4f":0.009501705,
+#    "TTTo2L2Nu":0.255495352,
+#    "TTToHadronic":0.102523092,
+#    "TTToSemiLeptonic":0.07267512,
+#    "WJetsToLNu":10.63712415,
+#    "WW":0.088197968,
+#    "WZ":0.060063755,
+#    "ZZ":0.197924492,
+#    "DYJetsToLL_M-10to50":9.15316241,
+#    "DYJetsToLL_M-50":0.901934791,
+#    "data":1
+#    }
 
 DatasetNameList=["QCD_Pt_1000to1400",
 "QCD_Pt_120to170",
@@ -227,14 +227,14 @@ DatasetNameList=["QCD_Pt_1000to1400",
 "ST_s-channel_4f",
 "TTTo2L2Nu",
 "TTToHadronic",
-#"TTToSemiLeptonic",
-"WJetsToLNu",
+"TTToSemiLeptonic",
+"W",
 "WW",
 "WZ",
 "ZZ",
-"DYJetsToLL_M-10to50",
-"DYJetsToLL_M-50",
-"data"]
+"DYlow",
+"DY",
+"Data"]
 
 #DatasetObjects={}
 
@@ -430,7 +430,7 @@ def main():
         ####Drawing the Histograms#######  
         DatasetObjects={}
         for index in range(len(DatasetNameList)) :
-            DatasetObjects[DatasetNameList[index]]=MakeHistograms(dataPath,DatasetNameList[index],str(DatasetNameXSWeightDictionary[DatasetNameList[index]]))
+            DatasetObjects[DatasetNameList[index]]=MakeHistograms(dataPath,DatasetNameList[index])
 
         for index in range(len(DatasetNameList)):
             print DatasetNameList[index]
@@ -438,8 +438,7 @@ def main():
                 variable,
                 args.standardCutString,
                 args.additionalSelections,
-                DatasetNameList[index],
-                DatasetObjects[DatasetNameList[index]].Weight)  
+                DatasetNameList[index])  
             #DatasetObjects[DatasetNameList[index]].FillEvents((DatasetObjects[DatasetNameList[index]].RootFileName),DatasetNameList[index])
 
         
