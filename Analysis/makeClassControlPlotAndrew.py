@@ -578,7 +578,7 @@ def main():
 
         ScaleBackground = 1/BackgroundShape.Integral()
 
-        DataShape = DatasetObjects["data"].HistogramName.Clone()
+        DataShape = DatasetObjects["Data"].HistogramName.Clone()
         
         ScaleData = 1/DataShape.Integral()
 
@@ -590,12 +590,11 @@ def main():
         ###########################################Making the Stack of Histograms#####################################################################
         
         backgroundStack = ROOT.THStack('backgroundStack','backgroundstack')
-        #
         backgroundStack.Add(DY_Histo,'HIST')
         backgroundStack.Add(ST_Histo,'HIST')
         backgroundStack.Add(QCD_Histo,'HIST')
-        #backgroundStack.Add(WJets_Histo,'HIST')
-        #backgroundStack.Add(TT_Histo,'HIST')
+        backgroundStack.Add(WJets_Histo,'HIST')
+        backgroundStack.Add(TT_Histo,'HIST')
         backgroundStack.Add(DiBoson_Histo,'HIST')
 #
         backgroundStack_Errors = MakeStackErrors(backgroundStack)
@@ -613,23 +612,23 @@ def main():
         N_DY_Histo = (DY_Histo.Clone())
         N_ST_Histo = (ST_Histo.Clone())
         N_QCD_Histo = (QCD_Histo.Clone())
-        #N_WJets_Histo = (WJets_Histo.Clone())
-        #N_TT_Histo = (TT_Histo.Clone())
+        N_WJets_Histo = (WJets_Histo.Clone())
+        N_TT_Histo = (TT_Histo.Clone())
         N_DiBoson_Histo = (DiBoson_Histo.Clone())
 
         N_DY_Histo.Scale(ScaleBackground)
         N_ST_Histo.Scale(ScaleBackground) 
         N_QCD_Histo.Scale(ScaleBackground)
-        #N_WJets_Histo.Scale(ScaleBackground)
-        #N_TT_Histo.Scale(ScaleBackground)
+        N_WJets_Histo.Scale(ScaleBackground)
+        N_TT_Histo.Scale(ScaleBackground)
         N_DiBoson_Histo.Scale(ScaleBackground)
 
         ShapeStack = ROOT.THStack('ShapeStack','ShapeStack')
         ShapeStack.Add(N_DY_Histo,'HIST')
         ShapeStack.Add(N_ST_Histo,'HIST')
         ShapeStack.Add(N_QCD_Histo,'HIST')
-        #ShapeStack.Add(N_WJets_Histo,'HIST')
-        #ShapeStack.Add(N_TT_Histo,'HIST')
+        ShapeStack.Add(N_WJets_Histo,'HIST')
+        ShapeStack.Add(N_TT_Histo,'HIST')
         ShapeStack.Add(N_DiBoson_Histo,'HIST')
 
         ShapeStack_Errors = MakeStackErrors(ShapeStack)
@@ -682,8 +681,8 @@ def main():
         theLegend = ROOT.TLegend(0.61,0.61,0.88,0.88)
         theLegend.AddEntry(DatasetObjects["Data"].HistogramName,'Observed','pe')
         theLegend.AddEntry(DiBoson_Histo,'DiBoson','f')
-        #theLegend.AddEntry(TT_Histo,'TTbar','f')
-        #theLegend.AddEntry(WJets_Histo,'WJets','f')
+        theLegend.AddEntry(TT_Histo,'TTbar','f')
+        theLegend.AddEntry(WJets_Histo,'WJets','f')
         theLegend.AddEntry(QCD_Histo,'QCD','f')
         theLegend.AddEntry(ST_Histo,'ST_s_Channel','f')
         theLegend.AddEntry(DY_Histo,'Drell-Yan','f')
@@ -763,8 +762,8 @@ def main():
         theLegend2 = ROOT.TLegend(0.61,0.61,0.88,0.88)
         theLegend2.AddEntry(DataShape,'Observed','pe')
         theLegend2.AddEntry(N_DiBoson_Histo,'DiBoson','f')
-        #theLegend2.AddEntry(N_TT_Histo,'TTbar','f')
-        #theLegend2.AddEntry(N_WJets_Histo,'WJets','f')
+        theLegend2.AddEntry(N_TT_Histo,'TTbar','f')
+        theLegend2.AddEntry(N_WJets_Histo,'WJets','f')
         theLegend2.AddEntry(N_QCD_Histo,'QCD','f')
         theLegend2.AddEntry(N_ST_Histo,'ST_s_Channel','f')
         theLegend2.AddEntry(N_DY_Histo,'Drell-Yan','f')
