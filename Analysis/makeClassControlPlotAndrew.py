@@ -521,9 +521,9 @@ def main():
 
         ################################Data is represented as points########################################################################
 
-        DatasetObjects["data"].HistogramName.SetMarkerStyle(20)
-        DatasetObjects["data"].HistogramName.SetMarkerSize(1.5)
-        DatasetObjects["data"].HistogramName.Sumw2()
+        DatasetObjects["Data"].HistogramName.SetMarkerStyle(20)
+        DatasetObjects["Data"].HistogramName.SetMarkerSize(1.5)
+        DatasetObjects["Data"].HistogramName.Sumw2()
 
         #DatasetObjects["data"].PassFailHistogramName.SetMarkerStyle(20)
         #DatasetObjects["data"].PassFailHistogramName.SetMarkerSize(1.5)
