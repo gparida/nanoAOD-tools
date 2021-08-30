@@ -572,8 +572,8 @@ def main():
         BackgroundShape = DY_Histo.Clone()
         BackgroundShape.Add(ST_Histo)
         BackgroundShape.Add(QCD_Histo)
-        #BackgroundShape.Add(WJets_Histo)
-        #BackgroundShape.Add(TT_Histo)
+        BackgroundShape.Add(WJets_Histo)
+        BackgroundShape.Add(TT_Histo)
         BackgroundShape.Add(DiBoson_Histo)
 
         ScaleBackground = 1/BackgroundShape.Integral()
