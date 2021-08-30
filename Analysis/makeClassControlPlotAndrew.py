@@ -126,8 +126,12 @@ class MakeHistograms(object):
 
 #This dictionary lists observable to be plotted in control plots and their corresponding histogram binning and range
 variableSettingDictionary = {
-    'Tau_pt':'20,50.0,150.0',
-    #'MET_pt':'10,10.0,400.0',
+    #'Tau_pt':'20,50.0,150.0',
+    'FatJet_pt':'60,0.0,1500.0',
+    'Tau_phi':'30,-3.14,3.14',
+    'Electron_pt':'40,0.0,1000.0',
+    'Electron_phi':'30,-3.14,3.14',
+    'MET_pt':'60,0.0,1500.0',
     #'Electron_eta':'48,-2.4,2.4',
     #'Electron_pt':'20,20.0,400.0',
     #'pt_2':'25,30.0,80.0',
@@ -155,10 +159,14 @@ variableSettingDictionary = {
 
 #This dictionary lists observable and its corresponding X-Axis name
 variableAxisTitleDictionary = {
-    'Tau_pt':'#tau_{p_{t}}',
-    'MET_pt':'MET_{p_{t}}',
+    'Tau_pt':'#tau_{p_{T}}',
+    'MET_pt':'MET_{p_{T}}',
     'nboostedTau':'Number of Boosted #tau',
     'nTau':'Number of #tau'
+    'FatJet_pt':'ak8 jet p_{T} [GeV]',
+    'Tau_phi':'#phi (#tau)',
+    'Electron_pt':'p_{T} (e)[GeV]',
+    'Electron_phi':'#phi (e)',
     #'Electron_eta':'Electron #eta',
     #'Electron_pt':'Electron p_{t}',
     #'pt_2':'#tau p_{t}',
@@ -365,8 +373,8 @@ def main():
     parser.add_argument('--variables',
                     nargs='+',
                     help='Variables to draw the control plots for',
-                    default=['Tau_pt'])
-            #default=['nTau','nboostedTau'])
+                    #default=['Tau_pt'])
+                    default=['FatJet_pt','Tau_phi','Electron_pt','Electron_phi','MET_pt'])
 
 
     parser.add_argument('--additionalSelections',
@@ -781,12 +789,12 @@ def main():
 
 
     #############################Saving The Plots####################################
-        theCanvas.SaveAs('QuickControlPlots/'+variable+'_'+args.year+'.png')
+        #theCanvas.SaveAs('QuickControlPlots/'+variable+'_'+args.year+'.png')
         theCanvas.SaveAs('QuickControlPlots/'+variable+'_'+args.year+'.pdf')
-        theCanvas.SaveAs('QuickControlPlots/'+variable+'_'+args.year+'.root')
-        ShapeCanvas.SaveAs('QuickControlPlots/'+ "Normalized" +variable+'_'+args.year+'.png')
+        #theCanvas.SaveAs('QuickControlPlots/'+variable+'_'+args.year+'.root')
+        #ShapeCanvas.SaveAs('QuickControlPlots/'+ "Normalized" +variable+'_'+args.year+'.png')
         ShapeCanvas.SaveAs('QuickControlPlots/'+ "Normalized" +variable+'_'+args.year+'.pdf')
-        ShapeCanvas.SaveAs('QuickControlPlots/'+ "Normalized" +variable+'_'+args.year+'.root')
+        #ShapeCanvas.SaveAs('QuickControlPlots/'+ "Normalized" +variable+'_'+args.year+'.root')
         #PassFailCanvas.SaveAs('QuickControlPlots/'+"Trigg_PF"+'_'+args.year+'.png')
         #PassFailCanvas.SaveAs('QuickControlPlots/'+"Trigg_PF"+'_'+args.year+'.pdf')
         #PassFailCanvas.SaveAs('QuickControlPlots/'+"Trigg_PF"+'_'+args.year+'.root')
