@@ -671,7 +671,7 @@ def main():
         backgroundStack.Draw()
         backgroundStack_Errors.Draw('SAME e2')
         backgroundStack.SetTitle(variableAxisTitleDictionary[variable])
-        DatasetObjects["data"].HistogramName.Draw('SAME e1')
+        DatasetObjects["Data"].HistogramName.Draw('SAME e1')
         #signalHisto.Draw('SAME HIST')
         backgroundStack.GetYaxis().SetTitle("Events")
         backgroundStack.GetYaxis().SetTitleOffset(1.58)
@@ -680,7 +680,7 @@ def main():
     ##############################Legend############################    
 
         theLegend = ROOT.TLegend(0.61,0.61,0.88,0.88)
-        theLegend.AddEntry(DatasetObjects["data"].HistogramName,'Observed','pe')
+        theLegend.AddEntry(DatasetObjects["Data"].HistogramName,'Observed','pe')
         theLegend.AddEntry(DiBoson_Histo,'DiBoson','f')
         #theLegend.AddEntry(TT_Histo,'TTbar','f')
         #theLegend.AddEntry(WJets_Histo,'WJets','f')
