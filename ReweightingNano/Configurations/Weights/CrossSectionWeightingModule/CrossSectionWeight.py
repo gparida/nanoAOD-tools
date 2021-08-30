@@ -5,7 +5,7 @@ from Configurations.Weights.WeightDefinition import Weight as Weight
 
 def CalculateCrossSectionWeight(self,theTree):
     crossSectionWeight = 1.0
-    if self.year == "2016VFP":
+    if self.year == "2016":
         #LHCLumi = 36.33e15
         LHCLumi = 16.8e15
     elif self.year == "2016APV":
@@ -45,7 +45,7 @@ def CalculateCrossSectionWeight(self,theTree):
 		   "ZZ":12.17e-12,
         }
     crossSectionWeighting = (crossSections[self.sample] * LHCLumi)/self.totalEvents
-    crossSectionWeighting = crossSectionWeighting * theTree.genweight
+    crossSectionWeighting = crossSectionWeighting * theTree.genWeight
     self.value[0] = crossSectionWeighting
 
 crossSectionWeight = Weight()
