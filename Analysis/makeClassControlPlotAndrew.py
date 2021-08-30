@@ -655,7 +655,7 @@ def main():
         plotPad.SetBottomMargin(0.08)
         ratioPad.SetGridy()
 #
-        ratioHist, ratioError = MakeRatioHistograms(DatasetObjects["data"].HistogramName,backgroundStack,variable)
+        ratioHist, ratioError = MakeRatioHistograms(DatasetObjects["Data"].HistogramName,backgroundStack,variable)
         ratioPad.cd()
         ratioHist.Draw('ex0')
         ratioError.Draw('SAME e2')
@@ -665,7 +665,7 @@ def main():
         plotPad.SetTickx()
         plotPad.SetTicky()
 #
-        backgroundStack.SetMaximum(max(backgroundStack.GetMaximum(),DatasetObjects["data"].HistogramName.GetMaximum()))
+        backgroundStack.SetMaximum(max(backgroundStack.GetMaximum(),DatasetObjects["Data"].HistogramName.GetMaximum()))
         
         backgroundStack.Draw()
         backgroundStack_Errors.Draw('SAME e2')
