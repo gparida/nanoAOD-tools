@@ -210,7 +210,7 @@ variableAxisTitleDictionary = {
 #    "data":1
 #    }
 
-DatasetNameList=["QCD_Pt_1000to1400",
+DatasetNameList=["QCD_1000to1400",
 "QCD_120to170",
 "QCD_1400to1800",
 "QCD_15to30",
