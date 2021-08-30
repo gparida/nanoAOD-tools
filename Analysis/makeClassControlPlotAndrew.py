@@ -4,6 +4,7 @@ import argparse  ##Importing root and package to take arguments
 
 class MakeHistograms(object):
     #constructor to initialize the objects
+    #def __init__(self,RootFilePath,RootFileName,Weight):
     def __init__(self,RootFilePath,RootFileName):
         self.RootFileName = ROOT.TFile(RootFilePath+RootFileName+'.root')
         self.HistogramName = None
@@ -52,10 +53,10 @@ class MakeHistograms(object):
                 "HLT_PFMET170_HBHE_BeamHaloCleaned"]
 
         theTree = theFile.Get('Events')
-        print (variable+'>>'+ histogramName +'('+variableSettingDictionary[variable]+')',
+        print (variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
                              self.CreateCutString(standardCutString,
                                              additionalSelections,theWeight)+' && '+'(' + '||'.join(trig_MET_MC) + ')'+')')
-        theTree.Draw(variable+'>>'+ histogramName +'('+variableSettingDictionary[variable]+')',
+        theTree.Draw(variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
                              self.CreateCutString(standardCutString,
                                              additionalSelections,theWeight)+' && '+'(' + '||'.join(trig_MET_MC) + ')'+')')
     #so, if the tree has no entries, root doesn't even hand back an empty histogram
@@ -125,10 +126,10 @@ class MakeHistograms(object):
 
 #This dictionary lists observable to be plotted in control plots and their corresponding histogram binning and range
 variableSettingDictionary = {
-	'Tau_pt':'10,50.0,150.0',
+    'Tau_pt':'20,50.0,150.0',
     #'MET_pt':'10,10.0,400.0',
-	#'Electron_eta':'48,-2.4,2.4',
-	#'Electron_pt':'20,20.0,400.0',
+    #'Electron_eta':'48,-2.4,2.4',
+    #'Electron_pt':'20,20.0,400.0',
     #'pt_2':'25,30.0,80.0',
     #'eta_2':'50,-2.5,2.5',
     #'pt_1':'30,20.0,80.0',
@@ -154,12 +155,12 @@ variableSettingDictionary = {
 
 #This dictionary lists observable and its corresponding X-Axis name
 variableAxisTitleDictionary = {
-	'Tau_pt':'#tau_{p_{t}}',
+    'Tau_pt':'#tau_{p_{t}}',
     'MET_pt':'MET_{p_{t}}',
     'nboostedTau':'Number of Boosted #tau',
     'nTau':'Number of #tau'
-	#'Electron_eta':'Electron #eta',
-	#'Electron_pt':'Electron p_{t}',
+    #'Electron_eta':'Electron #eta',
+    #'Electron_pt':'Electron p_{t}',
     #'pt_2':'#tau p_{t}',
     #'eta_2':'#tau #eta',
     #'pt_1':'#mu p_{t}',
@@ -197,10 +198,10 @@ variableAxisTitleDictionary = {
 #    "QCD_Pt_50to80":13473.64119,
 #    "QCD_Pt_600to800":0.040118257,
 #    "ST_s-channel_4f":0.009501705,
-#    "TTTo2L2Nu":0.255495352,
-#    "TTToHadronic":0.102523092,
-#    "TTToSemiLeptonic":0.07267512,
-#    "WJetsToLNu":10.63712415,
+#    #"TTTo2L2Nu":0.255495352,
+#    #"TTToHadronic":0.102523092,
+#    #"TTToSemiLeptonic":0.07267512,
+#    #"WJetsToLNu":10.63712415,
 #    "WW":0.088197968,
 #    "WZ":0.060063755,
 #    "ZZ":0.197924492,
@@ -229,7 +230,7 @@ DatasetNameList=["QCD_Pt_1000to1400",
 "TTToHadronic",
 "TTToSemiLeptonic",
 "W",
-"WW",
+"W",
 "WZ",
 "ZZ",
 "DYlow",
@@ -364,14 +365,14 @@ def main():
     parser.add_argument('--variables',
                     nargs='+',
                     help='Variables to draw the control plots for',
-                    #default=['Tau_pt','MET_pt'])'
-		    default=['nTau','nboostedTau'])
+                    default=['Tau_pt'])
+            #default=['nTau','nboostedTau'])
 
 
     parser.add_argument('--additionalSelections',
                         nargs='+',
                         help='additional region selections',
-                        default=['Tau_idMVAoldDM2017v2 & 4 == 4'])
+                        default=['Tau_idMVAoldDM2017v2 & 4 == 4','nTau==2 || nboostedTau==2','FatJet_btagDeepB > 0.45','nFatJet == 1'])
     parser.add_argument('--pause',
                         help='pause after drawing each plot to make it easier to view',
                         action='store_true')
@@ -399,10 +400,10 @@ def main():
     elif args.year == '2018':
         dataPath = '/data/aloeliger/SMHTT_Selected_2018_Deep/'
     elif args.year == 'test':
-    	#dataPath = '/afs/hep.wisc.edu/home/parida/HHbbtt_Analysis_Scripts/Plotting_Scripts/'
+        #dataPath = '/afs/hep.wisc.edu/home/parida/HHbbtt_Analysis_Scripts/Plotting_Scripts/'
         dataPath = "/hdfs/store/user/parida/HHbbtt_Background_Files/Andrew_Script_Skim/"
 
-   	#Open all the files that are necessary for plotting .......................#############################
+    #Open all the files that are necessary for plotting .......................#############################
     #for index in range(len(DatasetNameList)) 
 
     print DatasetNameList
@@ -412,7 +413,7 @@ def main():
 
     #For loop to draw histograms
     for variable in args.variables:
-    	try:
+        try:
             variableSettingDictionary[variable] != None
         except KeyError:
             print("No defined histogram settings for variable: "+variable)
@@ -430,6 +431,7 @@ def main():
         ####Drawing the Histograms#######  
         DatasetObjects={}
         for index in range(len(DatasetNameList)) :
+            #DatasetObjects[DatasetNameList[index]]=MakeHistograms(dataPath,DatasetNameList[index],str(DatasetNameXSWeightDictionary[DatasetNameList[index]]))
             DatasetObjects[DatasetNameList[index]]=MakeHistograms(dataPath,DatasetNameList[index])
 
         for index in range(len(DatasetNameList)):
@@ -493,14 +495,15 @@ def main():
         #####################################################################################
 
         ##################################WJets##############################################
-        WJets_Histo = DatasetObjects["WJetsToLNu"].HistogramName.Clone()
+        #WJets_Histo = DatasetObjects["WJetsToLNu"].HistogramName.Clone()
 
         #PF_WJets_Histo = DatasetObjects["WJetsToLNu"].PassFailHistogramName.Clone()
         ######################################################################################
 #
         ####################################TT-Histograms######################################
-        TT_Histo = DatasetObjects["TTTo2L2Nu"].HistogramName.Clone()
-        TT_Histo.Add(DatasetObjects["TTToHadronic"].HistogramName)
+        #TT_Histo = DatasetObjects["TTTo2L2Nu"].HistogramName.Clone()
+        #TT_Histo.Add(DatasetObjects["TTToHadronic"].HistogramName)
+
         ##TT_Histo.Add(DatasetObjects["TTToSemiLeptonic"].HistogramName) --Comment for the time being: File too big to handle
         #PF_TT_Histo = DatasetObjects["TTTo2L2Nu"].PassFailHistogramName.Clone()
         #PF_TT_Histo.Add(DatasetObjects["TTToHadronic"].PassFailHistogramName)
@@ -540,8 +543,8 @@ def main():
         #ST_s_channel_4f.SetFillColor(ROOT.TColor.GetColor("#ffcc66"))
 
         DiBoson_Histo.SetFillColor(ROOT.TColor.GetColor(color_DiBoson))
-        TT_Histo.SetFillColor(ROOT.TColor.GetColor(color_TT))
-        WJets_Histo.SetFillColor(ROOT.TColor.GetColor(color_WJets))
+        #TT_Histo.SetFillColor(ROOT.TColor.GetColor(color_TT))
+        #WJets_Histo.SetFillColor(ROOT.TColor.GetColor(color_WJets))
         QCD_Histo.SetFillColor(ROOT.TColor.GetColor(color_QCD))
         ST_Histo.SetFillColor(ROOT.TColor.GetColor(color_ST))
         DY_Histo.SetFillColor(ROOT.TColor.GetColor(color_DY))
@@ -569,8 +572,8 @@ def main():
         BackgroundShape = DY_Histo.Clone()
         BackgroundShape.Add(ST_Histo)
         BackgroundShape.Add(QCD_Histo)
-        BackgroundShape.Add(WJets_Histo)
-        BackgroundShape.Add(TT_Histo)
+        #BackgroundShape.Add(WJets_Histo)
+        #BackgroundShape.Add(TT_Histo)
         BackgroundShape.Add(DiBoson_Histo)
 
         ScaleBackground = 1/BackgroundShape.Integral()
@@ -591,8 +594,8 @@ def main():
         backgroundStack.Add(DY_Histo,'HIST')
         backgroundStack.Add(ST_Histo,'HIST')
         backgroundStack.Add(QCD_Histo,'HIST')
-        backgroundStack.Add(WJets_Histo,'HIST')
-        backgroundStack.Add(TT_Histo,'HIST')
+        #backgroundStack.Add(WJets_Histo,'HIST')
+        #backgroundStack.Add(TT_Histo,'HIST')
         backgroundStack.Add(DiBoson_Histo,'HIST')
 #
         backgroundStack_Errors = MakeStackErrors(backgroundStack)
@@ -610,23 +613,23 @@ def main():
         N_DY_Histo = (DY_Histo.Clone())
         N_ST_Histo = (ST_Histo.Clone())
         N_QCD_Histo = (QCD_Histo.Clone())
-        N_WJets_Histo = (WJets_Histo.Clone())
-        N_TT_Histo = (TT_Histo.Clone())
+        #N_WJets_Histo = (WJets_Histo.Clone())
+        #N_TT_Histo = (TT_Histo.Clone())
         N_DiBoson_Histo = (DiBoson_Histo.Clone())
 
         N_DY_Histo.Scale(ScaleBackground)
         N_ST_Histo.Scale(ScaleBackground) 
         N_QCD_Histo.Scale(ScaleBackground)
-        N_WJets_Histo.Scale(ScaleBackground)
-        N_TT_Histo.Scale(ScaleBackground)
+        #N_WJets_Histo.Scale(ScaleBackground)
+        #N_TT_Histo.Scale(ScaleBackground)
         N_DiBoson_Histo.Scale(ScaleBackground)
 
         ShapeStack = ROOT.THStack('ShapeStack','ShapeStack')
         ShapeStack.Add(N_DY_Histo,'HIST')
         ShapeStack.Add(N_ST_Histo,'HIST')
         ShapeStack.Add(N_QCD_Histo,'HIST')
-        ShapeStack.Add(N_WJets_Histo,'HIST')
-        ShapeStack.Add(N_TT_Histo,'HIST')
+        #ShapeStack.Add(N_WJets_Histo,'HIST')
+        #ShapeStack.Add(N_TT_Histo,'HIST')
         ShapeStack.Add(N_DiBoson_Histo,'HIST')
 
         ShapeStack_Errors = MakeStackErrors(ShapeStack)
@@ -679,8 +682,8 @@ def main():
         theLegend = ROOT.TLegend(0.61,0.61,0.88,0.88)
         theLegend.AddEntry(DatasetObjects["data"].HistogramName,'Observed','pe')
         theLegend.AddEntry(DiBoson_Histo,'DiBoson','f')
-        theLegend.AddEntry(TT_Histo,'TTbar','f')
-        theLegend.AddEntry(WJets_Histo,'WJets','f')
+        #theLegend.AddEntry(TT_Histo,'TTbar','f')
+        #theLegend.AddEntry(WJets_Histo,'WJets','f')
         theLegend.AddEntry(QCD_Histo,'QCD','f')
         theLegend.AddEntry(ST_Histo,'ST_s_Channel','f')
         theLegend.AddEntry(DY_Histo,'Drell-Yan','f')
@@ -760,8 +763,8 @@ def main():
         theLegend2 = ROOT.TLegend(0.61,0.61,0.88,0.88)
         theLegend2.AddEntry(DataShape,'Observed','pe')
         theLegend2.AddEntry(N_DiBoson_Histo,'DiBoson','f')
-        theLegend2.AddEntry(N_TT_Histo,'TTbar','f')
-        theLegend2.AddEntry(N_WJets_Histo,'WJets','f')
+        #theLegend2.AddEntry(N_TT_Histo,'TTbar','f')
+        #theLegend2.AddEntry(N_WJets_Histo,'WJets','f')
         theLegend2.AddEntry(N_QCD_Histo,'QCD','f')
         theLegend2.AddEntry(N_ST_Histo,'ST_s_Channel','f')
         theLegend2.AddEntry(N_DY_Histo,'Drell-Yan','f')
