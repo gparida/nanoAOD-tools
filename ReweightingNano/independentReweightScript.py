@@ -54,7 +54,7 @@ if __name__ == "__main__":
 
             #now get on with it
             theFile = ROOT.TFile.Open(theConfig.inputFile,"UPDATE")
-            theTree = theFile.mt_Selected
+            theTree = theFile.Events
             print("Creating individual event weights...")                        
             weightsBranchesDictionary = {}
             weightsVariationBranchesDictionary = {}
