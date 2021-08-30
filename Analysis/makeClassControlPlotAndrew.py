@@ -445,8 +445,8 @@ def main():
 
         
         #######################DY-Histograms####################################
-        DY_Histo = DatasetObjects["DYJetsToLL_M-10to50"].HistogramName.Clone()
-        DY_Histo.Add(DatasetObjects["DYJetsToLL_M-50"].HistogramName)
+        DY_Histo = DatasetObjects["DYlow"].HistogramName.Clone()
+        DY_Histo.Add(DatasetObjects["DY"].HistogramName)
 
         #PF_DY_Histo = DatasetObjects["DYJetsToLL_M-10to50"].PassFailHistogramName.Clone()
         #PF_DY_Histo.Add(DatasetObjects["DYJetsToLL_M-50"].PassFailHistogramName)
@@ -459,21 +459,21 @@ def main():
         #####################################################################################
 #
         ##############################QCD-Histograms##########################################
-        QCD_Histo = DatasetObjects["QCD_Pt_120to170"].HistogramName.Clone()
-        QCD_Histo.Add(DatasetObjects["QCD_Pt_1400to1800"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_Pt_15to30"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_Pt_170to300"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_Pt_1800to2400"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_Pt_2400to3200"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_Pt_300to470"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_Pt_30to50"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_Pt_3200toInf"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_Pt_470to600"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_Pt_800to1000"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_Pt_80to120"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_Pt_50to80"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_Pt_600to800"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_Pt_1000to1400"].HistogramName)
+        QCD_Histo = DatasetObjects["QCD_120to170"].HistogramName.Clone()
+        QCD_Histo.Add(DatasetObjects["QCD_1400to1800"].HistogramName)
+        QCD_Histo.Add(DatasetObjects["QCD_15to30"].HistogramName)
+        QCD_Histo.Add(DatasetObjects["QCD_170to300"].HistogramName)
+        QCD_Histo.Add(DatasetObjects["QCD_1800to2400"].HistogramName)
+        QCD_Histo.Add(DatasetObjects["QCD_2400to3200"].HistogramName)
+        QCD_Histo.Add(DatasetObjects["QCD_300to470"].HistogramName)
+        QCD_Histo.Add(DatasetObjects["QCD_30to50"].HistogramName)
+        QCD_Histo.Add(DatasetObjects["QCD_3200toInf"].HistogramName)
+        QCD_Histo.Add(DatasetObjects["QCD_470to600"].HistogramName)
+        QCD_Histo.Add(DatasetObjects["QCD_800to1000"].HistogramName)
+        QCD_Histo.Add(DatasetObjects["QCD_80to120"].HistogramName)
+        QCD_Histo.Add(DatasetObjects["QCD_50to80"].HistogramName)
+        QCD_Histo.Add(DatasetObjects["QCD_600to800"].HistogramName)
+        QCD_Histo.Add(DatasetObjects["QCD_1000to1400"].HistogramName)
 
         #PF_QCD_Histo = DatasetObjects["QCD_Pt_120to170"].PassFailHistogramName.Clone()
         #PF_QCD_Histo.Add(DatasetObjects["QCD_Pt_1400to1800"].PassFailHistogramName)
@@ -495,16 +495,16 @@ def main():
         #####################################################################################
 
         ##################################WJets##############################################
-        #WJets_Histo = DatasetObjects["WJetsToLNu"].HistogramName.Clone()
+        WJets_Histo = DatasetObjects["W"].HistogramName.Clone()
 
         #PF_WJets_Histo = DatasetObjects["WJetsToLNu"].PassFailHistogramName.Clone()
         ######################################################################################
 #
         ####################################TT-Histograms######################################
-        #TT_Histo = DatasetObjects["TTTo2L2Nu"].HistogramName.Clone()
-        #TT_Histo.Add(DatasetObjects["TTToHadronic"].HistogramName)
+        TT_Histo = DatasetObjects["TTTo2L2Nu"].HistogramName.Clone()
+        TT_Histo.Add(DatasetObjects["TTToHadronic"].HistogramName)
+        TT_Histo.Add(DatasetObjects["TTToSemiLeptonic"].HistogramName)
 
-        ##TT_Histo.Add(DatasetObjects["TTToSemiLeptonic"].HistogramName) --Comment for the time being: File too big to handle
         #PF_TT_Histo = DatasetObjects["TTTo2L2Nu"].PassFailHistogramName.Clone()
         #PF_TT_Histo.Add(DatasetObjects["TTToHadronic"].PassFailHistogramName)
         ########################################################################################
