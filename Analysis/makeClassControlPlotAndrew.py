@@ -393,7 +393,7 @@ def main():
     
 
     if args.year == '2016':
-        dataPath = '/data/aloeliger/SMHTT_Selected_2016_Deep/'
+        dataPath = '/data/aloeliger/bbtautauAnalysis/2016/'
     elif args.year == '2017':
         dataPath = '/data/aloeliger/SMHTT_Selected_2017_Deep/'
     elif args.year == '2018':
