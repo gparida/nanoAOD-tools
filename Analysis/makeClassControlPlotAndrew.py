@@ -543,8 +543,8 @@ def main():
         #ST_s_channel_4f.SetFillColor(ROOT.TColor.GetColor("#ffcc66"))
 
         DiBoson_Histo.SetFillColor(ROOT.TColor.GetColor(color_DiBoson))
-        #TT_Histo.SetFillColor(ROOT.TColor.GetColor(color_TT))
-        #WJets_Histo.SetFillColor(ROOT.TColor.GetColor(color_WJets))
+        TT_Histo.SetFillColor(ROOT.TColor.GetColor(color_TT))
+        WJets_Histo.SetFillColor(ROOT.TColor.GetColor(color_WJets))
         QCD_Histo.SetFillColor(ROOT.TColor.GetColor(color_QCD))
         ST_Histo.SetFillColor(ROOT.TColor.GetColor(color_ST))
         DY_Histo.SetFillColor(ROOT.TColor.GetColor(color_DY))
