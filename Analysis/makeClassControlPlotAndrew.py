@@ -5,11 +5,11 @@ import argparse  ##Importing root and package to take arguments
 class MakeHistograms(object):
     #constructor to initialize the objects
     #def __init__(self,RootFilePath,RootFileName,Weight):
-    def __init__(self,RootFilePath,RootFileName):
+    def __init__(self,RootFilePath,RootFileName, userWeight = "1.0"):
         self.RootFileName = ROOT.TFile(RootFilePath+RootFileName+'.root')
         self.HistogramName = None
         self.PassFailHistogramName = ROOT.TH1F("PassFailHist","PassFailHist",1,0,1)
-        #self.Weight = Weight
+        self.userWeight = userWeight
 
     #Cut creating member function
     def CreateCutString(self,standardCutString,
@@ -126,12 +126,26 @@ class MakeHistograms(object):
 
 #This dictionary lists observable to be plotted in control plots and their corresponding histogram binning and range
 variableSettingDictionary = {
-    #'Tau_pt':'20,50.0,150.0',
-    'FatJet_pt':'60,0.0,1500.0',
+    'Tau_pt':'16,0.0,400.0',
     'Tau_phi':'30,-3.14,3.14',
+    'Tau_eta':'20, -2.0, 2.0',
+    'nboostedTau':'6,0,6',
+    'nTau':'6,0,6',
+    'FatJet_pt':'60,0.0,1500.0',
+    'FatJet_phi':'30,-3.14,3.14',
+    'FatJet_eta':'20, -2.0, 2.0',
+    'nFatJet':'5,0,5',
     'Electron_pt':'40,0.0,1000.0',
     'Electron_phi':'30,-3.14,3.14',
+    'Electron_eta':'20, -2.0, 2.0',
+    'nElectron':'6,0,6',
     'MET_pt':'60,0.0,1500.0',
+    'MET_phi':'30,-3.14,3.14',
+    'MET_sumEt':'40,0.00,1000.00',
+    'Muon_pt':'16,0.0,400.0',
+    'Muon_eta':'20, -2.0, 2.0',
+    'Muon_phi':'30,-3.14,3.14',
+    'nMuon':'6,0,6',
     #'Electron_eta':'48,-2.4,2.4',
     #'Electron_pt':'20,20.0,400.0',
     #'pt_2':'25,30.0,80.0',
@@ -152,23 +166,34 @@ variableSettingDictionary = {
     #'jpt_2':'50,0.0,200.0',
     #'jeta_2':'50,-5.0,5.0',
     #'MT':'20,0.0,200.0',
-    'nboostedTau':'10,0,10',
-    'nTau':'10,0,10',
 }
 
 
 #This dictionary lists observable and its corresponding X-Axis name
 variableAxisTitleDictionary = {
-    'Tau_pt':'#tau_{p_{T}}',
-    'MET_pt':'MET_{p_{T}}',
+    #'Electron_eta':'Electron #eta',
+    #'Electron_pt':'Electron p_{t}','Tau_pt':'#tau_{p_{T}}',
+    'Tau_pt':'p_{T}(#tau)',
+    'Tau_phi':'#phi(#tau)',
+    'Tau_eta':'#eta(#tau)',
     'nboostedTau':'Number of Boosted #tau',
-    'nTau':'Number of #tau'
-    'FatJet_pt':'ak8 jet p_{T} [GeV]',
-    'Tau_phi':'#phi (#tau)',
+    'nTau':'Number of #tau',
+    'FatJet_pt':'ak8 jet p_{T}[GeV]',
+    'FatJet_phi':'#phi(ak8 jet)',
+    'FatJet_eta':'#eta(ak8 jet)',
+    'nFatJet':'Number of ak8 Jets',
     'Electron_pt':'p_{T} (e)[GeV]',
     'Electron_phi':'#phi (e)',
-    #'Electron_eta':'Electron #eta',
-    #'Electron_pt':'Electron p_{t}',
+    'Electron_eta':'#eta(e)',
+    'nElectron':'Number of e',
+    'MET_pt':'MET_{p_{T}}',
+    'MET_phi':'#phi(MET)',
+    'MET_sumEt':'Scalar Sum of E_{T}',
+    'Muon_pt':'#phi(#mu)',
+    'Muon_eta':'#eta(#mu)',
+    'Muon_phi':'#phi(#mu)',
+    'nMuon':'Number of #mu',
+    
     #'pt_2':'#tau p_{t}',
     #'eta_2':'#tau #eta',
     #'pt_1':'#mu p_{t}',
@@ -189,34 +214,37 @@ variableAxisTitleDictionary = {
     #'MT':'Transverse Mass',
     }
 
-#DatasetNameXSWeightDictionary={
-#    "QCD_Pt_1000to1400":0.006405107,
-#    "QCD_Pt_120to170":230.3234918,
-#    "QCD_Pt_1400to1800":0.000997817,
-#    "QCD_Pt_15to30":1058937.981,
-#    "QCD_Pt_170to300":59.15251935,
-#    "QCD_Pt_1800to2400":0.00026933,
-#    "QCD_Pt_2400to3200":0.0000296633850303439,
-#    "QCD_Pt_300to470":2.00778766,
-#    "QCD_Pt_30to50":90647.48201,
-#    "QCD_Pt_3200toInf":0.00000227136,
-#    "QCD_Pt_470to600":0.178230811,
-#    "QCD_Pt_800to1000":0.011793967,
-#    "QCD_Pt_80to120":1323.643203,
-#    "QCD_Pt_50to80":13473.64119,
-#    "QCD_Pt_600to800":0.040118257,
-#    "ST_s-channel_4f":0.009501705,
-#    #"TTTo2L2Nu":0.255495352,
-#    #"TTToHadronic":0.102523092,
-#    #"TTToSemiLeptonic":0.07267512,
-#    #"WJetsToLNu":10.63712415,
-#    "WW":0.088197968,
-#    "WZ":0.060063755,
-#    "ZZ":0.197924492,
-#    "DYJetsToLL_M-10to50":9.15316241,
-#    "DYJetsToLL_M-50":0.901934791,
-#    "data":1
-#    }
+DatasetNameXSWeightDictionary={
+    "QCD_1000to1400":0.006405107,
+    "QCD_120to170":230.3234918,
+    "QCD_1400to1800":0.000997817,
+    "QCD_15to30":1058937.981,
+    "QCD_170to300":59.15251935,
+    "QCD_1800to2400":0.00026933,
+    "QCD_2400to3200":0.0000296633850303439,
+    "QCD_300to470":2.00778766,
+    "QCD_30to50":90647.48201,
+    "QCD_3200toInf":0.00000227136,
+    "QCD_470to600":0.178230811,
+    "QCD_800to1000":0.011793967,
+    "QCD_80to120":1323.643203,
+    "QCD_50to80":13473.64119,
+    "QCD_600to800":0.040118257,
+    "ST_s-channel_4f":0.009501705,
+    #"TTTo2L2Nu":0.255495352,
+    #"TTToHadronic":0.102523092,
+    #"TTToSemiLeptonic":0.07267512,
+    "TTTo2L2Nu":0.036459448,
+    "TTToHadronic":0.036459448,
+    "TTToSemiLeptonic":0.036459448,
+    "W":10.63712415,
+    "WW":0.088197968,
+    "WZ":0.060063755,
+    "ZZ":0.197924492,
+    "DYlow":9.15316241,
+    "DY":0.901934791,
+    "Data":1,
+    }
 
 DatasetNameList=["QCD_1000to1400",
 "QCD_120to170",
@@ -373,14 +401,34 @@ def main():
     parser.add_argument('--variables',
                     nargs='+',
                     help='Variables to draw the control plots for',
-                    #default=['Tau_pt'])
-                    default=['FatJet_pt','Tau_phi','Electron_pt','Electron_phi','MET_pt'])
+                    #default=['nTau','nboostedTau'])
+                    default=['Tau_pt',
+                            'Tau_phi',
+                            'Tau_eta',
+                            'nboostedTau',
+                            'nTau',
+                            'FatJet_pt',
+                            'FatJet_phi',
+                            'FatJet_eta',
+                            'nFatJet',
+                            'Electron_pt',
+                            'Electron_phi',
+                            'Electron_eta',
+                            'nElectron',
+                            'MET_pt',
+                            'MET_phi',
+                            'MET_sumEt',
+                            'Muon_pt',
+                            'Muon_eta',
+                            'Muon_phi',
+                            'nMuon'])
 
 
     parser.add_argument('--additionalSelections',
                         nargs='+',
                         help='additional region selections',
-                        default=['Tau_idMVAoldDM2017v2 & 4 == 4','nTau==2 || nboostedTau==2','FatJet_btagDeepB > 0.45','nFatJet == 1'])
+                        #default=['Tau_idMVAoldDM2017v2 & 4 == 4','nTau==2 || nboostedTau==2','FatJet_btagDeepB > 0.45','nFatJet == 1'])
+                        default=["PV_ndof > 4", "abs(PV_z) < 24","sqrt(PV_x*PV_x+PV_y*PV_y) < 2"])
     parser.add_argument('--pause',
                         help='pause after drawing each plot to make it easier to view',
                         action='store_true')
@@ -439,8 +487,8 @@ def main():
         ####Drawing the Histograms#######  
         DatasetObjects={}
         for index in range(len(DatasetNameList)) :
-            #DatasetObjects[DatasetNameList[index]]=MakeHistograms(dataPath,DatasetNameList[index],str(DatasetNameXSWeightDictionary[DatasetNameList[index]]))
-            DatasetObjects[DatasetNameList[index]]=MakeHistograms(dataPath,DatasetNameList[index])
+            DatasetObjects[DatasetNameList[index]]=MakeHistograms(dataPath,DatasetNameList[index],str(DatasetNameXSWeightDictionary[DatasetNameList[index]]))
+            #DatasetObjects[DatasetNameList[index]]=MakeHistograms(dataPath,DatasetNameList[index])
 
         for index in range(len(DatasetNameList)):
             print DatasetNameList[index]
@@ -448,7 +496,8 @@ def main():
                 variable,
                 args.standardCutString,
                 args.additionalSelections,
-                DatasetNameList[index])  
+                DatasetNameList[index],
+                DatasetObjects[DatasetNameList[index]].userWeight)  
             #DatasetObjects[DatasetNameList[index]].FillEvents((DatasetObjects[DatasetNameList[index]].RootFileName),DatasetNameList[index])
 
         
