@@ -578,21 +578,21 @@ def main():
 
         ################################Data is represented as points########################################################################
 
-        DatasetObjects["Data"].HistogramName.SetMarkerStyle(20)
-        DatasetObjects["Data"].HistogramName.SetMarkerSize(1.5)
-        DatasetObjects["Data"].HistogramName.Sumw2()
+        DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].HistogramName.SetMarkerStyle(20)
+        DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].HistogramName.SetMarkerSize(1.5)
+        DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].HistogramName.Sumw2()
 
-        #DatasetObjects["data"].PassFailHistogramName.SetMarkerStyle(20)
-        #DatasetObjects["data"].PassFailHistogramName.SetMarkerSize(1.5)
-        #DatasetObjects["data"].PassFailHistogramName.Sumw2()
+        #DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].PassFailHistogramName.SetMarkerStyle(20)
+        #DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].PassFailHistogramName.SetMarkerSize(1.5)
+        #DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].PassFailHistogramName.Sumw2()
 
         ################################Color_Definitions -- Background Fill##############################################
-        color_DiBoson="#ffcc66"
-        color_TT="#4496c8"
-        color_WJets="#9999cc"
-        color_QCD="#12cadd"
-        color_ST="#990099"
-        color_DY="#cc6666" 
+        color_DiBoson="#ff66c4"
+        color_TT="#ff9e66"
+        color_WJets="#ffe866"
+        color_QCD="#d4ff66"
+        color_ST="#66ffe8"
+        color_DY="#bf66ff" 
         #color_jetfake="#f1cde1"
 
         #################################Filling Color for Backgrounds###############################################################################
@@ -635,7 +635,7 @@ def main():
 
         ScaleBackground = 1/BackgroundShape.Integral()
 
-        DataShape = DatasetObjects["Data"].HistogramName.Clone()
+        DataShape = DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].HistogramName.Clone()
         
         ScaleData = 1/DataShape.Integral()
 
@@ -710,24 +710,26 @@ def main():
         ratioPad.SetTopMargin(0.05)
         ratioPad.SetBottomMargin(0.27)
         plotPad.SetBottomMargin(0.08)
+        plotPad.SetFrameLineWidth(1)
         ratioPad.SetGridy()
 #
-        ratioHist, ratioError = MakeRatioHistograms(DatasetObjects["Data"].HistogramName,backgroundStack,variable)
+        ratioHist, ratioError = MakeRatioHistograms(DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].HistogramName,backgroundStack,variable)
         ratioPad.cd()
         ratioHist.Draw('ex0')
         ratioError.Draw('SAME e2')
         ratioHist.Draw('SAME ex0')
 #
         plotPad.cd()
+        plotPad.SetFrameLineWidth(1)
         plotPad.SetTickx()
         plotPad.SetTicky()
 #
-        backgroundStack.SetMaximum(max(backgroundStack.GetMaximum(),DatasetObjects["Data"].HistogramName.GetMaximum()))
+        backgroundStack.SetMaximum(max(backgroundStack.GetMaximum(),DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].HistogramName.GetMaximum()))
         
         backgroundStack.Draw()
         backgroundStack_Errors.Draw('SAME e2')
         backgroundStack.SetTitle(variableAxisTitleDictionary[variable])
-        DatasetObjects["Data"].HistogramName.Draw('SAME e1')
+        DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].HistogramName.Draw('SAME e1')
         #signalHisto.Draw('SAME HIST')
         backgroundStack.GetYaxis().SetTitle("Events")
         backgroundStack.GetYaxis().SetTitleOffset(1.58)
@@ -735,8 +737,14 @@ def main():
 
     ##############################Legend############################    
 
-        theLegend = ROOT.TLegend(0.61,0.61,0.88,0.88)
-        theLegend.AddEntry(DatasetObjects["Data"].HistogramName,'Observed','pe')
+        theLegend = ROOT.TLegend(0.85, 0.45, 1.0, 0.75, "", "brNDC")
+        theLegend.SetLineWidth(1)
+        theLegend.SetLineStyle(1)
+        theLegend.SetFillStyle(1001) #0
+        theLegend.SetFillColor(0)
+        theLegend.SetBorderSize(1)
+        theLegend.SetTextFont(42)
+        theLegend.AddEntry(DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].HistogramName,'Observed','pe')
         theLegend.AddEntry(DiBoson_Histo,'DiBoson','f')
         theLegend.AddEntry(TT_Histo,'TTbar','f')
         theLegend.AddEntry(WJets_Histo,'WJets','f')
@@ -762,11 +770,11 @@ def main():
 
     #######################################PASS FAIL CANVAS###########################################
         #PassFailCanvas = ROOT.TCanvas("PassFailCanvas","PassFailCanvas")
-        #PassFailStack.SetMaximum(max(PassFailStack.GetMaximum(),DatasetObjects["data"].PassFailHistogramName.GetMaximum()))
+        #PassFailStack.SetMaximum(max(PassFailStack.GetMaximum(),DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].PassFailHistogramName.GetMaximum()))
         #PassFailStack.Draw()
         #PassFailStack_Errors.Draw('SAME e2')
         #PassFailStack.SetTitle("Trigger Pass Fail")
-        #DatasetObjects["data"].PassFailHistogramName.Draw('SAME e1')
+        #DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].PassFailHistogramName.Draw('SAME e1')
         #PassFailStack.GetYaxis().SetTitle("Events")
         #PassFailStack.GetYaxis().SetTitleOffset(1.58)
         #PassFailStack.GetXaxis().SetLabelSize(0.0)
@@ -791,6 +799,7 @@ def main():
         Shape_ratioPad.SetPad("Shape_pad2","Shape_ratio",0.0,0.0,1.0,0.25,0)
 #
         Shape_ratioPad.SetTopMargin(0.05)
+        Shape_ratioPad.SetFrameLineWidth(1)
         Shape_ratioPad.SetBottomMargin(0.27)
         Shape_plotPad.SetBottomMargin(0.08)
         Shape_ratioPad.SetGridy()
@@ -802,6 +811,7 @@ def main():
         Shape_ratioHist.Draw('SAME ex0')
 #
         Shape_plotPad.cd()
+        Shape_plotPad.SetFrameLineWidth(1)
         Shape_plotPad.SetTickx()
         Shape_plotPad.SetTicky()
 #
@@ -816,7 +826,13 @@ def main():
         ShapeStack.GetYaxis().SetTitleOffset(1.58)
         ShapeStack.GetXaxis().SetLabelSize(0.0)
 
-        theLegend2 = ROOT.TLegend(0.61,0.61,0.88,0.88)
+        theLegend2 = ROOT.TLegend(0.85, 0.45, 1.0, 0.75, "", "brNDC")
+        theLegend2.SetLineWidth(1)
+        theLegend2.SetLineStyle(1)
+        theLegend2.SetFillStyle(1001) #0
+        theLegend2.SetFillColor(0)
+        theLegend2.SetBorderSize(1)
+        theLegend2.SetTextFont(42)
         theLegend2.AddEntry(DataShape,'Observed','pe')
         theLegend2.AddEntry(N_DiBoson_Histo,'DiBoson','f')
         theLegend2.AddEntry(N_TT_Histo,'TTbar','f')
