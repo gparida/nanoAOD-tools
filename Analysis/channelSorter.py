@@ -48,8 +48,8 @@ if __name__ == "__main__":
 try:
 
  	if args.Channel == "tt":
- 		fnames = glob.glob(args.inputLocation)
- 		outputDir = "."
+ 		fnames = glob.glob(args.inputLocation + "/*.root")
+ 		outputDir = args.inputLocation
  		outputbranches = "keep_and_drop.txt"
  		cuts = "MET_pt>200 && PV_ndof > 4 && abs(PV_z) < 24 && sqrt(PV_x*PV_x+PV_y*PV_y) < 2"
  		p = PostProcessor(outputDir, fnames, cut=cuts,branchsel=None,modules=[letsSortChannels(args.Channel)], postfix="_ttChannel",noOut=False,outputbranchsel=outputbranches)
