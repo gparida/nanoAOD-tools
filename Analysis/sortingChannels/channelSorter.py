@@ -56,7 +56,7 @@ letsSortChannels = lambda: Channel(args.Channel)
 
 
 if __name__ == "__main__":
-	parser = argparse.ArgumentParser(description='Script to Handle root file preparation to split into channels. Input should be a singular files for each dataset or data already with some basic selections applied')
+	parser = argparse.ArgumentParser(description='Script to Handle root file preparation to split into channels. Input should be a singular files for each dataset or data already with some basic selections and the weight branches applied. This is cause then we can use the filter and collection class')
 	parser.add_argument('--Channel',help="enter either tt or et or mut",required=True)
 	parser.add_argument('--inputLocation',help="enter the path to the location of input file set",default="")
 	args = parser.parse_args()
