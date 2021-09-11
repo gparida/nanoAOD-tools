@@ -43,11 +43,6 @@ class Channel(Module):
 		self.FatJet.apply_cut(lambda x: x.pt > 200 and (abs(x.eta) < 2.4))
 		
 
-
-		#gtau = filter(lambda x: x.pt > 20 and (abs(x.eta) < 2.4), tau) #Filtering "good" taus in a event
-		#fatjet = Collection(event,"FatJet")
-		#gfatjet = filter(lambda x: x.pt > 200 and (abs(x.eta) < 2.4), fatjet)
-
 		#Need to add more cchannels to this
 		if self.channel == "tt":
 			if(len(self.Tau.collection)==2 and len(self.FatJet.collection)==1): # condition for hadronic channel
@@ -64,7 +59,7 @@ letsSortChannels = lambda: Channel(args.Channel)
 
 
 if __name__ == "__main__":
-	parser = argparse.ArgumentParser(description='Script to Handle root file preparation to split into channels. Input should be a singular files for each dataset or data already with some basic selections and the weight branches applied. This is cause then we can use the filter and collection class')
+	parser = argparse.ArgumentParser(description='Script to Handle root file preparation to split into channels. Input should be a singular files for each dataset or data already with some basic selections applied')
 	parser.add_argument('--Channel',help="enter either tt or et or mut",required=True)
 	parser.add_argument('--inputLocation',help="enter the path to the location of input file set",default="")
 	args = parser.parse_args()

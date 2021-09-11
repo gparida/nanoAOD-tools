@@ -18,7 +18,7 @@ class particle():
 	#def endJob(self):
 	#	pass
 	
-	#Create the new branches to be added for the selected objects
+	#Create the new branches to be added for the selected objects. Specific bracnches for objects such as FatJets (softdropmass) can be added by writing a separate class that inherits base particle class
 	def setUpBranches(self, wrappedOutputTree):
 		wrappedOutputTree.branch("ng{}".format(self.particleType),"I")
 		wrappedOutputTree.branch("g{}_pt".format(self.particleType),"F",lenVar="ng{}".format(self.particleType))
@@ -29,11 +29,13 @@ class particle():
 	def setupCollection(self, event):
 		self.collection = Collection(event,self.particleType)
 	
+	#Cuts more complicated for some objects could be added in a separate class that inherits particle class
 	def apply_cut(self,l_func):
 		if self.collection is None:
 			return
 		self.collection = filter(l_func,self.collection)
 	
+
 	def fillBranches(self,wrappedOutputTree):
 		wrappedOutputTree.fillBranch("ng{}".format(self.particleType),len(self.collection))
 		wrappedOutputTree.fillBranch("g{}_pt".format(self.particleType),self.get_attributes("pt"))
@@ -47,7 +49,7 @@ class particle():
 		return [obj[variable] for obj in self.collection]
 
 	
-
+#############################OLDER ATTEMPTS for REFERENCE###################################################################################################
 	#def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
 	#	#self.out = wrappedOutputTree
 	#	if self.particleType == "Tau": 
@@ -99,7 +101,7 @@ class particle():
 	#	particleAttributes["pt"] = [particleObject[k].pt for k in range(len(particleObject))]
 	#	return particleAttributes
 
-    
+ #################################################################################################################################################################   
 
 
 
