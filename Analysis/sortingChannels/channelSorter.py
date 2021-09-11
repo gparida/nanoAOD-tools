@@ -25,8 +25,8 @@ class Channel(Module):
 
 	def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
 		self.out = wrappedOutputTree
-		self.Tau.beginFile(inputFile, outputFile, inputTree, self.out) #creating thre new branches
-		self.FatJet.beginFile(inputFile, outputFile, inputTree, self.out)
+		self.Tau.setUpBranches(self.out) #creating the new branches
+		self.FatJet.setUpBranches(self.out)
     		
     		
 	def endFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
@@ -35,16 +35,24 @@ class Channel(Module):
 	#event loop
 	def analyze(self, event): 
 		#Basic filtering procedure with the pt and eta contions for the time being
-		tau = Collection(event, "Tau") #creating Tau collection
-		gtau = filter(lambda x: x.pt > 20 and (abs(x.eta) < 2.4), tau) #Filtering "good" taus in a event
-		fatjet = Collection(event,"FatJet")
-		gfatjet = filter(lambda x: x.pt > 200 and (abs(x.eta) < 2.4), fatjet)
+		self.Tau.setupCollection(event)
+		self.Tau.apply_cut(lambda x: x.pt > 20 and (abs(x.eta) < 2.4))
+		
+
+		self.FatJet.setupCollection(event)
+		self.FatJet.apply_cut(lambda x: x.pt > 200 and (abs(x.eta) < 2.4))
+		
+
+
+		#gtau = filter(lambda x: x.pt > 20 and (abs(x.eta) < 2.4), tau) #Filtering "good" taus in a event
+		#fatjet = Collection(event,"FatJet")
+		#gfatjet = filter(lambda x: x.pt > 200 and (abs(x.eta) < 2.4), fatjet)
 
 		#Need to add more cchannels to this
 		if self.channel == "tt":
-			if (len(gtau)==2 and len(gfatjet)==1): # condition for hadronic channel
-				self.Tau.fillBranchTau(self.out,gtau) #Fill the branches
-				self.FatJet.fillBranchFatJet(self.out,gfatjet)
+			if(len(self.Tau.collection)==2 and len(self.FatJet.collection)==1): # condition for hadronic channel
+				self.Tau.fillBranches(self.out) #Fill the branches
+				self.FatJet.fillBranches(self.out)
 				return True # Store event
 			else:
 				return False # Reject event
