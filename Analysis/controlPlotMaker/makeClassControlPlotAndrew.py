@@ -1,6 +1,6 @@
 import ROOT
 import argparse  ##Importing root and package to take arguments 
-
+from controlPlotDictionary import *
 
 class MakeHistograms(object):
     #constructor to initialize the objects
@@ -124,185 +124,12 @@ class MakeHistograms(object):
 
 
 
-#This dictionary lists observable to be plotted in control plots and their corresponding histogram binning and range
-variableSettingDictionary = {
-    'boostedTau_pt':'26,40.0,300.0',
-    'boostedTau_pt[0]':'26,40.0,300.0',
-    'boostedTau_pt[1]':'26,40.0,300.0',
-    'boostedTau_phi':'20,-3.14,3.14',
-    'boostedTau_phi[0]':'20,-3.14,3.14',
-    'boostedTau_phi[1]':'20,-3.14,3.14',
-    'boostedTau_eta':"30,-3.14,3.14",
-    'boostedTau_eta[0]':"30,-3.14,3.14",
-    'boostedTau_eta[1]':"30,-3.14,3.14",
-    'boostedTau_mass':"20,0.0,2.0",
-    'Tau_pt':'16,0.0,400.0',
-    'Tau_phi':'30,-3.14,3.14',
-    'Tau_eta':'20, -2.0, 2.0',
-    'nboostedTau':'4,0,4',
-    'nTau':'4,0,4',
-    'FatJet_pt':'60,0.0,1500.0',
-    'FatJet_phi':'30,-3.14,3.14',
-    'FatJet_eta':'20, -2.0, 2.0',
-    'nFatJet':'5,0,5',
-    'Electron_pt':'40,0.0,1000.0',
-    'Electron_phi':'30,-3.14,3.14',
-    'Electron_eta':'20, -2.0, 2.0',
-    'nElectron':'6,0,6',
-    'MET_pt':'60,0.0,1500.0',
-    'MET_phi':'30,-3.14,3.14',
-    'MET_sumEt':'40,0.00,1000.00',
-    'Muon_pt':'16,0.0,400.0',
-    'Muon_eta':'20, -2.0, 2.0',
-    'Muon_phi':'30,-3.14,3.14',
-    'nMuon':'6,0,6',
-    #'Electron_eta':'48,-2.4,2.4',
-    #'Electron_pt':'20,20.0,400.0',
-    #'pt_2':'25,30.0,80.0',
-    #'eta_2':'50,-2.5,2.5',
-    #'pt_1':'30,20.0,80.0',
-    #'eta_1':'48,-2.4,2.4',
-    #'m_vis':'30,50.0,200.0',
-    #'m_sv':'25,50.0,300.0',
-    #'njets':'6,0.0,6.0',
-    #'HiggsPt':'40,0.0,400.0',
-    #'HiggsPt_Differential':'40,0.0,400.0',
-    #'met':'40,0.0,400.0',
-    #'DeltaR':'40,0.0,6.0',
-    #'mjj':'20,0.0,500.0',
-    #'abs(eta_1-eta_2)':'45,0.0,2.5',
-    #'jpt_1':'50,0.0,200.0',
-    #'jeta_1':'50,-5.0,5.0',
-    #'jpt_2':'50,0.0,200.0',
-    #'jeta_2':'50,-5.0,5.0',
-    #'MT':'20,0.0,200.0',
-}
 
 
-#This dictionary lists observable and its corresponding X-Axis name
-variableAxisTitleDictionary = {
-    'boostedTau_pt':'boostedTau_pt',
-    'boostedTau_pt[0]':'boostedTau_pt[0]',
-    'boostedTau_pt[1]':'boostedTau_pt[1]',
-    'boostedTau_phi':'boostedTau_phi',
-    'boostedTau_phi[0]':'boostedTau_phi[0]',
-    'boostedTau_phi[1]':'boostedTau_phi[1]',
-    'boostedTau_eta':'boostedTau_eta',
-    'boostedTau_eta[0]':'boostedTau_eta[0]',
-    'boostedTau_eta[1]':'boostedTau_eta[1]',
-    'boostedTau_mass':'boostedTau_mass',
-    'Tau_pt':'p_{T}(#tau)',
-    'Tau_phi':'#phi(#tau)',
-    'Tau_eta':'#eta(#tau)',
-    'nboostedTau':'Number of Boosted #tau',
-    'nTau':'Number of #tau',
-    'FatJet_pt':'ak8 jet p_{T}[GeV]',
-    'FatJet_phi':'#phi(ak8 jet)',
-    'FatJet_eta':'#eta(ak8 jet)',
-    'nFatJet':'Number of ak8 Jets',
-    'Electron_pt':'p_{T} (e)[GeV]',
-    'Electron_phi':'#phi (e)',
-    'Electron_eta':'#eta(e)',
-    'nElectron':'Number of e',
-    'MET_pt':'MET_{p_{T}}',
-    'MET_phi':'#phi(MET)',
-    'MET_sumEt':'Scalar Sum of E_{T}',
-    'Muon_pt':'#phi(#mu)',
-    'Muon_eta':'#eta(#mu)',
-    'Muon_phi':'#phi(#mu)',
-    'nMuon':'Number of #mu',
-    
-    #'pt_2':'#tau p_{t}',
-    #'eta_2':'#tau #eta',
-    #'pt_1':'#mu p_{t}',
-    #'eta_1':'#mu #eta',
-    #'m_vis':'m_{vis}',
-    #'m_sv':'m_{#tau#tau}',
-    #'njets':'N_{jets}',
-    #'HiggsPt':'Higgs p_{t}',
-    #'HiggsPt_Differential':'Higgs p_{t}',
-    #'met':'MET',
-    #'DeltaR':'#Delta r_{#mu,#tau}',
-    #'mjj':'m_{jj}',
-    #'abs(eta_1-eta_2)':'#Delta#eta_{jj}',
-    #'jpt_1':'p_{t} j_{1}',
-    #'jeta_1':'#eta j_{1}',
-    #'jpt_2':'p_{t} j_{2}',
-    #'jeta_2':'#eta j_{2}',    
-    #'MT':'Transverse Mass',
-    }
 
-DatasetNameXSWeightDictionary={
-    "QCD_1000to1400":0.006405107,
-    "QCD_120to170":230.3234918,
-    "QCD_1400to1800":0.000997817,
-    "QCD_15to30":1058937.981,
-    "QCD_170to300":59.15251935,
-    "QCD_1800to2400":0.00026933,
-    "QCD_2400to3200":0.0000296633850303439,
-    "QCD_300to470":2.00778766,
-    "QCD_30to50":90647.48201,
-    "QCD_3200toInf":0.00000227136,
-    "QCD_470to600":0.178230811,
-    "QCD_800to1000":0.011793967,
-    "QCD_80to120":1323.643203,
-    "QCD_50to80":13473.64119,
-    "QCD_600to800":0.040118257,
-    "ST_s-channel_4f":0.009501705,
-    "TTTo2L2Nu":0.255495352,
-    "TTToHadronic":0.102523092,
-    "TTToSemiLeptonic":0.07267512,
-    #"TTTo2L2Nu":0.036459448,
-    #"TTToHadronic":0.036459448,
-    #"TTToSemiLeptonic":0.036459448,
-    "W":10.63712415,
-    "WW":0.088197968,
-    "WZ":0.060063755,
-    "ZZ":0.197924492,
-    "DYlow":9.15316241,
-    "DY":0.901934791,
-    "Data":1,
-    }
 
-DatasetNameList=["QCD_1000to1400",
-"QCD_120to170",
-"QCD_1400to1800",
-"QCD_15to30",
-"QCD_170to300",
-"QCD_1800to2400",
-"QCD_2400to3200",
-"QCD_300to470",
-"QCD_30to50",
-"QCD_3200toInf",
-"QCD_470to600",
-"QCD_800to1000",
-"QCD_80to120",
-"QCD_50to80",
-"QCD_600to800",
-"ST_s-channel_4f",
-"TTTo2L2Nu",
-"TTToHadronic",
-"TTToSemiLeptonic",
-"W",
-"WW",
-"WZ",
-"ZZ",
-"DYlow",
-"DY",
-"Data"]
 
-SignalNameList=["RadionHH_M1000",
-"RadionHH_M1200",
-"RadionHH_M1400",
-"RadionHH_M1600",
-"RadionHH_M1800",
-"RadionHH_M2000",
-"RadionHH_M2500",
-"RadionHH_M3000",
-"RadionHH_M3500",
-"RadionHH_M4000",
-"RadionHH_M4500",
-]
+
 
 #DatasetObjects={}
 
@@ -463,7 +290,14 @@ def main():
                         nargs='+',
                         help='additional region selections',
                         #default=['Tau_idMVAoldDM2017v2 & 4 == 4','nTau==2 || nboostedTau==2','FatJet_btagDeepB > 0.45','nFatJet == 1'])
-                        default=["PV_ndof > 4", "abs(PV_z) < 24","sqrt(PV_x*PV_x+PV_y*PV_y) < 2"])
+                        default=["PV_ndof > 4", "abs(PV_z) < 24","sqrt(PV_x*PV_x+PV_y*PV_y) < 2",
+                        "Flag_goodVertices",
+                        "Flag_globalSuperTightHalo2016Filter",
+                        "Flag_HBHENoiseIsoFilter",
+                        "Flag_HBHENoiseFilter",
+                        "Flag_EcalDeadCellTriggerPrimitiveFilter",
+                        "Flag_BadPFMuonFilter",
+                        "Flag_eeBadScFilter"])
     parser.add_argument('--pause',
                         help='pause after drawing each plot to make it easier to view',
                         action='store_true')
@@ -546,6 +380,7 @@ def main():
                 args.standardCutString,
                 args.additionalSelections,
                 SignalNameList[index])
+            break
         
         ########################Signal-Histogram#############################
         Signal_Histo = SignalObjects["RadionHH_M1000"].HistogramName.Clone()
@@ -753,20 +588,91 @@ def main():
         ##########################################Preparing the Canvas##################################################
 
         theCanvas = ROOT.TCanvas("theCanvas","theCanvas")
+        #plotPad = ROOT.TPad("plotPad","plotPad",0,0.25,1,1)
+        #
+        #plotPad.SetFillColor(0)
+        #plotPad.SetBorderMode(0)
+        #plotPad.SetBorderSize(1)
+        #plotPad.SetTickx(1)
+        #plotPad.SetTicky(1)
+        #plotPad.SetGridx()
+        #plotPad.SetLeftMargin(0.15) #0.15
+        #plotPad.SetRightMargin(0.15) #0.1
+        #plotPad.SetTopMargin(0.122)
+        #plotPad.SetBottomMargin(0.025)
+        #plotPad.SetFrameFillStyle(0)
+        #plotPad.SetFrameLineStyle(0)
+        #plotPad.SetFrameLineWidth(1)
+        #plotPad.SetFrameBorderMode(0)
+        #plotPad.SetFrameBorderSize(1)
+        #
+        #ratioPad = ROOT.TPad("ratioPad","ratioPad",0,0,1,0.25);
+        #ratioPad.SetTopMargin(0.02);
+        #ratioPad.SetBottomMargin(0.35);
+        #ratioPad.SetLeftMargin(0.15);
+        #ratioPad.SetRightMargin(0.15);
+        #ratioPad.SetTickx(1)
+        #ratioPad.SetTicky(1)
+        #ratioPad.SetFrameLineWidth(1)
+        ##pad2.SetGridx()
+        #ratioPad.SetGridy()
+        ##pad2.SetLogy()
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
         theCanvas.Divide(1,2)
+
+
+
         
         plotPad = ROOT.gPad.GetPrimitive('theCanvas_1')
         ratioPad = ROOT.gPad.GetPrimitive('theCanvas_2')
         
-        plotPad.SetPad("pad1","plot",0.0,0.20,1.0,1.0,0)
-        ratioPad.SetPad("pad2","ratio",0.0,0.0,1.0,0.25,0)
-#
-        ratioPad.SetTopMargin(0.05)
-        ratioPad.SetBottomMargin(0.27)
-        plotPad.SetBottomMargin(0.08)
-        plotPad.SetFrameLineWidth(1)
+        #plotPad.SetPad("pad1","plot",0.0,0.20,1.0,1.0,0)
+        #ratioPad.SetPad("pad2","ratio",0.0,0.0,1.0,0.25,0)
+
+        plotPad.SetPad("pad1","plot",0,0.25,1,1)
+        plotPad.SetFillColor(0)
+        plotPad.SetBorderMode(0)
+        plotPad.SetBorderSize(1)
+        plotPad.SetTickx(1)
+        plotPad.SetTicky(1)
+        plotPad.SetGridx()
+        plotPad.SetLeftMargin(0.15) #0.15
+        plotPad.SetRightMargin(0.15) #0.1
+        plotPad.SetTopMargin(0.14) #0.122 if the exponent is not present
+        plotPad.SetBottomMargin(0.025)
+        plotPad.SetFrameFillStyle(0)
+        plotPad.SetFrameLineStyle(0)
+        plotPad.SetFrameLineWidth(1) #1
+        plotPad.SetFrameBorderMode(0)
+        plotPad.SetFrameBorderSize(1)
+        #
+        ratioPad.SetPad("pad2","ratio",0,0,1,0.25)
+        ratioPad.SetFillColor(0)
+        ratioPad.SetTopMargin(0.02)
+        ratioPad.SetBottomMargin(0.35)
+        ratioPad.SetLeftMargin(0.15)
+        ratioPad.SetRightMargin(0.15)
+        ratioPad.SetTickx(1)
+        ratioPad.SetTicky(1)
+        ratioPad.SetFrameLineWidth(1)
         ratioPad.SetGridy()
+        #pad2.SetGridx()
 #
+        #ratioPad.SetTopMargin(0.05)
+        #ratioPad.SetBottomMargin(0.27)
+        #plotPad.SetBottomMargin(0.08)
+        #plotPad.SetFrameLineWidth(1)
+        #ratioPad.SetGridy()
+##
         ratioHist, ratioError = MakeRatioHistograms(DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].HistogramName,backgroundStack,variable)
         ratioPad.cd()
         ratioHist.Draw('ex0')
