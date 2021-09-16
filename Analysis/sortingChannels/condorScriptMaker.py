@@ -28,6 +28,7 @@ os.system("rm -rf Jobs_%s"%str(args.Channel))
 os.system("mkdir Jobs_%s"%str(args.Channel))
 
 for name in glob.glob(args.inputLocation + "/*.root"):
+    print (name)
     nameStrip = name.strip()
     filename = (nameStrip.split('/')[-1]).split('.')[-2]
     print (filename)
@@ -61,11 +62,11 @@ sub_total.write("+IsFastQueueJob      = True\n")
 sub_total.write("getenv               = True\n")
 sub_total.write("request_memory       = 2G\n")
 sub_total.write("request_disk         = 3G\n")
-sub_total.write("Transfer_Input_Files = /nfs_scratch/parida/Physics_Tools_NanoAOD_Tools_HHbbtt/Aug_1_test/CMSSW_10_6_25/src/PhysicsTools\n")
+sub_total.write("Transfer_Input_Files =/nfs_scratch/parida/channelSorting/CMSSW_10_6_25/src/PhysicsTools\n")
 sub_total.write("output               = $Fp(filename)sorter.out\n")
 sub_total.write("error                = $Fp(filename)sorter.err\n")
 sub_total.write("Log                  = $Fp(filename)sorter.log\n")
-sub_total.write("queue filename matching ("+MYDIR+"/Jobs_*/*/*.sh)\n"%str(args.Channel))
+sub_total.write("queue filename matching ("+MYDIR+"/Jobs_%s/*/*.sh)\n"%str(args.Channel))
 	
 	
 	
