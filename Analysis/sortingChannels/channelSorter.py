@@ -70,7 +70,7 @@ class Channel(Module):
 			self.FatJet.apply_cut(lambda x: x.pt > 200 and (abs(x.eta) < 2.4))
 
 			self.boostedTau.setupCollection(event)
-			self.boostedTau.apply_cut(lambda x: x.pt > 20 and (abs(x.eta) < 2.3) and x.idDecayModeNewDMs )
+			self.boostedTau.apply_cut(lambda x: x.pt > 20 and (abs(x.eta) < 2.3) and (x.idMVAoldDM2017v2 & 1 == 1) )
 
 
 			if((len(self.Tau.collection)==2 or len(self.boostedTau.collection)==2) and len(self.FatJet.collection)==1): # condition for hadronic channel
