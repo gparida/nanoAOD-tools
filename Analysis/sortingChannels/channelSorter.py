@@ -65,8 +65,10 @@ if __name__ == "__main__":
 	args = parser.parse_args()
 	try:
 		if args.Channel == "tt":
-			fnames = glob.glob(args.inputLocation + "/*.root")
- 			outputDir = "/data/gparida/Background_Samples/bbtautauAnalysis/2016/TestOutput"
+			#fnames = glob.glob(args.inputLocation + "/*.root") #for local run
+			fnames = str(args.inputLocation)
+ 			#outputDir = "/data/gparida/Background_Samples/bbtautauAnalysis/2016/TestOutput" # for local run
+			outputDir = "." #for condor
  			outputbranches = "keep_and_drop.txt"
  			cuts = "MET_pt>200 && PV_ndof > 4 && abs(PV_z) < 24 && sqrt(PV_x*PV_x+PV_y*PV_y) < 2" # These wholesale cuts applied even before entering event loop
  			p = PostProcessor(outputDir, fnames, cut=cuts,branchsel=None,modules=[letsSortChannels()], postfix="_ttChannel",noOut=False,outputbranchsel=outputbranches) # running the post processor - output files will have the _ttChannels appended to their name 
