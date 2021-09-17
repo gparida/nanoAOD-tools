@@ -45,7 +45,7 @@ class particle():
 		
 
 	def get_attributes(self,variable):
-		print ("This is being returned as attributes: ", [obj[variable] for obj in self.collection])
+		#print ("This is being returned as attributes: ", [obj[variable] for obj in self.collection])
 		return [obj[variable] for obj in self.collection]
 
 	

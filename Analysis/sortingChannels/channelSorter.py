@@ -4,6 +4,7 @@ from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
 import ROOT
 import glob
 from particleClass import particle
+from FatJetClass import FatJet
 import argparse
 import traceback
 
@@ -12,21 +13,19 @@ ROOT.PyConfig.IgnoreCommandLineOptions = True  #Find out what does this do ?
 class Channel(Module):
 	def __init__(self, channel):
 		self.channel = channel # Specify the channel
-		#Need to add conditons for other channels
-		if self.channel == "tt":
-				self.boostedTau = particle("boostedTau")
-				self.Tau = particle("Tau")
-				self.FatJet = particle("FatJet")
-		
+		#All these objects are common to all channels	
+		self.boostedTau = particle("boostedTau")
+		self.Tau = particle("Tau")
+		self.FatJet = FatJet("FatJet")
+		self.Electron = particle("Electron")
+		self.Muon = particle("Muon")
+
 		if self.channel == "test":
 			self.boostedTau = particle("boostedTau")
-
-    			
-    			
-				
+			
 
 	def beginJob(self):
-        	pass
+		pass
 	
 	def endJob(self):
 		pass
@@ -36,10 +35,11 @@ class Channel(Module):
 		#self.Tau.setUpBranches(self.out) #creating the new branches
 		#self.FatJet.setUpBranches(self.out)
 		#self.boostedTau.setUpBranches(self.out)
-		if self.channel == "tt":
-			self.Tau.setUpBranches(self.out) #creating the new branches
-			self.FatJet.setUpBranches(self.out)
-			self.boostedTau.setUpBranches(self.out)
+		self.Tau.setUpBranches(self.out) #creating the new branches
+		self.FatJet.setUpBranches(self.out)
+		self.boostedTau.setUpBranches(self.out)
+		self.Electron.setUpBranches(self.out)
+		self.Muon.setUpBranches(self.out)
 		
 		if self.channel == "test":
 			self.boostedTau.setUpBranches(self.out)
@@ -61,24 +61,69 @@ class Channel(Module):
 			self.boostedTau.fillBranches(self.out)
 			return True
 
-		#Need to add other channels to this
+		#Add all the Object Based Selection########################################
+		
+		self.Tau.setupCollection(event)
+		self.Tau.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAoldDM2017v2 & 4 == 4))
+
+		self.boostedTau.setupCollection(event)
+		self.boostedTau.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAoldDM2017v2 & 4 == 4))
+
+		self.FatJet.setupCollection(event)
+		self.FatJet.apply_cut(lambda x: (x.pt > 200) and (abs(x.eta) < 2.4) and (x.msoftdrop > 30) and (x.msoftdrop < 250) and ((x.tau2/x.tau1) < 0.75))
+
+		self.Electron.setupCollection(event)
+		self.Electron.apply_cut(lambda x: x.mvaFall17V2Iso_WPL and (x.pt > 10))
+
+		self.Muon.setupCollection(event)
+		self.Muon.apply_cut(lambda x: x.isGlobal and (x.pt > 10))
+
+		############################################################################
+
+		#Now Add all the channel based selection####################################
+		# condition for hadronic channel
 		if self.channel == "tt":
-			self.Tau.setupCollection(event)
-			self.Tau.apply_cut(lambda x: x.pt > 20 and (abs(x.eta) < 2.4))
-
-			self.FatJet.setupCollection(event)
-			self.FatJet.apply_cut(lambda x: x.pt > 200 and (abs(x.eta) < 2.4))
-
-			self.boostedTau.setupCollection(event)
-			self.boostedTau.apply_cut(lambda x: x.pt > 20 and (abs(x.eta) < 2.3) and (x.idMVAoldDM2017v2 & 1 == 1) )
-
-
-			if((len(self.Tau.collection)==2 or len(self.boostedTau.collection)==2) and len(self.FatJet.collection)==1): # condition for hadronic channel
+			if((len(self.Tau.collection)==2 or len(self.boostedTau.collection)==2) 
+				and len(self.FatJet.collection)==1 
+				and len(self.Electron.collection)==0 
+				and len(self.Muon.collection)==0): 
+				#print ("length of good elec ",len(self.Electron.collection),"length of good muons ",len(self.Muon.collection))
 				self.Tau.fillBranches(self.out) #Fill the branches
 				self.FatJet.fillBranches(self.out)
+				self.boostedTau.fillBranches(self.out)
 				return True # Store event
 			else:
 				return False # Reject event
+		
+		if self.channel == "et":
+			if((len(self.Tau.collection)==1 or len(self.boostedTau.collection)==1) 
+				and len(self.FatJet.collection)==1 
+				and len(self.Electron.collection)==1 
+				and len(self.Muon.collection)==0):
+				self.Tau.fillBranches(self.out) #Fill the branches
+				self.FatJet.fillBranches(self.out)
+				self.boostedTau.fillBranches(self.out)
+				self.Electron.fillBranches(self.out)
+				return True
+			else:
+				return False
+		
+		if self.channel == "mut":
+			if((len(self.Tau.collection)==1 or len(self.boostedTau.collection)==1) 
+				and len(self.FatJet.collection)==1 
+				and len(self.Electron.collection)==0 
+				and len(self.Muon.collection)==1):
+				self.Tau.fillBranches(self.out) #Fill the branches
+				self.FatJet.fillBranches(self.out)
+				self.boostedTau.fillBranches(self.out)
+				self.Muon.fillBranches(self.out)
+				return True
+			else:
+				return False
+		
+		#####################################################################
+
+
 
 			
 	
@@ -91,15 +136,55 @@ if __name__ == "__main__":
 	parser.add_argument('--Channel',help="enter either tt or et or mut. For boostedTau test enter test",required=True)
 	parser.add_argument('--inputLocation',help="enter the path to the location of input file set",default="")
 	args = parser.parse_args()
+
+	#Define Event Selection - all those to be connected by and
+	eventSelectionAND = ["MET_pt>200",
+						"PV_ndof > 4",
+						"abs(PV_z) < 24",
+						"sqrt(PV_x*PV_x+PV_y*PV_y) < 2",
+						"Flag_goodVertices",
+						"Flag_globalSuperTightHalo2016Filter", 
+						"Flag_HBHENoiseIsoFilter",
+						"Flag_HBHENoiseFilter",
+						"Flag_EcalDeadCellTriggerPrimitiveFilter",
+						"Flag_BadPFMuonFilter",
+						"Flag_eeBadScFilter"]
+
+	#Define Eevnt Selection - all those to be connected by or
+
+    #Start the post processor
 	try:
 		if args.Channel == "tt":
-			#fnames = glob.glob(args.inputLocation + "/*.root")
-			fnames = [str(args.inputLocation)] #for condor
- 			#outputDir = "/data/gparida/Background_Samples/bbtautauAnalysis/2016/TestOutput"
-			outputDir = "." #for condor
+			fnames = glob.glob(args.inputLocation + "/*.root")
+			#fnames = [str(args.inputLocation)] #for condor - Singular files too need to be in a list
+ 			outputDir = "/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel"
+			#outputDir = "." #for condor
  			outputbranches = "keep_and_drop.txt"
- 			cuts = "MET_pt>200 && PV_ndof > 4 && abs(PV_z) < 24 && sqrt(PV_x*PV_x+PV_y*PV_y) < 2" # These wholesale cuts applied even before entering event loop
- 			p = PostProcessor(outputDir, fnames, cut=cuts,branchsel=None,modules=[letsSortChannels()], postfix="_ttChannel",noOut=False,outputbranchsel=outputbranches) # running the post processor - output files will have the _ttChannels appended to their name 
+ 			#cuts = "MET_pt>200 && PV_ndof > 4 && abs(PV_z) < 24 && sqrt(PV_x*PV_x+PV_y*PV_y) < 2 && Flag_goodVertices && Flag_globalSuperTightHalo2016Filter && Flag_HBHENoiseIsoFilter && Flag_HBHENoiseFilter && Flag_EcalDeadCellTriggerPrimitiveFilter && Flag_BadPFMuonFilter && Flag_eeBadScFilter" # Event Based selection
+ 			cuts = "&&".join(eventSelectionAND)
+			p = PostProcessor(outputDir, fnames, cut=cuts,branchsel=None,modules=[letsSortChannels()], postfix="_ttChannel",noOut=False,outputbranchsel=outputbranches) # running the post processor - output files will have the _ttChannels appended to their name 
+			p.run()
+
+		if args.Channel == "et":
+			fnames = glob.glob(args.inputLocation + "/*.root")
+			#fnames = [str(args.inputLocation)] #for condor
+ 			outputDir = "/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel"
+			#outputDir = "." #for condor
+ 			outputbranches = "keep_and_drop.txt"
+ 			#cuts = "MET_pt>200 && PV_ndof > 4 && abs(PV_z) < 24 && sqrt(PV_x*PV_x+PV_y*PV_y) < 2 && Flag_goodVertices && Flag_globalSuperTightHalo2016Filter && Flag_HBHENoiseIsoFilter && Flag_HBHENoiseFilter && Flag_EcalDeadCellTriggerPrimitiveFilter && Flag_BadPFMuonFilter && Flag_eeBadScFilter" # Event Based selection
+ 			cuts = "&&".join(eventSelectionAND)
+			p = PostProcessor(outputDir, fnames, cut=cuts,branchsel=None,modules=[letsSortChannels()], postfix="_etChannel",noOut=False,outputbranchsel=outputbranches) # running the post processor - output files will have the _ttChannels appended to their name 
+			p.run()
+		
+		if args.Channel == "mut":
+			fnames = glob.glob(args.inputLocation + "/*.root")
+			#fnames = [str(args.inputLocation)] #for condor
+ 			outputDir = "/data/gparida/Background_Samples/bbtautauAnalysis/2016/mut_Channel"
+			#outputDir = "." #for condor
+ 			outputbranches = "keep_and_drop.txt"
+			cuts = "&&".join(eventSelectionAND)
+ 			#cuts = "MET_pt>200 && PV_ndof > 4 && abs(PV_z) < 24 && sqrt(PV_x*PV_x+PV_y*PV_y) < 2 && Flag_goodVertices && Flag_globalSuperTightHalo2016Filter && Flag_HBHENoiseIsoFilter && Flag_HBHENoiseFilter && Flag_EcalDeadCellTriggerPrimitiveFilter && Flag_BadPFMuonFilter && Flag_eeBadScFilter" # Event Based selection
+ 			p = PostProcessor(outputDir, fnames, cut=cuts,branchsel=None,modules=[letsSortChannels()], postfix="_mutChannel",noOut=False,outputbranchsel=outputbranches) # running the post processor - output files will have the _ttChannels appended to their name 
 			p.run()
 		
 		if args.Channel == "test":
@@ -108,7 +193,8 @@ if __name__ == "__main__":
  			#outputDir = "/data/gparida/Background_Samples/bbtautauAnalysis/2016/TestOutput"
 			outputDir = "." #for condor
  			outputbranches = "keep_and_drop.txt"
- 			cuts = "MET_pt>200 && PV_ndof > 4 && abs(PV_z) < 24 && sqrt(PV_x*PV_x+PV_y*PV_y) < 2" # These wholesale cuts applied even before entering event loop
+			cuts = "&&".join(eventSelectionAND) 
+ 			#cuts = "MET_pt>200 && PV_ndof > 4 && abs(PV_z) < 24 && sqrt(PV_x*PV_x+PV_y*PV_y) < 2 && Flag_goodVertices && Flag_globalSuperTightHalo2016Filter && Flag_HBHENoiseIsoFilter && Flag_HBHENoiseFilter && Flag_EcalDeadCellTriggerPrimitiveFilter && Flag_BadPFMuonFilter && Flag_eeBadScFilter" # These wholesale cuts applied even before entering event loop
  			p = PostProcessor(outputDir, fnames, cut=cuts,branchsel=None,modules=[letsSortChannels()], postfix="_boostedTest",noOut=False,outputbranchsel=outputbranches) # running the post processor - output files will have the _ttChannels appended to their name 
 			p.run()
 
