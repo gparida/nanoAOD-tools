@@ -5,7 +5,7 @@ import ROOT
 ROOT.PyConfig.IgnoreCommandLineOptions = True  #Find out what does this do ?
 
 
-class particle():
+class particle(object):
 	def __init__(self, particleType):
 		self.particleType = particleType # What type of particle it is Tau, Jet etc
 		self.collection = None
