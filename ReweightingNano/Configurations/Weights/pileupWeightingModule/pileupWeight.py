@@ -1,11 +1,14 @@
 import ROOT
+import os 
 from Configurations.Weights.WeightDefinition import Weight as Weight
-from Configurations.Weights import b2gWeightPath
+#from Configurations.Weights import b2gWeightPath
+
+b2gWeightPath = os.environ['CMSSW_BASE'] + 'src/PhysicsTools/NanoAODTools/python/postprocessing/data/pileup/'
 
 def calculatePileupWeight(self, theTree):
     pileupWeighting = 1.0
 
-    pileupWeighting = self.dataHisto.GetBinContent(self.dataHisto.GetXaxis().FindBin(theTree.PV_npvs)) / self.mcHisto.GetBinContent(self.mcHisto.GetXaxis().FindBin(theTree.PV_npvs))
+    pileupWeighting = self.dataHisto.GetBinContent(self.dataHisto.GetXaxis().FindBin(theTree.Pileup_nPU)) / self.mcHisto.GetBinContent(self.mcHisto.GetXaxis().FindBin(theTree.Pileup_nPU))
 
     self.value[0] = pileupWeighting
 

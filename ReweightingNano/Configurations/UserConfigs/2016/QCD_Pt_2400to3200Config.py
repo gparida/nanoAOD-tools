@@ -4,8 +4,7 @@ import json
 
 from Configurations.ConfigDefinition import ReweightConfiguration
 from Configurations.Weights.CrossSectionWeightingModule.CrossSectionWeight import crossSectionWeight as crossSectionWeight
-#from Configurations.Weights.b2gAnalysisWeights.pileupWeightingModule.pileupWeight import pileupWeight_2016
-
+from Configurations.Weights.pileupWeightingModule.pileupWeight import pileupWeight_2016
 
 QCD_Pt_2400to3200Config = ReweightConfiguration()
 QCD_Pt_2400to3200Config.name = 'QCD_Pt_2400to3200'
