@@ -521,7 +521,7 @@ def main():
         BackgroundShape.Add(WJets_Histo)
         BackgroundShape.Add(TT_Histo)
         BackgroundShape.Add(DiBoson_Histo)
-        BackgroundShape.SetOptTitle(0)
+        #BackgroundShape.SetOptTitle(0)
 
         ScaleBackground = 1/BackgroundShape.Integral()
 
@@ -690,7 +690,8 @@ def main():
         
         backgroundStack.Draw()
         backgroundStack_Errors.Draw('SAME e2')
-        backgroundStack.SetTitle(variableAxisTitleDictionary[variable])
+        #backgroundStack.SetTitle(variableAxisTitleDictionary[variable])
+        backgroundStack.SetTitle("")
         DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].HistogramName.Draw('SAME e1')
         Signal_Histo.Draw('SAME HIST')
         backgroundStack.GetYaxis().SetTitle("Events")
