@@ -486,7 +486,7 @@ def main():
         #ST_s_channel_4f.SetFillColor(ROOT.TColor.GetColor("#ffcc66"))
         Signal_Histo.SetLineColor(ROOT.kBlue)
         Signal_Histo.Scale(50)
-        Signal_Histo.SetLineWidth(3)
+        Signal_Histo.SetLineWidth(2)
 
         DiBoson_Histo.SetFillColor(ROOT.TColor.GetColor(color_DiBoson))
         TT_Histo.SetFillColor(ROOT.TColor.GetColor(color_TT))
@@ -714,6 +714,9 @@ def main():
         theLegend.AddEntry(Signal_Histo,'Radion (#times 50)','l')
 
         theLegend.Draw('SAME')
+
+
+        
     ##############################################################################
 
 
@@ -727,6 +730,21 @@ def main():
         cmsLatex.DrawLatex(0.1,0.92,"CMS")
         cmsLatex.SetTextFont(52)
         cmsLatex.DrawLatex(0.1+0.08,0.92,"Preliminary")
+
+        cmsLatex.SetTextAlign(31)
+        cmsLatex.SetTextFont(42)
+        if args.year == '2016':
+            lumiText = '16.81 fb^{-1}, 13 TeV'
+        elif args.year == '2016APV':
+            lumiText = '19.52 fb^{-1}, 13 TeV'
+        elif args.year == '2017':
+            lumiText = '41.48 fb^{-1}, 13 TeV'
+        elif args.year == '2018':
+            lumiText = '59.83 fb^{-1}, 13 TeV'
+        cmsLatex.DrawLatex(0.9,0.92,lumiText)
+
+
+
     #################################################################################
 
     #######################################PASS FAIL CANVAS###########################################
