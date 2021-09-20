@@ -521,6 +521,7 @@ def main():
         BackgroundShape.Add(WJets_Histo)
         BackgroundShape.Add(TT_Histo)
         BackgroundShape.Add(DiBoson_Histo)
+        BackgroundShape.SetOptTitle(0)
 
         ScaleBackground = 1/BackgroundShape.Integral()
 
@@ -654,7 +655,7 @@ def main():
         plotPad.SetFrameLineWidth(1) #1
         plotPad.SetFrameBorderMode(0)
         plotPad.SetFrameBorderSize(1)
-        plotPad.SetOptTitle(0)
+        #plotPad.SetOptTitle(0)
         #
         ratioPad.SetPad("pad2","ratio",0,0,1,0.25)
         ratioPad.SetFillColor(0)
