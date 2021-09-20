@@ -195,7 +195,8 @@ def MakeRatioHistograms(dataHisto,backgroundStack,variable):
     finalRatioHist.SetMarkerStyle(20)
     finalRatioHist.SetTitle("")
     finalRatioHist.GetYaxis().SetTitle("Data/Predicted")
-    finalRatioHist.GetYaxis().SetTitleSize(0.1)
+    #finalRatioHist.GetYaxis().SetTitleSize(0.1)
+    finalRatioHist.GetYaxis().SetTitleSize(0.12)
     finalRatioHist.GetYaxis().SetTitleOffset(0.32)
     finalRatioHist.GetYaxis().CenterTitle()
     finalRatioHist.GetYaxis().SetLabelSize(0.1)
@@ -208,7 +209,8 @@ def MakeRatioHistograms(dataHisto,backgroundStack,variable):
     finalRatioHist.GetXaxis().SetLabelSize(0.1)
 
     finalRatioHist.GetXaxis().SetTitle(variableAxisTitleDictionary[variable])
-    finalRatioHist.GetXaxis().SetTitleSize(0.14)
+    #finalRatioHist.GetXaxis().SetTitleSize(0.14)
+    finalRatioHist.GetXaxis().SetTitleSize(0.17)
 
     MCErrors = ratioHist.Clone()
     MCErrors.Reset()
@@ -696,6 +698,7 @@ def main():
         Signal_Histo.Draw('SAME HIST')
         backgroundStack.GetYaxis().SetTitle("Events")
         backgroundStack.GetYaxis().SetTitleOffset(1.58)
+        backgroundStack.GetYaxis().SetLabelSize(0.25)
         backgroundStack.GetXaxis().SetLabelSize(0.0)
 
     ##############################Legend############################    
