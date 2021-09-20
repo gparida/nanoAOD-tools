@@ -698,7 +698,7 @@ def main():
         Signal_Histo.Draw('SAME HIST')
         backgroundStack.GetYaxis().SetTitle("Events")
         backgroundStack.GetYaxis().SetTitleOffset(1.58)
-        backgroundStack.GetYaxis().SetLabelSize(0.25)
+        backgroundStack.GetYaxis().SetTitleSize(0.21)
         backgroundStack.GetXaxis().SetLabelSize(0.0)
 
     ##############################Legend############################    
