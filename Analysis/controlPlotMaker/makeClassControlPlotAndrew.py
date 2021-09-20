@@ -654,6 +654,7 @@ def main():
         plotPad.SetFrameLineWidth(1) #1
         plotPad.SetFrameBorderMode(0)
         plotPad.SetFrameBorderSize(1)
+        plotPad.SetOptTitle(0)
         #
         ratioPad.SetPad("pad2","ratio",0,0,1,0.25)
         ratioPad.SetFillColor(0)
@@ -727,9 +728,11 @@ def main():
         cmsLatex.SetNDC(True)
         cmsLatex.SetTextFont(61)
         cmsLatex.SetTextAlign(11)
-        cmsLatex.DrawLatex(0.1,0.92,"CMS")
+        #cmsLatex.DrawLatex(0.1,0.92,"CMS")
+        cmsLatex.DrawLatex(0.2,0.92,"CMS")
         cmsLatex.SetTextFont(52)
-        cmsLatex.DrawLatex(0.1+0.08,0.92,"Preliminary")
+        #cmsLatex.DrawLatex(0.1+0.08,0.92,"Preliminary")
+        cmsLatex.DrawLatex(0.2+0.08,0.92,"Preliminary")
 
         cmsLatex.SetTextAlign(31)
         cmsLatex.SetTextFont(42)
@@ -741,7 +744,8 @@ def main():
             lumiText = '41.48 fb^{-1}, 13 TeV'
         elif args.year == '2018':
             lumiText = '59.83 fb^{-1}, 13 TeV'
-        cmsLatex.DrawLatex(0.9,0.92,lumiText)
+        #cmsLatex.DrawLatex(0.9,0.92,lumiText)
+        cmsLatex.DrawLatex(0.8,0.8,lumiText)
 
 
 
