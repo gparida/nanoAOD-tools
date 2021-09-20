@@ -730,10 +730,10 @@ def main():
         cmsLatex.SetTextFont(61)
         cmsLatex.SetTextAlign(11)
         #cmsLatex.DrawLatex(0.1,0.92,"CMS")
-        cmsLatex.DrawLatex(0.2,0.92,"CMS")
+        cmsLatex.DrawLatex(0.15,0.92,"CMS")
         cmsLatex.SetTextFont(52)
         #cmsLatex.DrawLatex(0.1+0.08,0.92,"Preliminary")
-        cmsLatex.DrawLatex(0.2+0.08,0.92,"Preliminary")
+        cmsLatex.DrawLatex(0.15+0.08,0.92,"Preliminary")
 
         cmsLatex.SetTextAlign(31)
         cmsLatex.SetTextFont(42)
@@ -746,7 +746,7 @@ def main():
         elif args.year == '2018':
             lumiText = '59.83 fb^{-1}, 13 TeV'
         #cmsLatex.DrawLatex(0.9,0.92,lumiText)
-        cmsLatex.DrawLatex(0.8,0.8,lumiText)
+        cmsLatex.DrawLatex(0.85,0.87,lumiText)
 
 
 
