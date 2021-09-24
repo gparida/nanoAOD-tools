@@ -196,17 +196,17 @@ def MakeRatioHistograms(dataHisto,backgroundStack,variable):
     finalRatioHist.SetTitle("")
     finalRatioHist.GetYaxis().SetTitle("Data/Predicted")
     #finalRatioHist.GetYaxis().SetTitleSize(0.1)
-    finalRatioHist.GetYaxis().SetTitleSize(0.12)
+    finalRatioHist.GetYaxis().SetTitleSize(0.1)
     finalRatioHist.GetYaxis().SetTitleOffset(0.32)
     finalRatioHist.GetYaxis().CenterTitle()
     finalRatioHist.GetYaxis().SetLabelSize(0.1)
     finalRatioHist.GetYaxis().SetNdivisions(6,0,0)
     #finalRatioHist.GetYaxis().SetRangeUser(1.3*1.05,0.7*0.95) #this doesn't seem to take effect here?    
-    finalRatioHist.GetXaxis().SetTitleOffset(0.75)
+    finalRatioHist.GetXaxis().SetTitleOffset(0.83)
     finalRatioHist.SetMaximum(1.3)
     finalRatioHist.SetMinimum(0.7)
 
-    finalRatioHist.GetXaxis().SetLabelSize(0.1)
+    finalRatioHist.GetXaxis().SetLabelSize(0.15)
 
     finalRatioHist.GetXaxis().SetTitle(variableAxisTitleDictionary[variable])
     #finalRatioHist.GetXaxis().SetTitleSize(0.14)
@@ -261,11 +261,39 @@ def main():
     parser.add_argument('--variables',
                     nargs='+',
                     help='Variables to draw the control plots for',
-                    default=['nTau','nboostedTau',"boostedTau_pt","boostedTau_pt[0]","boostedTau_pt[1]","boostedTau_eta","boostedTau_eta[0]","boostedTau_eta[1]",
-                    "boostedTau_phi",
-                    "boostedTau_phi[0]",
-                    "boostedTau_phi[1]",
-                    "boostedTau_mass"])
+                    default=["boostedTau_pt",
+                            "boostedTau_pt[0]",
+                            "boostedTau_pt[1]",
+                            "boostedTau_eta",
+                            "boostedTau_idMVAnewDM2017v2",
+                            "Electron_mvaFall17V2Iso_WPL",
+                            "Electron_mvaFall17V2Iso_WP90",
+                            "Electron_pt",
+                            "Electron_pt[0]",
+                            "Electron_pt[1]",
+                            "Muon_mvaId",
+                            "Muon_pt",
+                            "Muon_pt[0]",
+                            "Muon_pt[1]",
+                            "FatJet_pt",
+                            "FatJet_pt[0]",
+                            "FatJet_pt[1]",
+                            "FatJet_eta",
+                            "FatJet_eta[0]",
+                            "FatJet_eta[1]",
+                            "FatJet_msoftdrop",
+                            "FatJet_msoftdrop[0]",
+                            "FatJet_msoftdrop[1]",
+                            "FatJet_particleNet_HbbvsQCD",
+                            "FatJet_particleNet_HbbvsQCD[0]",
+                            "FatJet_particleNet_HbbvsQCD[1]",
+                            "FatJet_particleNetMD_Xbb",
+                            "FatJet_particleNetMD_Xbb[0]",
+                            "FatJet_particleNetMD_Xbb[1]",
+                            "FatJet_tau2/FatJet_tau1",
+                            "FatJet_tau2[0]/FatJet_tau1[0]",
+                            "FatJet_tau2[1]/FatJet_tau1[1]"]
+                            )
                     #default=['Tau_pt',
                     #       'Tau_phi',
                     #       'Tau_eta',
@@ -497,6 +525,13 @@ def main():
         ST_Histo.SetFillColor(ROOT.TColor.GetColor(color_ST))
         DY_Histo.SetFillColor(ROOT.TColor.GetColor(color_DY))
 
+        DiBoson_Histo.SetLineWidth(0)
+        TT_Histo.SetLineWidth(0)
+        WJets_Histo.SetLineWidth(0)
+        QCD_Histo.SetLineWidth(0)
+        ST_Histo.SetLineWidth(0)
+        DY_Histo.SetLineWidth(0)
+
         #PF_DiBoson_Histo.SetFillColor(ROOT.TColor.GetColor(color_DiBoson))
         #PF_TT_Histo.SetFillColor(ROOT.TColor.GetColor(color_TT))
         #PF_WJets_Histo.SetFillColor(ROOT.TColor.GetColor(color_WJets))
@@ -647,7 +682,7 @@ def main():
         plotPad.SetBorderSize(1)
         plotPad.SetTickx(1)
         plotPad.SetTicky(1)
-        plotPad.SetGridx()
+        #plotPad.SetGridx()
         plotPad.SetLeftMargin(0.15) #0.15
         plotPad.SetRightMargin(0.15) #0.1
         plotPad.SetTopMargin(0.14) #0.122 if the exponent is not present
@@ -697,8 +732,11 @@ def main():
         DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].HistogramName.Draw('SAME e1')
         Signal_Histo.Draw('SAME HIST')
         backgroundStack.GetYaxis().SetTitle("Events")
-        backgroundStack.GetYaxis().SetTitleOffset(1.58)
-        backgroundStack.GetYaxis().SetTitleSize(0.21)
+        backgroundStack.GetYaxis().SetTitleSize(0.065)
+        backgroundStack.GetYaxis().SetLabelSize(0.05)
+       #backgroundStack.GetYaxis().SetTitleOffset(1.58)
+        backgroundStack.GetYaxis().SetTitleOffset(0.87)
+        #backgroundStack.GetYaxis().SetTitleSize(1)
         backgroundStack.GetXaxis().SetLabelSize(0.0)
 
     ##############################Legend############################    
@@ -844,10 +882,10 @@ def main():
 
     #############################Saving The Plots####################################
         #theCanvas.SaveAs('QuickControlPlots/'+variable+'_'+args.year+'.png')
-        theCanvas.SaveAs('QuickControlPlots/'+variable+'_'+args.year+'.pdf')
+        theCanvas.SaveAs('QuickControlPlots/Presentation_Plots/'+variable+'_'+args.year+'.pdf')
         #theCanvas.SaveAs('QuickControlPlots/'+variable+'_'+args.year+'.root')
         #ShapeCanvas.SaveAs('QuickControlPlots/'+ "Normalized" +variable+'_'+args.year+'.png')
-        ShapeCanvas.SaveAs('QuickControlPlots/'+ "Normalized" +variable+'_'+args.year+'.pdf')
+        ShapeCanvas.SaveAs('QuickControlPlots/Presentation_Plots/'+ "Normalized" +variable+'_'+args.year+'.pdf')
         #ShapeCanvas.SaveAs('QuickControlPlots/'+ "Normalized" +variable+'_'+args.year+'.root')
         #PassFailCanvas.SaveAs('QuickControlPlots/'+"Trigg_PF"+'_'+args.year+'.png')
         #PassFailCanvas.SaveAs('QuickControlPlots/'+"Trigg_PF"+'_'+args.year+'.pdf')
