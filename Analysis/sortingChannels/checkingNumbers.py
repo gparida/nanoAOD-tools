@@ -14,6 +14,7 @@ ROOT.PyConfig.IgnoreCommandLineOptions = True  #Find out what does this do ?
 
 class Channel(Module):
 	def __init__(self, channel,filename):
+		self.writeHistFile=True
 		self.channel = channel # Specify the channel
 		self.filename = filename #filename passed cause we needed to count the events with zero divide errors
 		#All these objects are common to all channels	
