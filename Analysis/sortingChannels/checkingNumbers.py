@@ -36,7 +36,9 @@ class Channel(Module):
 		self.cutflow_tau.GetXaxis().SetBinLabel(2,"2 or more taus")
 		self.cutflow_tau.GetXaxis().SetBinLabel(3,"Object selection applied")
 		self.cutflow_tau.SetFillColor(38)
+		self.cutflow_mu =  ROOT.TH1F('cutflow_mu', 'cutflow_mu', 3, 0, 3)
 		self.addObject(self.cutflow_tau)
+		self.addObject(self.cutflow_mu)
 		#pass
 
 	def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
