@@ -157,10 +157,7 @@ if __name__ == "__main__":
 						"Flag_HBHENoiseFilter",
 						"Flag_EcalDeadCellTriggerPrimitiveFilter",
 						"Flag_BadPFMuonFilter",
-						"Flag_eeBadScFilter",
-                        "(nTau>=2 || nboostedTau>=2)",
-                        "(nMuon >= 1 || nElectron >=1)",
-                        "nFatJet >= 1"]
+						"Flag_eeBadScFilter"]
 
 	#Define Eevnt Selection - all those to be connected by or
 
