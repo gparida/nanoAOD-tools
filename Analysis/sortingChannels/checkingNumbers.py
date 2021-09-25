@@ -119,18 +119,18 @@ class Channel(Module):
 			self.cutflow_diTau.AddBinContent(3)
 			if (len(self.FatJet.collection)==1):
 				self.cutflow_diTau.AddBinContent(4)
-				if (len(self.Muon.collection==0)):
+				if (len(self.Muon.collection)==0):
 					self.cutflow_diTau.AddBinContent(5)
-					if (len(self.Electron.collection==0)):
+					if (len(self.Electron.collection)==0):
 						self.cutflow_diTau.AddBinContent(6)
 
 		if((len(self.Tau.collection)==1 or len(self.boostedTau.collection)==1)):
 			self.cutflow_mt.AddBinContent(3)
 			if (len(self.FatJet.collection)==1):
 				self.cutflow_mt.AddBinContent(4)
-				if (len(self.Muon.collection==1)):
+				if (len(self.Muon.collection)==1):
 					self.cutflow_mt.AddBinContent(5)
-					if (len(self.Electron.collection==0)):
+					if (len(self.Electron.collection)==0):
 						self.cutflow_mt.AddBinContent(6)
 
 
@@ -138,9 +138,9 @@ class Channel(Module):
 			self.cutflow_et.AddBinContent(3)
 			if (len(self.FatJet.collection)==1):
 				self.cutflow_et.AddBinContent(4)
-				if (len(self.Electron.collection==1)):
+				if (len(self.Electron.collection)==1):
 					self.cutflow_et.AddBinContent(5)
-					if (len(self.Muon.collection==0)):
+					if (len(self.Muon.collection)==0):
 						self.cutflow_et.AddBinContent(6)
 
 
