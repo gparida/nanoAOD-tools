@@ -38,9 +38,6 @@ class Channel(Module):
 		self.cutflow_tau.SetFillColor(38)
 		self.addObject(self.cutflow_tau)
 		#pass
-	
-	def endJob(self):
-		pass
 
 	def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
 		pass
