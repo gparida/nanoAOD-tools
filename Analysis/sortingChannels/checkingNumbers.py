@@ -106,7 +106,7 @@ class Channel(Module):
 		self.Muon.apply_cut(lambda x:(x.pt > 10) and x.mvaId & 1 == 1)
 
 		############################################################################
-		if ((len(self.Tau.collection)>=1 or len(self.boostedTau.collection)>=1) and len(self.FatJet.collection)>=1):
+		if ((len(self.Tau.collection)>=1 or len(self.boostedTau.collection)>=1) and len(self.FatJet.collection)>=1 and len(self.Muon.collection) >=0 and len(self.Electron.collection)>=0):
 			self.cutflow_diTau.AddBinContent(2)
 			self.cutflow_et.AddBinContent(2)
 			self.cutflow_mt.AddBinContent(2)
