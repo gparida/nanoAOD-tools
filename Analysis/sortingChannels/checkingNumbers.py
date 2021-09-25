@@ -86,7 +86,7 @@ class Channel(Module):
 		#Now Add all the channel based selection####################################
 		# condition for hadronic channel
 		if self.channel == "tt":
-			if((len(self.Tau.collection)==1 or len(self.boostedTau.collection)==1) and (len(self.Electron.collection)==0 and len(self.Muon.collection)==1) and (len(self.FatJet.collection)==1)):
+			if((len(self.Tau.collection)>=2 or len(self.boostedTau.collection)>=2) and (len(self.Electron.collection)==0 and len(self.Muon.collection)==0) and (len(self.FatJet.collection)==1)):
 				self.cutflow_tau.AddBinContent(2)
 				#print ("length of good elec ",len(self.Electron.collection),"length of good muons ",len(self.Muon.collection))
 				#self.Tau.fillBranches(self.out) #Fill the branches
@@ -135,7 +135,7 @@ def call_postpoc(files):
 		letsSortChannels = lambda: Channel(args.Channel,filename)
 		nameStrip=files.strip()
 		filename = (nameStrip.split('/')[-1]).split('.')[-2]
-		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=None,modules=[letsSortChannels()], postfix=post,noOut=True,outputbranchsel=outputbranches,histFileName="histOut.root",histDirName="plots")
+		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=None,modules=[letsSortChannels()], postfix=post,noOut=True,outputbranchsel=outputbranches,histFileName="histOut.root",histDirName="Cutfdlow/plots")
 		p.run()
 
 
