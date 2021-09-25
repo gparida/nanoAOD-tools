@@ -30,46 +30,26 @@ class Channel(Module):
 
 	def beginJob(self):
 		#self.cutflow_tau =  ROOT.TH1F('cutflow_tau', 'cutflow_tau', 3, 0, 3)
-		#self.cutflow_tau.SetBinLabel(1,"Events_preselected")
-		#self.cutflow_tau.GetXaxis().SetBinLabel(2,"2 or more taus")
-		#self.cutflow_tau.GetXaxis().SetBinLabel(3,"Object selection applied")
-		#self.cutflow_tau.SetFillColor(38)
-		#self.addObject(self.cutflow_tau)
-		pass
+		self.cutflow_tau.GetXaxis().SetBinLabel(1,"Events_preselected")
+		self.cutflow_tau.GetXaxis().SetBinLabel(2,"2 or more taus")
+		self.cutflow_tau.GetXaxis().SetBinLabel(3,"Object selection applied")
+		self.cutflow_tau.SetFillColor(38)
+		self.addObject(self.cutflow_tau)
+		#pass
 	
 	def endJob(self):
 		pass
 
 	def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
-		self.countBadevents = 0 #This is to keep track of bad events per file
-		self.out = wrappedOutputTree
-		self.Tau.setUpBranches(self.out) #creating the new branches
-		self.FatJet.setUpBranches(self.out)
-		self.boostedTau.setUpBranches(self.out)
-		self.Electron.setUpBranches(self.out)
-		self.Muon.setUpBranches(self.out)
-		
-		if self.channel == "test":
-			self.boostedTau.setUpBranches(self.out)
-		
-
-
-    		
-    		
-	def endFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
-		print ("Number of Bad Events ", self.countBadevents)
-		if self.countBadevents!=0:
-			save_path = MYDIR=os.getcwd() + "/badEvents"
-			file_name = "badEvents_"+str(self.filename)+"_"+str(self.channel)
-			complete_Name =  os. path. join(save_path, file_name)
-			file = open(complete_Name,"w")
-			file.write("The Bad events for this file "+str(self.filename)+" is "+str(self.countBadevents))
-			file.close()	
-		#pass
+		pass
+		 		
+	def endFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):	
+		pass
     	
 	#event loop
 	def analyze(self, event): 
 		
+		self.cutflow_tau.AddBinContent(1)
 
 		#This is for testing the sccript on boosted tau branches
 		if self.channel == "test":
@@ -108,6 +88,7 @@ class Channel(Module):
 		# condition for hadronic channel
 		if self.channel == "tt":
 			if((len(self.Tau.collection)==1 or len(self.boostedTau.collection)==1) and (len(self.Electron.collection)==0 and len(self.Muon.collection)==1) and (len(self.FatJet.collection)==1)):
+				self.cutflow_tau.AddBinContent(2)
 				#print ("length of good elec ",len(self.Electron.collection),"length of good muons ",len(self.Muon.collection))
 				#self.Tau.fillBranches(self.out) #Fill the branches
 				#self.FatJet.fillBranches(self.out)
