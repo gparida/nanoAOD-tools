@@ -176,7 +176,7 @@ if __name__ == "__main__":
 	parser = argparse.ArgumentParser(description='Script to Handle root file preparation to split into channels. Input should be a singular files for each dataset or data already with some basic selections applied')
 	#parser.add_argument('--Channel',help="enter either tt or et or mut. For boostedTau test enter test",required=True)
 	parser.add_argument('--inputFile',help="enter the path to the location of input file set",default="")
-	#parser.add_argument('--ncores',help ="number of cores for parallel processing", default=1)
+	parser.add_argument('--ncores',help ="number of cores for parallel processing", default=1)
 	args = parser.parse_args()
 
 	#Define Event Selection - all those to be connected by and
