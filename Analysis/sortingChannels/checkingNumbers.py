@@ -28,7 +28,7 @@ class Channel(Module):
 			self.boostedTau = particle("boostedTau")
 			
 
-	def beginJob(self):
+	def beginJob(self, histFile = "cutflow.root", histDirName ="plots"):
 		self.cutflow_tau =  ROOT.TH1F('cutflow_tau', 'cutflow_tau', 3, 0, 3)
 		self.cutflow_tau.GetXaxis().SetBinLabel(1,"Events_preselected")
 		self.cutflow_tau.GetXaxis().SetBinLabel(2,"2 or more taus")
