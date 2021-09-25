@@ -10,35 +10,62 @@ import traceback
 import multiprocessing as  np
 import os
 
+#This script is used to prepare cutflows to determine the selections for the objects
+
 ROOT.PyConfig.IgnoreCommandLineOptions = True  #Find out what does this do ?
 
 class Channel(Module):
-	def __init__(self, channel,filename):
+	def __init__(self,filename):
 		self.writeHistFile=True
-		self.channel = channel # Specify the channel
-		self.filename = filename #filename passed cause we needed to count the events with zero divide errors
-		#All these objects are common to all channels	
+		#self.channel = channel # Specify the channel
+		self.filename = filename #filename passed cause we needed to count the events with zero divide errors	
 		self.boostedTau = particle("boostedTau")
 		self.Tau = particle("Tau")
 		self.FatJet = FatJet("FatJet")
 		self.Electron = particle("Electron")
 		self.Muon = particle("Muon")
-
-		#this is for testing
-		if self.channel == "test":
-			self.boostedTau = particle("boostedTau")
 			
 
 	def beginJob(self, histFile=None,histDirName=None):
 		Module.beginJob(self,histFile,histDirName)
-		self.cutflow_tau =  ROOT.TH1F('cutflow_tau', 'cutflow_tau', 3, 0, 3)
-		self.cutflow_tau.GetXaxis().SetBinLabel(1,"Events_preselected")
-		self.cutflow_tau.GetXaxis().SetBinLabel(2,"2 or more taus")
-		self.cutflow_tau.GetXaxis().SetBinLabel(3,"Object selection applied")
-		self.cutflow_tau.SetFillColor(38)
-		self.cutflow_mu =  ROOT.TH1F('cutflow_mu', 'cutflow_mu', 3, 0, 3)
-		self.addObject(self.cutflow_tau)
-		self.addObject(self.cutflow_mu)
+
+		self.cutflow_diTau =  ROOT.TH1F('cutflow_diTau', 'cutflow_diTau', 6, 0, 6)
+		self.cutflow_diTau.GetXaxis().SetBinLabel(1,"Events_Preselected")
+		self.cutflow_diTau.GetXaxis().SetBinLabel(2,">1 gTau_gJet")
+		self.cutflow_diTau.GetXaxis().SetBinLabel(3,"gTau condition")
+		self.cutflow_diTau.GetXaxis().SetBinLabel(4,"gJet condition")
+		self.cutflow_diTau.GetXaxis().SetBinLabel(5,"gElectron condition")
+		self.cutflow_diTau.GetXaxis().SetBinLabel(6,"gMuon condition")
+		self.cutflow_diTau.GetXaxis().SetTitle("Selections")
+		self.cutflow_diTau.GetYaxis().SetTitle("Events")
+		self.cutflow_diTau.SetFillColor(38)
+
+
+		self.cutflow_et =  ROOT.TH1F('cutflow_et', 'cutflow_et', 6, 0, 6)
+		self.cutflow_et.GetXaxis().SetBinLabel(1,"Events_Preselected")
+		self.cutflow_et.GetXaxis().SetBinLabel(2,">1 gTau_gJet")
+		self.cutflow_et.GetXaxis().SetBinLabel(3,"gTau condition")
+		self.cutflow_et.GetXaxis().SetBinLabel(4,"gJet condition")
+		self.cutflow_et.GetXaxis().SetBinLabel(6,"gMuon condition")
+		self.cutflow_et.GetXaxis().SetBinLabel(5,"gElectron condition")
+		self.cutflow_et.GetXaxis().SetTitle("Selections")
+		self.cutflow_et.GetYaxis().SetTitle("Events")
+		self.cutflow_et.SetFillColor(38)
+
+		self.cutflow_mt =  ROOT.TH1F('cutflow_mt', 'cutflow_mt', 6, 0, 6)
+		self.cutflow_mt.GetXaxis().SetBinLabel(1,"Events_Preselected")
+		self.cutflow_mt.GetXaxis().SetBinLabel(2,">1 gTau_gJet")
+		self.cutflow_mt.GetXaxis().SetBinLabel(3,"gTau condition")
+		self.cutflow_mt.GetXaxis().SetBinLabel(4,"gJet condition")
+		self.cutflow_mt.GetXaxis().SetBinLabel(5,"gMuon condition")
+		self.cutflow_mt.GetXaxis().SetBinLabel(6,"gElectron condition")
+		self.cutflow_mt.GetXaxis().SetTitle("Selections")
+		self.cutflow_mt.GetYaxis().SetTitle("Events")
+		self.cutflow_mt.SetFillColor(38)
+
+		self.addObject(self.cutflow_diTau)
+		self.addObject(self.cutflow_mt)
+		self.addObject(self.cutflow_et)
 		#pass
 
 	def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
@@ -50,14 +77,9 @@ class Channel(Module):
 	#event loop
 	def analyze(self, event): 
 		
-		self.cutflow_tau.AddBinContent(1)
-
-		#This is for testing the sccript on boosted tau branches
-		if self.channel == "test":
-			self.boostedTau.setupCollection(event)
-			self.boostedTau.apply_cut(lambda x: x.pt > 20 and (abs(x.eta) < 2.3) and (x.idMVAoldDM2017v2 & 1 == 1) )
-			self.boostedTau.fillBranches(self.out)
-			return True
+		self.cutflow_diTau.AddBinContent(1)
+		self.cutflow_et.AddBinContent(1)
+		self.cutflow_mt.AddBinContent(1)
 
 		#Add all the Object Based Selection########################################
 		
@@ -84,45 +106,54 @@ class Channel(Module):
 		self.Muon.apply_cut(lambda x:(x.pt > 10) and x.mvaId & 1 == 1)
 
 		############################################################################
+		if ((len(self.Tau.collection)>=1 or len(self.boostedTau.collection)>=1) and len(self.FatJet.collection)>=1):
+			self.cutflow_diTau.AddBinContent(2)
+			self.cutflow_et.AddBinContent(2)
+			self.cutflow_mt.AddBinContent(2)
+
+
 
 		#Now Add all the channel based selection####################################
 		# condition for hadronic channel
-		if self.channel == "tt":
-			if((len(self.Tau.collection)>=2 or len(self.boostedTau.collection)>=2) and (len(self.Electron.collection)==0 and len(self.Muon.collection)==0) and (len(self.FatJet.collection)==1)):
-				self.cutflow_tau.AddBinContent(2)
-				#print ("length of good elec ",len(self.Electron.collection),"length of good muons ",len(self.Muon.collection))
-				#self.Tau.fillBranches(self.out) #Fill the branches
-				#self.FatJet.fillBranches(self.out)
-				#self.boostedTau.fillBranches(self.out)
-				return True # Store event
-			else:
-				return False # Reject event
-		
-		if self.channel == "et":
-			if((len(self.Tau.collection)==1 or len(self.boostedTau.collection)==1) 
-				and len(self.FatJet.collection)==1 
-				and len(self.Electron.collection)==1 
-				and len(self.Muon.collection)==0):
-				self.Tau.fillBranches(self.out) #Fill the branches
-				self.FatJet.fillBranches(self.out)
-				self.boostedTau.fillBranches(self.out)
-				self.Electron.fillBranches(self.out)
-				return True
-			else:
-				return False
-		
-		if self.channel == "mut":
-			if((len(self.Tau.collection)==1 or len(self.boostedTau.collection)==1) 
-				and len(self.FatJet.collection)==1 
-				and len(self.Electron.collection)==0 
-				and len(self.Muon.collection)==1):
-				self.Tau.fillBranches(self.out) #Fill the branches
-				self.FatJet.fillBranches(self.out)
-				self.boostedTau.fillBranches(self.out)
-				self.Muon.fillBranches(self.out)
-				return True
-			else:
-				return False
+		if((len(self.Tau.collection)==2 or len(self.boostedTau.collection)==2)):
+			self.cutflow_diTau.AddBinContent(3)
+			if (len(self.FatJet.collection)==1):
+				self.cutflow_diTau.AddBinContent(4)
+				if (len(self.Muon.collection==0)):
+					self.cutflow_diTau.AddBinContent(5)
+					if (len(self.Electron.collection==0)):
+						self.cutflow_diTau.AddBinContent(6)
+
+		if((len(self.Tau.collection)==1 or len(self.boostedTau.collection)==1)):
+			self.cutflow_mt.AddBinContent(3)
+			if (len(self.FatJet.collection)==1):
+				self.cutflow_mt.AddBinContent(4)
+				if (len(self.Muon.collection==1)):
+					self.cutflow_mt.AddBinContent(5)
+					if (len(self.Electron.collection==0)):
+						self.cutflow_mt.AddBinContent(6)
+
+
+		if((len(self.Tau.collection)==1 or len(self.boostedTau.collection)==1)):
+			self.cutflow_et.AddBinContent(3)
+			if (len(self.FatJet.collection)==1):
+				self.cutflow_et.AddBinContent(4)
+				if (len(self.Electron.collection==1)):
+					self.cutflow_et.AddBinContent(5)
+					if (len(self.Muon.collection==0)):
+						self.cutflow_et.AddBinContent(6)
+
+
+
+		return True
+
+
+				
+				 
+				 
+					 
+					 
+
 		
 		#####################################################################
 
@@ -134,18 +165,18 @@ class Channel(Module):
 
 
 def call_postpoc(files):
-		letsSortChannels = lambda: Channel(args.Channel,filename)
+		letsSortChannels = lambda: Channel(filename)
 		nameStrip=files.strip()
 		filename = (nameStrip.split('/')[-1]).split('.')[-2]
-		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=None,modules=[letsSortChannels()], postfix=post,noOut=True,outputbranchsel=outputbranches,histFileName="histOut.root",histDirName="")
+		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=None,modules=[letsSortChannels()], postfix=post,noOut=True,outputbranchsel=outputbranches,histFileName="Cutflow_"+filename+".root",histDirName="Plots")
 		p.run()
 
 
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(description='Script to Handle root file preparation to split into channels. Input should be a singular files for each dataset or data already with some basic selections applied')
-	parser.add_argument('--Channel',help="enter either tt or et or mut. For boostedTau test enter test",required=True)
-	parser.add_argument('--inputLocation',help="enter the path to the location of input file set",default="")
-	parser.add_argument('--ncores',help ="number of cores for parallel processing", default=1)
+	#parser.add_argument('--Channel',help="enter either tt or et or mut. For boostedTau test enter test",required=True)
+	parser.add_argument('--inputFile',help="enter the path to the location of input file set",default="")
+	#parser.add_argument('--ncores',help ="number of cores for parallel processing", default=1)
 	args = parser.parse_args()
 
 	#Define Event Selection - all those to be connected by and
@@ -164,7 +195,7 @@ if __name__ == "__main__":
 	#Define Eevnt Selection - all those to be connected by or
 
 	#fnames = glob.glob(args.inputLocation + "/*.root")  #making a list of input files
-	fnames =["/data/aloeliger/bbtautauAnalysis/2016/Data.root"]
+	fnames =[args.inputFile]
 	#outputDir = "/data/gparida/Background_Samples/bbtautauAnalysis/2016/{}_Channel".format(args.Channel)
 	outputDir = "."
 	outputbranches = "keep_and_drop.txt"
