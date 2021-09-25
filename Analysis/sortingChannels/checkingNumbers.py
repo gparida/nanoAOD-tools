@@ -29,7 +29,7 @@ class Channel(Module):
 			
 
 	def beginJob(self):
-		#self.cutflow_tau =  ROOT.TH1F('cutflow_tau', 'cutflow_tau', 3, 0, 3)
+		self.cutflow_tau =  ROOT.TH1F('cutflow_tau', 'cutflow_tau', 3, 0, 3)
 		self.cutflow_tau.GetXaxis().SetBinLabel(1,"Events_preselected")
 		self.cutflow_tau.GetXaxis().SetBinLabel(2,"2 or more taus")
 		self.cutflow_tau.GetXaxis().SetBinLabel(3,"Object selection applied")
