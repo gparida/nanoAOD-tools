@@ -29,7 +29,8 @@ class Channel(Module):
 			self.boostedTau = particle("boostedTau")
 			
 
-	def beginJob(self, histFile = "cutflow.root", histDirName ="plots"):
+	def beginJob(self, histFile=None,histDirName=None):
+		Module.beginJob(self,histFile,histDirName)
 		self.cutflow_tau =  ROOT.TH1F('cutflow_tau', 'cutflow_tau', 3, 0, 3)
 		self.cutflow_tau.GetXaxis().SetBinLabel(1,"Events_preselected")
 		self.cutflow_tau.GetXaxis().SetBinLabel(2,"2 or more taus")
@@ -137,7 +138,7 @@ def call_postpoc(files):
 		letsSortChannels = lambda: Channel(args.Channel,filename)
 		nameStrip=files.strip()
 		filename = (nameStrip.split('/')[-1]).split('.')[-2]
-		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=None,modules=[letsSortChannels()], postfix=post,noOut=False,outputbranchsel=outputbranches)
+		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=None,modules=[letsSortChannels()], postfix=post,noOut=False,outputbranchsel=outputbranches,histFileName="histOut.root",histDirName="plots")
 		p.run()
 
 
