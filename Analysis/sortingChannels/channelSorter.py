@@ -67,7 +67,7 @@ class Channel(Module):
 		#This is for testing the sccript on boosted tau branches
 		if self.channel == "test":
 			self.boostedTau.setupCollection(event)
-			self.boostedTau.apply_cut(lambda x: x.pt > 20 and (abs(x.eta) < 2.3) and (x.idMVAoldDM2017v2 & 1 == 1) )
+			self.boostedTau.apply_cut(lambda x: x.pt > 20 and (abs(x.eta) < 2.3) and (x.idMVAoldDM2017v2 & 4 == 4) )
 			self.boostedTau.fillBranches(self.out)
 			return True
 

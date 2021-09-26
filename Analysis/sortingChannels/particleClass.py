@@ -20,11 +20,13 @@ class particle(object):
 	
 	#Create the new branches to be added for the selected objects. Specific bracnches for objects such as FatJets (softdropmass) can be added by writing a separate class that inherits base particle class
 	def setUpBranches(self, wrappedOutputTree):
-		wrappedOutputTree.branch("ng{}".format(self.particleType),"UInt_t")
-		wrappedOutputTree.branch("g{}_pt".format(self.particleType),"Float_t",lenVar="ng{}".format(self.particleType))
-		wrappedOutputTree.branch("g{}_mass".format(self.particleType),"Float_t",lenVar="ng{}".format(self.particleType))
-		wrappedOutputTree.branch("g{}_phi".format(self.particleType),"Float_t",lenVar="ng{}".format(self.particleType))
-		wrappedOutputTree.branch("g{}_eta".format(self.particleType),"Float_t",lenVar="ng{}".format(self.particleType))
+		wrappedOutputTree.branch("ng{}".format(self.particleType),"I")
+		wrappedOutputTree.branch("g{}_pt".format(self.particleType),"F",lenVar="ng{}".format(self.particleType))
+		wrappedOutputTree.branch("g{}_mass".format(self.particleType),"F",lenVar="ng{}".format(self.particleType))
+		wrappedOutputTree.branch("g{}_phi".format(self.particleType),"F",lenVar="ng{}".format(self.particleType))
+		wrappedOutputTree.branch("g{}_eta".format(self.particleType),"F",lenVar="ng{}".format(self.particleType))
+		wrappedOutputTree.branch("g{}_idMVAoldDM2017v2".format(self.particleType),"I",lenVar="ng{}".format(self.particleType))
+		wrappedOutputTree.branch("g{}_idAntiEleDeadECal".format(self.particleType),"B",lenVar="ng{}".format(self.particleType))
 
 	def setupCollection(self, event):
 		self.collection = Collection(event,self.particleType)
@@ -42,6 +44,8 @@ class particle(object):
 		wrappedOutputTree.fillBranch("g{}_eta".format(self.particleType),self.get_attributes("eta"))
 		wrappedOutputTree.fillBranch("g{}_mass".format(self.particleType),self.get_attributes("mass"))
 		wrappedOutputTree.fillBranch("g{}_eta".format(self.particleType),self.get_attributes("eta"))
+		wrappedOutputTree.fillBranch("g{}_idMVAoldDM2017v2".format(self.particleType),self.get_attributes("idMVAoldDM2017v2"))
+		wrappedOutputTree.fillBranch("g{}_idAntiEleDeadECal".format(self.particleType),self.get_attributes("idAntiEleDeadECal"))
 		
 
 	def get_attributes(self,variable):

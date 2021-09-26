@@ -10,7 +10,7 @@ import traceback
 import multiprocessing as  np
 import os
 
-#This script is used to prepare cutflows to determine the selections for the objects
+#This script is used to prepare cutflows to determine and optimize the selections for the objects
 
 ROOT.PyConfig.IgnoreCommandLineOptions = True  #Find out what does this do ?
 
