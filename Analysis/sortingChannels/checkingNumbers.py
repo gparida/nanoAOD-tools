@@ -131,7 +131,7 @@ class Channel(Module):
 
 
 
-		return True
+		return False
 
 
 				
@@ -188,6 +188,3 @@ if __name__ == "__main__":
 	else:
 		pool = np.Pool(int(args.ncores))
 		res=pool.map(call_postpoc, argList)
-
-
-		
