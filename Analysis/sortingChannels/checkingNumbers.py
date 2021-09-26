@@ -144,12 +144,6 @@ class Channel(Module):
 		#####################################################################
 
 
-
-			
-	
-
-
-
 def call_postpoc(files):
 		letsSortChannels = lambda: Channel(filename)
 		nameStrip=files.strip()
@@ -194,3 +188,6 @@ if __name__ == "__main__":
 	else:
 		pool = np.Pool(int(args.ncores))
 		res=pool.map(call_postpoc, argList)
+
+
+		
