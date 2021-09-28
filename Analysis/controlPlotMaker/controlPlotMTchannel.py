@@ -4,7 +4,6 @@ from controlPlotDictionary import *
 
 class MakeHistograms(object):
     #constructor to initialize the objects
-    #def __init__(self,RootFilePath,RootFileName,Weight):
     def __init__(self,RootFilePath,RootFileName, userWeight = "1.0"):
         self.RootFileName = ROOT.TFile(RootFilePath+RootFileName+'.root')
         self.HistogramName = None
@@ -16,11 +15,13 @@ class MakeHistograms(object):
                     otherCuts,
                     weighting):
     #cutString = weighting+'*('+standardCutString+' && '
-        cutString =weighting+'*('+'('+standardCutString+')'+' && '
-        if otherCuts!=None:
-            for cut in otherCuts:
-                cutString += '('+cut+')' + ' && '
-
+        if standardCutString != None:
+            cutString =weighting+'*('+'('+standardCutString+')'+' && '
+            if otherCuts!=None:
+                for cut in otherCuts:
+                    cutString += '('+cut+')' + ' && '
+        else:
+            cutString=weighting +' && '
         cutString = cutString[:len(cutString)-3] # removing the && at the very end of the final cutstring
         #cutString+=')'
         return cutString
@@ -32,33 +33,14 @@ class MakeHistograms(object):
                  additionalSelections,
                  histogramName,
                  theWeight = 'FinalWeighting'):
-        trig_MET_MC =[#"HLT_PFMETNoMu90_PFMHTNoMu90_IDTight",
-            "HLT_PFMETNoMu110_PFMHTNoMu110_IDTight",
-            "HLT_PFMETNoMu120_PFMHTNoMu120_IDTight",
-            "HLT_MonoCentralPFJet80_PFMETNoMu120_PFMHTNoMu120_IDTight",
-            "HLT_PFMET110_PFMHT110_IDTight",
-            "HLT_PFMET120_PFMHT120_IDTight",
-            #"HLT_PFMET170_NoiseCleaned",
-            "HLT_PFMET170_HBHECleaned",
-            "HLT_PFMET170_HBHE_BeamHaloCleaned"]
-
-        trig_MET_Data =[#"HLT_PFMETNoMu90_PFMHTNoMu90_IDTight",
-                "HLT_PFMETNoMu110_PFMHTNoMu110_IDTight",
-                "HLT_PFMETNoMu120_PFMHTNoMu120_IDTight",
-                "HLT_MonoCentralPFJet80_PFMETNoMu120_PFMHTNoMu120_IDTight",
-                "HLT_PFMET110_PFMHT110_IDTight",
-                "HLT_PFMET120_PFMHT120_IDTight",
-                #"HLT_PFMET170_NoiseCleaned",
-                "HLT_PFMET170_HBHECleaned",
-                "HLT_PFMET170_HBHE_BeamHaloCleaned"]
 
         theTree = theFile.Get('Events')
-        print (variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
+        print ('g'+variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
                              self.CreateCutString(standardCutString,
-                                             additionalSelections,theWeight)+' && '+'(' + '||'.join(trig_MET_MC) + ')'+')')
-        theTree.Draw(variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
-                             self.CreateCutString(standardCutString,
-                                             additionalSelections,theWeight)+' && '+'(' + '||'.join(trig_MET_MC) + ')'+')')
+                                             additionalSelections,theWeight))
+        theTree.Draw('g'+variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
+                    self.CreateCutString(standardCutString,
+                                    additionalSelections,theWeight))
     #so, if the tree has no entries, root doesn't even hand back an empty histogram
     # and therefore this ends up trying to get clone a none type
     #pass the None forward, and we can let the Add handle this
@@ -69,69 +51,6 @@ class MakeHistograms(object):
         #return theHisto
         self.HistogramName=theHisto
 
-
-    def FillEvents(self, theFile, dataset):
-        #PassFailHist = ROOT.TH1F("PassFailHist","PassFailHist",3,0,3)
-        #self.PassFailHistogramName.GetXaxis().SetBinLabel(1,"All")
-        #self.PassFailHistogramName.GetXaxis().SetBinLabel(2,"FailTrigger")
-        self.PassFailHistogramName.GetXaxis().SetBinLabel(1,"PassTrigger")
-        trig_MET_MC =["HLT_PFMETNoMu90_PFMHTNoMu90_IDTight",
-            "HLT_PFMETNoMu110_PFMHTNoMu110_IDTight",
-            "HLT_PFMETNoMu120_PFMHTNoMu120_IDTight",
-            "HLT_MonoCentralPFJet80_PFMETNoMu120_PFMHTNoMu120_IDTight",
-            "HLT_PFMET110_PFMHT110_IDTight",
-            "HLT_PFMET120_PFMHT120_IDTight",
-            #"HLT_PFMET170_NoiseCleaned",
-            "HLT_PFMET170_HBHECleaned",
-            "HLT_PFMET170_HBHE_BeamHaloCleaned"]
-
-        trig_MET_Data =["HLT_PFMETNoMu90_PFMHTNoMu90_IDTight",
-            "HLT_PFMETNoMu110_PFMHTNoMu110_IDTight",
-            "HLT_PFMETNoMu120_PFMHTNoMu120_IDTight",
-            "HLT_MonoCentralPFJet80_PFMETNoMu120_PFMHTNoMu120_IDTight",
-            "HLT_PFMET110_PFMHT110_IDTight",
-            "HLT_PFMET120_PFMHT120_IDTight",
-            #"HLT_PFMET170_NoiseCleaned",
-            "HLT_PFMET170_HBHECleaned",
-            "HLT_PFMET170_HBHE_BeamHaloCleaned"]
-
-
-        theTree=theFile.Get('Events')
-
-        if dataset == "data":
-            self.PassFailHistogramName.SetBinContent(1,theTree.GetEntries("MET_pt >= 200 && (" + "||".join(trig_MET_MC) + ")"))
-        else:
-            self.PassFailHistogramName.SetBinContent(1,theTree.GetEntries("MET_pt >= 200 && (" + "||".join(trig_MET_Data) + ")"))
-
-
-        #self.PassFailHistogramName.SetBinContent(1,theTree.GetEntries())
-        #self.PassFailHistogramName.SetBinContent(2,(theTree.GetEntries()-theTree.GetEntries("MET_pt >= 205 && (" + "||".join(trig_MET) + ")")))
-        
-        #self.PassFailHistogramName.SetBinContent(1,theTree.GetEntries("MET_pt >= 205 && (" + "||".join(trig_MET_MC) + ")"))
-
-        #self.PassFailHistogramName = PassFailHist
-        #del PassFailHist
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-#DatasetObjects={}
 
 def MakeStackErrors(theStack):
     denominatorHistos = theStack.GetHists().At(0).Clone()
@@ -238,25 +157,6 @@ def main():
     parser.add_argument('--batchMode',
                         help='run in batch mode',
                         action='store_true')
-    #parser.add_argument('--variables',
-    #                    nargs='+',
-    #                    help='Variables to draw the control plots for',
-    #                    default=['pt_2',
-    #                             'eta_2',
-    #                             'pt_1',
-    #                             'eta_1',
-    #                             'm_vis',
-    #                             'm_sv',
-    #                             'njets',
-    #                             'HiggsPt',
-    #                             'met',
-    #                             'DeltaR',
-    #                             'mjj',
-    #                             'abs(eta_1-eta_2)',
-    #                             'jpt_1',
-    #                             'jeta_1',
-    #                             'jpt_2',
-    #                             'jeta_2',])
 
     parser.add_argument('--variables',
                     nargs='+',
@@ -320,21 +220,22 @@ def main():
                         nargs='+',
                         help='additional region selections',
                         #default=['Tau_idMVAoldDM2017v2 & 4 == 4','nTau==2 || nboostedTau==2','FatJet_btagDeepB > 0.45','nFatJet == 1'])
-                        default=["PV_ndof > 4", "abs(PV_z) < 24","sqrt(PV_x*PV_x+PV_y*PV_y) < 2",
-                        "Flag_goodVertices",
-                        "Flag_globalSuperTightHalo2016Filter",
-                        "Flag_HBHENoiseIsoFilter",
-                        "Flag_HBHENoiseFilter",
-                        "Flag_EcalDeadCellTriggerPrimitiveFilter",
-                        "Flag_BadPFMuonFilter",
-                        "Flag_eeBadScFilter"])
+                        #default=["PV_ndof > 4", "abs(PV_z) < 24","sqrt(PV_x*PV_x+PV_y*PV_y) < 2",
+                        #"Flag_goodVertices",
+                        #"Flag_globalSuperTightHalo2016Filter",
+                        #"Flag_HBHENoiseIsoFilter",
+                        #"Flag_HBHENoiseFilter",
+                        #"Flag_EcalDeadCellTriggerPrimitiveFilter",
+                        #"Flag_BadPFMuonFilter",
+                        #"Flag_eeBadScFilter"])
+                        default=None)
     parser.add_argument('--pause',
                         help='pause after drawing each plot to make it easier to view',
                         action='store_true')
     parser.add_argument('--standardCutString',
                         nargs='?',
                         help='Change the standard cutting definition',
-                        default='MET_pt>200')
+                        default=None)
     parser.add_argument('--changeHistogramBounds',
                         nargs = '?',
                         help = 'Change the standard histogram bounding (affects all histograms)')
@@ -349,7 +250,7 @@ def main():
     
 
     if args.year == '2016':
-        dataPath = '/data/aloeliger/bbtautauAnalysis/2016/'
+        dataPath = '/data/gparida/Background_Samples/bbtautauAnalysis/2016/mut_Channel/'
     elif args.year == '2017':
         dataPath = '/data/aloeliger/SMHTT_Selected_2017_Deep/'
     elif args.year == '2018':
@@ -418,8 +319,11 @@ def main():
 
 
         #######################DY-Histograms####################################
-        DY_Histo = DatasetObjects["DYlow"].HistogramName.Clone()
-        DY_Histo.Add(DatasetObjects["DY"].HistogramName)
+       # DY_Histo = DatasetObjects["DYlow"].HistogramName.Clone() #Zero for MT channel
+       # DY_Histo.Add(DatasetObjects["DY"].HistogramName)
+        DY_Histo = DatasetObjects["DY"].HistogramName.Clone()
+
+	    
 
         #PF_DY_Histo = DatasetObjects["DYJetsToLL_M-10to50"].PassFailHistogramName.Clone()
         #PF_DY_Histo.Add(DatasetObjects["DYJetsToLL_M-50"].PassFailHistogramName)
@@ -432,64 +336,40 @@ def main():
         #####################################################################################
 #
         ##############################QCD-Histograms##########################################
-        QCD_Histo = DatasetObjects["QCD_120to170"].HistogramName.Clone()
-        QCD_Histo.Add(DatasetObjects["QCD_1400to1800"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_15to30"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_170to300"].HistogramName)
+        #QCD_Histo = DatasetObjects["QCD_120to170"].HistogramName.Clone() also zero events
+        #QCD_Histo.Add(DatasetObjects["QCD_15to30"].HistogramName)   also zero events
+        #QCD_Histo.Add(DatasetObjects["QCD_170to300"].HistogramName) also zero events
+        #QCD_Histo.Add(DatasetObjects["QCD_30to50"].HistogramName) also zero events
+        #QCD_Histo.Add(DatasetObjects["QCD_80to120"].HistogramName) also zero events
+        #QCD_Histo.Add(DatasetObjects["QCD_50to80"].HistogramName) also zero events
+
+        QCD_Histo = DatasetObjects["QCD_1400to1800"].HistogramName.Clone()
         QCD_Histo.Add(DatasetObjects["QCD_1800to2400"].HistogramName)
         QCD_Histo.Add(DatasetObjects["QCD_2400to3200"].HistogramName)
         QCD_Histo.Add(DatasetObjects["QCD_300to470"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_30to50"].HistogramName)
         QCD_Histo.Add(DatasetObjects["QCD_3200toInf"].HistogramName)
         QCD_Histo.Add(DatasetObjects["QCD_470to600"].HistogramName)
         QCD_Histo.Add(DatasetObjects["QCD_800to1000"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_80to120"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_50to80"].HistogramName)
         QCD_Histo.Add(DatasetObjects["QCD_600to800"].HistogramName)
         QCD_Histo.Add(DatasetObjects["QCD_1000to1400"].HistogramName)
-
-        #PF_QCD_Histo = DatasetObjects["QCD_Pt_120to170"].PassFailHistogramName.Clone()
-        #PF_QCD_Histo.Add(DatasetObjects["QCD_Pt_1400to1800"].PassFailHistogramName)
-        #PF_QCD_Histo.Add(DatasetObjects["QCD_Pt_15to30"].PassFailHistogramName)
-        #PF_QCD_Histo.Add(DatasetObjects["QCD_Pt_170to300"].PassFailHistogramName)
-        #PF_QCD_Histo.Add(DatasetObjects["QCD_Pt_1800to2400"].PassFailHistogramName)
-        #PF_QCD_Histo.Add(DatasetObjects["QCD_Pt_2400to3200"].PassFailHistogramName)
-        #PF_QCD_Histo.Add(DatasetObjects["QCD_Pt_300to470"].PassFailHistogramName)
-        #PF_QCD_Histo.Add(DatasetObjects["QCD_Pt_30to50"].PassFailHistogramName)
-        #PF_QCD_Histo.Add(DatasetObjects["QCD_Pt_3200toInf"].PassFailHistogramName)
-        #PF_QCD_Histo.Add(DatasetObjects["QCD_Pt_470to600"].PassFailHistogramName)
-        #PF_QCD_Histo.Add(DatasetObjects["QCD_Pt_800to1000"].PassFailHistogramName)
-        #PF_QCD_Histo.Add(DatasetObjects["QCD_Pt_80to120"].PassFailHistogramName)
-        #PF_QCD_Histo.Add(DatasetObjects["QCD_Pt_50to80"].PassFailHistogramName)
-        #PF_QCD_Histo.Add(DatasetObjects["QCD_Pt_600to800"].PassFailHistogramName)
-        #PF_QCD_Histo.Add(DatasetObjects["QCD_Pt_1000to1400"].PassFailHistogramName)
-
 
         #####################################################################################
 
         ##################################WJets##############################################
         WJets_Histo = DatasetObjects["W"].HistogramName.Clone()
 
-        #PF_WJets_Histo = DatasetObjects["WJetsToLNu"].PassFailHistogramName.Clone()
         ######################################################################################
 #
         ####################################TT-Histograms######################################
         TT_Histo = DatasetObjects["TTTo2L2Nu"].HistogramName.Clone()
         TT_Histo.Add(DatasetObjects["TTToHadronic"].HistogramName)
         TT_Histo.Add(DatasetObjects["TTToSemiLeptonic"].HistogramName)
-
-        #PF_TT_Histo = DatasetObjects["TTTo2L2Nu"].PassFailHistogramName.Clone()
-        #PF_TT_Histo.Add(DatasetObjects["TTToHadronic"].PassFailHistogramName)
         ########################################################################################
 #
         ################################DiBoson-Histograms##########################################
         DiBoson_Histo = DatasetObjects["WW"].HistogramName.Clone()
         DiBoson_Histo.Add(DatasetObjects["WZ"].HistogramName)
         DiBoson_Histo.Add(DatasetObjects["ZZ"].HistogramName)
-
-        #PF_DiBoson_Histo = DatasetObjects["WW"].PassFailHistogramName.Clone()
-        #PF_DiBoson_Histo.Add(DatasetObjects["WZ"].PassFailHistogramName)
-        #PF_DiBoson_Histo.Add(DatasetObjects["ZZ"].PassFailHistogramName)
         ################################################################################################
 
         ################################Data is represented as points########################################################################
@@ -497,10 +377,6 @@ def main():
         DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].HistogramName.SetMarkerStyle(20)
         DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].HistogramName.SetMarkerSize(0.7)
         DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].HistogramName.Sumw2()
-
-        #DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].PassFailHistogramName.SetMarkerStyle(20)
-        #DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].PassFailHistogramName.SetMarkerSize(1.5)
-        #DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].PassFailHistogramName.Sumw2()
 
         ################################Color_Definitions -- Background Fill##############################################
         color_DiBoson="#ff66c4"
@@ -531,26 +407,7 @@ def main():
         QCD_Histo.SetLineWidth(0)
         ST_Histo.SetLineWidth(0)
         DY_Histo.SetLineWidth(0)
-
-        #PF_DiBoson_Histo.SetFillColor(ROOT.TColor.GetColor(color_DiBoson))
-        #PF_TT_Histo.SetFillColor(ROOT.TColor.GetColor(color_TT))
-        #PF_WJets_Histo.SetFillColor(ROOT.TColor.GetColor(color_WJets))
-        #PF_QCD_Histo.SetFillColor(ROOT.TColor.GetColor(color_QCD))
-        #PF_ST_Histo.SetFillColor(ROOT.TColor.GetColor(color_ST))
-        #PF_DY_Histo.SetFillColor(ROOT.TColor.GetColor(color_DY))
-
-        #####################################Setting the line width to zero for all expect Data###########################################################################################################
-
-        #for index in range(len(DatasetNameList)-1) :
-         #   DatasetObjects[DatasetNameList[index]].HistogramName.SetLineWidth(0)
-
-        for index in range(len(DatasetNameList)-1) :
-            DatasetObjects[DatasetNameList[index]].HistogramName.SetLineWidth(0)
-            #DatasetObjects[DatasetNameList[index]].PassFailHistogramName.SetLineWidth(0)
-
-
         
-
         ########################################Histograms For Shape Check###############################
         BackgroundShape = DY_Histo.Clone()
         BackgroundShape.Add(ST_Histo)
@@ -582,15 +439,6 @@ def main():
         backgroundStack.Add(DiBoson_Histo,'HIST')
 #
         backgroundStack_Errors = MakeStackErrors(backgroundStack)
-
-
-        #PassFailStack = ROOT.THStack('PassFailStack','PassFailStack')
-        #PassFailStack.Add(PF_DY_Histo,'HIST')
-        #PassFailStack.Add(PF_ST_Histo,'HIST')
-        #PassFailStack.Add(PF_QCD_Histo,'HIST')
-        #PassFailStack.Add(PF_WJets_Histo,'HIST')
-        #PassFailStack.Add(PF_TT_Histo,'HIST')
-        #PassFailStack.Add(PF_DiBoson_Histo,'HIST')
 #
         #PassFailStack_Errors = MakeStackErrors(PassFailStack)
         N_DY_Histo = (DY_Histo.Clone())
@@ -618,63 +466,13 @@ def main():
         ShapeStack_Errors = MakeStackErrors(ShapeStack)
 
 
-
-
-
-
-
         ##########################################Preparing the Canvas##################################################
 
         theCanvas = ROOT.TCanvas("theCanvas","theCanvas")
-        #plotPad = ROOT.TPad("plotPad","plotPad",0,0.25,1,1)
-        #
-        #plotPad.SetFillColor(0)
-        #plotPad.SetBorderMode(0)
-        #plotPad.SetBorderSize(1)
-        #plotPad.SetTickx(1)
-        #plotPad.SetTicky(1)
-        #plotPad.SetGridx()
-        #plotPad.SetLeftMargin(0.15) #0.15
-        #plotPad.SetRightMargin(0.15) #0.1
-        #plotPad.SetTopMargin(0.122)
-        #plotPad.SetBottomMargin(0.025)
-        #plotPad.SetFrameFillStyle(0)
-        #plotPad.SetFrameLineStyle(0)
-        #plotPad.SetFrameLineWidth(1)
-        #plotPad.SetFrameBorderMode(0)
-        #plotPad.SetFrameBorderSize(1)
-        #
-        #ratioPad = ROOT.TPad("ratioPad","ratioPad",0,0,1,0.25);
-        #ratioPad.SetTopMargin(0.02);
-        #ratioPad.SetBottomMargin(0.35);
-        #ratioPad.SetLeftMargin(0.15);
-        #ratioPad.SetRightMargin(0.15);
-        #ratioPad.SetTickx(1)
-        #ratioPad.SetTicky(1)
-        #ratioPad.SetFrameLineWidth(1)
-        ##pad2.SetGridx()
-        #ratioPad.SetGridy()
-        ##pad2.SetLogy()
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
         theCanvas.Divide(1,2)
-
-
-
         
         plotPad = ROOT.gPad.GetPrimitive('theCanvas_1')
         ratioPad = ROOT.gPad.GetPrimitive('theCanvas_2')
-        
-        #plotPad.SetPad("pad1","plot",0.0,0.20,1.0,1.0,0)
-        #ratioPad.SetPad("pad2","ratio",0.0,0.0,1.0,0.25,0)
 
         plotPad.SetPad("pad1","plot",0,0.25,1,1)
         plotPad.SetFillColor(0)
@@ -706,12 +504,6 @@ def main():
         ratioPad.SetGridy()
         #pad2.SetGridx()
 #
-        #ratioPad.SetTopMargin(0.05)
-        #ratioPad.SetBottomMargin(0.27)
-        #plotPad.SetBottomMargin(0.08)
-        #plotPad.SetFrameLineWidth(1)
-        #ratioPad.SetGridy()
-##
         ratioHist, ratioError = MakeRatioHistograms(DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].HistogramName,backgroundStack,variable)
         ratioPad.cd()
         ratioHist.Draw('ex0')
@@ -742,6 +534,7 @@ def main():
     ##############################Legend############################    
 
         theLegend = ROOT.TLegend(0.85, 0.45, 1.0, 0.75, "", "brNDC")
+        theLegend.SetHeader("#mu-#tau Channel","C")
         theLegend.SetLineWidth(0)
         theLegend.SetLineStyle(1)
         theLegend.SetFillStyle(1001)#0
@@ -792,27 +585,7 @@ def main():
 
 
 
-    #################################################################################
-
-    #######################################PASS FAIL CANVAS###########################################
-        #PassFailCanvas = ROOT.TCanvas("PassFailCanvas","PassFailCanvas")
-        #PassFailStack.SetMaximum(max(PassFailStack.GetMaximum(),DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].PassFailHistogramName.GetMaximum()))
-        #PassFailStack.Draw()
-        #PassFailStack_Errors.Draw('SAME e2')
-        #PassFailStack.SetTitle("Trigger Pass Fail")
-        #DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].PassFailHistogramName.Draw('SAME e1')
-        #PassFailStack.GetYaxis().SetTitle("Events")
-        #PassFailStack.GetYaxis().SetTitleOffset(1.58)
-        #PassFailStack.GetXaxis().SetLabelSize(0.0)
-        #theLegend.Draw()
-        #cmsLatex = ROOT.TLatex()
-        #cmsLatex.SetTextSize(0.06)
-        #cmsLatex.SetNDC(True)
-        #cmsLatex.SetTextFont(61)
-        #cmsLatex.SetTextAlign(11)
-        #cmsLatex.DrawLatex(0.1,0.92,"CMS")
-        #cmsLatex.SetTextFont(52)
-        #cmsLatex.DrawLatex(0.1+0.08,0.92,"Preliminary")
+    #############################################################################################
 
     #################################Shape Check Canvas########################################################
         ShapeCanvas = ROOT.TCanvas("ShapeCanvas","ShapeCanvas")
@@ -853,6 +626,7 @@ def main():
         ShapeStack.GetXaxis().SetLabelSize(0.0)
 
         theLegend2 = ROOT.TLegend(0.85, 0.45, 1.0, 0.75, "", "brNDC")
+        theLegend2.SetHeader("#mu-#tau_{h} Channel","C")
         theLegend2.SetLineWidth(0)
         theLegend2.SetLineStyle(1)
         theLegend2.SetFillStyle(1001) #0
@@ -882,10 +656,10 @@ def main():
 
     #############################Saving The Plots####################################
         #theCanvas.SaveAs('QuickControlPlots/'+variable+'_'+args.year+'.png')
-        theCanvas.SaveAs('Plots/'+variable+'_'+args.year+'.pdf')
+        theCanvas.SaveAs('MTPlots/'+variable+'_'+args.year+'.pdf')
         #theCanvas.SaveAs('QuickControlPlots/'+variable+'_'+args.year+'.root')
         #ShapeCanvas.SaveAs('QuickControlPlots/'+ "Normalized" +variable+'_'+args.year+'.png')
-        ShapeCanvas.SaveAs('Plots/'+ "Normalized" +variable+'_'+args.year+'.pdf')
+        ShapeCanvas.SaveAs('MTPlots/'+ "Normalized" +variable+'_'+args.year+'.pdf')
         #ShapeCanvas.SaveAs('QuickControlPlots/'+ "Normalized" +variable+'_'+args.year+'.root')
         #PassFailCanvas.SaveAs('QuickControlPlots/'+"Trigg_PF"+'_'+args.year+'.png')
         #PassFailCanvas.SaveAs('QuickControlPlots/'+"Trigg_PF"+'_'+args.year+'.pdf')
@@ -903,17 +677,6 @@ def main():
 
         #Delete the Objects created to avoid memory leaks
         del DatasetObjects
-
-
-        #for index in range(len(DatasetNameList)) :
-            #del DatasetObjects[DatasetNameList[index]]
-
-    
-    #ST_s_channel_4f_File.close()
-    #TTTo2L2Nu_File.close()
-    #Data_File.close()
-
-
 
 
 if __name__ == '__main__':
