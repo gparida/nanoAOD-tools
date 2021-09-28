@@ -1,6 +1,7 @@
 import ROOT
 import argparse  ##Importing root and package to take arguments 
 from controlPlotDictionary import *
+import os
 
 class MakeHistograms(object):
     #constructor to initialize the objects
@@ -163,36 +164,39 @@ def main():
                     help='Variables to draw the control plots for',
                     default=["boostedTau_pt",
                             "boostedTau_pt[0]",
-                            "boostedTau_pt[1]",
+                            #"boostedTau_pt[1]",
                             "boostedTau_eta",
-                            "boostedTau_idMVAnewDM2017v2",
-                            "Electron_mvaFall17V2Iso_WPL",
-                            "Electron_mvaFall17V2Iso_WP90",
-                            "Electron_pt",
-                            "Electron_pt[0]",
-                            "Electron_pt[1]",
-                            "Muon_mvaId",
+                            "boostedTau_eta[0]",
+                            "boostedTau_phi",
+                            "boostedTau_phi[0]",
+                            #"boostedTau_idMVAnewDM2017v2",
+                            #"Electron_mvaFall17V2Iso_WPL",
+                            #"Electron_mvaFall17V2Iso_WP90",
+                            #"Electron_pt",
+                            #"Electron_pt[0]",
+                            #"Electron_pt[1]",
+                            #"Muon_mvaId",
                             "Muon_pt",
                             "Muon_pt[0]",
-                            "Muon_pt[1]",
+                            #"Muon_pt[1]",
                             "FatJet_pt",
                             "FatJet_pt[0]",
-                            "FatJet_pt[1]",
+                            #"FatJet_pt[1]",
                             "FatJet_eta",
                             "FatJet_eta[0]",
-                            "FatJet_eta[1]",
+                            #"FatJet_eta[1]",
                             "FatJet_msoftdrop",
-                            "FatJet_msoftdrop[0]",
-                            "FatJet_msoftdrop[1]",
-                            "FatJet_particleNet_HbbvsQCD",
-                            "FatJet_particleNet_HbbvsQCD[0]",
-                            "FatJet_particleNet_HbbvsQCD[1]",
-                            "FatJet_particleNetMD_Xbb",
-                            "FatJet_particleNetMD_Xbb[0]",
-                            "FatJet_particleNetMD_Xbb[1]",
-                            "FatJet_tau2/FatJet_tau1",
-                            "FatJet_tau2[0]/FatJet_tau1[0]",
-                            "FatJet_tau2[1]/FatJet_tau1[1]"]
+                            "FatJet_msoftdrop[0]"]
+                            #"FatJet_msoftdrop[1]",
+                            #"FatJet_particleNet_HbbvsQCD",
+                            #"FatJet_particleNet_HbbvsQCD[0]",
+                            #"FatJet_particleNet_HbbvsQCD[1]",
+                            #"FatJet_particleNetMD_Xbb",
+                            #"FatJet_particleNetMD_Xbb[0]",
+                            #"FatJet_particleNetMD_Xbb[1]",
+                            #"FatJet_tau2/FatJet_tau1",
+                            #"FatJet_tau2[0]/FatJet_tau1[0]",
+                            #"FatJet_tau2[1]/FatJet_tau1[1]"]
                             )
                     #default=['Tau_pt',
                     #       'Tau_phi',
@@ -283,7 +287,12 @@ def main():
         if args.changeHistogramBounds != None:
             variableSettingDictionary[variable] = args.changeHistogramBounds
 
-
+        save_path = MYDIR=os.getcwd() + "/countingData"
+        file_name = "Entries_MTChannel.txt"
+        complete_Name =  os. path. join(save_path, file_name)
+        file = open(complete_Name,"a")
+        file.write("variable "+'\t'+ "Data Counts"+'\n')
+		
         ####Drawing the Histograms#######  
         DatasetObjects={}
         for index in range(len(DatasetNameList)) :
@@ -420,6 +429,8 @@ def main():
         ScaleBackground = 1/BackgroundShape.Integral()
 
         DataShape = DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].HistogramName.Clone()
+
+        file.write(variable + '\t' + str(DataShape.Integral())+'\n')
         
         ScaleData = 1/DataShape.Integral()
 
@@ -534,7 +545,9 @@ def main():
     ##############################Legend############################    
 
         theLegend = ROOT.TLegend(0.85, 0.45, 1.0, 0.75, "", "brNDC")
-        theLegend.SetHeader("#mu-#tau Channel","C")
+        theLegend.SetTextSize(0.03)
+        theLegend.SetHeader("#mu-#tau Channel")
+        theLegend.SetTextSize(0.03)
         theLegend.SetLineWidth(0)
         theLegend.SetLineStyle(1)
         theLegend.SetFillStyle(1001)#0
@@ -677,7 +690,7 @@ def main():
 
         #Delete the Objects created to avoid memory leaks
         del DatasetObjects
-
+    file.close()
 
 if __name__ == '__main__':
     main()
