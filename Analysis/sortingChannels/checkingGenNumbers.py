@@ -110,7 +110,7 @@ def call_postpoc(files):
 		letsSortChannels = lambda: Channel(filename)
 		nameStrip=files.strip()
 		filename = (nameStrip.split('/')[-1]).split('.')[-2]
-		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=None,modules=[letsSortChannels()],noOut=True,outputbranchsel=outputbranches,histFileName="Cutflow_VVLooseTau"+filename+".root",histDirName="Plots")
+		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=None,modules=[letsSortChannels()],noOut=True,outputbranchsel=outputbranches,histFileName="Gen_"+filename+".root",histDirName="Plots")
 		p.run()
 
 
