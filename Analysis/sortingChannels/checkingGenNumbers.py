@@ -48,7 +48,7 @@ class Channel(Module):
         self.cutflow_mt.GetXaxis().SetTitle("Selections")
         self.cutflow_mt.GetYaxis().SetTitle("Events")
         self.cutflow_mt.SetFillColor(38)
-        self.addObject(self.cutflow_diTau)
+        self.addObject(self.cutflow_diTau) #adding these objects is important cause we can accesses these afterwards!
         self.addObject(self.cutflow_mt)
         self.addObject(self.cutflow_et)
 
