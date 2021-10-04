@@ -89,11 +89,13 @@ class Channel(Module):
             self.cutflow_et.AddBinContent(3)
             self.cutflow_mt.AddBinContent(3)
             for i in range(len(self.GenPart.collection)):
-                if abs(self.GenPart.collection[i].pdgId) == 11 and abs(self.GenPart.collection[self.GenPart.collection[i].genPartIdxMother].pdgId) == 15:
-                    eCount += 1
+                if abs(self.GenPart.collection[i].pdgId) == 11 and self.GenPart.collection[i].genPartIdxMother >=0:
+                    if abs(self.GenPart.collection[self.GenPart.collection[i].genPartIdxMother].pdgId) == 15:    
+                        eCount += 1
                 
-                if abs(self.GenPart.collection[i].pdgId) == 13 and abs(self.GenPart.collection[self.GenPart.collection[i].genPartIdxMother].pdgId) == 15:
-                    muCount += 1
+                if abs(self.GenPart.collection[i].pdgId) == 13 and self.GenPart.collection[i].genPartIdxMother >=0:
+                    if abs(self.GenPart.collection[self.GenPart.collection[i].genPartIdxMother].pdgId) == 15:
+                        muCount += 1
                 
             
             if eCount == 1:
