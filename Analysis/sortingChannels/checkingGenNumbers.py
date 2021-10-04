@@ -24,7 +24,7 @@ class Channel(Module):
         self.cutflow_diTau =  ROOT.TH1F('cutflow_diTau', 'cutflow_diTau', 4, 0, 4)
         self.cutflow_diTau.GetXaxis().SetBinLabel(1,"Events_Preselected")
         self.cutflow_diTau.GetXaxis().SetBinLabel(2,"Two Higgs")
-        self.cutflow_diTau.GetXaxis().SetBinLabel(3,"gJet condition")
+        self.cutflow_diTau.GetXaxis().SetBinLabel(3,"2b2t")
         self.cutflow_diTau.GetXaxis().SetBinLabel(4,"diTau")
         self.cutflow_diTau.GetXaxis().SetTitle("Selections")
         self.cutflow_diTau.GetYaxis().SetTitle("Events")
@@ -107,7 +107,7 @@ class Channel(Module):
             else:
                 self.cutflow_diTau.AddBinContent(4)
 
-        return False        
+        return True        
 
 
 def call_postpoc(files):
