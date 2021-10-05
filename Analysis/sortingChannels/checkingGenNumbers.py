@@ -69,6 +69,7 @@ class Channel(Module):
         self.cutflow_diTau.AddBinContent(1)
         self.cutflow_et.AddBinContent(1)
         self.cutflow_mt.AddBinContent(1)
+        self.cutflow_em.AddBinContent(1)
 
         hCount = 0
         tCount = 0
@@ -88,6 +89,7 @@ class Channel(Module):
             self.cutflow_diTau.AddBinContent(2)
             self.cutflow_et.AddBinContent(2)
             self.cutflow_mt.AddBinContent(2)
+            self.cutflow_em.AddBinContent(2)
             for i in range(len(self.GenPart.collection)):
                 if abs(self.GenPart.collection[i].pdgId) == 15 and self.GenPart.collection[i].statusFlags & 2 ==2 and self.GenPart.collection[i].genPartIdxMother >=0 :
                     if self.GenPart.collection[self.GenPart.collection[i].genPartIdxMother].pdgId == 25:
@@ -101,6 +103,7 @@ class Channel(Module):
             self.cutflow_diTau.AddBinContent(3)
             self.cutflow_et.AddBinContent(3)
             self.cutflow_mt.AddBinContent(3)
+            self.cutflow_em.AddBinContent(3)
             for i in range(len(self.GenPart.collection)):
                 if abs(self.GenPart.collection[i].pdgId) == 11 and self.GenPart.collection[i].genPartIdxMother >=0:
                     if abs(self.GenPart.collection[self.GenPart.collection[i].genPartIdxMother].pdgId) == 15:    
