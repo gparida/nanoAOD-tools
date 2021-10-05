@@ -76,6 +76,8 @@ class Channel(Module):
         bCount = 0
         eCount = 0
         muCount = 0
+        tau1_index = 0
+        tau2_index = 0
 
 
         self.GenPart.setupCollection(event)
@@ -99,7 +101,7 @@ class Channel(Module):
                     if self.GenPart.collection[self.GenPart.collection[i].genPartIdxMother].pdgId == 25:
                         bCount += 1
 
-        if tCount == 2 and bCount == 2:
+        if tCount == 2:
             self.cutflow_diTau.AddBinContent(3)
             self.cutflow_et.AddBinContent(3)
             self.cutflow_mt.AddBinContent(3)
