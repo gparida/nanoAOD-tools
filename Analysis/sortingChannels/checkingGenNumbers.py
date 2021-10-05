@@ -54,6 +54,7 @@ class Channel(Module):
 
 
     def analyze(self, event): 
+        #Filling pre selected events
         self.cutflow_diTau.AddBinContent(1)
         self.cutflow_et.AddBinContent(1)
         self.cutflow_mt.AddBinContent(1)
@@ -72,6 +73,7 @@ class Channel(Module):
                 hCount += 1
         
         if hCount == 2:
+            #Counting events with just 2 higgs. Should be equal to preselected events
             self.cutflow_diTau.AddBinContent(2)
             self.cutflow_et.AddBinContent(2)
             self.cutflow_mt.AddBinContent(2)
