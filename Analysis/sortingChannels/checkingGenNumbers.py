@@ -48,9 +48,20 @@ class Channel(Module):
         self.cutflow_mt.GetXaxis().SetTitle("Selections")
         self.cutflow_mt.GetYaxis().SetTitle("Events")
         self.cutflow_mt.SetFillColor(38)
+    
+        self.cutflow_em =  ROOT.TH1F('cutflow_em', 'cutflow_em', 4, 0, 4)
+        self.cutflow_em.GetXaxis().SetBinLabel(1,"Events_Preselected")
+        self.cutflow_em.GetXaxis().SetBinLabel(2,"Twi Higgs")
+        self.cutflow_em.GetXaxis().SetBinLabel(3,"2b2t")
+        self.cutflow_em.GetXaxis().SetBinLabel(4,"em")
+        self.cutflow_em.GetXaxis().SetTitle("Selections")
+        self.cutflow_em.GetYaxis().SetTitle("Events")
+        self.cutflow_em.SetFillColor(38)
+
         self.addObject(self.cutflow_diTau)
         self.addObject(self.cutflow_mt)
         self.addObject(self.cutflow_et)
+        self.addObject(self.cutflow_em)
 
 
     def analyze(self, event): 
@@ -100,14 +111,29 @@ class Channel(Module):
                         muCount += 1
                 
             
-            if eCount == 1:
+            #if eCount == 1:
+            #    self.cutflow_et.AddBinContent(4)
+            #
+            #elif muCount ==1:
+            #    self.cutflow_mt.AddBinContent(4)
+            #
+            #else:
+            #    self.cutflow_diTau.AddBinContent(4)
+
+            if eCount == 1 and muCount ==0:
                 self.cutflow_et.AddBinContent(4)
             
-            elif muCount ==1:
+            elif muCount ==1 and eCount == 0:
                 self.cutflow_mt.AddBinContent(4)
+
+            elif muCount ==1 and eCount == 1:
+                self.cutflow_em.AddBinContent(4)
             
             else:
                 self.cutflow_diTau.AddBinContent(4)
+            
+
+
 
         return True        
 
