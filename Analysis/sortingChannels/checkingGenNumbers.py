@@ -139,6 +139,7 @@ class Channel(Module):
             tau1="m" 
         else:
             print ("tau1 unassigned")
+            print ("tau1 ","hadron Count = ",haCount," eCount = ",eCount," muCount = ",muCount)
 
         haCount=0
         eCount=0
@@ -159,7 +160,8 @@ class Channel(Module):
         elif muCount==1 and eCount==0 and haCount==0:
             tau2="m" 
         else:
-            print ("tau2 unassigned")       
+            print ("tau2 unassigned")
+            print ("tau2","hadron Count = ",haCount," eCount = ",eCount," muCount = ",muCount)       
                 
 
         if ((tau1+tau2) =="tt"):
