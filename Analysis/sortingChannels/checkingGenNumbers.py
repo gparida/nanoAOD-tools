@@ -143,11 +143,11 @@ class Channel(Module):
         eCount=0
         muCount=0
 
-        for entry in tau1_particlesID:
+        for entry in tau2_particlesID:
             if abs(entry)>100:
                 hCount+=1
             if abs(entry)==11:
-                 eCount+=1
+                eCount+=1
             if abs(entry)==13:
                 muCount+=1
         
