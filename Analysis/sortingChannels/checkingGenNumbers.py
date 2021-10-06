@@ -73,11 +73,16 @@ class Channel(Module):
 
         hCount = 0
         tCount = 0
-        bCount = 0
+        #bCount=0
         eCount = 0
         muCount = 0
-        tau1_index = 0
-        tau2_index = 0
+        tau_index ={}
+        tau_charge ={}
+        tau1_particlesID = {}
+        tau2_particlesID = {}
+        tau1=""
+        tau2=""  
+        
 
 
         self.GenPart.setupCollection(event)
@@ -96,50 +101,76 @@ class Channel(Module):
                 #if abs(self.GenPart.collection[i].pdgId) == 15 and self.GenPart.collection[i].statusFlags & 2 ==2 and self.GenPart.collection[i].genPartIdxMother >=0 :
                 if abs(self.GenPart.collection[i].pdgId) == 15 and self.GenPart.collection[i].genPartIdxMother >=0 :
                     if self.GenPart.collection[self.GenPart.collection[i].genPartIdxMother].pdgId == 25:
-                        tCount += 1         
+                        tCount += 1
+                        tau_index.append(i) 
+                        tau_charge.append(self.GenPart.collection[i].pdgId)        
 
-                if abs(self.GenPart.collection[i].pdgId) == 5 and self.GenPart.collection[i].genPartIdxMother >=0:
-                    if self.GenPart.collection[self.GenPart.collection[i].genPartIdxMother].pdgId == 25:
-                        bCount += 1
+                #if abs(self.GenPart.collection[i].pdgId) == 5 and self.GenPart.collection[i].genPartIdxMother >=0:
+                    #if self.GenPart.collection[self.GenPart.collection[i].genPartIdxMother].pdgId == 25:
+                        #bCount += 1
 
-        if tCount == 2:
+        if tCount == 2 and (tau_charge[0]*tau_charge[1])<0:
             self.cutflow_diTau.AddBinContent(3)
             self.cutflow_et.AddBinContent(3)
             self.cutflow_mt.AddBinContent(3)
             self.cutflow_em.AddBinContent(3)
             for i in range(len(self.GenPart.collection)):
-                if abs(self.GenPart.collection[i].pdgId) == 11 and self.GenPart.collection[i].genPartIdxMother >=0:
-                    if abs(self.GenPart.collection[self.GenPart.collection[i].genPartIdxMother].pdgId) == 15:    
-                        eCount += 1
+                if self.GenPart.collection[i].genPartIdxMother == tau_index[0]:
+                    tau1_particlesID.append(self.GenPart.collection[i].pdgId)
                 
-                if abs(self.GenPart.collection[i].pdgId) == 13 and self.GenPart.collection[i].genPartIdxMother >=0:
-                    if abs(self.GenPart.collection[self.GenPart.collection[i].genPartIdxMother].pdgId) == 15:
-                        muCount += 1
+                elif self.GenPart.collection[i].genPartIdxMother == tau_index[1]:
+                    tau2_particlesID.append(self.GenPart.collection[i].pdgId)
+
+
+        for entry in tau1_particlesID:
+            if abs(entry)>100:
+                hCount+=1
+            if abs(entry)==11:
+                eCount+=1
+            if abs(entry)==13:
+                muCount+=1
+        
+        if hCount!=0:
+            tau1="t"
+        elif eCount==1 and hCount == 0 and muCount==0:
+            tau1="e"
+        elif muCount==1 and eCount==0 and hCount==0:
+            tau1="m" 
+        else:
+            print ("tau1 unassigned")
+
+        hCount=0
+        eCount=0
+        muCount=0
+
+        for entry in tau1_particlesID:
+            if abs(entry)>100:
+                hCount+=1
+            if abs(entry)==11:
+                 eCount+=1
+            if abs(entry)==13:
+                muCount+=1
+        
+        if hCount!=0:
+            tau2="t"
+        elif eCount==1 and hCount == 0 and muCount==0:
+            tau2="e"
+        elif muCount==1 and eCount==0 and hCount==0:
+            tau2="m" 
+        else:
+            print ("tau2 unassigned")       
                 
-            
-            #if eCount == 1:
-            #    self.cutflow_et.AddBinContent(4)
-            #
-            #elif muCount ==1:
-            #    self.cutflow_mt.AddBinContent(4)
-            #
-            #else:
-            #    self.cutflow_diTau.AddBinContent(4)
 
-            if eCount == 1 and muCount ==0:
-                self.cutflow_et.AddBinContent(4)
-            
-            elif muCount ==1 and eCount == 0:
-                self.cutflow_mt.AddBinContent(4)
-
-            elif muCount ==1 and eCount == 1:
-                self.cutflow_em.AddBinContent(4)
-            
-            else:
-                self.cutflow_diTau.AddBinContent(4)
-            
-
-
+        if ((tau1+tau2) =="tt"):
+            self.cutflow_diTau.AddBinContent(4) 
+        elif ((tau1+tau2) =="mt" or (tau1+tau2) =="tm"):
+            self.cutflow_mt.AddBinContent(4)
+        elif ((tau1+tau2) =="et" or (tau1+tau2) =="te"):
+            self.cutflow_et.AddBinContent(4)
+        elif ((tau1+tau2) =="ee" or (tau1+tau2) =="mm" or (tau1+tau2) =="em" or (tau1+tau2) =="me"):
+            self.cutflow_em.AddBinContent(4)
+        else:
+            print ("gadbad")
 
         return True        
 
