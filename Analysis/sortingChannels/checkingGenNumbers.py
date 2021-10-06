@@ -123,58 +123,58 @@ class Channel(Module):
                     tau2_particlesID.append(self.GenPart.collection[i].pdgId)
 
 
-        for entry in tau1_particlesID:
-            if abs(entry)>100:
-                haCount+=1
-            if abs(entry)==11:
-                eCount+=1
-            if abs(entry)==13:
-                muCount+=1
+            for entry in tau1_particlesID:
+                if abs(entry)>100:
+                    haCount+=1
+                if abs(entry)==11:
+                    eCount+=1
+                if abs(entry)==13:
+                    muCount+=1
+
+            if haCount!=0:
+                tau1="t"
+            elif eCount==1 and haCount == 0 and muCount==0:
+                tau1="e"
+            elif muCount==1 and eCount==0 and haCount==0:
+                tau1="m" 
+            else:
+                print ("tau1 unassigned")
+                print ("tau1 ","hadron Count = ",haCount," eCount = ",eCount," muCount = ",muCount,"pdg= ",tau1_particlesID)
+
+            haCount=0
+            eCount=0
+            muCount=0
+
+            for entry in tau2_particlesID:
+                if abs(entry)>100:
+                    haCount+=1
+                if abs(entry)==11:
+                    eCount+=1
+                if abs(entry)==13:
+                    muCount+=1
         
-        if haCount!=0:
-            tau1="t"
-        elif eCount==1 and haCount == 0 and muCount==0:
-            tau1="e"
-        elif muCount==1 and eCount==0 and haCount==0:
-            tau1="m" 
-        else:
-            print ("tau1 unassigned")
-            print ("tau1 ","hadron Count = ",haCount," eCount = ",eCount," muCount = ",muCount,"pdg= ",tau1_particlesID)
+            if haCount!=0:
+                tau2="t"
+            elif eCount==1 and haCount == 0 and muCount==0:
+                tau2="e"
+            elif muCount==1 and eCount==0 and haCount==0:
+                tau2="m" 
+            else:
+                print ("tau2 unassigned")
+                print ("tau2","hadron Count = ",haCount," eCount = ",eCount," muCount = ",muCount,"pdg= ",tau2_particlesID)       
+                    
 
-        haCount=0
-        eCount=0
-        muCount=0
-
-        for entry in tau2_particlesID:
-            if abs(entry)>100:
-                haCount+=1
-            if abs(entry)==11:
-                eCount+=1
-            if abs(entry)==13:
-                muCount+=1
-        
-        if haCount!=0:
-            tau2="t"
-        elif eCount==1 and haCount == 0 and muCount==0:
-            tau2="e"
-        elif muCount==1 and eCount==0 and haCount==0:
-            tau2="m" 
-        else:
-            print ("tau2 unassigned")
-            print ("tau2","hadron Count = ",haCount," eCount = ",eCount," muCount = ",muCount,"pdg= ",tau2_particlesID)       
-                
-
-        if ((tau1+tau2) =="tt"):
-            self.cutflow_diTau.AddBinContent(4) 
-        elif ((tau1+tau2) =="mt" or (tau1+tau2) =="tm"):
-            self.cutflow_mt.AddBinContent(4)
-        elif ((tau1+tau2) =="et" or (tau1+tau2) =="te"):
-            self.cutflow_et.AddBinContent(4)
-        elif ((tau1+tau2) =="ee" or (tau1+tau2) =="mm" or (tau1+tau2) =="em" or (tau1+tau2) =="me"):
-            self.cutflow_em.AddBinContent(4)
-        else:
-            print ("gadbad")
-
+            if ((tau1+tau2) =="tt"):
+                self.cutflow_diTau.AddBinContent(4) 
+            elif ((tau1+tau2) =="mt" or (tau1+tau2) =="tm"):
+                self.cutflow_mt.AddBinContent(4)
+            elif ((tau1+tau2) =="et" or (tau1+tau2) =="te"):
+                self.cutflow_et.AddBinContent(4)
+            elif ((tau1+tau2) =="ee" or (tau1+tau2) =="mm" or (tau1+tau2) =="em" or (tau1+tau2) =="me"):
+                self.cutflow_em.AddBinContent(4)
+            else:
+                print ("gadbad")
+    
         return True        
 
 
