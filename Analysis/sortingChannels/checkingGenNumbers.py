@@ -76,10 +76,10 @@ class Channel(Module):
         #bCount=0
         eCount = 0
         muCount = 0
-        tau_index ={}
-        tau_charge ={}
-        tau1_particlesID = {}
-        tau2_particlesID = {}
+        tau_index =[]
+        tau_charge =[]
+        tau1_particlesID =[]
+        tau2_particlesID =[]
         tau1=""
         tau2=""  
         
