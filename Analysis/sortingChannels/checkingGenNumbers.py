@@ -98,8 +98,8 @@ class Channel(Module):
             self.cutflow_mt.AddBinContent(2)
             self.cutflow_em.AddBinContent(2)
             for i in range(len(self.GenPart.collection)):
-                #if abs(self.GenPart.collection[i].pdgId) == 15 and self.GenPart.collection[i].statusFlags & 2 ==2 and self.GenPart.collection[i].genPartIdxMother >=0 :
-                if abs(self.GenPart.collection[i].pdgId) == 15 and self.GenPart.collection[i].genPartIdxMother >=0 :
+                if abs(self.GenPart.collection[i].pdgId) == 15 and self.GenPart.collection[i].statusFlags & 2 ==2 and self.GenPart.collection[i].genPartIdxMother >=0 :
+                #if abs(self.GenPart.collection[i].pdgId) == 15 and self.GenPart.collection[i].genPartIdxMother >=0 :
                     if self.GenPart.collection[self.GenPart.collection[i].genPartIdxMother].pdgId == 25:
                         tCount += 1
                         tau_index.append(i) 
