@@ -133,9 +133,9 @@ class Channel(Module):
         
         if haCount!=0:
             tau1="t"
-        elif eCount==1 and hCount == 0 and muCount==0:
+        elif eCount==1 and haCount == 0 and muCount==0:
             tau1="e"
-        elif muCount==1 and eCount==0 and hCount==0:
+        elif muCount==1 and eCount==0 and haCount==0:
             tau1="m" 
         else:
             print ("tau1 unassigned")
@@ -154,9 +154,9 @@ class Channel(Module):
         
         if haCount!=0:
             tau2="t"
-        elif eCount==1 and hCount == 0 and muCount==0:
+        elif eCount==1 and haCount == 0 and muCount==0:
             tau2="e"
-        elif muCount==1 and eCount==0 and hCount==0:
+        elif muCount==1 and eCount==0 and haCount==0:
             tau2="m" 
         else:
             print ("tau2 unassigned")       
