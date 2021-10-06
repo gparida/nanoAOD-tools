@@ -73,6 +73,7 @@ class Channel(Module):
 
         hCount = 0
         tCount = 0
+        haCount = 0
         #bCount=0
         eCount = 0
         muCount = 0
@@ -124,13 +125,13 @@ class Channel(Module):
 
         for entry in tau1_particlesID:
             if abs(entry)>100:
-                hCount+=1
+                haCount+=1
             if abs(entry)==11:
                 eCount+=1
             if abs(entry)==13:
                 muCount+=1
         
-        if hCount!=0:
+        if haCount!=0:
             tau1="t"
         elif eCount==1 and hCount == 0 and muCount==0:
             tau1="e"
@@ -139,19 +140,19 @@ class Channel(Module):
         else:
             print ("tau1 unassigned")
 
-        hCount=0
+        haCount=0
         eCount=0
         muCount=0
 
         for entry in tau2_particlesID:
             if abs(entry)>100:
-                hCount+=1
+                haCount+=1
             if abs(entry)==11:
                 eCount+=1
             if abs(entry)==13:
                 muCount+=1
         
-        if hCount!=0:
+        if haCount!=0:
             tau2="t"
         elif eCount==1 and hCount == 0 and muCount==0:
             tau2="e"
