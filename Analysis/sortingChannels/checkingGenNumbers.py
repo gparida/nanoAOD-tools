@@ -24,7 +24,7 @@ class Channel(Module):
         self.cutflow_diTau =  ROOT.TH1F('cutflow_diTau', 'cutflow_diTau', 4, 0, 4)
         self.cutflow_diTau.GetXaxis().SetBinLabel(1,"Events_Preselected")
         self.cutflow_diTau.GetXaxis().SetBinLabel(2,"Two Higgs")
-        self.cutflow_diTau.GetXaxis().SetBinLabel(3,"gJet condition")
+        self.cutflow_diTau.GetXaxis().SetBinLabel(3,"2b2t")
         self.cutflow_diTau.GetXaxis().SetBinLabel(4,"diTau")
         self.cutflow_diTau.GetXaxis().SetTitle("Selections")
         self.cutflow_diTau.GetYaxis().SetTitle("Events")
@@ -48,21 +48,42 @@ class Channel(Module):
         self.cutflow_mt.GetXaxis().SetTitle("Selections")
         self.cutflow_mt.GetYaxis().SetTitle("Events")
         self.cutflow_mt.SetFillColor(38)
-        self.addObject(self.cutflow_diTau) #adding these objects is important cause we can accesses these afterwards!
+    
+        self.cutflow_em =  ROOT.TH1F('cutflow_em', 'cutflow_em', 4, 0, 4)
+        self.cutflow_em.GetXaxis().SetBinLabel(1,"Events_Preselected")
+        self.cutflow_em.GetXaxis().SetBinLabel(2,"Twi Higgs")
+        self.cutflow_em.GetXaxis().SetBinLabel(3,"2b2t")
+        self.cutflow_em.GetXaxis().SetBinLabel(4,"em")
+        self.cutflow_em.GetXaxis().SetTitle("Selections")
+        self.cutflow_em.GetYaxis().SetTitle("Events")
+        self.cutflow_em.SetFillColor(38)
+
+        self.addObject(self.cutflow_diTau)
         self.addObject(self.cutflow_mt)
         self.addObject(self.cutflow_et)
+        self.addObject(self.cutflow_em)
 
 
     def analyze(self, event): 
+        #Filling pre selected events
         self.cutflow_diTau.AddBinContent(1)
         self.cutflow_et.AddBinContent(1)
         self.cutflow_mt.AddBinContent(1)
+        self.cutflow_em.AddBinContent(1)
 
         hCount = 0
         tCount = 0
-        bCount = 0
+        haCount = 0
+        #bCount=0
         eCount = 0
         muCount = 0
+        tau_index =[]
+        tau_charge =[]
+        tau1_particlesID =[]
+        tau2_particlesID =[]
+        tau1=""
+        tau2=""  
+        
 
 
         self.GenPart.setupCollection(event)
@@ -72,38 +93,89 @@ class Channel(Module):
                 hCount += 1
         
         if hCount == 2:
+            #Counting events with just 2 higgs. Should be equal to preselected events
             self.cutflow_diTau.AddBinContent(2)
             self.cutflow_et.AddBinContent(2)
             self.cutflow_mt.AddBinContent(2)
+            self.cutflow_em.AddBinContent(2)
             for i in range(len(self.GenPart.collection)):
-                if abs(self.GenPart.collection[i].pdgId) == 15 and self.GenPart.collection[i].statusFlags & 2 ==2 and self.GenPart.collection[self.GenPart.collection[i].genPartIdxMother].pdgId == 25:
-                    tCount += 1
+                if abs(self.GenPart.collection[i].pdgId) == 15 and self.GenPart.collection[i].statusFlags & 2 ==2 and self.GenPart.collection[i].genPartIdxMother >=0 :
+                #if abs(self.GenPart.collection[i].pdgId) == 15 and self.GenPart.collection[i].genPartIdxMother >=0 :
+                    if self.GenPart.collection[self.GenPart.collection[i].genPartIdxMother].pdgId == 25:
+                        tCount += 1
+                        tau_index.append(i) 
+                        tau_charge.append(self.GenPart.collection[i].pdgId)        
 
-                if abs(self.GenPart.collection[i].pdgId) == 5 and self.GenPart.collection[self.GenPart.collection[i].genPartIdxMother].pdgId == 25:
-                    bCount += 1
+                #if abs(self.GenPart.collection[i].pdgId) == 5 and self.GenPart.collection[i].genPartIdxMother >=0:
+                    #if self.GenPart.collection[self.GenPart.collection[i].genPartIdxMother].pdgId == 25:
+                        #bCount += 1
 
-        if tCount == 2 and bCount == 2:
+        if tCount == 2 and (tau_charge[0]*tau_charge[1])<0:
             self.cutflow_diTau.AddBinContent(3)
             self.cutflow_et.AddBinContent(3)
             self.cutflow_mt.AddBinContent(3)
+            self.cutflow_em.AddBinContent(3)
             for i in range(len(self.GenPart.collection)):
-                if abs(self.GenPart.collection[i].pdgId) == 11 and abs(self.GenPart.collection[self.GenPart.collection[i].genPartIdxMother].pdgId) == 15:
-                    eCount += 1
+                if self.GenPart.collection[i].genPartIdxMother == tau_index[0]:
+                    tau1_particlesID.append(self.GenPart.collection[i].pdgId)
                 
-                if abs(self.GenPart.collection[i].pdgId) == 13 and abs(self.GenPart.collection[self.GenPart.collection[i].genPartIdxMother].pdgId) == 15:
-                    muCount += 1
-                
-            
-            if eCount == 1:
-                self.cutflow_et.AddBinContent(4)
-            
-            elif muCount ==1:
-                self.cutflow_mt.AddBinContent(4)
-            
-            else:
-                self.cutflow_diTau.AddBinContent(4)
+                elif self.GenPart.collection[i].genPartIdxMother == tau_index[1]:
+                    tau2_particlesID.append(self.GenPart.collection[i].pdgId)
 
-        return False        
+
+            for entry in tau1_particlesID:
+                if abs(entry)>100:
+                    haCount+=1
+                if abs(entry)==11:
+                    eCount+=1
+                if abs(entry)==13:
+                    muCount+=1
+
+            if haCount!=0:
+                tau1="t"
+            elif eCount==1 and haCount == 0 and muCount==0:
+                tau1="e"
+            elif muCount==1 and eCount==0 and haCount==0:
+                tau1="m" 
+            else:
+                print ("tau1 unassigned")
+                print ("tau1 ","hadron Count = ",haCount," eCount = ",eCount," muCount = ",muCount,"pdg= ",tau1_particlesID)
+
+            haCount=0
+            eCount=0
+            muCount=0
+
+            for entry in tau2_particlesID:
+                if abs(entry)>100:
+                    haCount+=1
+                if abs(entry)==11:
+                    eCount+=1
+                if abs(entry)==13:
+                    muCount+=1
+        
+            if haCount!=0:
+                tau2="t"
+            elif eCount==1 and haCount == 0 and muCount==0:
+                tau2="e"
+            elif muCount==1 and eCount==0 and haCount==0:
+                tau2="m" 
+            else:
+                print ("tau2 unassigned")
+                print ("tau2","hadron Count = ",haCount," eCount = ",eCount," muCount = ",muCount,"pdg= ",tau2_particlesID)       
+                    
+
+            if ((tau1+tau2) =="tt"):
+                self.cutflow_diTau.AddBinContent(4) 
+            elif ((tau1+tau2) =="mt" or (tau1+tau2) =="tm"):
+                self.cutflow_mt.AddBinContent(4)
+            elif ((tau1+tau2) =="et" or (tau1+tau2) =="te"):
+                self.cutflow_et.AddBinContent(4)
+            elif ((tau1+tau2) =="ee" or (tau1+tau2) =="mm" or (tau1+tau2) =="em" or (tau1+tau2) =="me"):
+                self.cutflow_em.AddBinContent(4)
+            else:
+                print ("gadbad")
+    
+        return True        
 
 
 def call_postpoc(files):
