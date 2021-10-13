@@ -12,6 +12,20 @@ def calculatePileupWeight(self, theTree):
 
     self.value[0] = pileupWeighting
 
+def CalculatePileupWeight_Up(self, theTree, uncert):
+    pileupWeighting_Up = 1.0
+    pileupWeighting_Up = self.dataHistoUp.GetBinContent(self.dataHistoUp.GetXaxis().FindBin(theTree.Pileup_nPU)) / self.mcHisto.GetBinContent(self.mcHisto.GetXaxis().FindBin(theTree.Pileup_nPU))
+    self.uncertaintyVariationArrays[uncert][0] = pileupWeighting_Up
+
+def CalculatePileupWeight_Down(self, theTree, uncert):
+    pileupWeighting_Down = 1.0
+    pileupWeighting_Down = self.dataHistDown.GetBinContent(self.dataHistoDown.GetXaxis().FindBin(theTree.Pileup_nPU)) / self.mcHisto.GetBinContent(self.mcHisto.GetXaxis().FindBin(theTree.Pileup_nPU))
+    self.uncertaintyVariationArrays[uncert][0] = pileupWeighting_Down
+
+
+
+
+
 pileupWeight_2016 = Weight()
 pileupWeight_2016.name = 'pileupWeighting'
 pileupWeight_2016.mcHistoFilePath = b2gWeightPath+'mcPileupUL2016.root'
@@ -27,6 +41,19 @@ pileupWeight_2016.dataHisto.Scale(1.0/pileupWeight_2016.dataHisto.Integral())
 pileupWeight_2016.dataHistoUp.Scale(1.0/pileupWeight_2016.dataHistoUp.Integral())
 pileupWeight_2016.dataHistoDown.Scale(1.0/pileupWeight_2016.dataHistoDown.Integral())
 pileupWeight_2016.CalculateWeight = calculatePileupWeight
+pileupWeight_2016.hasUpDownUncertainties = True
+pileupWeight_2016.uncertaintyVariationList = [
+    "pileupWeight_UP",
+    "pileupWeight_DOWN"
+    ]
+pileupWeight_2016.InitUncertaintyVariations()
+pileupWeight_2016.uncertaintyVariationFunctions = {
+    "pileupWeight_UP":CalculatePileupWeight_Up,
+    "pileupWeight_DOWN":CalculatePileupWeight_Down
+}
+
+
+
 
 pileupWeight_2017 = Weight()
 pileupWeight_2017.name = 'pileupWeighting'
@@ -43,6 +70,16 @@ pileupWeight_2017.dataHisto.Scale(1.0/pileupWeight_2017.dataHisto.Integral())
 pileupWeight_2017.dataHistoUp.Scale(1.0/pileupWeight_2017.dataHistoUp.Integral())
 pileupWeight_2017.dataHistoDown.Scale(1.0/pileupWeight_2017.dataHistoDown.Integral())
 pileupWeight_2017.CalculateWeight = calculatePileupWeight
+pileupWeight_2017.hasUpDownUncertainties = True
+pileupWeight_2017.uncertaintyVariationList = [
+    "pileupWeight_UP",
+    "pileupWeight_DOWN"
+    ]
+pileupWeight_2017.InitUncertaintyVariations()
+pileupWeight_2017.uncertaintyVariationFunctions = {
+    "pileupWeight_UP":CalculatePileupWeight_Up,
+    "pileupWeight_DOWN":CalculatePileupWeight_Down
+}
 
 pileupWeight_2018 = Weight()
 pileupWeight_2018.name = 'pileupWeighting'
@@ -59,3 +96,13 @@ pileupWeight_2018.dataHisto.Scale(1.0/pileupWeight_2018.dataHisto.Integral())
 pileupWeight_2018.dataHistoUp.Scale(1.0/pileupWeight_2018.dataHistoUp.Integral())
 pileupWeight_2018.dataHistoDown.Scale(1.0/pileupWeight_2018.dataHistoDown.Integral())
 pileupWeight_2018.CalculateWeight = calculatePileupWeight
+pileupWeight_2018.hasUpDownUncertainties = True
+pileupWeight_2018.uncertaintyVariationList = [
+    "pileupWeight_UP",
+    "pileupWeight_DOWN"
+    ]
+pileupWeight_2018.InitUncertaintyVariations()
+pileupWeight_2018.uncertaintyVariationFunctions = {
+    "pileupWeight_UP":CalculatePileupWeight_Up,
+    "pileupWeight_DOWN":CalculatePileupWeight_Down
+}
