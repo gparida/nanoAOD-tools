@@ -19,7 +19,7 @@ def calculatePileupWeight_Up(self, theTree, uncert):
 
 def calculatePileupWeight_Down(self, theTree, uncert):
     pileupWeighting_Down = 1.0
-    pileupWeighting_Down = self.dataHistDown.GetBinContent(self.dataHistoDown.GetXaxis().FindBin(theTree.Pileup_nPU)) / self.mcHisto.GetBinContent(self.mcHisto.GetXaxis().FindBin(theTree.Pileup_nPU))
+    pileupWeighting_Down = self.dataHistoDown.GetBinContent(self.dataHistoDown.GetXaxis().FindBin(theTree.Pileup_nPU)) / self.mcHisto.GetBinContent(self.mcHisto.GetXaxis().FindBin(theTree.Pileup_nPU))
     self.uncertaintyVariationArrays[uncert][0] = pileupWeighting_Down
 
 
