@@ -12,12 +12,12 @@ def calculatePileupWeight(self, theTree):
 
     self.value[0] = pileupWeighting
 
-def CalculatePileupWeight_Up(self, theTree, uncert):
+def calculatePileupWeight_Up(self, theTree, uncert):
     pileupWeighting_Up = 1.0
     pileupWeighting_Up = self.dataHistoUp.GetBinContent(self.dataHistoUp.GetXaxis().FindBin(theTree.Pileup_nPU)) / self.mcHisto.GetBinContent(self.mcHisto.GetXaxis().FindBin(theTree.Pileup_nPU))
     self.uncertaintyVariationArrays[uncert][0] = pileupWeighting_Up
 
-def CalculatePileupWeight_Down(self, theTree, uncert):
+def calculatePileupWeight_Down(self, theTree, uncert):
     pileupWeighting_Down = 1.0
     pileupWeighting_Down = self.dataHistDown.GetBinContent(self.dataHistoDown.GetXaxis().FindBin(theTree.Pileup_nPU)) / self.mcHisto.GetBinContent(self.mcHisto.GetXaxis().FindBin(theTree.Pileup_nPU))
     self.uncertaintyVariationArrays[uncert][0] = pileupWeighting_Down
@@ -48,8 +48,8 @@ pileupWeight_2016.uncertaintyVariationList = [
     ]
 pileupWeight_2016.InitUncertaintyVariations()
 pileupWeight_2016.uncertaintyVariationFunctions = {
-    "pileupWeight_UP":CalculatePileupWeight_Up,
-    "pileupWeight_DOWN":CalculatePileupWeight_Down
+    "pileupWeight_UP":calculatePileupWeight_Up,
+    "pileupWeight_DOWN":calculatePileupWeight_Down
 }
 
 
@@ -77,8 +77,8 @@ pileupWeight_2017.uncertaintyVariationList = [
     ]
 pileupWeight_2017.InitUncertaintyVariations()
 pileupWeight_2017.uncertaintyVariationFunctions = {
-    "pileupWeight_UP":CalculatePileupWeight_Up,
-    "pileupWeight_DOWN":CalculatePileupWeight_Down
+    "pileupWeight_UP":calculatePileupWeight_Up,
+    "pileupWeight_DOWN":calculatePileupWeight_Down
 }
 
 pileupWeight_2018 = Weight()
@@ -103,6 +103,6 @@ pileupWeight_2018.uncertaintyVariationList = [
     ]
 pileupWeight_2018.InitUncertaintyVariations()
 pileupWeight_2018.uncertaintyVariationFunctions = {
-    "pileupWeight_UP":CalculatePileupWeight_Up,
-    "pileupWeight_DOWN":CalculatePileupWeight_Down
+    "pileupWeight_UP":calculatePileupWeight_Up,
+    "pileupWeight_DOWN":calculatePileupWeight_Down
 }
