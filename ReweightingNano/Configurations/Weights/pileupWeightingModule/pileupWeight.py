@@ -27,7 +27,7 @@ def calculatePileupWeight_Down(self, theTree, uncert):
 
 
 pileupWeight_2016 = Weight()
-pileupWeight_2016.name = 'pileupWeighting'
+pileupWeight_2016.name = 'gpileupWeighting'
 pileupWeight_2016.mcHistoFilePath = b2gWeightPath+'mcPileupUL2016.root'
 pileupWeight_2016.mcHistoFile = ROOT.TFile(pileupWeight_2016.mcHistoFilePath)
 pileupWeight_2016.mcHisto = pileupWeight_2016.mcHistoFile.Get('pu_mc')
@@ -43,20 +43,20 @@ pileupWeight_2016.dataHistoDown.Scale(1.0/pileupWeight_2016.dataHistoDown.Integr
 pileupWeight_2016.CalculateWeight = calculatePileupWeight
 pileupWeight_2016.hasUpDownUncertainties = True
 pileupWeight_2016.uncertaintyVariationList = [
-    "pileupWeight_UP",
-    "pileupWeight_DOWN"
+    "gpileupWeight_UP",
+    "gpileupWeight_DOWN"
     ]
 pileupWeight_2016.InitUncertaintyVariations()
 pileupWeight_2016.uncertaintyVariationFunctions = {
-    "pileupWeight_UP":calculatePileupWeight_Up,
-    "pileupWeight_DOWN":calculatePileupWeight_Down
+    "gpileupWeight_UP":calculatePileupWeight_Up,
+    "gpileupWeight_DOWN":calculatePileupWeight_Down
 }
 
 
 
 
 pileupWeight_2017 = Weight()
-pileupWeight_2017.name = 'pileupWeighting'
+pileupWeight_2017.name = 'gpileupWeighting'
 pileupWeight_2017.mcHistoFilePath = b2gWeightPath+'mcPileupUL2017.root'
 pileupWeight_2017.mcHistoFile = ROOT.TFile(pileupWeight_2017.mcHistoFilePath)
 pileupWeight_2017.mcHisto = pileupWeight_2017.mcHistoFile.Get('pu_mc')
@@ -72,17 +72,17 @@ pileupWeight_2017.dataHistoDown.Scale(1.0/pileupWeight_2017.dataHistoDown.Integr
 pileupWeight_2017.CalculateWeight = calculatePileupWeight
 pileupWeight_2017.hasUpDownUncertainties = True
 pileupWeight_2017.uncertaintyVariationList = [
-    "pileupWeight_UP",
-    "pileupWeight_DOWN"
+    "gpileupWeight_UP",
+    "gpileupWeight_DOWN"
     ]
 pileupWeight_2017.InitUncertaintyVariations()
 pileupWeight_2017.uncertaintyVariationFunctions = {
-    "pileupWeight_UP":calculatePileupWeight_Up,
-    "pileupWeight_DOWN":calculatePileupWeight_Down
+    "gpileupWeight_UP":calculatePileupWeight_Up,
+    "gpileupWeight_DOWN":calculatePileupWeight_Down
 }
 
 pileupWeight_2018 = Weight()
-pileupWeight_2018.name = 'pileupWeighting'
+pileupWeight_2018.name = 'gpileupWeighting'
 pileupWeight_2018.mcHistoFilePath = b2gWeightPath+'mcPileupUL2018.root'
 pileupWeight_2018.mcHistoFile = ROOT.TFile(pileupWeight_2018.mcHistoFilePath)
 pileupWeight_2018.mcHisto = pileupWeight_2018.mcHistoFile.Get('pu_mc')
@@ -98,11 +98,11 @@ pileupWeight_2018.dataHistoDown.Scale(1.0/pileupWeight_2018.dataHistoDown.Integr
 pileupWeight_2018.CalculateWeight = calculatePileupWeight
 pileupWeight_2018.hasUpDownUncertainties = True
 pileupWeight_2018.uncertaintyVariationList = [
-    "pileupWeight_UP",
-    "pileupWeight_DOWN"
+    "gpileupWeight_UP",
+    "gpileupWeight_DOWN"
     ]
 pileupWeight_2018.InitUncertaintyVariations()
 pileupWeight_2018.uncertaintyVariationFunctions = {
-    "pileupWeight_UP":calculatePileupWeight_Up,
-    "pileupWeight_DOWN":calculatePileupWeight_Down
+    "gpileupWeight_UP":calculatePileupWeight_Up,
+    "gpileupWeight_DOWN":calculatePileupWeight_Down
 }

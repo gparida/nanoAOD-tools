@@ -79,6 +79,6 @@ def calculateCrossSectionWeight(self, theTree):
     
 
 crossSectionWeight = Weight() # creating an instance of the weight class
-crossSectionWeight.name = 'crossSectionWeighting' #filling up the different attributes of the weight class which were previously empyty
+crossSectionWeight.name = 'gcrossSectionWeighting' #filling up the different attributes of the weight class which were previously empyty
 crossSectionWeight.CalculateWeight = calculateCrossSectionWeight #This calculate weight function - the way to calculate xs weight
 crossSectionWeight.forcedGenWeight = None
