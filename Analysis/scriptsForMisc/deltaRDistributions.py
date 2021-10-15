@@ -66,7 +66,8 @@ class dRDistributions(Module):
         secondLepton_V=ROOT.TLorentzVector(0.0,0.0,0.0,0.0)
         if (len(self.boostedTauLoose.collection)!=0):
             leadingBoostedTau_V.SetPtEtaPhiM(self.boostedTauLoose.collection[0].pt,self.boostedTauLoose.collection[0].eta,self.boostedTauLoose.collection[0].phi,self.boostedTauLoose.collection[0].mass)
-
+        else:
+            return False
         for tau in  self.boostedTauLoose.collection:
             if (tau.pt == self.boostedTauLoose.collection[0].pt 
             and tau.eta == self.boostedTauLoose.collection[0].eta 
