@@ -86,6 +86,7 @@ class dRDistributions(Module):
         self.looseTau.GetXaxis().SetTitle("Delta R")
         self.looseTau.GetYaxis().SetTitle("Events")
         self.looseTau.SetLineColor(1)
+        self.looseTau.SetLineWidth(2)
         counter = 0 
         
         for tau in  self.boostedTauVLoose.collection:
@@ -104,6 +105,7 @@ class dRDistributions(Module):
         self.vlooseTau.GetXaxis().SetTitle("Delta R")
         self.vlooseTau.GetYaxis().SetTitle("Events")
         self.vlooseTau.SetLineColor(2)
+        self.vlooseTau.SetLineWidth(2)
         counter=0
         
         for tau in  self.boostedTaunoID.collection:
@@ -121,7 +123,8 @@ class dRDistributions(Module):
         self.noIDTau.Fill(least_deltaR_noIDTau)
         self.noIDTau.GetXaxis().SetTitle("Delta R")
         self.noIDTau.GetYaxis().SetTitle("Events")
-        self.noIDTau.SetLineColor(3)
+        self.noIDTau.SetLineColor(42)
+        self.noIDTau.SetLineWidth(2)
         counter = 0 
 
 
@@ -138,6 +141,7 @@ class dRDistributions(Module):
         self.electron.GetXaxis().SetTitle("Delta R")
         self.electron.GetYaxis().SetTitle("Events")
         self.electron.SetLineColor(4)
+        self.electron.SetLineWidth(2)
         counter=0
 
         for muon in  self.Muon.collection:
@@ -151,7 +155,8 @@ class dRDistributions(Module):
         self.muon.Fill(least_deltaR_muon)
         self.muon.GetXaxis().SetTitle("Delta R")
         self.muon.GetYaxis().SetTitle("Events")
-        self.muon.SetLineColor(5)
+        self.muon.SetLineColor(28)
+        self.muon.SetLineWidth(2)
         counter=0
         print (len(self.boostedTauLoose.collection),len(self.boostedTauVLoose.collection),len(self.boostedTaunoID.collection),len(self.Muon.collection),len(self.Electron.collection))
         print (least_deltaR_LooseTau,least_deltaR_VLooseTau, least_deltaR_noIDTau, least_deltaR_muon, least_deltaR_electron)
