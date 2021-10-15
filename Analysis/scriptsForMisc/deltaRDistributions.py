@@ -153,7 +153,7 @@ class dRDistributions(Module):
         self.muon.GetYaxis().SetTitle("Events")
         self.muon.SetLineColor(5)
         counter=0
-        print (len(self.boostedTauLoose.collection),len(self.boostedTauVLoose.collection),len(self.boostedTaunoID.collection),len(self.muon.collection),len(self.electron.collection))
+        print (len(self.boostedTauLoose.collection),len(self.boostedTauVLoose.collection),len(self.boostedTaunoID.collection),len(self.Muon.collection),len(self.Electron.collection))
         print (least_deltaR_LooseTau,least_deltaR_VLooseTau, least_deltaR_noIDTau, least_deltaR_muon, least_deltaR_electron)
 	
         return True        
