@@ -76,7 +76,7 @@ class dRDistributions(Module):
                 continue
             secondLepton_V.SetPtEtaPhiM(tau.pt,tau.eta,tau.phi,tau.mass)
             deltaR = leadingBoostedTau_V.DeltaR(secondLepton_V)
-            print (deltaR)
+            #print (deltaR)
             if (deltaR < least_deltaR_LooseTau or counter==0):
                 least_deltaR_LooseTau = deltaR
                 counter+=1
@@ -153,7 +153,7 @@ class dRDistributions(Module):
         self.muon.GetYaxis().SetTitle("Events")
         self.muon.SetLineColor(5)
         counter=0
-
+        print (len(self.boostedTauLoose.collection),len(self.boostedTauVLoose.collection),len(self.boostedTaunoID.collection),len(self.muon.collection),len(self.electron.collection))
         print (least_deltaR_LooseTau,least_deltaR_VLooseTau, least_deltaR_noIDTau, least_deltaR_muon, least_deltaR_electron)
 	
         return True        
