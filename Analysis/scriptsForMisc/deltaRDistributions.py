@@ -13,6 +13,7 @@ ROOT.PyConfig.IgnoreCommandLineOptions = True
 
 class dRDistributions(Module):
     def __init__(self, filename):
+        self.writeHistFile=True
         self.filename = filename #filename passed cause we needed to count the events with zero divide errors
 	    #All these objects are common to all channels
         self.boostedTauLoose = particle("boostedTauLoose")
