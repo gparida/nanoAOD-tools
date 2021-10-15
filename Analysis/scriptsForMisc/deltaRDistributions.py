@@ -75,6 +75,7 @@ class dRDistributions(Module):
                 continue
             secondLepton_V.SetPtEtaPhiM(tau.pt,tau.eta,tau.phi,tau.mass)
             deltaR = leadingBoostedTau_V.DeltaR(secondLepton_V)
+            print (deltaR)
             if (deltaR < least_deltaR_LooseTau):
                 least_deltaR_LooseTau = deltaR
         
