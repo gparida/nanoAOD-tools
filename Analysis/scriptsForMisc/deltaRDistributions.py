@@ -135,6 +135,8 @@ class dRDistributions(Module):
         self.muon.GetXaxis().SetTitle("Delta R")
         self.muon.GetYaxis().SetTitle("Events")
         self.muon.SetLineColor(5)
+
+        print (least_deltaR_LooseTau,least_deltaR_VLooseTau, least_deltaR_noIDTau, least_deltaR_muon, least_deltaR_electron)
 	
         return True        
 
