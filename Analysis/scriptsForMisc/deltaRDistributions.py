@@ -16,9 +16,9 @@ class dRDistributions(Module):
         self.writeHistFile=True
         self.filename = filename #filename passed cause we needed to count the events with zero divide errors
 	    #All these objects are common to all channels
-        self.boostedTauLoose = particle("boostedTauLoose")
-        self.boostedTauVLoose = particle("boostedTauVLoose")
-        self.boostedTaunoID = particle("boostedTaunoID")
+        self.boostedTauLoose = particle("boostedTau")
+        self.boostedTauVLoose = particle("boostedTau")
+        self.boostedTaunoID = particle("boostedTau")
         self.Electron = particle("Electron")
         self.Muon = particle("Muon")		
 		
