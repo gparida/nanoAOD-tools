@@ -59,9 +59,8 @@ class dRDistributions(Module):
         self.Electron.setupCollection(event)
         self.Electron.apply_cut(lambda x: x.mvaFall17V2Iso_WPL and (x.pt > 10))
 
-        self.Muon.setupCollection(event)
-        print 
-        self.Muon.apply_cut(lambda x: (x.pt > 10)  and   int(''.join(format(ord(i), '016b') for i in x.mvaId),2)==1)
+        self.Muon.setupCollection(event) 
+        self.Muon.apply_cut(lambda x: (x.pt > 10))
 
         leadingBoostedTau_V = ROOT.TLorentzVector(0.0,0.0,0.0,0.0)
         secondLepton_V=ROOT.TLorentzVector(0.0,0.0,0.0,0.0)
