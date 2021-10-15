@@ -46,6 +46,7 @@ class dRDistributions(Module):
         least_deltaR_noIDTau = 0
         least_deltaR_electron = 0
         least_deltaR_muon = 0
+        counter = 0
 
         self.boostedTauLoose.setupCollection(event)
         self.boostedTauLoose.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAnewDM2017v2 & 4 == 4))
@@ -76,13 +77,16 @@ class dRDistributions(Module):
             secondLepton_V.SetPtEtaPhiM(tau.pt,tau.eta,tau.phi,tau.mass)
             deltaR = leadingBoostedTau_V.DeltaR(secondLepton_V)
             print (deltaR)
-            if (deltaR < least_deltaR_LooseTau):
+            if (deltaR < least_deltaR_LooseTau or counter==0):
                 least_deltaR_LooseTau = deltaR
+                counter+=1
+            
         
         self.looseTau.Fill(least_deltaR_LooseTau)
         self.looseTau.GetXaxis().SetTitle("Delta R")
         self.looseTau.GetYaxis().SetTitle("Events")
         self.looseTau.SetLineColor(1)
+        counter = 0 
         
         for tau in  self.boostedTauVLoose.collection:
             if (tau.pt == self.boostedTauLoose.collection[0].pt 
@@ -91,13 +95,16 @@ class dRDistributions(Module):
                 continue
             secondLepton_V.SetPtEtaPhiM(tau.pt,tau.eta,tau.phi,tau.mass)
             deltaR = leadingBoostedTau_V.DeltaR(secondLepton_V)
-            if (deltaR < least_deltaR_VLooseTau):
+            if (deltaR < least_deltaR_VLooseTau or counter==0):
                 least_deltaR_VLooseTau = deltaR
-        
+                counter+=1
+            
+
         self.vlooseTau.Fill(least_deltaR_VLooseTau)
         self.vlooseTau.GetXaxis().SetTitle("Delta R")
         self.vlooseTau.GetYaxis().SetTitle("Events")
         self.vlooseTau.SetLineColor(2)
+        counter=0
         
         for tau in  self.boostedTaunoID.collection:
             if (tau.pt == self.boostedTauLoose.collection[0].pt 
@@ -106,36 +113,46 @@ class dRDistributions(Module):
                 continue
             secondLepton_V.SetPtEtaPhiM(tau.pt,tau.eta,tau.phi,tau.mass)
             deltaR = leadingBoostedTau_V.DeltaR(secondLepton_V)
-            if (deltaR < least_deltaR_noIDTau):
+            if (deltaR < least_deltaR_noIDTau or counter==0):
                 least_deltaR_noIDTau= deltaR
+                counter +=1
+            
         
         self.noIDTau.Fill(least_deltaR_noIDTau)
         self.noIDTau.GetXaxis().SetTitle("Delta R")
         self.noIDTau.GetYaxis().SetTitle("Events")
         self.noIDTau.SetLineColor(3)
+        counter = 0 
+
 
 
         for electron in  self.Electron.collection:
             secondLepton_V.SetPtEtaPhiM(electron.pt,electron.eta,electron.phi,electron.mass)
             deltaR = leadingBoostedTau_V.DeltaR(secondLepton_V)
-            if (deltaR < least_deltaR_electron):
+            if (deltaR < least_deltaR_electron or counter == 0):
                 least_deltaR_electron = deltaR
+                counter+=1
+            
 
         self.electron.Fill(least_deltaR_electron)
         self.electron.GetXaxis().SetTitle("Delta R")
         self.electron.GetYaxis().SetTitle("Events")
         self.electron.SetLineColor(4)
+        counter=0
 
         for muon in  self.Muon.collection:
             secondLepton_V.SetPtEtaPhiM(muon.pt,muon.eta,muon.phi,muon.mass)
             deltaR = leadingBoostedTau_V.DeltaR(secondLepton_V)
-            if (deltaR < least_deltaR_muon):
+            if (deltaR < least_deltaR_muon or counter==0):
                 least_deltaR_muon = deltaR
+                counter+=1
+            
         
         self.muon.Fill(least_deltaR_muon)
         self.muon.GetXaxis().SetTitle("Delta R")
         self.muon.GetYaxis().SetTitle("Events")
         self.muon.SetLineColor(5)
+        counter=0
 
         print (least_deltaR_LooseTau,least_deltaR_VLooseTau, least_deltaR_noIDTau, least_deltaR_muon, least_deltaR_electron)
 	
