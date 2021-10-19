@@ -69,6 +69,8 @@ class HPSVetoandMultiplicty(Module):
 
         HPSVetoCollection = filter(self.HPStauVeto,self.HPSTauVloose.collection)
 
+        print ("original HPS Taus = ",len(self.boostedTauVLoose.collection),"Vetoed Taus = ",len(HPSVetoCollection))
+
         self.totalMultiplicity.Fill(len(self.boostedTauVLoose.collection)+len(HPSVetoCollection))
 
         if (len(self.boostedTauVLoose.collection)!=0 and len(HPSVetoCollection)!=0):
