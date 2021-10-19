@@ -71,7 +71,8 @@ class HPSVetoandMultiplicty(Module):
 
         HPSVetoCollection = filter(self.HPStauVeto,self.HPSTauVVloose.collection)
 
-        print ("original HPS Taus = ",len(self.HPSTauVVloose.collection),"Vetoed Taus = ",len(HPSVetoCollection))
+        #print ("original HPS Taus = ",len(self.HPSTauVVloose.collection),"Vetoed Taus = ",len(HPSVetoCollection))
+        print ("Event Weight = ",event.FinalWeighting)
 
         self.totalMultiplicity.Fill(len(self.boostedTauVVLoose.collection)+len(HPSVetoCollection),event.FinalWeighting)
 
