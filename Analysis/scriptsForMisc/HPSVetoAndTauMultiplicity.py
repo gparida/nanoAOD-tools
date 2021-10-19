@@ -45,7 +45,7 @@ class HPSVetoandMultiplicty(Module):
         for loosetau in self.boostedTauVLoose.collection:
             tau2.SetPtEtaPhiM(loosetau.pt,loosetau.eta,loosetau.phi,loosetau.mass)
             deltaR = tau1.DeltaR(tau2)
-            if deltaR < 0.02:
+            if deltaR <= 0.02:
                 isTau = "bad"
                 break
         if isTau != "bad":
