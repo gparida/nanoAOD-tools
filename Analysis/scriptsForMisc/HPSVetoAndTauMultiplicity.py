@@ -79,7 +79,7 @@ class HPSVetoandMultiplicty(Module):
             if ((self.boostedTauVVLoose.collection[0].pt > HPSVetoCollection[0].pt) and (self.boostedTauVVLoose.collection[0].idMVAnewDM2017v2 & 2 == 2)):
                 self.leadingVLooseMultiplicity.Fill(len(self.boostedTauVVLoose.collection)+len(HPSVetoCollection),event.FinalWeighting)
 
-            if ((self.boostedTauVVLoose.collection[0].pt < HPSVetoCollection[0].pt) and (self.HPSTauVVloose[0].idMVAnewDM2017v2 & 2 == 2)):
+            if ((self.boostedTauVVLoose.collection[0].pt < HPSVetoCollection[0].pt) and (HPSVetoCollection[0].idMVAnewDM2017v2 & 2 == 2)):
                 self.leadingVLooseMultiplicity.Fill(len(self.boostedTauVVLoose.collection)+len(HPSVetoCollection),event.FinalWeighting)
             
 
