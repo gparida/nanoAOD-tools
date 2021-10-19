@@ -61,11 +61,11 @@ class HPSVetoandMultiplicty(Module):
         #self.boostedTauLoose.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAnewDM2017v2 & 4 == 4))
 
         self.boostedTauVLoose.setupCollection(event)
-        self.boostedTauVLoose.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAnewDM2017v2 & 8 == 8))
+        self.boostedTauVLoose.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAnewDM2017v2 & 2 == 2))
         
 
         self.HPSTauVloose.setupCollection(event)
-        self.HPSTauVloose.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAnewDM2017v2 & 8 == 8))
+        self.HPSTauVloose.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAnewDM2017v2 & 2 == 2))
 
         HPSVetoCollection = filter(self.HPStauVeto,self.HPSTauVloose.collection)
 
@@ -75,38 +75,38 @@ class HPSVetoandMultiplicty(Module):
             if ((self.boostedTauVLoose.collection[0].pt > HPSVetoCollection[0].pt) and (self.boostedTauVLoose.collection[0].idMVAnewDM2017v2 & 4 == 4)):
                 self.leadingLooseMultiplcity.Fill(len(self.boostedTauVLoose.collection)+len(HPSVetoCollection))
 
-            elif ((self.boostedTauVLoose.collection[0].pt < HPSVetoCollection[0].pt) and (HPSVetoCollection[0].idMVAnewDM2017v2 & 4 == 4)):
+            if ((self.boostedTauVLoose.collection[0].pt < HPSVetoCollection[0].pt) and (HPSVetoCollection[0].idMVAnewDM2017v2 & 4 == 4)):
                 self.leadingLooseMultiplcity.Fill(len(self.boostedTauVLoose.collection)+len(HPSVetoCollection))
 
-            elif ((self.boostedTauVLoose.collection[0].pt > HPSVetoCollection[0].pt) and (self.boostedTauVLoose.collection[0].idMVAnewDM2017v2 & 8 == 8)):
+            if ((self.boostedTauVLoose.collection[0].pt > HPSVetoCollection[0].pt) and (self.boostedTauVLoose.collection[0].idMVAnewDM2017v2 & 8 == 8)):
                 self.leadingMediumMultiplicity.Fill(len(self.boostedTauVLoose.collection)+len(HPSVetoCollection))
 
-            elif ((self.boostedTauVLoose.collection[0].pt < HPSVetoCollection[0].pt) and (HPSVetoCollection[0].idMVAnewDM2017v2 & 8 == 8)):
+            if ((self.boostedTauVLoose.collection[0].pt < HPSVetoCollection[0].pt) and (HPSVetoCollection[0].idMVAnewDM2017v2 & 8 == 8)):
                 self.leadingMediumMultiplicity.Fill(len(self.boostedTauVLoose.collection)+len(HPSVetoCollection))
             
-            elif ((self.boostedTauVLoose.collection[0].pt > HPSVetoCollection[0].pt) and (self.boostedTauVLoose.collection[0].idMVAnewDM2017v2 & 16 == 16)):
+            if ((self.boostedTauVLoose.collection[0].pt > HPSVetoCollection[0].pt) and (self.boostedTauVLoose.collection[0].idMVAnewDM2017v2 & 16 == 16)):
                 self.leadingTightMultiplicity.Fill(len(self.boostedTauVLoose.collection)+len(HPSVetoCollection))
 
-            elif ((self.boostedTauVLoose.collection[0].pt < HPSVetoCollection[0].pt) and (HPSVetoCollection[0].idMVAnewDM2017v2 & 16 == 16)):
+            if ((self.boostedTauVLoose.collection[0].pt < HPSVetoCollection[0].pt) and (HPSVetoCollection[0].idMVAnewDM2017v2 & 16 == 16)):
                 self.leadingTightMultiplicity.Fill(len(self.boostedTauVLoose.collection)+len(HPSVetoCollection))
 
 
         if (len(self.boostedTauVLoose.collection)!=0 and len(HPSVetoCollection)==0):
             if (self.boostedTauVLoose.collection[0].idMVAnewDM2017v2 & 4 == 4):
                 self.leadingLooseMultiplcity.Fill(len(self.boostedTauVLoose.collection)+len(HPSVetoCollection))
-            elif (self.boostedTauVLoose.collection[0].idMVAnewDM2017v2 & 8 == 8):
+            if (self.boostedTauVLoose.collection[0].idMVAnewDM2017v2 & 8 == 8):
                 self.leadingMediumMultiplicity.Fill(len(self.boostedTauVLoose.collection)+len(HPSVetoCollection))
-            elif (self.boostedTauVLoose.collection[0].idMVAnewDM2017v2 & 16 == 16):
+            if (self.boostedTauVLoose.collection[0].idMVAnewDM2017v2 & 16 == 16):
                 self.leadingTightMultiplicity.Fill(len(self.boostedTauVLoose.collection)+len(HPSVetoCollection))
         
         if (len(self.boostedTauVLoose.collection)==0 and len(HPSVetoCollection)!=0):
             if (HPSVetoCollection[0].idMVAnewDM2017v2 & 4 == 4):
                 self.leadingLooseMultiplcity.Fill(len(self.boostedTauVLoose.collection)+len(HPSVetoCollection))
             
-            elif (HPSVetoCollection[0].idMVAnewDM2017v2 & 8 == 8):
+            if (HPSVetoCollection[0].idMVAnewDM2017v2 & 8 == 8):
                 self.leadingMediumMultiplicity.Fill(len(self.boostedTauVLoose.collection)+len(HPSVetoCollection))
             
-            elif (HPSVetoCollection[0].idMVAnewDM2017v2 & 16 == 16):
+            if (HPSVetoCollection[0].idMVAnewDM2017v2 & 16 == 16):
                 self.leadingTightMultiplicity.Fill(len(self.boostedTauVLoose.collection)+len(HPSVetoCollection))
 	
         return True        
