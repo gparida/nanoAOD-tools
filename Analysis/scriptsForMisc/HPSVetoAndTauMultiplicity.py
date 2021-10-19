@@ -116,7 +116,7 @@ def call_postpoc(files):
 		letsSortChannels = lambda: HPSVetoandMultiplicty(filename)
 		nameStrip=files.strip()
 		filename = (nameStrip.split('/')[-1]).split('.')[-2]
-		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=None,modules=[letsSortChannels()],noOut=True,outputbranchsel=outputbranches,histFileName="DR"+filename+".root",histDirName="Plots")
+		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=None,modules=[letsSortChannels()],noOut=True,outputbranchsel=outputbranches,histFileName="HPSVeto_"+filename+".root",histDirName="Plots")
 		p.run()
 
 
