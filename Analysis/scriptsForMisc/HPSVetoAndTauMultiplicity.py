@@ -108,6 +108,30 @@ class HPSVetoandMultiplicty(Module):
             
             if (HPSVetoCollection[0].idMVAnewDM2017v2 & 16 == 16):
                 self.leadingTightMultiplicity.Fill(len(self.boostedTauVLoose.collection)+len(HPSVetoCollection))
+
+        self.totalMultiplicity.GetXaxis().SetTitle("Total Taus")
+        self.looseTau.GetYaxis().SetTitle("Events")
+        self.looseTau.SetLineColor(1)
+        self.looseTau.SetLineWidth(3)
+
+        self.leadingLooseMultiplcity.GetXaxis().SetTitle("Total Taus")
+        self.looseTau.GetYaxis().SetTitle("Events")
+        self.looseTau.SetLineColor(2)
+        self.looseTau.SetLineWidth(3)
+
+        self.leadingMediumMultiplicity.GetXaxis().SetTitle("Total Taus")
+        self.looseTau.GetYaxis().SetTitle("Events")
+        self.looseTau.SetLineColor(3)
+        self.looseTau.SetLineWidth(3)
+
+        self.leadingTightMultiplicity.GetXaxis().SetTitle("Total Taus")
+        self.looseTau.GetYaxis().SetTitle("Events")
+        self.looseTau.SetLineColor(4)
+        self.looseTau.SetLineWidth(3)
+
+
+
+
 	
         return True        
 
