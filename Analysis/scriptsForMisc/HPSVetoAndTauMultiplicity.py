@@ -110,24 +110,24 @@ class HPSVetoandMultiplicty(Module):
                 self.leadingTightMultiplicity.Fill(len(self.boostedTauVLoose.collection)+len(HPSVetoCollection))
 
         self.totalMultiplicity.GetXaxis().SetTitle("Total Taus")
-        self.looseTau.GetYaxis().SetTitle("Events")
-        self.looseTau.SetLineColor(1)
-        self.looseTau.SetLineWidth(3)
+        self.totalMultiplicity.GetYaxis().SetTitle("Events")
+        self.totalMultiplicity.SetLineColor(1)
+        self.totalMultiplicity.SetLineWidth(3)
 
         self.leadingLooseMultiplcity.GetXaxis().SetTitle("Total Taus")
-        self.looseTau.GetYaxis().SetTitle("Events")
-        self.looseTau.SetLineColor(2)
-        self.looseTau.SetLineWidth(3)
+        self.leadingLooseMultiplcity.GetYaxis().SetTitle("Events")
+        self.leadingLooseMultiplcity.SetLineColor(2)
+        self.leadingLooseMultiplcity.SetLineWidth(3)
 
         self.leadingMediumMultiplicity.GetXaxis().SetTitle("Total Taus")
-        self.looseTau.GetYaxis().SetTitle("Events")
-        self.looseTau.SetLineColor(3)
-        self.looseTau.SetLineWidth(3)
+        self.leadingMediumMultiplicity.GetYaxis().SetTitle("Events")
+        self.leadingMediumMultiplicity.SetLineColor(3)
+        self.leadingMediumMultiplicity.SetLineWidth(3)
 
         self.leadingTightMultiplicity.GetXaxis().SetTitle("Total Taus")
-        self.looseTau.GetYaxis().SetTitle("Events")
-        self.looseTau.SetLineColor(4)
-        self.looseTau.SetLineWidth(3)
+        self.leadingTightMultiplicity.GetYaxis().SetTitle("Events")
+        self.leadingTightMultiplicity.SetLineColor(4)
+        self.leadingTightMultiplicity.SetLineWidth(3)
 
 
 
