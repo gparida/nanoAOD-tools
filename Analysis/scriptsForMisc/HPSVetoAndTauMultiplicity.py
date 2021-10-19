@@ -61,11 +61,11 @@ class HPSVetoandMultiplicty(Module):
         #self.boostedTauLoose.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAnewDM2017v2 & 4 == 4))
 
         self.boostedTauVLoose.setupCollection(event)
-        self.boostedTauVLoose.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAnewDM2017v2 & 2 == 2))
+        self.boostedTauVLoose.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAnewDM2017v2 & 8 == 8))
         
 
         self.HPSTauVloose.setupCollection(event)
-        self.HPSTauVloose.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAnewDM2017v2 & 2 == 2))
+        self.HPSTauVloose.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAnewDM2017v2 & 8 == 8))
 
         HPSVetoCollection = filter(self.HPStauVeto,self.HPSTauVloose.collection)
 
