@@ -22,7 +22,7 @@ class Muon(particle):
         if self.collection is None:
 	        return
 
-        self.collection = filter(self.passingMVAID,self.collection)
+        #self.collection = filter(self.passingMVAID,self.collection)
         self.collection = filter(l_func,self.collection)
 
     

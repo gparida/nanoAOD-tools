@@ -116,7 +116,7 @@ class Channel(Module):
 		self.Electron.apply_cut(lambda x: x.mvaFall17V2Iso_WPL and (x.pt > 10))
 
 		self.Muon.setupCollection(event)
-		self.Muon.apply_cut(lambda x: x.pt > 10)
+		self.Muon.apply_cut(lambda x: x.pt > 10 and x.mvaId >= 1)
 
 		############################################################################
 
