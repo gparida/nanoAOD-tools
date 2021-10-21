@@ -27,6 +27,7 @@ class Muon(particle):
 
     
     def passingMVAID(self,muonCollectionObject):
+        print ("Testing Muon MVA ID= ",type(muonCollectionObject.mvaId),muonCollectionObject.mvaId)
         theMuonIDBits = ''.join(format(ord(i), '016b')for i in muonCollectionObject.mvaId)
         theMuonID = int(theMuonIDBits, 2)    
         if theMuonID >= 1:
