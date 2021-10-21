@@ -207,7 +207,7 @@ if __name__ == "__main__":
 	#fnames = ["/data/aloeliger/bbtautauAnalysis/2016/Data.root"]
 	fnames = glob.glob(args.inputLocation + "/*.root")  #making a list of input files
 	outputDir = "/data/gparida/Background_Samples/bbtautauAnalysis/2016/{}_Channel".format(args.Channel)
-	outputDir = "."
+	#outputDir = "."
 	outputbranches = "keep_and_drop.txt"
 	cuts = "&&".join(eventSelectionAND)
 	post ="_{}Channel".format(str(args.Channel))
