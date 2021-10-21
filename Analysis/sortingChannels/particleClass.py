@@ -44,6 +44,7 @@ class particle(object):
 			print ("Please check ",variable," for ",self.particleType)
 			print("Error:(")
 			traceback.print_exc()
+			return []
 
 	
 #############################OLDER ATTEMPTS for REFERENCE###################################################################################################
