@@ -3,7 +3,7 @@ from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collect
 from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
 import ROOT
 ROOT.PyConfig.IgnoreCommandLineOptions = True  #Find out what does this do ?
-
+import traceback
 
 class particle(object):
 	def __init__(self, particleType):
@@ -31,14 +31,19 @@ class particle(object):
 	def fillBranches(self,wrappedOutputTree):
 		wrappedOutputTree.fillBranch("gn{}".format(self.particleType),len(self.collection))
 		wrappedOutputTree.fillBranch("g{}_pt".format(self.particleType),self.get_attributes("pt"))
-		wrappedOutputTree.fillBranch("g{}_eta".format(self.particleType),self.get_attributes("eta"))
 		wrappedOutputTree.fillBranch("g{}_mass".format(self.particleType),self.get_attributes("mass"))
-		wrappedOutputTree.fillBranch("g{}_eta".format(self.particleType),self.get_attributes("eta"))
-		
+		wrappedOutputTree.fillBranch("g{}_phi".format(self.particleType),self.get_attributes("phi"))
+		wrappedOutputTree.fillBranch("g{}_eta".format(self.particleType),self.get_attributes("eta"))	
 
 	def get_attributes(self,variable):
-		#print ("This is being returned as attributes: ", [obj[variable] for obj in self.collection])
-		return [obj[variable] for obj in self.collection]
+		try:
+			#print ("This is being returned as attributes: ", [obj[variable] for obj in self.collection])
+			return [obj[variable] for obj in self.collection]
+
+		except RuntimeError:
+			print ("Please check ",variable," for ",self.particleType)
+			print("Error:(")
+			traceback.print_exc()
 
 	
 #############################OLDER ATTEMPTS for REFERENCE###################################################################################################
