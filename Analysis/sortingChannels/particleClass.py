@@ -41,7 +41,7 @@ class particle(object):
 			return [obj[variable] for obj in self.collection]
 
 		except RuntimeError:
-			print ("Please check ",variable," for ",self.particleType)
+			#print ("Please check ",variable," for ",self.particleType)
 			#print("Error:(")
 			#traceback.print_exc()
 			return []

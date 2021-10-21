@@ -96,12 +96,16 @@ class Channel(Module):
 		#Add all the Object Based Selection########################################
 		
 		self.Tau.setupCollection(event)
+		print ("HPS collection before cut = ",len(self.Tau.collection))
 		self.Tau.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAnewDM2017v2 & 1 == 1))
+		print ("HPS collection after cut = ",len(self.Tau.collection))
 
 		self.boostedTau.setupCollection(event)
 		self.boostedTau.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAnewDM2017v2 & 1 == 1))
 
+
 		self.Tau.collection =  filter(self.HPStauVeto,self.Tau.collection)
+		print ("HPS collection after veto = ",len(self.Tau.collection))
 
 		self.FatJet.setupCollection(event)
 		try:
