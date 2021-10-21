@@ -152,7 +152,7 @@ class Channel(Module):
 			else:
 				return False
 		
-		if self.channel == "mut":
+		if self.channel == "mt":
 			if(((len(self.Tau.collection) + len(self.boostedTau.collection))==1) 
 				and len(self.FatJet.collection)==1 
 				and len(self.Electron.collection)==0 
@@ -184,7 +184,7 @@ def call_postpoc(files):
 
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(description='Script to Handle root file preparation to split into channels. Input should be a singular files for each dataset or data already with some basic selections applied')
-	parser.add_argument('--Channel',help="enter either tt or et or mut. For boostedTau test enter test",required=True)
+	parser.add_argument('--Channel',help="enter either tt or et or mt. For boostedTau test enter test",required=True)
 	parser.add_argument('--inputLocation',help="enter the path to the location of input file set",default="")
 	parser.add_argument('--ncores',help ="number of cores for parallel processing", default=1)
 	args = parser.parse_args()
@@ -204,9 +204,9 @@ if __name__ == "__main__":
 
 	#Define Eevnt Selection - all those to be connected by or
 
-	fnames = ["/data/aloeliger/bbtautauAnalysis/2016/Data.root"]
-	#fnames = glob.glob(args.inputLocation + "/*.root")  #making a list of input files
-	#outputDir = "/data/gparida/Background_Samples/bbtautauAnalysis/2016/{}_Channel".format(args.Channel)
+	#fnames = ["/data/aloeliger/bbtautauAnalysis/2016/Data.root"]
+	fnames = glob.glob(args.inputLocation + "/*.root")  #making a list of input files
+	outputDir = "/data/gparida/Background_Samples/bbtautauAnalysis/2016/{}_Channel".format(args.Channel)
 	outputDir = "."
 	outputbranches = "keep_and_drop.txt"
 	cuts = "&&".join(eventSelectionAND)
