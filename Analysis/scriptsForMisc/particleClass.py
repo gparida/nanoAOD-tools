@@ -3,6 +3,7 @@ from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collect
 from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
 import ROOT
 ROOT.PyConfig.IgnoreCommandLineOptions = True  #Find out what does this do ?
+import traceback
 
 
 class particle(object):
@@ -20,11 +21,11 @@ class particle(object):
 	
 	#Create the new branches to be added for the selected objects. Specific bracnches for objects such as FatJets (softdropmass) can be added by writing a separate class that inherits base particle class
 	def setUpBranches(self, wrappedOutputTree):
-		wrappedOutputTree.branch("ng{}".format(self.particleType),"I")
-		wrappedOutputTree.branch("g{}_pt".format(self.particleType),"F",lenVar="ng{}".format(self.particleType))
-		wrappedOutputTree.branch("g{}_mass".format(self.particleType),"F",lenVar="ng{}".format(self.particleType))
-		wrappedOutputTree.branch("g{}_phi".format(self.particleType),"F",lenVar="ng{}".format(self.particleType))
-		wrappedOutputTree.branch("g{}_eta".format(self.particleType),"F",lenVar="ng{}".format(self.particleType))
+		wrappedOutputTree.branch("gn{}".format(self.particleType),"I")
+		wrappedOutputTree.branch("g{}_pt".format(self.particleType),"F",lenVar="gn{}".format(self.particleType))
+		wrappedOutputTree.branch("g{}_mass".format(self.particleType),"F",lenVar="gn{}".format(self.particleType))
+		wrappedOutputTree.branch("g{}_phi".format(self.particleType),"F",lenVar="gn{}".format(self.particleType))
+		wrappedOutputTree.branch("g{}_eta".format(self.particleType),"F",lenVar="gn{}".format(self.particleType))
 		#wrappedOutputTree.branch("g{}_idMVAoldDM2017v2".format(self.particleType),"I",lenVar="ng{}".format(self.particleType))
 		#wrappedOutputTree.branch("g{}_idAntiEleDeadECal".format(self.particleType),"B",lenVar="ng{}".format(self.particleType))
 
@@ -39,18 +40,28 @@ class particle(object):
 	
 
 	def fillBranches(self,wrappedOutputTree):
-		wrappedOutputTree.fillBranch("ng{}".format(self.particleType),len(self.collection))
+		wrappedOutputTree.fillBranch("gn{}".format(self.particleType),len(self.collection))
 		wrappedOutputTree.fillBranch("g{}_pt".format(self.particleType),self.get_attributes("pt"))
 		wrappedOutputTree.fillBranch("g{}_eta".format(self.particleType),self.get_attributes("eta"))
 		wrappedOutputTree.fillBranch("g{}_mass".format(self.particleType),self.get_attributes("mass"))
 		wrappedOutputTree.fillBranch("g{}_eta".format(self.particleType),self.get_attributes("eta"))
-		#wrappedOutputTree.fillBranch("g{}_idMVAoldDM2017v2".format(self.particleType),self.get_attributes("idMVAoldDM2017v2"))
-		#wrappedOutputTree.fillBranch("g{}_idAntiEleDeadECal".format(self.particleType),self.get_attributes("idAntiEleDeadECal"))
+
+
 		
 
 	def get_attributes(self,variable):
-		#print ("This is being returned as attributes: ", [obj[variable] for obj in self.collection])
-		return [obj[variable] for obj in self.collection]
+		try:
+			#print ("This is being returned as attributes: ", [obj[variable] for obj in self.collection])
+			return [obj[variable] for obj in self.collection]
+
+		except RuntimeError:
+			print ("Please check ",variable," for ",self.particleType)
+			print("Error:(")
+			traceback.print_exc()
+			
+
+		
+		
 
 	
 #############################OLDER ATTEMPTS for REFERENCE###################################################################################################

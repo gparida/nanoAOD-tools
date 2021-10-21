@@ -5,6 +5,10 @@ import ROOT
 import glob
 from particleClass import particle
 from FatJetClass import FatJet
+from TauClass import Tau
+from BoostedTauClass import BoostedTau
+from ElectronClass import Electron
+from MuonClass import Muon
 import argparse
 import traceback
 import multiprocessing as  np
@@ -17,11 +21,11 @@ class Channel(Module):
 		self.channel = channel # Specify the channel
 		self.filename = filename #filename passed cause we needed to count the events with zero divide errors
 		#All these objects are common to all channels	
-		self.boostedTau = particle("boostedTau")
-		self.Tau = particle("Tau")
+		self.boostedTau = BoostedTau("boostedTau")
+		self.Tau = Tau("Tau")
 		self.FatJet = FatJet("FatJet")
-		self.Electron = particle("Electron")
-		self.Muon = particle("Muon")
+		self.Electron = Electron("Electron")
+		self.Muon = Muon("Muon")
 
 		#this is for testing
 		if self.channel == "test":
@@ -60,7 +64,25 @@ class Channel(Module):
 			file.write("The Bad events for this file "+str(self.filename)+" is "+str(self.countBadevents))
 			file.close()	
 		#pass
-    	
+	
+	def HPStauVeto(self,tauCollectionObject):
+		isTau =""
+		tau1 = ROOT.TLorentzVector(0.0,0.0,0.0,0.0)
+		tau2=ROOT.TLorentzVector(0.0,0.0,0.0,0.0)
+		tau1.SetPtEtaPhiM(tauCollectionObject.pt,tauCollectionObject.eta,tauCollectionObject.phi,tauCollectionObject.mass)
+		for boostedtau in self.boostedTau.collection:
+			tau2.SetPtEtaPhiM(boostedtau.pt,boostedtau.eta,boostedtau.phi,boostedtau.mass)
+			deltaR = tau1.DeltaR(tau2)
+			if deltaR <= 0.02:
+				isTau = "bad"
+				break
+		
+		if isTau != "bad":
+			return True
+		else:
+			return False
+		
+
 	#event loop
 	def analyze(self, event): 
 
@@ -74,10 +96,12 @@ class Channel(Module):
 		#Add all the Object Based Selection########################################
 		
 		self.Tau.setupCollection(event)
-		self.Tau.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAoldDM2017v2 & 4 == 4))
+		self.Tau.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAnewDM2017v2 & 1 == 1))
 
 		self.boostedTau.setupCollection(event)
-		self.boostedTau.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAoldDM2017v2 & 4 == 4))
+		self.boostedTau.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAnewDM2017v2 & 1 == 1))
+
+		self.Tau.collection =  filter(self.HPStauVeto,self.Tau.collection)
 
 		self.FatJet.setupCollection(event)
 		try:
@@ -92,14 +116,14 @@ class Channel(Module):
 		self.Electron.apply_cut(lambda x: x.mvaFall17V2Iso_WPL and (x.pt > 10))
 
 		self.Muon.setupCollection(event)
-		self.Muon.apply_cut(lambda x: x.isGlobal and (x.pt > 10))
+		self.Muon.apply_cut(lambda x: x.pt > 10)
 
 		############################################################################
 
 		#Now Add all the channel based selection####################################
 		# condition for hadronic channel
 		if self.channel == "tt":
-			if((len(self.Tau.collection)==2 or len(self.boostedTau.collection)==2) 
+			if(((len(self.Tau.collection) + len(self.boostedTau.collection))==2) 
 				and len(self.FatJet.collection)==1 
 				and len(self.Electron.collection)==0 
 				and len(self.Muon.collection)==0): 
@@ -112,7 +136,7 @@ class Channel(Module):
 				return False # Reject event
 		
 		if self.channel == "et":
-			if((len(self.Tau.collection)==1 or len(self.boostedTau.collection)==1) 
+			if(((len(self.Tau.collection) + len(self.boostedTau.collection))==1) 
 				and len(self.FatJet.collection)==1 
 				and len(self.Electron.collection)==1 
 				and len(self.Muon.collection)==0):
@@ -125,7 +149,7 @@ class Channel(Module):
 				return False
 		
 		if self.channel == "mut":
-			if((len(self.Tau.collection)==1 or len(self.boostedTau.collection)==1) 
+			if(((len(self.Tau.collection) + len(self.boostedTau.collection))==1) 
 				and len(self.FatJet.collection)==1 
 				and len(self.Electron.collection)==0 
 				and len(self.Muon.collection)==1):

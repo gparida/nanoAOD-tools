@@ -1,6 +1,3 @@
-from PhysicsTools.NanoAODTools.postprocessing.framework.postprocessor import PostProcessor
-from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collection 
-from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
 from branchesList import *
 from particleClass import particle
 
@@ -13,17 +10,16 @@ class FatJet(particle):
     
     def setUpBranches(self, wrappedOutputTree):
         super(FatJet,self).setUpBranches(wrappedOutputTree)
-        for branch in FatJetBranches:
-            wrappedOutputTree.branch("g{}_{}".format(self.particleType,branch),"F",lenVar="ng{}".format(self.particleType))
+        for branch in FatJetBranches.values():
+            wrappedOutputTree.branch("g{}_{}".format(self.particleType,branch[0]),"{}".format(branch[1]),lenVar="gn{}".format(self.particleType))
+ 
 
-
-
-
-        wrappedOutputTree.branch("g{}_msoftdrop".format(self.particleType),"F",lenVar="ng{}".format(self.particleType))
     
     def fillBranches(self,wrappedOutputTree):
         super(FatJet,self).fillBranches(wrappedOutputTree)
-        wrappedOutputTree.fillBranch("g{}_msoftdrop".format(self.particleType),self.get_attributes("msoftdrop"))
+        for branch in FatJetBranches.values():
+            wrappedOutputTree.fillBranch("g{}_{}".format(self.particleType,branch[0]),self.get_attributes(branch[0]))
+
 
     
 
