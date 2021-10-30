@@ -22,10 +22,10 @@ class VisibleMass(Module):
         pass
 
     def analyze(self,event):
-       gTau = Collection(event, "gTau")
-       gboostedTau = Collection(event,"gboostedTau")
-       gElectron = Collection(event,"gElectron")
-       gMuon = Collection(event,"gMuon")
+       gTau = Collection(event, "gTau","gnTau")
+       gboostedTau = Collection(event,"gboostedTau","gnboostedTau")
+       gElectron = Collection(event,"gElectron","gnElectron")
+       gMuon = Collection(event,"gMuon","gnMuon")
 
        lepton1 = ROOT.TLorentzVector(0.0,0.0,0.0,0.0)
        lepton2 = ROOT.TLorentzVector(0.0,0.0,0.0,0.0)
