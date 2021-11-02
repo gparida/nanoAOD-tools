@@ -96,8 +96,11 @@ class PostProcessor:
             return fname, False
 
     def run(self):
+        #outpostfix = self.postfix if self.postfix is not None else (
+           # "_Friend" if self.friend else "_Skim")
+        
         outpostfix = self.postfix if self.postfix is not None else (
-            "_Friend" if self.friend else "_Skim")
+            "_Friend" if self.friend else "")
         if not self.noOut:
 
             if self.compression != "none":

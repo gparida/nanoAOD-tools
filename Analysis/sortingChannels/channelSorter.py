@@ -81,6 +81,7 @@ class Channel(Module):
 			return True
 		else:
 			return False
+	
 		
 
 	#event loop
@@ -106,8 +107,8 @@ class Channel(Module):
 
 		self.Tau.collection =  filter(self.HPStauVeto,self.Tau.collection)
 		#print ("HPS collection after veto = ",len(self.Tau.collection))
-
 		self.FatJet.setupCollection(event)
+
 		try:
 			self.FatJet.apply_cut(lambda x: (x.pt > 200) and (abs(x.eta) < 2.4) and (x.msoftdrop > 30) and (x.msoftdrop < 250) and ((x.tau2/x.tau1) < 0.75))
 		except ZeroDivisionError:
@@ -118,9 +119,10 @@ class Channel(Module):
 
 		self.Electron.setupCollection(event)
 		self.Electron.apply_cut(lambda x: x.mvaFall17V2Iso_WPL and (x.pt > 10))
+		self.Electron.collection = filter(self.Electron.relativeIso,self.Electron.collection)
 
 		self.Muon.setupCollection(event)
-		self.Muon.apply_cut(lambda x: x.pt > 10 and x.mvaId >= 1)
+		self.Muon.apply_cut(lambda x: x.pt > 10 and x.mvaId >= 1 and x.pfRelIso03_all < 0.25)
 
 		############################################################################
 
@@ -184,8 +186,9 @@ def call_postpoc(files):
 
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(description='Script to Handle root file preparation to split into channels. Input should be a singular files for each dataset or data already with some basic selections applied')
-	parser.add_argument('--Channel',help="enter either tt or et or mt. For boostedTau test enter test",required=True)
+	parser.add_argument('--Channel',help="enter either tt or et or mt. For boostedTau test enter test",required=True,choices=['tt', 'et', 'mt'])
 	parser.add_argument('--inputLocation',help="enter the path to the location of input file set",default="")
+	parser.add_argument('--outputLocation',help="enter the path where yu want the output files to be stored",default ="")
 	parser.add_argument('--ncores',help ="number of cores for parallel processing", default=1)
 	args = parser.parse_args()
 
@@ -206,11 +209,13 @@ if __name__ == "__main__":
 
 	#fnames = ["/data/aloeliger/bbtautauAnalysis/2016/Data.root"]
 	fnames = glob.glob(args.inputLocation + "/*.root")  #making a list of input files
-	outputDir = "/data/gparida/Background_Samples/bbtautauAnalysis/2016/{}_Channel".format(args.Channel)
+	#outputDir = "/data/gparida/Background_Samples/bbtautauAnalysis/2016/{}_Channel".format(args.Channel)
+	outputDir = args.outputLocation
 	#outputDir = "."
 	outputbranches = "keep_and_drop.txt"
 	cuts = "&&".join(eventSelectionAND)
-	post ="_{}Channel".format(str(args.Channel))
+	#post ="_{}Channel".format(str(args.Channel))
+	post = None
 	argList = list()
 	filename =""
 	for file in fnames:
