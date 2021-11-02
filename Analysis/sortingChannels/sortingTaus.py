@@ -58,6 +58,7 @@ class mergeTau(Module):
                 else:
                     allTauCollection = boostedtauCollection
                     allTauCollection.extend(tauCollection)
+            print ("Type of the new collection", type(allTauCollection))
             self.fillBranches(self.out)
             return True    
         
