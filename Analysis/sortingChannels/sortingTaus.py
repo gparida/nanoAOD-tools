@@ -34,7 +34,7 @@ class mergeTau(Module):
         self.out.fillBranch("{}_phi".format("allTau"),self.get_attributes("phi"))
         self.out.fillBranch("{}_eta".format("allTau"),self.get_attributes("eta"))
         for branch in boostedTauBranches.values():
-            self.out.fillBranch("g{}_{}".format("allTau",branch[0]),self.get_attributes(branch[0]))
+            self.out.fillBranch("{}_{}".format("allTau",branch[0]),self.get_attributes(branch[0]))
 
     def get_attributes(self,variable):
         return [obj[variable] for obj in self.allTauCollection]
@@ -43,6 +43,7 @@ class mergeTau(Module):
     def analyze(self,event):
         tauCollection = Collection(event, "gTau","gnTau")
         boostedtauCollection = Collection(event, "gboostedTau","gnboostedTau")
+        print ("Type of the collection", type(tauCollection))
 
         if self.channel == "tt":
             if (len(tauCollection)==2):
@@ -60,7 +61,7 @@ class mergeTau(Module):
             self.fillBranches(self.out)
             return True    
         
-        if self.channel == "mt"  or self.channel == "et":
+        if (self.channel == "mt"  or self.channel == "et"):
             if (len(tauCollection)==1):
                 self.allTauCollection = tauCollection
             if (len(boostedtauCollection)==1):
@@ -77,21 +78,24 @@ def call_postpoc(files):
 		p.run()
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Script to Handle root file preparation to split into channels. Input should be a singular files for each dataset or data already with some basic selections applied')
+    parser = argparse.ArgumentParser(description='Script to create a total reconstructed Tau collection')
     parser.add_argument('--Channel',help="enter either tt or et or mt. For boostedTau test enter test",required=True)
     parser.add_argument('--inputLocation',help="enter the path to the location of input file set",default="")
+    parser.add_argument('--outputLocation',help="enter the path where yu want the output files to be stored",default ="")
     parser.add_argument('--ncores',help ="number of cores for parallel processing", default=1)
+    parser.add_argument('--postfix',help="string at the end of output file names", default="")
     args = parser.parse_args()
 
     #Define Eevnt Selection - all those to be connected by or
 
 	#fnames = ["/data/aloeliger/bbtautauAnalysis/2016/Data.root"]
-    fnames = glob.glob(args.inputLocation + "/*.root")  #making a list of input files
-    outputDir = "/data/gparida/Background_Samples/bbtautauAnalysis/2016/{}_Channel/Test".format(args.Channel)
+    fnames = glob.glob(args.inputLocation + "/DY.root")  #making a list of input files
+    #outputDir = "/data/gparida/Background_Samples/bbtautauAnalysis/2016/{}_Channel/Test".format(args.Channel)
+    outputDir = args.outputLocation
 	#outputDir = "."
     outputbranches = "keep_and_drop.txt"
 	#cuts = "&&".join(eventSelectionAND)
-    post ="_MVis"
+    post = args.postfix
     argList = list()
     filename =""
     for file in fnames:
