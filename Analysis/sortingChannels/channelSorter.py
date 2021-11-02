@@ -190,7 +190,7 @@ if __name__ == "__main__":
 	parser.add_argument('--inputLocation',help="enter the path to the location of input file set",default="")
 	parser.add_argument('--outputLocation',help="enter the path where yu want the output files to be stored",default ="")
 	parser.add_argument('--ncores',help ="number of cores for parallel processing", default=1)
-	parser.add_argument('--postfix',help="string at the end of output file names", default=None)
+	parser.add_argument('--postfix',help="string at the end of output file names", default="")
 	args = parser.parse_args()
 
 	#Define Event Selection - all those to be connected by and
