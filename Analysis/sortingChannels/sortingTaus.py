@@ -89,8 +89,8 @@ if __name__ == "__main__":
 
     #Define Eevnt Selection - all those to be connected by or
 
-	#fnames = ["/data/aloeliger/bbtautauAnalysis/2016/Data.root"]
-    fnames = glob.glob(args.inputLocation + "/DY.root")  #making a list of input files
+    fnames = [args.inputLocation+"/W.root"]
+    #fnames = glob.glob(args.inputLocation + "/DY.root")  #making a list of input files
     #outputDir = "/data/gparida/Background_Samples/bbtautauAnalysis/2016/{}_Channel/Test".format(args.Channel)
     outputDir = args.outputLocation
 	#outputDir = "."
