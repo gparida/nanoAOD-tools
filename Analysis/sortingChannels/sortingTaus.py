@@ -45,8 +45,8 @@ class mergeTau(Module):
         for coll in collList:
             for obj in coll:
                 list.append(obj[variable])
-        if variable == "pt":
-            print (list)
+        #if variable == "pt":
+            #print (list)
         return list
 
         #return [obj[variable] for obj in self.allTauCollection]
@@ -56,7 +56,7 @@ class mergeTau(Module):
         tauCollection = Collection(event, "gTau","gnTau")
         boostedtauCollection = Collection(event, "gboostedTau","gnboostedTau")
         colllist =[]
-        print ("Type of the collection", type(tauCollection))
+        #print ("Type of the collection", type(tauCollection))
 
         if self.channel == "tt":
             if (len(tauCollection)==2):
