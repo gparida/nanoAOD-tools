@@ -1,6 +1,8 @@
 from PhysicsTools.NanoAODTools.postprocessing.framework.postprocessor import PostProcessor
 from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collection 
 from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
+from visibleMass import VisibleMass
+from sortingTaus import mergeTau
 import ROOT
 import glob
 from particleClass import particle
@@ -178,9 +180,11 @@ class Channel(Module):
 
 def call_postpoc(files):
 		letsSortChannels = lambda: Channel(args.Channel,filename)
+		tauOdering = lambda: mergeTau(args.Channel)
+		visibleM = lambda:VisibleMass(args.Channel)
 		nameStrip=files.strip()
 		filename = (nameStrip.split('/')[-1]).split('.')[-2]
-		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=None,modules=[letsSortChannels()], postfix=post,noOut=False,outputbranchsel=outputbranches)
+		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=None,modules=[letsSortChannels(),tauOdering(),visibleM()], postfix=post,noOut=False,outputbranchsel=outputbranches)
 		p.run()
 
 
