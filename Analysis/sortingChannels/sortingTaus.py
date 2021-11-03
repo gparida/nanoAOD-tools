@@ -1,7 +1,7 @@
 from PhysicsTools.NanoAODTools.postprocessing.framework.postprocessor import PostProcessor
 from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collection 
 from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
-from Analysis.addingNewObservableBranches.visibleMass import VisibleMass
+from visibleMass import VisibleMass
 import ROOT
 import glob
 #from particleClass import particle
