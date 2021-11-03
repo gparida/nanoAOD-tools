@@ -78,7 +78,7 @@ class mergeTau(Module):
                     #allTauCollection = boostedtauCollection
                     #allTauCollection.extend(tauCollection)
             #print ("Type of the new collection", type(allTauCollection))
-            self.fillBranches(self.out,colllist)
+            self.fillBranches(colllist)
             return True    
         
         if (self.channel == "mt"  or self.channel == "et"):
