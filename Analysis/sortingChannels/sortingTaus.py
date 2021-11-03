@@ -83,9 +83,9 @@ class mergeTau(Module):
         
         if (self.channel == "mt"  or self.channel == "et"):
             if (len(tauCollection)==1):
-                colllist= tauCollection
+                colllist.append(tauCollection)
             if (len(boostedtauCollection)==1):
-                colllist = boostedtauCollection
+                colllist.append(boostedtauCollection)
             self.fillBranches(colllist)
             return True
         
