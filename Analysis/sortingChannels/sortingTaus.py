@@ -86,7 +86,7 @@ class mergeTau(Module):
                 colllist= tauCollection
             if (len(boostedtauCollection)==1):
                 colllist = boostedtauCollection
-            self.fillBranches(self.out)
+            self.fillBranches(colllist)
             return True
         
 
