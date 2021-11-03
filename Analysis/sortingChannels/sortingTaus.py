@@ -96,7 +96,7 @@ def call_postpoc(files):
         addBranches = lambda: mergeTau(args.Channel)
         nameStrip=files.strip()
         filename = (nameStrip.split('/')[-1]).split('.')[-2]
-        p = PostProcessor(outputDir,[files], cut=None,branchsel=None,modules=[addBranches(),visibleM], postfix=post,noOut=False,outputbranchsel=outputbranches)
+        p = PostProcessor(outputDir,[files], cut=None,branchsel=None,modules=[addBranches(),visibleM()], postfix=post,noOut=False,outputbranchsel=outputbranches)
         p.run()
 
 if __name__ == "__main__":
