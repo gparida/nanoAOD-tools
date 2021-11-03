@@ -16,8 +16,8 @@ class VisibleMass(Module):
 
     def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
         self.out = wrappedOutputTree
-        self.out.branch("MVis", "F")
-        self.out.branch("DeltaR","F")
+        self.out.branch("MVis_LL", "F")
+        self.out.branch("DeltaR_LL","F")
 
 
     def endFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
@@ -42,8 +42,8 @@ class VisibleMass(Module):
             if (len(gTau)==1 and len(gboostedTau)==1):
                 lepton1.SetPtEtaPhiM(gTau[0].pt,gTau[0].eta,gTau[0].phi,gTau[0].mass)
                 lepton2.SetPtEtaPhiM(gboostedTau[0].pt,gboostedTau[0].eta,gboostedTau[0].phi,gboostedTau[0].mass)
-            self.out.fillBranch("MVis",abs((lepton1 + lepton2).M()))
-            self.out.fillBranch("DeltaR",lepton1.DeltaR(lepton2))
+            self.out.fillBranch("MVis_LL",abs((lepton1 + lepton2).M()))
+            self.out.fillBranch("DeltaR_LL",lepton1.DeltaR(lepton2))
     
        if self.channel == "et":
             if (len(gTau)!=0):
@@ -53,8 +53,8 @@ class VisibleMass(Module):
             if (len(gboostedTau)!=0):
                  lepton1.SetPtEtaPhiM(gboostedTau[0].pt,gboostedTau[0].eta,gboostedTau[0].phi,gboostedTau[0].mass)
                  lepton2.SetPtEtaPhiM(gElectron[0].pt,gElectron[0].eta,gElectron[0].phi,gElectron[0].mass)
-            self.out.fillBranch("MVis",abs((lepton1 + lepton2).M()))
-            self.out.fillBranch("DeltaR",lepton1.DeltaR(lepton2))
+            self.out.fillBranch("MVis_LL",abs((lepton1 + lepton2).M()))
+            self.out.fillBranch("DeltaR_LL",lepton1.DeltaR(lepton2))
 
        if self.channel == "mt":
             if (len(gTau)!=0):
@@ -63,8 +63,8 @@ class VisibleMass(Module):
             if (len(gboostedTau)!=0):
                 lepton1.SetPtEtaPhiM(gboostedTau[0].pt,gboostedTau[0].eta,gboostedTau[0].phi,gboostedTau[0].mass)
                 lepton2.SetPtEtaPhiM(gMuon[0].pt,gMuon[0].eta,gMuon[0].phi,gMuon[0].mass)
-            self.out.fillBranch("MVis",abs((lepton1 + lepton2).M()))
-            self.out.fillBranch("DeltaR",lepton1.DeltaR(lepton2)) 
+            self.out.fillBranch("MVis_LL",abs((lepton1 + lepton2).M()))
+            self.out.fillBranch("DeltaR_LL",lepton1.DeltaR(lepton2)) 
        
        return True     
 
@@ -77,40 +77,42 @@ def call_postpoc(files):
           
               
 if __name__ == "__main__":
-	parser = argparse.ArgumentParser(description='Script to Handle root file preparation to split into channels. Input should be a singular files for each dataset or data already with some basic selections applied')
-	parser.add_argument('--Channel',help="enter either tt or et or mt. For boostedTau test enter test",required=True)
-	parser.add_argument('--inputLocation',help="enter the path to the location of input file set",default="")
-	parser.add_argument('--ncores',help ="number of cores for parallel processing", default=1)
-	args = parser.parse_args()
+    parser = argparse.ArgumentParser(description='Script to create a total vsible mass and DeltaR branches in files')
+    parser.add_argument('--Channel',help="enter either tt or et or mt. For boostedTau test enter test",required=True,choices=['tt', 'et', 'mt'])
+    parser.add_argument('--inputLocation',help="enter the path to the location of input file set",default="")
+    parser.add_argument('--outputLocation',help="enter the path where yu want the output files to be stored",default ="")
+    parser.add_argument('--ncores',help ="number of cores for parallel processing", default=1)
+    parser.add_argument('--postfix',help="string at the end of output file names", default="")
+    args = parser.parse_args()
 
 
 	#Define Eevnt Selection - all those to be connected by or
 
 	#fnames = ["/data/aloeliger/bbtautauAnalysis/2016/Data.root"]
-	fnames = glob.glob(args.inputLocation + "/*.root")  #making a list of input files
-	outputDir = "/data/gparida/Background_Samples/bbtautauAnalysis/2016/{}_Channel/VisibleMassAdded".format(args.Channel)
+    fnames = glob.glob(args.inputLocation + "/*.root")  #making a list of input files
+    outputDir = "/data/gparida/Background_Samples/bbtautauAnalysis/2016/{}_Channel/VisibleMassAdded".format(args.Channel)
 	#outputDir = "."
-	outputbranches = "keep_and_drop.txt"
+    outputbranches = "keep_and_drop.txt"
 	#cuts = "&&".join(eventSelectionAND)
-	post ="_MVis"
-	argList = list()
-	filename =""
-	for file in fnames:
-		argList.append(file)
+    post ="_MVis"
+    argList = list()
+    filename =""
+    for file in fnames:
+	    argList.append(file)
 		#nameStrip = file.strip()
     	#filename = (nameStrip.split('/')[-1]).split('.')[-2]
 	
 	#print (argList)
 
-	if int(args.ncores) == 1:
-		for arr in argList:
+    if int(args.ncores) == 1:
+	    for arr in argList:
 			#print ("This is what is passed ",arr[1])
-			call_postpoc(arr)
+		    call_postpoc(arr)
 	
-	else:
-		pool = np.Pool(int(args.ncores))
+    else:
+	    pool = np.Pool(int(args.ncores))
 		#with np.Pool(object,ncores) as pool:
-		res=pool.map(call_postpoc, argList)           
+	    res=pool.map(call_postpoc, argList)           
           
                
           

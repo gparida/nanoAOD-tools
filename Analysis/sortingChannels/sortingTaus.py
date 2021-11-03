@@ -1,6 +1,7 @@
 from PhysicsTools.NanoAODTools.postprocessing.framework.postprocessor import PostProcessor
 from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collection 
 from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
+from PhysicsTools.NanoAODTools.Analysis.addingNewObservableBranches.visibleMass import VisibleMass
 import ROOT
 import glob
 #from particleClass import particle
@@ -91,11 +92,12 @@ class mergeTau(Module):
         
 
 def call_postpoc(files):
-		addBranches = lambda: mergeTau(args.Channel)
-		nameStrip=files.strip()
-		filename = (nameStrip.split('/')[-1]).split('.')[-2]
-		p = PostProcessor(outputDir,[files], cut=None,branchsel=None,modules=[addBranches()], postfix=post,noOut=False,outputbranchsel=outputbranches)
-		p.run()
+        visibleM = lambda:VisibleMass(args.Channel)
+        addBranches = lambda: mergeTau(args.Channel)
+        nameStrip=files.strip()
+        filename = (nameStrip.split('/')[-1]).split('.')[-2]
+        p = PostProcessor(outputDir,[files], cut=None,branchsel=None,modules=[addBranches(),visibleM], postfix=post,noOut=False,outputbranchsel=outputbranches)
+        p.run()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Script to create a total reconstructed Tau collection')
@@ -108,7 +110,7 @@ if __name__ == "__main__":
 
     #Define Eevnt Selection - all those to be connected by or
 
-    fnames = [args.inputLocation+"/W.root"]
+    fnames = [args.inputLocation+"/*.root"]
     #fnames = glob.glob(args.inputLocation + "/DY.root")  #making a list of input files
     #outputDir = "/data/gparida/Background_Samples/bbtautauAnalysis/2016/{}_Channel/Test".format(args.Channel)
     outputDir = args.outputLocation
