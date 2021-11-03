@@ -14,7 +14,6 @@ ROOT.PyConfig.IgnoreCommandLineOptions = True  #Find out what does this do ?
 class mergeTau(Module):
     def __init__(self, channel):
         self.channel = channel # Specify the channel
-        self.allTauCollection = []
     
     #lets define the branches that need to be filled
     def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
@@ -84,9 +83,9 @@ class mergeTau(Module):
         
         if (self.channel == "mt"  or self.channel == "et"):
             if (len(tauCollection)==1):
-                self.allTauCollection = tauCollection
+                colllist= tauCollection
             if (len(boostedtauCollection)==1):
-                self.allTauCollection = boostedtauCollection
+                colllist = boostedtauCollection
             self.fillBranches(self.out)
             return True
         
