@@ -27,39 +27,58 @@ class mergeTau(Module):
         for branch in boostedTauBranches.values():
             self.out.branch("{}_{}".format("allTau",branch[0]),"{}".format(branch[1]),lenVar="n{}".format("allTau"))
     
-    def fillBranches(self):
-        self.out.fillBranch("nallTau",len(self.allTauCollection))
-        self.out.fillBranch("{}_pt".format("allTau"),self.get_attributes("pt"))
-        self.out.fillBranch("{}_mass".format("allTau"),self.get_attributes("mass"))
-        self.out.fillBranch("{}_phi".format("allTau"),self.get_attributes("phi"))
-        self.out.fillBranch("{}_eta".format("allTau"),self.get_attributes("eta"))
+    def fillBranches(self,colllist):
+        if self.channel == "tt":
+            length = 2
+        else:
+            length =1
+        self.out.fillBranch("nallTau",length)
+        self.out.fillBranch("{}_pt".format("allTau"),self.get_attributes("pt",colllist))
+        self.out.fillBranch("{}_mass".format("allTau"),self.get_attributes("mass",colllist))
+        self.out.fillBranch("{}_phi".format("allTau"),self.get_attributes("phi",colllist))
+        self.out.fillBranch("{}_eta".format("allTau"),self.get_attributes("eta",colllist))
         for branch in boostedTauBranches.values():
-            self.out.fillBranch("{}_{}".format("allTau",branch[0]),self.get_attributes(branch[0]))
+            self.out.fillBranch("{}_{}".format("allTau",branch[0]),self.get_attributes(branch[0],colllist))
 
-    def get_attributes(self,variable):
-        return [obj[variable] for obj in self.allTauCollection]
+    def get_attributes(self,variable,collList):
+        list = []
+        for coll in collList:
+            for obj in coll:
+                list.append(obj[variable])
+        if variable == "pt":
+            print (list)
+        return list
+
+        #return [obj[variable] for obj in self.allTauCollection]
             
 
     def analyze(self,event):
         tauCollection = Collection(event, "gTau","gnTau")
         boostedtauCollection = Collection(event, "gboostedTau","gnboostedTau")
+        colllist =[]
         print ("Type of the collection", type(tauCollection))
 
         if self.channel == "tt":
             if (len(tauCollection)==2):
-                self.allTauCollection = tauCollection
+                #self.allTauCollection = tauCollection
+                colllist.append(tauCollection)
             if (len(boostedtauCollection)==2):
-                self.allTauCollection = boostedtauCollection
+                #self.allTauCollection = boostedtauCollection
+                colllist.append(boostedtauCollection)
             if (len(tauCollection)==1 or len(boostedtauCollection)==1):
-                if tauCollection[0].pt > boostedtauCollection[0].pt:
-                    self.allTauCollection = tauCollection
-                    self.allTauCollection.extend(boostedtauCollection)
+                if tauCollection[0].pt >= boostedtauCollection[0].pt:
+                    colllist.append(tauCollection)
+                    colllist.append(boostedtauCollection)
+                    #self.allTauCollection = tauCollection
+                    #self.allTauCollection.extend(boostedtauCollection)
 
                 else:
-                    allTauCollection = boostedtauCollection
-                    allTauCollection.extend(tauCollection)
-            print ("Type of the new collection", type(allTauCollection))
-            self.fillBranches(self.out)
+                    colllist.append(boostedtauCollection)
+                    colllist.append(tauCollection)
+                    #allTauCollection = boostedtauCollection
+                    #allTauCollection.extend(tauCollection)
+            #print ("Type of the new collection", type(allTauCollection))
+            self.fillBranches(self.out,colllist)
             return True    
         
         if (self.channel == "mt"  or self.channel == "et"):
