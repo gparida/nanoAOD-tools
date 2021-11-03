@@ -180,8 +180,8 @@ class Channel(Module):
 
 def call_postpoc(files):
 		letsSortChannels = lambda: Channel(args.Channel,filename)
-		tauOdering = lambda: mergeTau(args.Channel)
-		visibleM = lambda:VisibleMass(args.Channel)
+		#tauOdering = lambda: mergeTau(args.Channel)
+		#visibleM = lambda:VisibleMass(args.Channel)
 		nameStrip=files.strip()
 		filename = (nameStrip.split('/')[-1]).split('.')[-2]
 		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=None,modules=[letsSortChannels(),tauOdering(),visibleM()], postfix=post,noOut=False,outputbranchsel=outputbranches)
