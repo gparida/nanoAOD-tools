@@ -425,7 +425,7 @@ def main():
 
         #ST_s_channel_4f.SetFillColor(ROOT.TColor.GetColor("#ffcc66"))
         Signal_Histo.SetLineColor(ROOT.kBlue)
-        Signal_Histo.Scale(50)
+        Signal_Histo.Scale(30)
         Signal_Histo.SetLineWidth(2)
 
         DiBoson_Histo.SetFillColor(ROOT.TColor.GetColor(color_DiBoson))
