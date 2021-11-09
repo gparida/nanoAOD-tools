@@ -131,6 +131,9 @@ class Channel(Module):
 		#Now Add all the channel based selection####################################
 		# condition for hadronic channel
 		if self.channel == "tt":
+			#loose against both electron and Muon
+			self.boostedTau.apply_cut(lambda x: (x.idAntiEle2018 & 2 ==2) and (x.idAntiMu & 1 == 1))
+			self.Tau.apply_cut(lambda x: (x.idAntiEle2018 & 2 ==2) and (x.idAntiMu & 1 == 1))
 			if(((len(self.Tau.collection) + len(self.boostedTau.collection))==2) 
 				and len(self.FatJet.collection)==1 
 				and len(self.Electron.collection)==0 
@@ -144,6 +147,9 @@ class Channel(Module):
 				return False # Reject event
 		
 		if self.channel == "et":
+			#Electron is in the channel, so Tight discrimiantion against it and loose discrimination against Muon
+			self.boostedTau.apply_cut(lambda x: (x.idAntiEle2018 & 8 ==8) and (x.idAntiMu & 1 == 1))
+			self.Tau.apply_cut(lambda x: (x.idAntiEle2018 & 8 ==8) and (x.idAntiMu & 1 == 1))
 			if(((len(self.Tau.collection) + len(self.boostedTau.collection))==1) 
 				and len(self.FatJet.collection)==1 
 				and len(self.Electron.collection)==1 
@@ -157,6 +163,9 @@ class Channel(Module):
 				return False
 		
 		if self.channel == "mt":
+			#Muon is in the channel so Tight diiscrimination against Muon and Loose against electron
+			self.boostedTau.apply_cut(lambda x: (x.idAntiEle2018 & 2 ==2) and (x.idAntiMu & 2 == 2))
+			self.Tau.apply_cut(lambda x: (x.idAntiEle2018 & 2 ==2) and (x.idAntiMu & 2 == 2))
 			if(((len(self.Tau.collection) + len(self.boostedTau.collection))==1) 
 				and len(self.FatJet.collection)==1 
 				and len(self.Electron.collection)==0 
