@@ -210,6 +210,8 @@ def main():
                             "FatJet_phi",
                             #"FatJet_eta[1]",
                             "FatJet_msoftdrop",
+                            "DeltaR_LL",
+                            "MVis_LL",
                             "FatJet_msoftdrop[0]"]
                             #"FatJet_msoftdrop[1]",
                             #"FatJet_particleNet_HbbvsQCD",

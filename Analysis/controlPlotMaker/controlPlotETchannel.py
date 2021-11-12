@@ -193,6 +193,8 @@ def main():
                             "Electron_mvaFall17V2Iso_WP90",
                             "Electron_pt",
                             "Electron_pt[0]",
+                            "DeltaR_LL",
+                            "MVis_LL",
                             #"Electron_pt[1]",
                             #"Muon_mvaId",
                             #"Muon_pt",
