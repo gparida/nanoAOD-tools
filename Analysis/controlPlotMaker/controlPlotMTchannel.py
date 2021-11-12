@@ -206,6 +206,8 @@ def main():
                             "FatJet_eta",
                             "FatJet_eta[0]",
                             "FatJet_phi",
+                            "DeltaR_LL",
+                            "MVis_LL",
                             #"FatJet_eta[1]",
                             "nFatJet",
                             "FatJet_msoftdrop",
