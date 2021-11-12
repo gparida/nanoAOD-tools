@@ -246,7 +246,7 @@ variableSettingDictionary = {
     "ngTau":"5,0,5",
     "ngboostedTau":"5,0,5",
     "MVis_LL":"18,20,200",
-    "DeltaR_LL":"10,0,0.5",
+    "DeltaR_LL":"30,0,3",
     #'Electron_eta':'48,-2.4,2.4',
     #'Electron_pt':'20,20.0,400.0',
     #'pt_2':'25,30.0,80.0',
