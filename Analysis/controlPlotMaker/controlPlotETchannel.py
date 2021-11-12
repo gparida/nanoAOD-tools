@@ -696,10 +696,10 @@ def main():
 
     #############################Saving The Plots####################################
         #theCanvas.SaveAs('QuickControlPlots/'+variable+'_'+args.year+'.png')
-        theCanvas.SaveAs('ETPlots/'+variable+'_'+args.year+'.pdf')
+        theCanvas.SaveAs('ETPlots/'+variableAxisTitleDictionary[variable]+'_'+args.year+'.pdf')
         #theCanvas.SaveAs('QuickControlPlots/'+variable+'_'+args.year+'.root')
         #ShapeCanvas.SaveAs('QuickControlPlots/'+ "Normalized" +variable+'_'+args.year+'.png')
-        ShapeCanvas.SaveAs('ETPlots/'+ "Normalized" +variable+'_'+args.year+'.pdf')
+        ShapeCanvas.SaveAs('ETPlots/'+ "Normalized" +variableAxisTitleDictionary[variable]+'_'+args.year+'.pdf')
         #ShapeCanvas.SaveAs('QuickControlPlots/'+ "Normalized" +variable+'_'+args.year+'.root')
         #PassFailCanvas.SaveAs('QuickControlPlots/'+"Trigg_PF"+'_'+args.year+'.png')
         #PassFailCanvas.SaveAs('QuickControlPlots/'+"Trigg_PF"+'_'+args.year+'.pdf')
