@@ -121,6 +121,10 @@ variableAxisTitleDictionary = {
     "ngElectron":"nElectron",
     "MVis_LL":"MVis (LL)",
     "DeltaR_LL":"DeltaR_LL",
+    "gFatJet_particleNetMD_Xbb/(gFatJet_particleNetMD_Xbb + gFatJet_particleNetMD_QCD)":"gFatJet_particleNetMD_Xbb/(gFatJet_particleNetMD_Xbb + gFatJet_particleNetMD_QCD)",
+    "gFatJet_particleNetMD_Xbb":"gFatJet_particleNetMD_Xbb",
+    "gFatJet_particleNetMD_QCD":"gFatJet_particleNetMD_QCD",
+    "gFatJet_particleNet_HbbvsQCD":"gFatJet_particleNet_HbbvsQCD",
     }
 
 
@@ -247,6 +251,10 @@ variableSettingDictionary = {
     "ngboostedTau":"5,0,5",
     "MVis_LL":"18,20,200",
     "DeltaR_LL":"30,0,5",
+    "gFatJet_particleNetMD_Xbb/(gFatJet_particleNetMD_Xbb + gFatJet_particleNetMD_QCD)":"20,0,1",
+    "gFatJet_particleNetMD_Xbb":"20,0,1",
+    "gFatJet_particleNetMD_QCD":"20,0,1",
+    "gFatJet_particleNet_HbbvsQCD":"20,0,1",
     #'Electron_eta':'48,-2.4,2.4',
     #'Electron_pt':'20,20.0,400.0',
     #'pt_2':'25,30.0,80.0',
