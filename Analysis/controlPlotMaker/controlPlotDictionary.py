@@ -121,7 +121,7 @@ variableAxisTitleDictionary = {
     "ngElectron":"nElectron",
     "MVis_LL":"MVis (LL)",
     "DeltaR_LL":"DeltaR_LL",
-    "gFatJet_particleNetMD_Xbb/(gFatJet_particleNetMD_Xbb+gFatJet_particleNetMD_QCD)":"gFatJet_particleNetMD_Xbb/(gFatJet_particleNetMD_Xbb + gFatJet_particleNetMD_QCD)",
+    "gFatJet_particleNetMD_Xbb/(gFatJet_particleNetMD_Xbb+gFatJet_particleNetMD_QCD)":"HbbDiscriminant",
     "gFatJet_particleNetMD_Xbb":"gFatJet_particleNetMD_Xbb",
     "gFatJet_particleNetMD_QCD":"gFatJet_particleNetMD_QCD",
     "gFatJet_particleNet_HbbvsQCD":"gFatJet_particleNet_HbbvsQCD",
