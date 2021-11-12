@@ -427,7 +427,7 @@ def main():
 
         #ST_s_channel_4f.SetFillColor(ROOT.TColor.GetColor("#ffcc66"))
         Signal_Histo.SetLineColor(ROOT.kBlue)
-        Signal_Histo.Scale(30)
+        Signal_Histo.Scale(20)
         Signal_Histo.SetLineWidth(2)
 
         DiBoson_Histo.SetFillColor(ROOT.TColor.GetColor(color_DiBoson))
@@ -573,7 +573,7 @@ def main():
 
         theLegend = ROOT.TLegend(0.85, 0.45, 1.0, 0.75, "", "brNDC")
         theLegend.SetTextSize(0.03)
-        theLegend.SetHeader("#e-#tau Channel")
+        theLegend.SetHeader("e-#tau Channel")
         theLegend.SetTextSize(0.03)
         theLegend.SetLineWidth(0)
         theLegend.SetLineStyle(1)
@@ -588,7 +588,7 @@ def main():
         theLegend.AddEntry(QCD_Histo,'QCD','f')
         theLegend.AddEntry(ST_Histo,'ST_s_Channel','f')
         theLegend.AddEntry(DY_Histo,'Drell-Yan','f')
-        theLegend.AddEntry(Signal_Histo,'Radion (#times 50)','l')
+        theLegend.AddEntry(Signal_Histo,'Radion (#times 20)','l')
 
         theLegend.Draw('SAME')
 
@@ -680,7 +680,7 @@ def main():
         theLegend2.AddEntry(N_QCD_Histo,'QCD','f')
         theLegend2.AddEntry(N_ST_Histo,'ST_s_Channel','f')
         theLegend2.AddEntry(N_DY_Histo,'Drell-Yan','f')
-        #theLegend2.AddEntry(Signal_Histo,'Radion (#times 50)','l')
+        #theLegend2.AddEntry(Signal_Histo,'Radion (#times 20)','l')
 
         theLegend2.Draw('SAME')
         cmsLatex = ROOT.TLatex()

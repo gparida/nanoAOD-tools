@@ -425,7 +425,7 @@ def main():
 
         #ST_s_channel_4f.SetFillColor(ROOT.TColor.GetColor("#ffcc66"))
         Signal_Histo.SetLineColor(ROOT.kBlue)
-        Signal_Histo.Scale(30)
+        Signal_Histo.Scale(20)
         Signal_Histo.SetLineWidth(2)
 
         DiBoson_Histo.SetFillColor(ROOT.TColor.GetColor(color_DiBoson))
@@ -586,7 +586,7 @@ def main():
         theLegend.AddEntry(QCD_Histo,'QCD','f')
         theLegend.AddEntry(ST_Histo,'ST_s_Channel','f')
         theLegend.AddEntry(DY_Histo,'Drell-Yan','f')
-        theLegend.AddEntry(Signal_Histo,'Radion (#times 50)','l')
+        theLegend.AddEntry(Signal_Histo,'Radion (#times 20)','l')
 
         theLegend.Draw('SAME')
 
