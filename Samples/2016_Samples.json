@@ -1,6 +1,9 @@
 {
     "DY":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/DY.root",
+	"file_original": "/data/gparida/bbtautauAnalysis/2016/DY.root",
+	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/DY.root",
+	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/DY.root",
+	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/DY.root",
 	"XS": 5398.0,
 	"equivalentLumi":0.1852
     },
