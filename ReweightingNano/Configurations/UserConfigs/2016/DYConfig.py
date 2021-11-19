@@ -33,7 +33,7 @@ except KeyError:
 
 
 DYConfig.listOfWeights = [
-    #crossSectionWeight,
-    #pileupWeight_2016,
+    crossSectionWeight,
+    pileupWeight_2016,
     tauIDWeight
 ]
