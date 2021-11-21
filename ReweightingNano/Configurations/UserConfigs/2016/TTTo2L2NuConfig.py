@@ -18,6 +18,9 @@ totalNumberOfEvents = theFile.cutflow.GetBinContent(1)
 theFile.Close()
 
 TTTo2L2NuConfig.inputFile = jsonInfo[TTTo2L2NuConfig.name]['file']
+TTTo2L2NuConfig.inputFile_tt = jsonInfo[TTTo2L2NuConfig.name]['file_tt']
+TTTo2L2NuConfig.inputFile_et = jsonInfo[TTTo2L2NuConfig.name]['file_et']
+TTTo2L2NuConfig.inputFile_mt = jsonInfo[TTTo2L2NuConfig.name]['file_mt']
 
 crossSectionWeight.XS = jsonInfo[TTTo2L2NuConfig.name]['XS'] * 1e-12 #XS in pb
 crossSectionWeight.timePeriod = '2016'

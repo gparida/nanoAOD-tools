@@ -19,6 +19,10 @@ totalNumberOfEvents = theFile.cutflow.GetBinContent(1)
 theFile.Close()
 
 TTToSemiLeptonicConfig.inputFile = jsonInfo[TTToSemiLeptonicConfig.name]['file']
+TTToSemiLeptonicConfig.inputFile_tt = jsonInfo[TTToSemiLeptonicConfig.name]['file_tt']
+TTToSemiLeptonicConfig.inputFile_et = jsonInfo[TTToSemiLeptonicConfig.name]['file_et']
+TTToSemiLeptonicConfig.inputFile_mt = jsonInfo[TTToSemiLeptonicConfig.name]['file_mt']
+
 
 crossSectionWeight.XS = jsonInfo[TTToSemiLeptonicConfig.name]['XS'] * 1e-12 #XS in pb
 crossSectionWeight.timePeriod = '2016'

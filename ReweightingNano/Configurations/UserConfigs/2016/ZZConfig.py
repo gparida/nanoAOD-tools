@@ -18,6 +18,9 @@ totalNumberOfEvents = theFile.cutflow.GetBinContent(1)
 theFile.Close()
 
 ZZConfig.inputFile = jsonInfo[ZZConfig.name]['file']
+ZZConfig.inputFile_tt = jsonInfo[ZZConfig.name]['file_tt']
+ZZConfig.inputFile_et = jsonInfo[ZZConfig.name]['file_et']
+ZZConfig.inputFile_mt = jsonInfo[ZZConfig.name]['file_mt']
 
 crossSectionWeight.XS = jsonInfo[ZZConfig.name]['XS'] * 1e-12 #XS in pb
 crossSectionWeight.timePeriod = '2016'

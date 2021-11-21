@@ -3,7 +3,7 @@ import os
 import json
 
 from Configurations.ConfigDefinition import ReweightConfiguration
-from Configurations.Weights.CrossSectionWeightingModule.CrossSectionWeight import crossSectionWeight as crossSectionWeightossSectionWeight
+from Configurations.Weights.CrossSectionWeightingModule.CrossSectionWeight import crossSectionWeight as crossSectionWeight
 from Configurations.Weights.pileupWeightingModule.pileupWeight import pileupWeight_2016
 
 WZConfig = ReweightConfiguration()
@@ -18,6 +18,10 @@ totalNumberOfEvents = theFile.cutflow.GetBinContent(1)
 theFile.Close()
 
 WZConfig.inputFile = jsonInfo[WZConfig.name]['file']
+WZConfig.inputFile_tt = jsonInfo[WZConfig.name]['file_tt']
+WZConfig.inputFile_et = jsonInfo[WZConfig.name]['file_et']
+WZConfig.inputFile_mt = jsonInfo[WZConfig.name]['file_mt']
+
 
 crossSectionWeight.XS = jsonInfo[WZConfig.name]['XS'] * 1e-12 #XS in pb
 crossSectionWeight.timePeriod = '2016'

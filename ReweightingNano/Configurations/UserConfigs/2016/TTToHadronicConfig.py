@@ -17,6 +17,10 @@ totalNumberOfEvents = theFile.cutflow.GetBinContent(1)
 theFile.Close()
 
 TTToHadronicConfig.inputFile = jsonInfo[TTToHadronicConfig.name]['file']
+TTToHadronicConfig.inputFile_tt = jsonInfo[TTToHadronicConfig.name]['file_tt']
+TTToHadronicConfig.inputFile_et = jsonInfo[TTToHadronicConfig.name]['file_et']
+TTToHadronicConfig.inputFile_mt = jsonInfo[TTToHadronicConfig.name]['file_mt']
+
 
 crossSectionWeight.XS = jsonInfo[TTToHadronicConfig.name]['XS'] * 1e-12 #XS in pb
 crossSectionWeight.timePeriod = '2016'

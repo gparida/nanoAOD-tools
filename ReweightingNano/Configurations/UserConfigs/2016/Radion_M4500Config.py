@@ -18,6 +18,9 @@ totalNumberOfEvents = theFile.cutflow.GetBinContent(1)
 theFile.Close()
 
 Radion_M4500Config.inputFile = jsonInfo[Radion_M4500Config.name]['file']
+Radion_M4500Config.inputFile_tt = jsonInfo[Radion_M4500Config.name]['file_tt']
+Radion_M4500Config.inputFile_et = jsonInfo[Radion_M4500Config.name]['file_et']
+Radion_M4500Config.inputFile_mt = jsonInfo[Radion_M4500Config.name]['file_mt']
 
 crossSectionWeight.XS = jsonInfo[Radion_M4500Config.name]['XS'] * 1e-12 #XS in pb
 crossSectionWeight.timePeriod = '2016'

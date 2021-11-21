@@ -17,6 +17,12 @@ totalNumberOfEvents = theFile.cutflow.GetBinContent(1)
 theFile.Close()
 
 QCD_Pt_3200toInfConfig.inputFile = jsonInfo[QCD_Pt_3200toInfConfig.name]['file']
+QCD_Pt_3200toInfConfig.inputFile_tt = jsonInfo[QCD_Pt_3200toInfConfig.name]['file_tt']
+QCD_Pt_3200toInfConfig.inputFile_et = jsonInfo[QCD_Pt_3200toInfConfig.name]['file_et']
+QCD_Pt_3200toInfConfig.inputFile_mt = jsonInfo[QCD_Pt_3200toInfConfig.name]['file_mt']
+
+
+
 
 crossSectionWeight.XS = jsonInfo[QCD_Pt_3200toInfConfig.name]['XS'] * 1e-12 #XS in pb
 crossSectionWeight.timePeriod = '2016'

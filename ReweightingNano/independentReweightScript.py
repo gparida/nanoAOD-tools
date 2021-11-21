@@ -8,12 +8,13 @@ from Configurations.ConfigDefinition import ReweightConfiguration
 from array import array
 from tqdm import tqdm
 import Utilities.BranchRemovalTool as branchRemovalTool
+from configDefaultPass import *
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Handle script for performing final reweighting of events')
-    parser.add_argument('--ConfigFiles',nargs = '+',help="Python based config files used to specify samples",required=True)
+    parser.add_argument('--ConfigFiles',nargs = '+',help="Python based config files used to specify samples",required=True,default=configList)
     parser.add_argument('--Remove',help = "Provide the recipe to remove the branches from the file, and then exit", action="store_true")
-
+    parser.add_argument('--Channel',help = "Based on this option, the location of the input files will be changed", required=True,choices=['tt', 'et', 'mt','original'])
     args = parser.parse_args()
     theLoader= RecursiveLoader()    
     numErrors = 0
@@ -53,7 +54,18 @@ if __name__ == "__main__":
                 continue
 
             #now get on with it
-            theFile = ROOT.TFile.Open(theConfig.inputFile,"UPDATE")
+            #Here we will add the condtion to process different files based on the channel selection
+
+            if args.Channel == "tt":
+                theFile = ROOT.TFile.Open(theConfig.inputFile_tt,"UPDATE")
+            if args.Channel == "et":
+                theFile = ROOT.TFile.Open(theConfig.inputFile_et,"UPDATE")
+            if args.Channel == "mt":
+                theFile = ROOT.TFile.Open(theConfig.inputFile_mt,"UPDATE")
+            if args.Channel == "original":
+                theFile = ROOT.TFile.Open(theConfig.inputFile,"UPDATE")
+
+            #theFile = ROOT.TFile.Open(theConfig.inputFile,"UPDATE")
             theTree = theFile.Events
             print("Creating individual event weights...")                        
             weightsBranchesDictionary = {}

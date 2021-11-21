@@ -18,6 +18,10 @@ totalNumberOfEvents = theFile.cutflow.GetBinContent(1)
 theFile.Close()
 
 DYLowMassConfig.inputFile = jsonInfo[DYLowMassConfig.name]['file']
+DYLowMassConfig.inputFile_tt = jsonInfo[DYLowMassConfig.name]['file_tt']
+DYLowMassConfig.inputFile_et = jsonInfo[DYLowMassConfig.name]['file_et']
+DYLowMassConfig.inputFile_mt = jsonInfo[DYLowMassConfig.name]['file_mt']
+
 
 crossSectionWeight.XS = jsonInfo[DYLowMassConfig.name]['XS'] * 1e-12 #XS in pb
 crossSectionWeight.timePeriod = '2016'

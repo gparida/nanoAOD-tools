@@ -20,7 +20,10 @@ totalNumberOfEvents = theFile.cutflow.GetBinContent(1)
 theFile.Close()
 
 #DYConfig.inputFile = jsonInfo[DYConfig.name]['file']
-DYConfig.inputFile = jsonInfo[DYConfig.name]['file_tt']
+DYConfig.inputFile = jsonInfo[DYConfig.name]['file']
+DYConfig.inputFile_tt = jsonInfo[DYConfig.name]['file_tt']
+DYConfig.inputFile_et = jsonInfo[DYConfig.name]['file_et']
+DYConfig.inputFile_mt = jsonInfo[DYConfig.name]['file_mt']
 #DYConfig.inputFile = "/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/allTau_VM_DR_1/DY.root"
 
 crossSectionWeight.XS = jsonInfo[DYConfig.name]['XS'] * 1e-12 #XS in pb

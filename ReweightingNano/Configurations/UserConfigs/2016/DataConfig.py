@@ -16,6 +16,9 @@ totalNumberOfEvents = theFile.cutflow.GetBinContent(1)
 theFile.Close()
 
 DataConfig.inputFile = jsonInfo[DataConfig.name]['file']
+DataConfig.inputFile_tt = jsonInfo[DataConfig.name]['file_tt']
+DataConfig.inputFile_et = jsonInfo[DataConfig.name]['file_et']
+DataConfig.inputFile_mt = jsonInfo[DataConfig.name]['file_mt']
 
 
 DataConfig.listOfWeights = [
