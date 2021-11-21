@@ -12,7 +12,7 @@ from configDefaultPass import *
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Handle script for performing final reweighting of events')
-    parser.add_argument('--ConfigFiles',nargs = '+',help="Python based config files used to specify samples",required=True,default=configList)
+    parser.add_argument('--ConfigFiles',nargs = '+',help="Python based config files used to specify samples",default=configList)
     parser.add_argument('--Remove',help = "Provide the recipe to remove the branches from the file, and then exit", action="store_true")
     parser.add_argument('--Channel',help = "Based on this option, the location of the input files will be changed", required=True,choices=['tt', 'et', 'mt','original'])
     args = parser.parse_args()
