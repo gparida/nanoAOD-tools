@@ -1,6 +1,6 @@
 {
     "DY":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/DY.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/DY.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/DY.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/DY.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/DY.root",
@@ -8,7 +8,7 @@
 	"equivalentLumi":0.1852
     },
     "DYLowMass":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/DYlow.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/DYlow.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/DYlow.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/DYlow.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/DYlow.root",
@@ -16,7 +16,7 @@
 	"equivalentLumi":0.06292
     },
     "WJets":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/W.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/W.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/W.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/W.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/W.root",
@@ -25,7 +25,7 @@
 	"forcedGenWeight":1.0
     },
     "TTToHadronic":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/TTToHadronic.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/TTToHadronic.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/TTToHadronic.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/TTToHadronic.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/TTToHadronic.root",
@@ -34,7 +34,7 @@
 	"forcedGenWeight":1.0
     },
     "TTToSemiLeptonic":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/TTToSemiLeptonic.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/TTToSemiLeptonic.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/TTToSemiLeptonic.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/TTToSemiLeptonic.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/TTToSemiLeptonic.root",
@@ -43,7 +43,7 @@
 	"forcedGenWeight":1.0
     },
     "TTTo2L2Nu":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/TTTo2L2Nu.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/TTTo2L2Nu.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/TTTo2L2Nu.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/TTTo2L2Nu.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/TTTo2L2Nu.root",
@@ -52,7 +52,7 @@
 	"forcedGenWeight":1.0
     },
     "ST_s-channel_4f":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/ST_s-channel_4f.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/ST_s-channel_4f.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/ST_s-channel_4f.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/ST_s-channel_4f.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/ST_s-channel_4f.root",
@@ -60,7 +60,7 @@
 	"equivalentlumi":118.1
     },
     "WW":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/WW.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/WW.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/WW.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/WW.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/WW.root",
@@ -68,7 +68,7 @@
 	"equivalentLumi":13.17
     },
     "WZ":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/WZ.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/WZ.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/WZ.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/WZ.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/WZ.root",
@@ -76,7 +76,7 @@
 	"equivalentLumi":36.25
     },
     "ZZ":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/ZZ.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/ZZ.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/ZZ.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/ZZ.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/ZZ.root",
@@ -84,7 +84,7 @@
 	"equivalentLumi":82.19
     },
     "QCD_Pt_15to30":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/QCD_15to30.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/QCD_15to30.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/QCD_15to30.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/QCD_15to30.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/QCD_15to30.root",
@@ -92,7 +92,7 @@
 	"equivalentLumi":8.04e-07
     },
     "QCD_Pt_30to50":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/QCD_30to50.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/QCD_30to50.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/QCD_30to50.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/QCD_30to50.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/QCD_30to50.root",
@@ -100,7 +100,7 @@
 	"equivalentlumi":9.386e-06
     },
     "QCD_Pt_50to80":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/QCD_50to80.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/QCD_50to80.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/QCD_50to80.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/QCD_50to80.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/QCD_50to80.root",
@@ -108,7 +108,7 @@
 	"equivalentLumi":6.368e-05
     },
     "QCD_Pt_80to120":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/QCD_80to120.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/QCD_80to120.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/QCD_80to120.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/QCD_80to120.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/QCD_80to120.root",
@@ -116,7 +116,7 @@
 	"equivalentLumi":0.0004263
     },
     "QCD_Pt_120to170":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/QCD_120to170.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/QCD_120to170.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/QCD_120to170.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/QCD_120to170.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/QCD_120to170.root",
@@ -124,7 +124,7 @@
 	"equivalentLumi":0.002453
     },
     "QCD_Pt_170to300":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/QCD_120to170.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/QCD_120to170.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/QCD_170to300.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/QCD_170to300.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/QCD_170to300.root",
@@ -132,7 +132,7 @@
 	"equivalentLumi":0.009642
     },
     "QCD_Pt_300to470":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/QCD_300to470.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/QCD_300to470.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/QCD_300to470.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/QCD_300to470.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/QCD_300to470.root",
@@ -140,7 +140,7 @@
 	"equivalentLumi":0.1465
     },
     "QCD_Pt_470to600":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/QCD_470to600.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/QCD_470to600.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/QCD_470to600.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/QCD_470to600.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/QCD_470to600.root",
@@ -148,7 +148,7 @@
 	"equivalentLumi":1.814
     },
     "QCD_Pt_600to800":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/QCD_600to800.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/QCD_600to800.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/QCD_600to800.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/QCD_600to800.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/QCD_600to800.root",
@@ -156,7 +156,7 @@
 	"equivalentLumi":6.383
     },
     "QCD_Pt_800to1000":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/QCD_800to1000.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/QCD_800to1000.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/QCD_800to1000.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/QCD_800to1000.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/QCD_800to1000.root",
@@ -164,7 +164,7 @@
 	"equivalentLumi":38.09
     },
     "QCD_Pt_1000to1400":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/QCD_1000to1400.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/QCD_1000to1400.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/QCD_1000to1400.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/QCD_1000to1400.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/QCD_1000to1400.root",
@@ -172,7 +172,7 @@
 	"equivalentLumi":134.0
     },
     "QCD_Pt_1400to1800":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/QCD_1400to1800.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/QCD_1400to1800.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/QCD_1400to1800.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/QCD_1400to1800.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/QCD_1400to1800.root",
@@ -180,7 +180,7 @@
 	"equivalentLumi":1541.0
     },
     "QCD_Pt_1800to2400":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/QCD_1800to2400.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/QCD_1800to2400.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/QCD_1800to2400.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/QCD_1800to2400.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/QCD_1800to2400.root",
@@ -188,7 +188,7 @@
 	"equivalentLumi":11450.0
     },
     "QCD_Pt_2400to3200":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/QCD_2400to3200.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/QCD_2400to3200.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/QCD_2400to3200.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/QCD_2400to3200.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/QCD_2400to3200.root",
@@ -196,7 +196,7 @@
 	"equivalentLumi":191000.0
     },
     "QCD_Pt_3200toInf":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/QCD_3200toInf.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/QCD_3200toInf.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/QCD_3200toInf.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/QCD_3200toInf.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/QCD_3200toInf.root",
@@ -204,84 +204,84 @@
 	"equivalentLumi":7397000.0
     },
     "Radion_M1000":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/RadionHH_M1000.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/RadionHH_M1000.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/RadionHH_M1000.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/RadionHH_M1000.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/RadionHH_M1000.root",
 	"XS":1.0
     },
     "Radion_M1200":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/RadionHH_M1200.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/RadionHH_M1200.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/RadionHH_M1200.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/RadionHH_M1200.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/RadionHH_M1200.root",
 	"XS":1.0
     },
     "Radion_M1400":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/RadionHH_M1400.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/RadionHH_M1400.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/RadionHH_M1400.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/RadionHH_M1400.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/RadionHH_M1400.root",
 	"XS":1.0
     },
     "Radion_M1600":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/RadionHH_M1600.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/RadionHH_M1600.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/RadionHH_M1600.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/RadionHH_M1600.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/RadionHH_M1600.root",
 	"XS":1.0
     },
     "Radion_M1800":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/RadionHH_M1800.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/RadionHH_M1800.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/RadionHH_M1800.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/RadionHH_M1800.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/RadionHH_M1800.root",
 	"XS":1.0
     },
     "Radion_M2000":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/RadionHH_M2000.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/RadionHH_M2000.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/RadionHH_M2000.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/RadionHH_M2000.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/RadionHH_M2000.root",
 	"XS":1.0
     },
     "Radion_M2500":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/RadionHH_M2500.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/RadionHH_M2500.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/RadionHH_M2500.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/RadionHH_M2500.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/RadionHH_M2500.root",
 	"XS":1.0
     },
     "Radion_M3000":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/RadionHH_M3000.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/RadionHH_M3000.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/RadionHH_M3000.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/RadionHH_M3000.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/RadionHH_M3000.root",
 	"XS":1.0
     },
     "Radion_M3500":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/RadionHH_M3500.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/RadionHH_M3500.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/RadionHH_M3500.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/RadionHH_M3500.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/RadionHH_M3500.root",
 	"XS":1.0
     },
     "Radion_M4000":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/RadionHH_M4000.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/RadionHH_M4000.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/RadionHH_M4000.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/RadionHH_M4000.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/RadionHH_M4000.root",
 	"XS":1.0
     },
     "Radion_M4500":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/RadionHH_M4500.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/RadionHH_M4500.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/RadionHH_M4500.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/RadionHH_M4500.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/RadionHH_M4500.root",
 	"XS":1.0
     },
     "Data":{
-	"file": "/data/gparida/bbtautauAnalysis/2016/Data.root",
+	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/Data.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/Data.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/Data.root",
 	"file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/Data.root"
