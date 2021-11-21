@@ -50,7 +50,15 @@ if __name__ == "__main__":
                 print(theRecipe)
                 print("\n\'")
                 """
-                branchRemovalTool.PruneBranches(theConfig.inputFile,branchesToAdd)
+                if args.Channel == "tt":
+                    branchRemovalTool.PruneBranches(theConfig.inputFile_tt,branchesToAdd)
+                if args.Channel == "et":
+                    branchRemovalTool.PruneBranches(theConfig.inputFile_et,branchesToAdd)
+                if args.Channel == "mt":
+                    branchRemovalTool.PruneBranches(theConfig.inputFile_mt,branchesToAdd)
+                if args.Channel == "original":
+                    branchRemovalTool.PruneBranches(theConfig.inputFile,branchesToAdd)
+                
                 continue
 
             #now get on with it
