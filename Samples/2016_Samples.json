@@ -7,7 +7,7 @@
 	"XS": 5398.0,
 	"equivalentLumi":0.1852
     },
-    "DYLow":{
+    "DYLowMass":{
 	"file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData/DYlow.root",
 	"file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/DYlow.root",
 	"file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/DYlow.root",
