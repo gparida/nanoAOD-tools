@@ -1,5 +1,5 @@
 configList=["Configurations/UserConfigs/2016/DYConfig.py",                        
-"Configurations/UserConfigs/2016/DYConfig.py",                       
+#"Configurations/UserConfigs/2016/DYConfig.py",                       
 "Configurations/UserConfigs/2016/DYLowMassConfig.py",                 
 #"Configurations/UserConfigs/2016/DYlowConfig.py",                    
 "Configurations/UserConfigs/2016/DataConfig.py",                     
