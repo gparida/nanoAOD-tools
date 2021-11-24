@@ -1,7 +1,8 @@
 from PhysicsTools.NanoAODTools.postprocessing.framework.postprocessor import PostProcessor
 from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collection 
 from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
-from PhysicsTools.NanoAODTools.Analysis.addingNewObservableBranches.visibleMass import VisibleMass
+#from PhysicsTools.NanoAODTools.Analysis.addingNewObservableBranches.visibleMass import VisibleMass
+from Analysis.addingNewObservableBranches.visibleMass import VisibleMass
 #from visibleMass import VisibleMass
 from sortingTaus import mergeTau
 import ROOT
