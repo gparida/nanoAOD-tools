@@ -30,6 +30,7 @@ class Channel(Module):
 		self.FatJet = FatJet("FatJet")
 		self.Electron = Electron("Electron")
 		self.Muon = Muon("Muon")
+		self.Jet = particle("Jet")
 
 		#this is for testing
 		if self.channel == "test":
@@ -99,14 +100,18 @@ class Channel(Module):
 			return True
 
 		#Add all the Object Based Selection########################################
+
+
+		self.Jet.setupCollection(event)
+		self.Jet.apply_cut(lambda x: (x.pt > 20) and (x.btagDeepB >= 0.0480))
 		
 		self.Tau.setupCollection(event)
 		#print ("HPS collection before cut = ",len(self.Tau.collection))
-		self.Tau.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAnewDM2017v2 & 1 == 1))
+		self.Tau.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAoldDM2017v2 & 2 == 2))
 		#print ("HPS collection after cut = ",len(self.Tau.collection))
 
 		self.boostedTau.setupCollection(event)
-		self.boostedTau.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAnewDM2017v2 & 1 == 1))
+		self.boostedTau.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAoldDM2017v2 & 2 == 2))
 
 
 		self.Tau.collection =  filter(self.HPStauVeto,self.Tau.collection)
@@ -139,7 +144,8 @@ class Channel(Module):
 			if(((len(self.Tau.collection) + len(self.boostedTau.collection))==2) 
 				and len(self.FatJet.collection)==1 
 				and len(self.Electron.collection)==0 
-				and len(self.Muon.collection)==0): 
+				and len(self.Muon.collection)==0
+				and len(self.Jet.collection==0)): 
 				#print ("length of good elec ",len(self.Electron.collection),"length of good muons ",len(self.Muon.collection))
 				self.Tau.fillBranches(self.out) #Fill the branches
 				self.FatJet.fillBranches(self.out)
@@ -157,7 +163,8 @@ class Channel(Module):
 			if(((len(self.Tau.collection) + len(self.boostedTau.collection))==1) 
 				and len(self.FatJet.collection)==1 
 				and len(self.Electron.collection)==1 
-				and len(self.Muon.collection)==0):
+				and len(self.Muon.collection)==0
+				and len(self.Jet.collection==0)):
 				self.Tau.fillBranches(self.out) #Fill the branches
 				self.FatJet.fillBranches(self.out)
 				self.boostedTau.fillBranches(self.out)
@@ -174,7 +181,8 @@ class Channel(Module):
 			if(((len(self.Tau.collection) + len(self.boostedTau.collection))==1) 
 				and len(self.FatJet.collection)==1 
 				and len(self.Electron.collection)==0 
-				and len(self.Muon.collection)==1):
+				and len(self.Muon.collection)==1
+				and len(self.Jet.collection==0)):
 				self.Tau.fillBranches(self.out) #Fill the branches
 				self.FatJet.fillBranches(self.out)
 				self.boostedTau.fillBranches(self.out)
