@@ -145,7 +145,7 @@ class Channel(Module):
 				and len(self.FatJet.collection)==1 
 				and len(self.Electron.collection)==0 
 				and len(self.Muon.collection)==0
-				and len(self.Jet.collection==0)): 
+				and len(self.Jet.collection)==0): 
 				#print ("length of good elec ",len(self.Electron.collection),"length of good muons ",len(self.Muon.collection))
 				self.Tau.fillBranches(self.out) #Fill the branches
 				self.FatJet.fillBranches(self.out)
@@ -164,7 +164,7 @@ class Channel(Module):
 				and len(self.FatJet.collection)==1 
 				and len(self.Electron.collection)==1 
 				and len(self.Muon.collection)==0
-				and len(self.Jet.collection==0)):
+				and len(self.Jet.collection)==0):
 				self.Tau.fillBranches(self.out) #Fill the branches
 				self.FatJet.fillBranches(self.out)
 				self.boostedTau.fillBranches(self.out)
@@ -182,7 +182,7 @@ class Channel(Module):
 				and len(self.FatJet.collection)==1 
 				and len(self.Electron.collection)==0 
 				and len(self.Muon.collection)==1
-				and len(self.Jet.collection==0)):
+				and len(self.Jet.collection)==0):
 				self.Tau.fillBranches(self.out) #Fill the branches
 				self.FatJet.fillBranches(self.out)
 				self.boostedTau.fillBranches(self.out)
