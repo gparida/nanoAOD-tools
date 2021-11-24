@@ -1,6 +1,7 @@
 import ROOT
 import os
 import json
+from weightList import *
 
 
 from Configurations.ConfigDefinition import ReweightConfiguration
@@ -35,8 +36,10 @@ except KeyError:
     crossSectionWeight.forcedGenWeight = None
 
 
-DYConfig.listOfWeights = [
-    crossSectionWeight,
-    pileupWeight_2016,
-    tauIDWeight
-]
+#DYConfig.listOfWeights = [
+#    crossSectionWeight,
+#    pileupWeight_2016,
+#    tauIDWeight
+#]
+
+DYConfig.listOfWeights = list
