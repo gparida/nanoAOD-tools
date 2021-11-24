@@ -142,6 +142,8 @@ class Channel(Module):
 				self.Tau.fillBranches(self.out) #Fill the branches
 				self.FatJet.fillBranches(self.out)
 				self.boostedTau.fillBranches(self.out)
+				self.Electron.fillBranches(self.out)
+				self.Muon.fillBranches(self.out)
 				return True # Store event
 			else:
 				return False # Reject event
