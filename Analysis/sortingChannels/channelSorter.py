@@ -1,7 +1,8 @@
 from PhysicsTools.NanoAODTools.postprocessing.framework.postprocessor import PostProcessor
 from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collection 
 from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
-from visibleMass import VisibleMass
+from PhysicsTools.NanoAODTools.Analysis.addingNewObservableBranches.visibleMass import VisibleMass
+#from visibleMass import VisibleMass
 from sortingTaus import mergeTau
 import ROOT
 import glob
@@ -160,6 +161,7 @@ class Channel(Module):
 				self.FatJet.fillBranches(self.out)
 				self.boostedTau.fillBranches(self.out)
 				self.Electron.fillBranches(self.out)
+				self.Muon.fillBranches(self.out)
 				return True
 			else:
 				return False
@@ -176,6 +178,7 @@ class Channel(Module):
 				self.FatJet.fillBranches(self.out)
 				self.boostedTau.fillBranches(self.out)
 				self.Muon.fillBranches(self.out)
+				self.Electron.fillBranches(self.out)
 				return True
 			else:
 				return False
