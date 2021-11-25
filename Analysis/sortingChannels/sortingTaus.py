@@ -53,6 +53,7 @@ class mergeTau(Module):
             
 
     def analyze(self,event):
+        print ("Running the sorting Taus Module")
         tauCollection = Collection(event, "gTau","gnTau")
         boostedtauCollection = Collection(event, "gboostedTau","gnboostedTau")
         colllist =[]

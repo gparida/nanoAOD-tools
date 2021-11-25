@@ -1,9 +1,7 @@
 from PhysicsTools.NanoAODTools.postprocessing.framework.postprocessor import PostProcessor
 from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collection 
 from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
-#from PhysicsTools.NanoAODTools.Analysis.addingNewObservableBranches.visibleMass import VisibleMass
-from addingNewObservableBranches.visibleMass import VisibleMass
-#from visibleMass import VisibleMass
+from addingNewObservableBranches.visibleMass import VisibleMass  #Importing modules works if the folders are in the place where the scripts are
 from sortingTaus import mergeTau
 import ROOT
 import glob
@@ -91,7 +89,7 @@ class Channel(Module):
 
 	#event loop
 	def analyze(self, event): 
-
+		print ("Running the channel sorter Module")
 		#This is for testing the sccript on boosted tau branches
 		if self.channel == "test":
 			self.boostedTau.setupCollection(event)
@@ -107,7 +105,7 @@ class Channel(Module):
 		
 		self.Tau.setupCollection(event)
 		#print ("HPS collection before cut = ",len(self.Tau.collection))
-		self.Tau.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAoldDM2017v2 & 2 == 2))
+		self.Tau.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAoldDM2017v2 & 2 == 2))  #oldMVAId and the VLoose WP cause weights are defined for that
 		#print ("HPS collection after cut = ",len(self.Tau.collection))
 
 		self.boostedTau.setupCollection(event)
@@ -115,9 +113,9 @@ class Channel(Module):
 
 
 		self.Tau.collection =  filter(self.HPStauVeto,self.Tau.collection)
-		#print ("HPS collection after veto = ",len(self.Tau.collection))
-		self.FatJet.setupCollection(event)
 
+
+		self.FatJet.setupCollection(event)
 		try:
 			self.FatJet.apply_cut(lambda x: (x.pt > 200) and (abs(x.eta) < 2.4) and (x.msoftdrop > 30) and (x.msoftdrop < 250) and ((x.tau2/x.tau1) < 0.75))
 		except ZeroDivisionError:

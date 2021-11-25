@@ -24,6 +24,7 @@ class VisibleMass(Module):
         pass
 
     def analyze(self,event):
+       print ("Running the Visible Mass and Delta R branches")
        gTau = Collection(event, "gTau","gnTau")
        gboostedTau = Collection(event,"gboostedTau","gnboostedTau")
        gElectron = Collection(event,"gElectron","gnElectron")
