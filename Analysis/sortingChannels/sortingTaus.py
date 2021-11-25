@@ -78,7 +78,6 @@ class mergeTau(Module):
                     colllist.append(tauCollection)
                     #allTauCollection = boostedtauCollection
                     #allTauCollection.extend(tauCollection)
-            #print ("Type of the new collection", type(allTauCollection))
             self.fillBranches(colllist)
             return True    
         
