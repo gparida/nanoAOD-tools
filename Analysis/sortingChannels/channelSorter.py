@@ -250,6 +250,7 @@ if __name__ == "__main__":
 	else:
 		pool = np.Pool(int(args.ncores))
 		#with np.Pool(object,ncores) as pool:
+		print ("list", argList)
 		res=pool.map(call_postpoc, argList)
 
 	
