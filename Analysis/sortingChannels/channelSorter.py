@@ -20,6 +20,7 @@ ROOT.PyConfig.IgnoreCommandLineOptions = True  #Find out what does this do ?
 
 class Channel(Module):
 	def __init__(self, channel,filename):
+		print ("Running the channel sorter Module")
 		self.channel = channel # Specify the channel
 		self.filename = filename #filename passed cause we needed to count the events with zero divide errors
 		#All these objects are common to all channels	
@@ -89,7 +90,7 @@ class Channel(Module):
 
 	#event loop
 	def analyze(self, event): 
-		print ("Running the channel sorter Module")
+		
 
 		#Select the AK4 Jets and keep choose Jets with Meduim DeepJet ID
 		self.Jet.setupCollection(event)
