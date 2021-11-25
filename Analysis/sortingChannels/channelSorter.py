@@ -90,29 +90,18 @@ class Channel(Module):
 	#event loop
 	def analyze(self, event): 
 		print ("Running the channel sorter Module")
-		#This is for testing the sccript on boosted tau branches
-		if self.channel == "test":
-			self.boostedTau.setupCollection(event)
-			self.boostedTau.apply_cut(lambda x: x.pt > 20 and (abs(x.eta) < 2.3) and (x.idMVAoldDM2017v2 & 4 == 4) )
-			self.boostedTau.fillBranches(self.out)
-			return True
 
-		#Add all the Object Based Selection########################################
-
-
+		#Select the AK4 Jets and keep choose Jets with Meduim DeepJet ID
 		self.Jet.setupCollection(event)
-		self.Jet.apply_cut(lambda x: (x.pt > 20) and (x.btagDeepB >= 0.0480))
+		self.Jet.apply_cut(lambda x: (x.pt > 20) and (x.btagDeepB >= 0.2489))
 		
 		self.Tau.setupCollection(event)
-		#print ("HPS collection before cut = ",len(self.Tau.collection))
 		self.Tau.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAoldDM2017v2 & 2 == 2))  #oldMVAId and the VLoose WP cause weights are defined for that
-		#print ("HPS collection after cut = ",len(self.Tau.collection))
+		self.Tau.collection =  filter(self.HPStauVeto,self.Tau.collection)
+
 
 		self.boostedTau.setupCollection(event)
 		self.boostedTau.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAoldDM2017v2 & 2 == 2))
-
-
-		self.Tau.collection =  filter(self.HPStauVeto,self.Tau.collection)
 
 
 		self.FatJet.setupCollection(event)
