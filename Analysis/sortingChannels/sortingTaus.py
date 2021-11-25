@@ -13,6 +13,7 @@ ROOT.PyConfig.IgnoreCommandLineOptions = True  #Find out what does this do ?
 
 class mergeTau(Module):
     def __init__(self, channel):
+        print ("Running the sorting Taus Module")
         self.channel = channel # Specify the channel
     
     #lets define the branches that need to be filled
@@ -53,7 +54,6 @@ class mergeTau(Module):
             
 
     def analyze(self,event):
-        print ("Running the sorting Taus Module")
         tauCollection = Collection(event, "gTau","gnTau")
         boostedtauCollection = Collection(event, "gboostedTau","gnboostedTau")
         colllist =[]
