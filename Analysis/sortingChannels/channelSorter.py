@@ -97,12 +97,13 @@ class Channel(Module):
 		
 		self.Tau.setupCollection(event)
 		self.Tau.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAoldDM2017v2 & 2 == 2))  #oldMVAId and the VLoose WP cause weights are defined for that
-		self.Tau.collection =  filter(self.HPStauVeto,self.Tau.collection)
+		
 
 
 		self.boostedTau.setupCollection(event)
 		self.boostedTau.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAoldDM2017v2 & 2 == 2))
 
+		self.Tau.collection =  filter(self.HPStauVeto,self.Tau.collection)
 
 		self.FatJet.setupCollection(event)
 		try:
