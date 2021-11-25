@@ -90,51 +90,6 @@ class mergeTau(Module):
             return True
         
 
-def call_postpoc(files):
-        #visibleM = lambda:VisibleMass(args.Channel)
-        addBranches = lambda: mergeTau(args.Channel)
-        nameStrip=files.strip()
-        filename = (nameStrip.split('/')[-1]).split('.')[-2]
-        p = PostProcessor(outputDir,[files], cut=None,branchsel=None,modules=[addBranches()], postfix=post,noOut=False,outputbranchsel=outputbranches)
-        p.run()
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Script to create a total reconstructed Tau collection')
-    parser.add_argument('--Channel',help="enter either tt or et or mt. For boostedTau test enter test",required=True)
-    parser.add_argument('--inputLocation',help="enter the path to the location of input file set",default="")
-    parser.add_argument('--outputLocation',help="enter the path where yu want the output files to be stored",default ="")
-    parser.add_argument('--ncores',help ="number of cores for parallel processing", default=1)
-    parser.add_argument('--postfix',help="string at the end of output file names", default="")
-    args = parser.parse_args()
-
-    #Define Eevnt Selection - all those to be connected by or
-
-    #fnames = [args.inputLocation+"/W.root"]
-    fnames = glob.glob(args.inputLocation + "/*.root")  #making a list of input files
-    #outputDir = "/data/gparida/Background_Samples/bbtautauAnalysis/2016/{}_Channel/Test".format(args.Channel)
-    outputDir = args.outputLocation
-	#outputDir = "."
-    outputbranches = "keep_and_drop.txt"
-	#cuts = "&&".join(eventSelectionAND)
-    post = args.postfix
-    argList = list()
-    filename =""
-    for file in fnames:
-	    argList.append(file)
-	    #nameStrip = file.strip()
-        #filename = (nameStrip.split('/')[-1]).split('.')[-2]
-	
-	#print (argList)
-
-    if int(args.ncores) == 1:
-	    for arr in argList:
-		    #print ("This is what is passed ",arr[1])
-		    call_postpoc(arr)
-	
-    else:
-	    pool = np.Pool(int(args.ncores))
-	    #with np.Pool(object,ncores) as pool:
-	    res=pool.map(call_postpoc, argList)   
 
 
 	
