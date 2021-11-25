@@ -197,6 +197,9 @@ def call_postpoc(files):
 		nameStrip=files.strip()
 		filename = (nameStrip.split('/')[-1]).split('.')[-2]
 		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[letsSortChannels(),tauOdering(),visibleM()], postfix=post,noOut=False,outputbranchsel=outputbranches)
+		#p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[tauOdering()], postfix=post,noOut=False,outputbranchsel=outputbranches)
+		#p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[letsSortChannels(),tauOdering(),visibleM()], postfix=post,noOut=False,outputbranchsel=outputbranches)
+
 		p.run()
 
 
@@ -251,7 +254,7 @@ if __name__ == "__main__":
 		pool = np.Pool(int(args.ncores))
 		#with np.Pool(object,ncores) as pool:
 		print ("list", argList)
-		res=pool.map(call_postpoc, argList)
+		res=pool.starmap(call_postpoc, argList)
 
 	
 	
