@@ -21,6 +21,7 @@ ROOT.PyConfig.IgnoreCommandLineOptions = True  #Find out what does this do ?
 class Channel(Module):
 	def __init__(self, channel,filename):
 		print ("Running the channel sorter Module")
+		print ("processing file ",filename)
 		self.channel = channel # Specify the channel
 		self.filename = filename #filename passed cause we needed to count the events with zero divide errors
 		#All these objects are common to all channels	
@@ -196,7 +197,7 @@ def call_postpoc(files):
 		visibleM = lambda:VisibleMass(args.Channel)
 		nameStrip=files.strip()
 		filename = (nameStrip.split('/')[-1]).split('.')[-2]
-		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[letsSortChannels(),visibleM()], postfix=post,noOut=False,outputbranchsel=outputbranches)
+		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[letsSortChannels(),tauOdering(),visibleM()], postfix=post,noOut=False,outputbranchsel=outputbranches)
 		#p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[tauOdering()], postfix=post,noOut=False,outputbranchsel=outputbranches)
 		#p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[visibleM()], postfix=post,noOut=False,outputbranchsel=outputbranches)
 		#p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[letsSortChannels(),tauOdering(),visibleM()], postfix=post,noOut=False,outputbranchsel=outputbranches)
