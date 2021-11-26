@@ -48,7 +48,6 @@ class mergeTau(Module):
         list = []
         for coll in collList:
             for obj in coll:
-                print (obj[variable])
                 list.append(obj[variable])
         #if variable == "pt":
             #print (list)
@@ -60,7 +59,6 @@ class mergeTau(Module):
     def analyze(self,event):
         tauCollection = Collection(event, "gTau","gnTau")
         boostedtauCollection = Collection(event, "gboostedTau","gnboostedTau")
-        print ("length of tau", len(tauCollection),"length of boostedTau",len(boostedtauCollection))
         colllist =[]
         #print ("Type of the collection", type(tauCollection))
 
