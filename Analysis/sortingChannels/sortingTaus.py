@@ -59,6 +59,7 @@ class mergeTau(Module):
         tauCollection = Collection(event, "gTau","gnTau")
         boostedtauCollection = Collection(event, "gboostedTau","gnboostedTau")
         colllist =[]
+        print (boostedtauCollection[0].genPartFlav)
         #print ("Type of the collection", type(tauCollection))
 
         if self.channel == "tt":
