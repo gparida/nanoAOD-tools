@@ -39,6 +39,7 @@ class mergeTau(Module):
         self.out.fillBranch("{}_phi".format("allTau"),self.get_attributes("phi",colllist))
         self.out.fillBranch("{}_eta".format("allTau"),self.get_attributes("eta",colllist))
         for branch in boostedTauBranches.values():
+            print (branch[0],colllist)
             self.out.fillBranch("{}_{}".format("allTau",branch[0]),self.get_attributes(branch[0],colllist))
 
     def get_attributes(self,variable,collList):
