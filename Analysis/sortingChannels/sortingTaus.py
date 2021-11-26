@@ -46,6 +46,7 @@ class mergeTau(Module):
         list = []
         for coll in collList:
             for obj in coll:
+                print (obj[variable])
                 list.append(obj[variable])
         #if variable == "pt":
             #print (list)
