@@ -12,7 +12,7 @@ import argparse
 ROOT.PyConfig.IgnoreCommandLineOptions = True  #Find out what does this do ?
 
 class mergeTau(Module):
-    def __init__(self, filename, channel):
+    def __init__(self,channel,filename):
         print ("Running the sorting Taus Module")
         self.channel = channel # Specify the channel
         self.filename = filename
