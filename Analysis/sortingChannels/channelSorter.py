@@ -98,12 +98,12 @@ class Channel(Module):
 		#self.Jet.apply_cut(lambda x: (x.pt > 20) and (x.btagDeepB >= 0.6377))
 		
 		self.Tau.setupCollection(event)
-		self.Tau.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAoldDM2017v2 & 2 == 2))  #oldMVAId and the VLoose WP cause weights are defined for that
+		self.Tau.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAnewDM2017v2 & 2 == 2))  #oldMVAId and the VLoose WP cause weights are defined for that
 		
 
 
 		self.boostedTau.setupCollection(event)
-		self.boostedTau.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAoldDM2017v2 & 2 == 2))
+		self.boostedTau.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAnewDM2017v2 & 2 == 2))
 
 		self.Tau.collection =  filter(self.HPStauVeto,self.Tau.collection)
 
