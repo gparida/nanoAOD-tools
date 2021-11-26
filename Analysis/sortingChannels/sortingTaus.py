@@ -63,10 +63,10 @@ class mergeTau(Module):
 
         if self.channel == "tt":
             if (len(tauCollection)==2):
+                print ("Gen Part for boosted Tau",tauCollection[0].genPartFlav)
                 #self.allTauCollection = tauCollection
                 colllist.append(tauCollection)
             if (len(boostedtauCollection)==2):
-                print ("Gen Part for boosted Tau",boostedtauCollection[0].genPartFlav)
                 #self.allTauCollection = boostedtauCollection
                 colllist.append(boostedtauCollection)
             if (len(tauCollection)==1 or len(boostedtauCollection)==1):
