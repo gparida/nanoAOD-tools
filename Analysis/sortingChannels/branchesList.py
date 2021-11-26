@@ -232,7 +232,7 @@ boostedTauBranches ={
 #5:["dxy","F"],
 #6:["dz","F"],
 #7:["eta","F"],
-8:["genPartFlav","I"],
+#8:["genPartFlav","I"],
 9:["genPartIdx","I"],
 #10:["idAntiEle","I"],
 11:["idAntiEle2018","I"],
