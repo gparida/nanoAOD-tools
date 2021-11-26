@@ -197,7 +197,7 @@ def call_postpoc(files):
 		visibleM = lambda:VisibleMass(args.Channel)
 		nameStrip=files.strip()
 		filename = (nameStrip.split('/')[-1]).split('.')[-2]
-		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[letsSortChannels()], postfix=post,noOut=False,outputbranchsel=outputbranches)
+		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[letsSortChannels(),tauOdering()], postfix=post,noOut=False,outputbranchsel=outputbranches)
 		#p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[tauOdering()], postfix=post,noOut=False,outputbranchsel=outputbranches)
 		#p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[visibleM()], postfix=post,noOut=False,outputbranchsel=outputbranches)
 		#p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[letsSortChannels(),tauOdering(),visibleM()], postfix=post,noOut=False,outputbranchsel=outputbranches)
