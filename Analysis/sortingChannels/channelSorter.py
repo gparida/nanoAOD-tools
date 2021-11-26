@@ -30,7 +30,7 @@ class Channel(Module):
 		self.FatJet = FatJet("FatJet")
 		self.Electron = Electron("Electron")
 		self.Muon = Muon("Muon")
-		self.Jet = particle("Jet")
+		#self.Jet = particle("Jet")
 
 		#this is for testing
 		if self.channel == "test":
@@ -94,8 +94,8 @@ class Channel(Module):
 		
 
 		#Select the AK4 Jets and keep choose Jets with Tight DeepJet ID
-		self.Jet.setupCollection(event)
-		self.Jet.apply_cut(lambda x: (x.pt > 20) and (x.btagDeepB >= 0.6377))
+		#self.Jet.setupCollection(event)
+		#self.Jet.apply_cut(lambda x: (x.pt > 20) and (x.btagDeepB >= 0.6377))
 		
 		self.Tau.setupCollection(event)
 		self.Tau.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAoldDM2017v2 & 2 == 2))  #oldMVAId and the VLoose WP cause weights are defined for that
@@ -197,10 +197,7 @@ def call_postpoc(files):
 		visibleM = lambda:VisibleMass(args.Channel)
 		nameStrip=files.strip()
 		filename = (nameStrip.split('/')[-1]).split('.')[-2]
-		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[letsSortChannels(),tauOdering()], postfix=post,noOut=False,outputbranchsel=outputbranches)
-		#p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[tauOdering()], postfix=post,noOut=False,outputbranchsel=outputbranches)
-		#p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[visibleM()], postfix=post,noOut=False,outputbranchsel=outputbranches)
-		#p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[letsSortChannels(),tauOdering(),visibleM()], postfix=post,noOut=False,outputbranchsel=outputbranches)
+		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[letsSortChannels(),tauOdering(),visibleM()], postfix=post,noOut=False,outputbranchsel=outputbranches)
 
 		p.run()
 
