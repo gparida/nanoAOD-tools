@@ -12,9 +12,10 @@ import argparse
 ROOT.PyConfig.IgnoreCommandLineOptions = True  #Find out what does this do ?
 
 class mergeTau(Module):
-    def __init__(self, channel):
+    def __init__(self, filename, channel):
         print ("Running the sorting Taus Module")
         self.channel = channel # Specify the channel
+        self.filename = filename
     
     #lets define the branches that need to be filled
     def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
@@ -39,7 +40,8 @@ class mergeTau(Module):
         self.out.fillBranch("{}_phi".format("allTau"),self.get_attributes("phi",colllist))
         self.out.fillBranch("{}_eta".format("allTau"),self.get_attributes("eta",colllist))
         for branch in boostedTauBranches.values():
-            print (branch[0],colllist)
+            if (self.filename == "Data" and (branch[0] == "genPartFlav" or branch[0] =="genPartIdx")):
+                continue
             self.out.fillBranch("{}_{}".format("allTau",branch[0]),self.get_attributes(branch[0],colllist))
 
     def get_attributes(self,variable,collList):
@@ -64,7 +66,6 @@ class mergeTau(Module):
 
         if self.channel == "tt":
             if (len(tauCollection)==2):
-                print ("Gen Part for boosted Tau",tauCollection[0].genPartFlav)
                 #self.allTauCollection = tauCollection
                 colllist.append(tauCollection)
             if (len(boostedtauCollection)==2):
