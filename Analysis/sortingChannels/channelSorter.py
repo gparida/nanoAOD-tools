@@ -254,7 +254,7 @@ if __name__ == "__main__":
 		pool = np.Pool(int(args.ncores))
 		#with np.Pool(object,ncores) as pool:
 		print ("list", argList)
-		res=pool.starmap(call_postpoc, argList)
+		res=pool.map(call_postpoc, argList)
 
 	
 	
