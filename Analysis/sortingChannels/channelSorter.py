@@ -133,8 +133,8 @@ class Channel(Module):
 			if(((len(self.Tau.collection) + len(self.boostedTau.collection))==2) 
 				and len(self.FatJet.collection)==1 
 				and len(self.Electron.collection)==0 
-				and len(self.Muon.collection)==0
-				and len(self.Jet.collection)==0): 
+				and len(self.Muon.collection)==0):
+				#and len(self.Jet.collection)==0): 
 				#print ("length of good elec ",len(self.Electron.collection),"length of good muons ",len(self.Muon.collection))
 				self.Tau.fillBranches(self.out) #Fill the branches
 				self.FatJet.fillBranches(self.out)
@@ -152,8 +152,8 @@ class Channel(Module):
 			if(((len(self.Tau.collection) + len(self.boostedTau.collection))==1) 
 				and len(self.FatJet.collection)==1 
 				and len(self.Electron.collection)==1 
-				and len(self.Muon.collection)==0
-				and len(self.Jet.collection)==0):
+				and len(self.Muon.collection)==0):
+				#and len(self.Jet.collection)==0):
 				self.Tau.fillBranches(self.out) #Fill the branches
 				self.FatJet.fillBranches(self.out)
 				self.boostedTau.fillBranches(self.out)
@@ -170,8 +170,8 @@ class Channel(Module):
 			if(((len(self.Tau.collection) + len(self.boostedTau.collection))==1) 
 				and len(self.FatJet.collection)==1 
 				and len(self.Electron.collection)==0 
-				and len(self.Muon.collection)==1
-				and len(self.Jet.collection)==0):
+				and len(self.Muon.collection)==1):
+				#and len(self.Jet.collection)==0):
 				self.Tau.fillBranches(self.out) #Fill the branches
 				self.FatJet.fillBranches(self.out)
 				self.boostedTau.fillBranches(self.out)
@@ -196,8 +196,9 @@ def call_postpoc(files):
 		visibleM = lambda:VisibleMass(args.Channel)
 		nameStrip=files.strip()
 		filename = (nameStrip.split('/')[-1]).split('.')[-2]
-		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[letsSortChannels()], postfix=post,noOut=False,outputbranchsel=outputbranches)
+		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[letsSortChannels(),tauOdering(),visibleM()], postfix=post,noOut=False,outputbranchsel=outputbranches)
 		#p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[tauOdering()], postfix=post,noOut=False,outputbranchsel=outputbranches)
+		#p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[visibleM()], postfix=post,noOut=False,outputbranchsel=outputbranches)
 		#p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[letsSortChannels(),tauOdering(),visibleM()], postfix=post,noOut=False,outputbranchsel=outputbranches)
 
 		p.run()
