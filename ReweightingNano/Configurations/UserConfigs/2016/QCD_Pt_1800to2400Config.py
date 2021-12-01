@@ -1,6 +1,7 @@
 import ROOT
 import os
 import json
+from weightList import *
 
 from Configurations.ConfigDefinition import ReweightConfiguration
 from Configurations.Weights.CrossSectionWeightingModule.CrossSectionWeight import crossSectionWeight as crossSectionWeight
@@ -31,7 +32,4 @@ except KeyError:
     crossSectionWeight.forcedGenWeight = None
 
 
-QCD_Pt_1800to2400Config.listOfWeights = [
-    crossSectionWeight,
-    pileupWeight_2016,
-]
+QCD_Pt_1800to2400Config.listOfWeights = list

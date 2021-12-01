@@ -50,7 +50,7 @@ class MakeHistograms(object):
         #            self.CreateCutString(standardCutString,
         #                            additionalSelections,theWeight))
     #so, if the tree has no entries, root doesn't even hand back an empty histogram
-    # and therefore this ends up trying to get clone a none type
+    #and therefore this ends up trying to get clone a none type
     #pass the None forward, and we can let the Add handle this
         try:
             theHisto = ROOT.gDirectory.Get(histogramName).Clone()
@@ -280,7 +280,7 @@ def main():
     
 
     if args.year == '2016':
-        dataPath = '/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/allTau_VM_DR_1/'
+        dataPath = '/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/'
     elif args.year == '2017':
         dataPath = '/data/aloeliger/SMHTT_Selected_2017_Deep/'
     elif args.year == '2018':

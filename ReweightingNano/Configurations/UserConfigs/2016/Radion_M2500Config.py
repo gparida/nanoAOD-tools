@@ -1,6 +1,7 @@
 import ROOT
 import os
 import json
+from weightList import *
 
 from Configurations.ConfigDefinition import ReweightConfiguration
 from Configurations.Weights.CrossSectionWeightingModule.CrossSectionWeight import crossSectionWeight as crossSectionWeight
@@ -30,7 +31,4 @@ except KeyError:
     crossSectionWeight.forcedGenWeight = None
 
 
-Radion_M2500Config.listOfWeights = [
-    crossSectionWeight,
-    pileupWeight_2016,
-]
+Radion_M2500Config.listOfWeights = list

@@ -1,6 +1,7 @@
 import ROOT
 import os
 import json
+from weightList import *
 
 from Configurations.ConfigDefinition import ReweightConfiguration
 from Configurations.Weights.CrossSectionWeightingModule.CrossSectionWeight import crossSectionWeight as crossSectionWeight
@@ -32,7 +33,4 @@ try:
 except ValueError:
     crossSectionWeight.forcedGenWeight = None
  
-WJetsConfig.listOfWeights = [
-    crossSectionWeight,
-    pileupWeight_2016,
-]
+WJetsConfig.listOfWeights = list
