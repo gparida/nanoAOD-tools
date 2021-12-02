@@ -103,7 +103,7 @@ class Channel(Module):
 
 
 		self.boostedTau.setupCollection(event)
-		self.boostedTau.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAnewDM2017v2 & 2 == 2)) # VLoose ID for oldMVA for boosted Taus
+		self.boostedTau.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAnewDM2017v2 & 2 == 2)) # VLoose ID for newMVA for boosted Taus - but use oldMVA weighttn
 
 		self.Tau.collection =  filter(self.HPStauVeto,self.Tau.collection)
 

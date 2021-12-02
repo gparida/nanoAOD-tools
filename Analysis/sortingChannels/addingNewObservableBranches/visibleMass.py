@@ -17,8 +17,8 @@ class VisibleMass(Module):
 
     def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
         self.out = wrappedOutputTree
-        self.out.branch("MVis_LL", "F")
-        self.out.branch("DeltaR_LL","F")
+        self.out.branch("gMVis_LL", "F")
+        self.out.branch("gDeltaR_LL","F")
 
 
     def endFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
@@ -64,8 +64,8 @@ class VisibleMass(Module):
             if (len(gboostedTau)!=0):
                 lepton1.SetPtEtaPhiM(gboostedTau[0].pt,gboostedTau[0].eta,gboostedTau[0].phi,gboostedTau[0].mass)
                 lepton2.SetPtEtaPhiM(gMuon[0].pt,gMuon[0].eta,gMuon[0].phi,gMuon[0].mass)
-            self.out.fillBranch("MVis_LL",abs((lepton1 + lepton2).M()))
-            self.out.fillBranch("DeltaR_LL",lepton1.DeltaR(lepton2)) 
+            self.out.fillBranch("gMVis_LL",abs((lepton1 + lepton2).M()))
+            self.out.fillBranch("gDeltaR_LL",lepton1.DeltaR(lepton2)) 
        
        return True     
 
