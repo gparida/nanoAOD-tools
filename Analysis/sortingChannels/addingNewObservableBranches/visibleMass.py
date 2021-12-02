@@ -43,8 +43,8 @@ class VisibleMass(Module):
             if (len(gTau)==1 and len(gboostedTau)==1):
                 lepton1.SetPtEtaPhiM(gTau[0].pt,gTau[0].eta,gTau[0].phi,gTau[0].mass)
                 lepton2.SetPtEtaPhiM(gboostedTau[0].pt,gboostedTau[0].eta,gboostedTau[0].phi,gboostedTau[0].mass)
-            self.out.fillBranch("MVis_LL",abs((lepton1 + lepton2).M()))
-            self.out.fillBranch("DeltaR_LL",lepton1.DeltaR(lepton2))
+            self.out.fillBranch("gMVis_LL",abs((lepton1 + lepton2).M()))
+            self.out.fillBranch("gDeltaR_LL",lepton1.DeltaR(lepton2))
     
        if self.channel == "et":
             if (len(gTau)!=0):
@@ -54,8 +54,8 @@ class VisibleMass(Module):
             if (len(gboostedTau)!=0):
                  lepton1.SetPtEtaPhiM(gboostedTau[0].pt,gboostedTau[0].eta,gboostedTau[0].phi,gboostedTau[0].mass)
                  lepton2.SetPtEtaPhiM(gElectron[0].pt,gElectron[0].eta,gElectron[0].phi,gElectron[0].mass)
-            self.out.fillBranch("MVis_LL",abs((lepton1 + lepton2).M()))
-            self.out.fillBranch("DeltaR_LL",lepton1.DeltaR(lepton2))
+            self.out.fillBranch("gMVis_LL",abs((lepton1 + lepton2).M()))
+            self.out.fillBranch("gDeltaR_LL",lepton1.DeltaR(lepton2))
 
        if self.channel == "mt":
             if (len(gTau)!=0):
