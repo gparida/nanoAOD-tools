@@ -125,6 +125,9 @@ variableAxisTitleDictionary = {
     "gFatJet_particleNetMD_Xbb":"gFatJet_particleNetMD_Xbb",
     "gFatJet_particleNetMD_QCD":"gFatJet_particleNetMD_QCD",
     "gFatJet_particleNet_HbbvsQCD":"gFatJet_particleNet_HbbvsQCD",
+    "MET_pt":"MET",
+    "alltau_pt":"reconstructedTau_pt",
+    "allTau_eta":"reconstructedTau_eta",
     }
 
 
@@ -255,6 +258,9 @@ variableSettingDictionary = {
     "gFatJet_particleNetMD_Xbb":"20,0,1",
     "gFatJet_particleNetMD_QCD":"20,0,1",
     "gFatJet_particleNet_HbbvsQCD":"20,0,1",
+    "MET":"50,0,1000",
+    "allTau_pt":"20,0.0,400.0",
+    "allTau_eta":"30,-3.0,3.0",
     #'Electron_eta':'48,-2.4,2.4',
     #'Electron_pt':'20,20.0,400.0',
     #'pt_2':'25,30.0,80.0',
