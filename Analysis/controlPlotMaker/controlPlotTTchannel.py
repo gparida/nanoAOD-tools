@@ -37,21 +37,21 @@ class MakeHistograms(object):
 
         theTree = theFile.Get('Events')
 
-        print ('g'+variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
-                         self.CreateCutString(standardCutString,
-                                         additionalSelections,theWeight))
-        #
-        theTree.Draw('g'+variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
-                self.CreateCutString(standardCutString,
-                                additionalSelections,theWeight))
-        #print ("uhoh No g in it")
-        #print (variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
+        #print ('g'+variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
         #                 self.CreateCutString(standardCutString,
         #                                 additionalSelections,theWeight))
-        
-        #theTree.Draw(variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
+        ##
+        #theTree.Draw('g'+variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
         #        self.CreateCutString(standardCutString,
         #                        additionalSelections,theWeight))
+        ##print ("uhoh No g in it")
+        print (variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
+                         self.CreateCutString(standardCutString,
+                                         additionalSelections,theWeight))
+        
+        theTree.Draw(variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
+                self.CreateCutString(standardCutString,
+                                additionalSelections,theWeight))
             
 
 
