@@ -36,7 +36,7 @@ class MakeHistograms(object):
                  theWeight = 'FinalWeighting'):
 
         theTree = theFile.Get('Events')
-        try:
+        
             print ('g'+variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
                              self.CreateCutString(standardCutString,
                                              additionalSelections,theWeight))
