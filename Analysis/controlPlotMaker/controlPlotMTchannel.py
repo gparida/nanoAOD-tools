@@ -45,15 +45,15 @@ class MakeHistograms(object):
         #        self.CreateCutString(standardCutString,
         #                        additionalSelections,theWeight))
 
+         
+        print ("uhoh No g in it")
+        print (variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
+                         self.CreateCutString(standardCutString,
+                                         additionalSelections,theWeight))
         
-       print ("uhoh No g in it")
-       print (variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
-                        self.CreateCutString(standardCutString,
-                                        additionalSelections,theWeight))
-       
-       theTree.Draw(variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
-               self.CreateCutString(standardCutString,
-                               additionalSelections,theWeight))
+        theTree.Draw(variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
+                self.CreateCutString(standardCutString,
+                                additionalSelections,theWeight))
     #so, if the tree has no entries, root doesn't even hand back an empty histogram
     # and therefore this ends up trying to get clone a none type
     #pass the None forward, and we can let the Add handle this
