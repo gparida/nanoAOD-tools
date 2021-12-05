@@ -126,7 +126,7 @@ variableAxisTitleDictionary = {
     "gFatJet_particleNetMD_QCD":"gFatJet_particleNetMD_QCD",
     "gFatJet_particleNet_HbbvsQCD":"gFatJet_particleNet_HbbvsQCD",
     "MET_pt":"MET",
-    "alltau_pt":"reconstructedTau_pt",
+    "allTau_pt":"reconstructedTau_pt",
     "allTau_eta":"reconstructedTau_eta",
     }
 
