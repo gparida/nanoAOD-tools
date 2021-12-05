@@ -46,7 +46,7 @@ class MakeHistograms(object):
         #                        additionalSelections,theWeight))
 
         
-        print ("uhoh No g in it")
+        #print ("uhoh No g in it")
         print (variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
                          self.CreateCutString(standardCutString,
                                          additionalSelections,theWeight))
