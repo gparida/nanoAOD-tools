@@ -279,7 +279,7 @@ def main():
     parser.add_argument('--standardCutString',
                         nargs='?',
                         help='Change the standard cutting definition',
-                        default=["MET_pt>200"])
+                        default="MET_pt>200")
     parser.add_argument('--changeHistogramBounds',
                         nargs = '?',
                         help = 'Change the standard histogram bounding (affects all histograms)')
