@@ -24,7 +24,7 @@ class MakeHistograms(object):
         else:
             cutString=weighting +' && '
         cutString = cutString[:len(cutString)-3] # removing the && at the very end of the final cutstring
-        #cutString+=')'
+        cutString+=')'
         return cutString
         
     #Histogram Making member function and storing it in an attribute
@@ -37,23 +37,23 @@ class MakeHistograms(object):
 
         theTree = theFile.Get('Events')
         
-        print ('g'+variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
-                         self.CreateCutString(standardCutString,
-                                         additionalSelections,theWeight))
-        
-        theTree.Draw('g'+variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
-                self.CreateCutString(standardCutString,
-                                additionalSelections,theWeight))
-
-        
-        #print ("uhoh No g in it")
-        #print (variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
+        #print ('g'+variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
         #                 self.CreateCutString(standardCutString,
         #                                 additionalSelections,theWeight))
         #
-        #theTree.Draw(variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
+        #theTree.Draw('g'+variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
         #        self.CreateCutString(standardCutString,
         #                        additionalSelections,theWeight))
+
+        
+        #print ("uhoh No g in it")
+        print (variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
+                         self.CreateCutString(standardCutString,
+                                         additionalSelections,theWeight))
+        
+        theTree.Draw(variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
+                self.CreateCutString(standardCutString,
+                                additionalSelections,theWeight))
     #so, if the tree has no entries, root doesn't even hand back an empty histogram
     # and therefore this ends up trying to get clone a none type
     #pass the None forward, and we can let the Add handle this
