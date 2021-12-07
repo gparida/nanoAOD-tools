@@ -253,7 +253,7 @@ variableSettingDictionary = {
     "ngTau":"5,0,5",
     "ngboostedTau":"5,0,5",
     "gMVis_LL":"18,20,200",
-    "gDeltaR_LL":"10,0,5",
+    "gDeltaR_LL":"50,0,5",
     "gFatJet_particleNetMD_Xbb/(gFatJet_particleNetMD_Xbb+gFatJet_particleNetMD_QCD)":"20,0,1",
     "gFatJet_particleNetMD_Xbb":"20,0,1",
     "gFatJet_particleNetMD_QCD":"20,0,1",
