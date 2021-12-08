@@ -24,7 +24,7 @@ class MakeHistograms(object):
         else:
             cutString=weighting +' && '
         cutString = cutString[:len(cutString)-3] # removing the && at the very end of the final cutstring
-        cutString+=')'
+        #cutString+=')'
         return cutString
         
     #Histogram Making member function and storing it in an attribute
@@ -193,7 +193,7 @@ def main():
                             #"gMuon_eta",
                             #"gElectron_pt",
                             #"gElectron_eta",
-                            "gDeltaR_LL"]
+                            "gDeltaR_LL"])
                             #"boostedTau_pt",
                             #"boostedTau_pt[0]",
                             #"boostedTau_pt[1]",
@@ -247,7 +247,7 @@ def main():
                             #"FatJet_tau2/FatJet_tau1",
                             #"FatJet_tau2[0]/FatJet_tau1[0]",
                             #"FatJet_tau2[1]/FatJet_tau1[1]"]
-                            )
+                            #)
                     #default=['Tau_pt',
                     #       'Tau_phi',
                     #       'Tau_eta',
