@@ -541,6 +541,7 @@ def main():
         plotPad.SetFrameLineWidth(1) #1
         plotPad.SetFrameBorderMode(0)
         plotPad.SetFrameBorderSize(1)
+        plotPad.SetLogy(1)
         #plotPad.SetOptTitle(0)
         #
         ratioPad.SetPad("pad2","ratio",0,0,1,0.25)
