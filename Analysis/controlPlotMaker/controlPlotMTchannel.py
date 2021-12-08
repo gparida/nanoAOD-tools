@@ -176,7 +176,7 @@ def main():
                     help='Variables to draw the control plots for',
                     default=["gFatJet_pt",
                              "gFatJet_eta",
-                             "gFatJet_msoftdrop"
+                             "gFatJet_msoftdrop",
                              "MET_pt",
                              "allTau_pt",
                              "allTau_eta",
