@@ -73,7 +73,7 @@ class Channel(Module):
 	def HPStauVeto(self,tauCollectionObject):
 		isTau =""
 		tau1 = ROOT.TLorentzVector(0.0,0.0,0.0,0.0)
-		tau2=ROOT.TLorentzVector(0.0,0.0,0.0,0.0)
+		tau2 = ROOT.TLorentzVector(0.0,0.0,0.0,0.0)
 		tau1.SetPtEtaPhiM(tauCollectionObject.pt,tauCollectionObject.eta,tauCollectionObject.phi,tauCollectionObject.mass)
 		for boostedtau in self.boostedTau.collection:
 			tau2.SetPtEtaPhiM(boostedtau.pt,boostedtau.eta,boostedtau.phi,boostedtau.mass)
@@ -87,7 +87,22 @@ class Channel(Module):
 		else:
 			return False
 	
+	def FatJetConeIsolation(self,CollectionObject):
+		isObj =""
+		obj1 = ROOT.TLorentzVector(0.0,0.0,0.0,0.0)
+		obj2 = ROOT.TLorentzVector(0.0,0.0,0.0,0.0)	
+		obj1.SetPtEtaPhiM(CollectionObject.pt,CollectionObject.eta,CollectionObject.phi,CollectionObject.mass)
+		for fatjet in self.FatJet.collection:
+			obj2.SetPtEtaPhiM(fatjet.pt,fatjet.eta,fatjet.phi,fatjet.mass)
+			deltaR = obj1.DeltaR(obj2)
+			if deltaR <= 0.8:
+				isObj = "bad"
+				break
 		
+		if isObj != "bad":
+			return True
+		else:
+			return False
 
 	#event loop
 	def analyze(self, event): 
@@ -122,6 +137,14 @@ class Channel(Module):
 
 		self.Muon.setupCollection(event)
 		self.Muon.apply_cut(lambda x: x.pt > 10 and x.mvaId >= 1 and x.pfRelIso03_all < 0.25)
+
+		#filter Objects to remove those within the fatjet cone
+
+		self.Tau.collection = filter(self.FatJetConeIsolation,self.Tau.collection)
+		self.boostedTau.collection = filter(self.FatJetConeIsolation,self.boostedTau.collection)
+		self.Electron.collection = filter(self.FatJetConeIsolation,self.Electron.collection)
+		self.Muon.collection = filter(self.FatJetConeIsolation,self.Muon.collection)
+		self.Jet.collection = filter (self.FatJetConeIsolation,self.Jet.collection)
 
 		############################################################################
 
