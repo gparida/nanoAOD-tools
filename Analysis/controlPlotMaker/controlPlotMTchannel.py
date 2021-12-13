@@ -270,6 +270,8 @@ def main():
                         nargs = '?',
                         help = 'Change the standard histogram bounding (affects all histograms)')
 
+    parser.add_argument('--logScale', help='make log plots', action='store_true')
+    
     args = parser.parse_args()
 
     ROOT.gStyle.SetOptStat(0)
@@ -527,6 +529,8 @@ def main():
         plotPad.SetFrameLineWidth(1) #1
         plotPad.SetFrameBorderMode(0)
         plotPad.SetFrameBorderSize(1)
+        if args.logScale:
+            plotPad.SetLogy(1)
         #plotPad.SetLogy(1)
         #plotPad.SetOptTitle(0)
         #
