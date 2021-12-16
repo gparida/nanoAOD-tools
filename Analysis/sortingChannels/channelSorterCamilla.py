@@ -35,6 +35,7 @@ class ChannelCamilla(Module):
 	def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
 		self.countBadevents = 0 #This is to keep track of bad events per file
 		self.out = wrappedOutputTree
+		#self.input = inputTree
 		self.Tau.setUpBranches(self.out) #creating the new branches     
 		self.FatJet.setUpBranches(self.out)
 		self.boostedTau.setUpBranches(self.out)

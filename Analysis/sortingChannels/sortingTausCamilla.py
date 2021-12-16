@@ -62,7 +62,7 @@ class mergeTauCamilla(Module):
         colllist =[]
         #print ("Type of the collection", type(tauCollection))
 
-        if event.channel == 0:
+        if event._tree.channel == 0:
             if (len(tauCollection)==2):
                 #self.allTauCollection = tauCollection
                 colllist.append(tauCollection)
@@ -84,7 +84,7 @@ class mergeTauCamilla(Module):
             self.fillBranches(colllist)
             return True    
         
-        if (event.channel == 1  or self.channel == 2):
+        if (event._tree.channel == 1  or event._tree.channel == 2):
             if (len(tauCollection)==1):
                 colllist.append(tauCollection)
             if (len(boostedtauCollection)==1):
