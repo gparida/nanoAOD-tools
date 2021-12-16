@@ -59,11 +59,11 @@ class mergeTauCamilla(Module):
     def analyze(self,event):
         tauCollection = Collection(event, "gTau","gnTau")
         boostedtauCollection = Collection(event, "gboostedTau","gnboostedTau")
-        channelCollection = Collection(event,"channel")
-        print ("channel",channelCollection[0].channel)
+        #channelCollection = Collection(event,"channel")
+        #print ("channel",channelCollection[0].channel)
         colllist =[]
         #print ("Type of the collection", type(tauCollection))
-        print ("MET",event._tree.MET_pt)
+        print ("MET",event.MET_pt)
         if event._tree.channel == 0:
             if (len(tauCollection)==2):
                 #self.allTauCollection = tauCollection
