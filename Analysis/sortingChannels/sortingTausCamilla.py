@@ -16,6 +16,7 @@ class mergeTauCamilla(Module):
         print ("Running the sorting Taus Module")
         #self.channel = channel # Specify the channel
         self.filename = filename
+        self.event =None
     
     #lets define the branches that need to be filled
     def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
@@ -30,7 +31,7 @@ class mergeTauCamilla(Module):
             self.out.branch("{}_{}".format("allTau",branch[0]),"{}".format(branch[1]),lenVar="n{}".format("allTau"))
     
     def fillBranches(self,colllist):
-        if self.channel == "tt":
+        if self.event.channel == 0:
             length = 2
         else:
             length =1
@@ -57,6 +58,7 @@ class mergeTauCamilla(Module):
             
 
     def analyze(self,event):
+        self.event = event
         tauCollection = Collection(event, "gTau","gnTau")
         boostedtauCollection = Collection(event, "gboostedTau","gnboostedTau")
         #channelCollection = Collection(event,"channel")
