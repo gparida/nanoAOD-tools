@@ -197,7 +197,7 @@ class ChannelCamilla(Module):
 		self.FatJet.setupCollection(event)
 		try:
 			#self.FatJet.apply_cut(lambda x: (x.pt > 200) and (abs(x.eta) < 2.4) and (x.msoftdrop > 30) and (x.msoftdrop < 250) and ((x.tau2/x.tau1) < 0.75))
-			self.FatJet.apply_cut(lambda x: (x.pt > 200) and (abs(x.eta) < 2.4) and (x.msoftdrop > 30) and (x.msoftdrop < 250) and x.jetId>=2)	
+			self.FatJet.apply_cut(lambda x: (x.pt > 200) and (abs(x.eta) < 2.4) and (x.msoftdrop > 30) and (x.msoftdrop < 250) and x.jetId>=2 and ((x.tau2/x.tau1) < 0.75))	
 		except ZeroDivisionError:
 			self.countBadevents += 1
 			print("Error:(")
