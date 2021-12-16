@@ -64,7 +64,7 @@ class mergeTauCamilla(Module):
         colllist =[]
         #print ("Type of the collection", type(tauCollection))
         print ("MET",event.MET_pt)
-        if event._tree.channel == 0:
+        if event.channel == 0:
             if (len(tauCollection)==2):
                 #self.allTauCollection = tauCollection
                 colllist.append(tauCollection)
