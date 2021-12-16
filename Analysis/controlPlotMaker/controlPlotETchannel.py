@@ -263,14 +263,14 @@ def main():
                         #"Flag_EcalDeadCellTriggerPrimitiveFilter",
                         #"Flag_BadPFMuonFilter",
                         #"Flag_eeBadScFilter"])
-                        default=None)
+                        default=["gDeltaR_LL<1.5"])
     parser.add_argument('--pause',
                         help='pause after drawing each plot to make it easier to view',
                         action='store_true')
     parser.add_argument('--standardCutString',
                         nargs='?',
                         help='Change the standard cutting definition',
-                        default=None)
+                        default="channel==0")
     parser.add_argument('--changeHistogramBounds',
                         nargs = '?',
                         help = 'Change the standard histogram bounding (affects all histograms)')
