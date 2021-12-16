@@ -41,7 +41,7 @@ class ChannelCamilla(Module):
 		self.boostedTau.setUpBranches(self.out)
 		self.Electron.setUpBranches(self.out)
 		self.Muon.setUpBranches(self.out)
-		self.out.branch("channel","I")
+		self.out.branch("channel","I") # adding a new branch for channel 0-Di tau, 1- E-tau, 2- M-Tau
 	
 	def endFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
 		print ("Number of Bad Events ", self.countBadevents)
@@ -177,7 +177,7 @@ class ChannelCamilla(Module):
 
 
 	def analyze(self, event): 
-		list = {}
+		list = {} # to store the combined pt and the indices of the pairs
 
 
 		#Select the AK4 Jets and keep choose Jets with Tight DeepJet ID
@@ -192,7 +192,7 @@ class ChannelCamilla(Module):
 		self.boostedTau.setupCollection(event)
 		self.boostedTau.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAnewDM2017v2 & 2 == 2)) # VLoose ID for newMVA for boosted Taus - but use oldMVA weighttn
 
-		self.Tau.collection =  filter(self.HPStauVeto,self.Tau.collection)
+		self.Tau.collection =  filter(self.HPStauVeto,self.Tau.collection) #HPS veto applied
 
 		self.FatJet.setupCollection(event)
 		try:
@@ -311,7 +311,7 @@ class ChannelCamilla(Module):
 					self.Muon.collection = [obj for obj in self.Muon.collection if self.Muon.collection.index(obj)==list[Keymax][2]]
 					self.out.fillBranch("channel",2)
 				else:
-					print ("Thsi also happens")
+					print ("This also happens")
 				
 				self.Tau.fillBranches(self.out)
 				self.FatJet.fillBranches(self.out)
