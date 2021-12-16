@@ -86,7 +86,7 @@ class mergeTauCamilla(Module):
             self.fillBranches(colllist)
             return True    
         
-        if (event._tree.channel == 1  or event._tree.channel == 2):
+        if (event.channel == 1  or event.channel == 2):
             if (len(tauCollection)==1):
                 colllist.append(tauCollection)
             if (len(boostedtauCollection)==1):
