@@ -310,6 +310,8 @@ class ChannelCamilla(Module):
 					self.Electron.collection = []
 					self.Muon.collection = [obj for obj in self.Muon.collection if self.Muon.collection.index(obj)==list[Keymax][2]]
 					self.out.fillBranch("channel",2)
+				else:
+					print ("Thsi also happens")
 				
 				self.Tau.fillBranches(self.out)
 				self.FatJet.fillBranches(self.out)
@@ -317,7 +319,9 @@ class ChannelCamilla(Module):
 				self.Muon.fillBranches(self.out)
 				self.Electron.fillBranches(self.out)
 				
+				
 				return True
+
 			else:
 				return False	
 				
