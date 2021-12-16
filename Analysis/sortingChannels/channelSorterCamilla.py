@@ -239,12 +239,13 @@ class ChannelCamilla(Module):
 			list["te"]=self.crossPairing(self.Tau.collection,self.Electron.collection)
 			list["tm"]=self.crossPairing(self.Tau.collection,self.Muon.collection)
 
-			print (list)
+			#print (list)
 
 			Keymax = max(list, key = lambda x: list[x][0])
-			print(Keymax)
+			
 
 			if (list[Keymax][0]>0):
+				print(Keymax)
 				if Keymax == "bb":
 					self.boostedTau.collection = [obj for obj in self.boostedTau.collection if self.boostedTau.collection.index(obj)==list[Keymax][1] or self.boostedTau.collection.index(obj)==list[Keymax][2]]
 					#self.Tau.collection = [obj for obj in self.Tau.collection if self.Tau.collection.index(obj)==-1 or self.Tau.collection.index(obj)==-1]
