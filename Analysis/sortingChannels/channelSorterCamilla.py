@@ -1,8 +1,8 @@
 from PhysicsTools.NanoAODTools.postprocessing.framework.postprocessor import PostProcessor
 from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collection 
 from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
-from addingNewObservableBranches.visibleMass import VisibleMass  #Importing modules works if the folders are in the place where the scripts are
-from sortingTaus import mergeTau
+from addingNewObservableBranches.visibleMassCamilla import VisibleMassCamilla  #Importing modules works if the folders are in the place where the scripts are
+from sortingTausCamilla import mergeTauCamilla
 import ROOT
 import glob
 from particleClass import particle
@@ -19,7 +19,7 @@ import os
 ROOT.PyConfig.IgnoreCommandLineOptions = True  #Find out what does this do ?
 
 class ChannelCamilla(Module):
-	def __init__(self, channel,filename):
+	def __init__(self,filename):
 		print ("Running the channel sorter Module")
 		print ("processing file ",filename)
 		#self.channel = channel # Specify the channel
@@ -326,19 +326,19 @@ class ChannelCamilla(Module):
 
 
 def call_postpoc(files):
-		letsSortChannels = lambda: ChannelCamilla(args.Channel,filename)
-		tauOdering = lambda: mergeTau(args.Channel,filename)
-		visibleM = lambda:VisibleMass(args.Channel)
+		letsSortChannels = lambda: ChannelCamilla(filename)
+		tauOdering = lambda: mergeTauCamilla(filename)
+		visibleM = lambda:VisibleMassCamilla()
 		nameStrip=files.strip()
 		filename = (nameStrip.split('/')[-1]).split('.')[-2]
-		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[letsSortChannels()], postfix=post,noOut=False,outputbranchsel=outputbranches)
+		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[letsSortChannels(),tauOdering(),visibleM()], postfix=post,noOut=False,outputbranchsel=outputbranches)
 
 		p.run()
 
 
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(description='Script to Handle root file preparation to split into channels. Input should be a singular files for each dataset or data already with some basic selections applied')
-	parser.add_argument('--Channel',help="enter either tt or et or mt. For boostedTau test enter test",required=True,choices=['tt', 'et', 'mt'])
+	#parser.add_argument('--Channel',help="enter either tt or et or mt. For boostedTau test enter test",required=True,choices=['tt', 'et', 'mt'])
 	parser.add_argument('--inputLocation',help="enter the path to the location of input file set",default="")
 	parser.add_argument('--outputLocation',help="enter the path where yu want the output files to be stored",default ="")
 	parser.add_argument('--ncores',help ="number of cores for parallel processing", default=1)
