@@ -282,7 +282,7 @@ def main():
                         #"Flag_EcalDeadCellTriggerPrimitiveFilter",
                         #"Flag_BadPFMuonFilter",
                         #"Flag_eeBadScFilter"])
-                        default=["gDeltaR_LL<1.5"])
+                        default=["gDeltaR_LL<1.5","gFatJet_tau2/gFatJet_tau1<1.5"])
     parser.add_argument('--pause',
                         help='pause after drawing each plot to make it easier to view',
                         action='store_true')
