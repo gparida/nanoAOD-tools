@@ -12,7 +12,7 @@ ROOT.PyConfig.IgnoreCommandLineOptions = True
 class VisibleMassCamilla(Module):
     def __init__(self):
        print ("Running the Visible Mass and Delta R branches")
-       self.channel = channel # Specify the channel
+       #self.channel = channel # Specify the channel
 
 
     def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):

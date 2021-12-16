@@ -14,7 +14,7 @@ ROOT.PyConfig.IgnoreCommandLineOptions = True  #Find out what does this do ?
 class mergeTauCamilla(Module):
     def __init__(self,filename):
         print ("Running the sorting Taus Module")
-        self.channel = channel # Specify the channel
+        #self.channel = channel # Specify the channel
         self.filename = filename
     
     #lets define the branches that need to be filled
