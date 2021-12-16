@@ -245,7 +245,7 @@ class ChannelCamilla(Module):
 			
 
 			if (list[Keymax][0]>0):
-				print(Keymax)
+				#print(Keymax)
 				if Keymax == "bb":
 					self.boostedTau.collection = [obj for obj in self.boostedTau.collection if self.boostedTau.collection.index(obj)==list[Keymax][1] or self.boostedTau.collection.index(obj)==list[Keymax][2]]
 					#self.Tau.collection = [obj for obj in self.Tau.collection if self.Tau.collection.index(obj)==-1 or self.Tau.collection.index(obj)==-1]
