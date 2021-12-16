@@ -24,7 +24,7 @@ class MakeHistograms(object):
         else:
             cutString=weighting +' && '
         cutString = cutString[:len(cutString)-3] # removing the && at the very end of the final cutstring
-        #cutString+=')'
+        cutString+=')'
         return cutString
         
     #Histogram Making member function and storing it in an attribute
