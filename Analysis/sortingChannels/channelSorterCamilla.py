@@ -104,6 +104,25 @@ class ChannelCamilla(Module):
 			return True
 		else:
 			return False
+
+	def FatJetTauOverlap(self,CollectionObject):
+		isObj =""
+		bigJet = ROOT.TLorentzVector(0.0,0.0,0.0,0.0)
+		tau = ROOT.TLorentzVector(0.0,0.0,0.0,0.0)
+		tau.SetPtEtaPhiM(CollectionObject.pt,CollectionObject.eta,CollectionObject.phi,CollectionObject.mass)
+		for fatjet in self.FatJet.collection:
+			bigJet.SetPtEtaPhiM(fatjet.pt,fatjet.eta,fatjet.phi,fatjet.mass)
+			deltaR = tau.DeltaR(bigJet)
+			if deltaR <= 1.5:
+				isObj = "bad"
+			break
+		
+		if isObj != "bad":
+			return True
+		else:
+			return False
+
+		
 	
 	def ElectronTauOverlap(self,CollectionObject):
 		isObj =""
@@ -212,14 +231,14 @@ class ChannelCamilla(Module):
 		self.Muon.apply_cut(lambda x: x.pt > 10 and x.mvaId >= 1 and x.pfRelIso03_all < 0.25)
 
 		#filter Objects to remove those within the fatjet cone
-
-		self.Tau.collection = filter(self.FatJetConeIsolation,self.Tau.collection)
-		self.boostedTau.collection = filter(self.FatJetConeIsolation,self.boostedTau.collection)
 		self.Electron.collection = filter(self.FatJetConeIsolation,self.Electron.collection)
 		self.Muon.collection = filter(self.FatJetConeIsolation,self.Muon.collection)
-		self.Jet.collection = filter (self.FatJetConeIsolation,self.Jet.collection)
+
+		#Tau and FatJet should be more than 1.5 distance apart
+		self.Tau.collection = filter(self.FatJetTauOverlap,self.Tau.collection)
+		self.boostedTau.collection = filter(self.FatJetTauOverlap,self.boostedTau.collection)
 	
-		#filter the AK4 Jet collection for FatJet and Ak4 Jet overlap
+		#filter the AK4 Jet collection for FatJet and Ak4 Jet overlap, 1.2 distance apart
 		self.Jet.collection = filter(self.JetFatJetIsolation,self.Jet.collection)
 
 		#remove light lepton and tau overlap
