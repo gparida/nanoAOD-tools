@@ -2,6 +2,7 @@ from PhysicsTools.NanoAODTools.postprocessing.framework.postprocessor import Pos
 from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collection 
 from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
 from addingNewObservableBranches.visibleMassCamilla import VisibleMassCamilla  #Importing modules works if the folders are in the place where the scripts are
+from addingNewObservableBranches.fastMTTBranches import fastMTTBranches
 from sortingTausCamilla import mergeTauCamilla
 import ROOT
 import glob
@@ -336,7 +337,7 @@ def call_postpoc(files):
 		visibleM = lambda:VisibleMassCamilla()
 		nameStrip=files.strip()
 		filename = (nameStrip.split('/')[-1]).split('.')[-2]
-		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[letsSortChannels(),tauOdering(),visibleM()], postfix=post,noOut=False,outputbranchsel=outputbranches)
+		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[letsSortChannels(),tauOdering(),visibleM(), fastMTTBranches()], postfix=post,noOut=False,outputbranchsel=outputbranches)
 
 		p.run()
 
