@@ -36,7 +36,8 @@ class genMeasurementRadionBranches(Module):
     def analyze(self, event):
         genParticles = Collection(event, 'GenPart', 'nGenPart')
 
-        genParticleRadion = filter(lambda x: (x.mass==1000 or x.mass==1200 or x.mass==1400 or x.mass == 1600 or x.mass==1800 or x.mass==2000 or x.mass==2500 or x.mass==3000 or x.mass==3500 or x.mass==4000 or x.mass==4500) and abs(x.eta)<2.4,genParticles)
+        genParticleRadion = filter(lambda x: (x.mass==1000 or x.mass==1200 or x.mass==1400 or x.mass == 1600 or x.mass==1800 or x.mass==2000 or x.mass==2500 or x.mass==3000 or x.mass==3500 or x.mass==4000 or x.mass==4500) and abs(x.pt)>=1,genParticles)
+        ,genParticles)
         genParticlesHiggs = filter(lambda x: x.mass==125,genParticles)
 
         Higgs1 = ROOT.TLorentzVector(0.0,0.0,0.0,0.0)
