@@ -37,7 +37,6 @@ class genMeasurementRadionBranches(Module):
         genParticles = Collection(event, 'GenPart', 'nGenPart')
 
         genParticleRadion = filter(lambda x: (x.mass==1000 or x.mass==1200 or x.mass==1400 or x.mass == 1600 or x.mass==1800 or x.mass==2000 or x.mass==2500 or x.mass==3000 or x.mass==3500 or x.mass==4000 or x.mass==4500) and x.pt>=1,genParticles)
-        ,genParticles)
         genParticlesHiggs = filter(lambda x: x.mass==125,genParticles)
 
         Higgs1 = ROOT.TLorentzVector(0.0,0.0,0.0,0.0)
