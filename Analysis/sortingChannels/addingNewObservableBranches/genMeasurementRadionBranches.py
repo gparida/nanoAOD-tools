@@ -42,7 +42,7 @@ class genMeasurementRadionBranches(Module):
         Higgs1 = ROOT.TLorentzVector(0.0,0.0,0.0,0.0)
         Higgs2 = ROOT.TLorentzVector(0.0,0.0,0.0,0.0)
 
-        if len(genParticlesHiggs == 2):
+        if len(genParticlesHiggs)==2:
             Higgs1.SetPtEtaPhiM(genParticlesHiggs[0].pt,genParticlesHiggs[0].eta,genParticlesHiggs[0].phi,genParticlesHiggs[0].mass)
             Higgs2.SetPtEtaPhiM(genParticlesHiggs[1].pt,genParticlesHiggs[1].eta,genParticlesHiggs[1].phi,genParticlesHiggs[1].mass)
             self.out.fillBranch("RecoGenRadion_m",abs((Higgs1+Higgs2).M()))
@@ -52,7 +52,7 @@ class genMeasurementRadionBranches(Module):
         else:
             print ("!!!!!!!!!!!!!!!!!!!!!!!!!More than two Higgs in Signal!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
-        if len(genParticleRadion==1):
+        if len(genParticleRadion)==1:
             self.out.fillBranch("genRadion_pt",genParticlesHiggs[0].pt)
             self.out.fillBranch("genRadion_eta",genParticlesHiggs[0].eta)
             self.out.fillBranch("genRadion_phi",genParticlesHiggs[0].phi)
