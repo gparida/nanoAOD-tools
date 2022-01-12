@@ -52,15 +52,15 @@ class genMeasurementRadionBranches(Module):
         else:
             print ("!!!!!!!!!!!!!!!!!!!!!!!!!More than two Higgs in Signal!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
-        if len(genParticleRadion)>=1:
-            self.out.fillBranch("genRadion_pt",genParticlesHiggs[0].pt)
-            self.out.fillBranch("genRadion_eta",genParticlesHiggs[0].eta)
-            self.out.fillBranch("genRadion_phi",genParticlesHiggs[0].phi)
-            self.out.fillBranch("genRadion_m",genParticlesHiggs[0].mass)
+        if len(genParticleRadion)==1:
+            self.out.fillBranch("genRadion_pt",genParticleRadion[0].pt)
+            self.out.fillBranch("genRadion_eta",genParticleRadion[0].eta)
+            self.out.fillBranch("genRadion_phi",genParticleRadion[0].phi)
+            self.out.fillBranch("genRadion_m",genParticleRadion[0].mass)
         
         else:
             print("!!!!!!!!!!!!!!!!!!!!!!!!!More than one Radion in Signal!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-            print (genParticleRadion[0].pt,genParticleRadion[1].pt)
+            print (len(genParticleRadion))
 
 
         return True
