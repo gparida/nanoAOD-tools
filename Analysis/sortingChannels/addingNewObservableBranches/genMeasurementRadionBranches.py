@@ -60,6 +60,7 @@ class genMeasurementRadionBranches(Module):
         
         else:
             print("!!!!!!!!!!!!!!!!!!!!!!!!!More than one Radion in Signal!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+            print (genParticleRadion[0].pt,genParticleRadion[1].pt)
 
 
         return True
