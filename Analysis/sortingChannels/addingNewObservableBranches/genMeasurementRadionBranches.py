@@ -69,7 +69,7 @@ def call_postpoc(files):
 	genMeasurementRadion = lambda: genMeasurementRadion(filename)
 	nameStrip=files.strip()
 	filename = (nameStrip.split('/')[-1]).split('.')[-2]
-	p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[genMeasurementRadion(filename)], postfix=post,noOut=False,outputbranchsel=outputbranches)
+	p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[genMeasurementRadion()], postfix=post,noOut=False,outputbranchsel=outputbranches)
 	p.run()
 
 
