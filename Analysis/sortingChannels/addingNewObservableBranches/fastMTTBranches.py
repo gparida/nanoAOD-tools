@@ -149,6 +149,8 @@ class fastMTTBranches(Module):
         self.theFastMTTtool.setFirstLepton(firstLepton)
         self.theFastMTTtool.setSecondLepton(secondLepton)
         self.theFastMTTtool.setTheMET(theMET)
+
+        print ("mass= ",self.theFastMTTtool.getFastMTTmass(),"phi= ",self.theFastMTTtool.getFastMTTphi())
         
         HTTvector = ROOT.TLorentzVector()
         HTTvector.SetPtEtaPhiM(
