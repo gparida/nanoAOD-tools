@@ -2,14 +2,20 @@
 #Module for creating our analysis's FastMTT based branches
 from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collection
 from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
+from PhysicsTools.NanoAODTools.postprocessing.framework.postprocessor import PostProcessor
 import ROOT
 from bbtautauAnalysisScripts.fastMTTPython.fastMTTtool import *
 import math
+import argparse
+import glob
+import multiprocessing as  np
 
 class fastMTTBranches(Module):
-    def __init__(self):
+    def __init__(self, filename):
         print("Creating fast MTT based branches")
         self.theFastMTTtool = fastMTTtool()
+        print ("processing file ",filename)
+        self.filename = filename
 
         
     def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
@@ -143,9 +149,11 @@ class fastMTTBranches(Module):
             xy = event.MET_covXY,
             yy = event.MET_covYY)
 
+
         #Now, we can try to reconstruct the radion in different ways
         #start with the simple ones
         #then we try to reconstruct the HTT vertex
+
         
         #Hbb vector
         HbbVector = ROOT.TLorentzVector()
@@ -231,3 +239,54 @@ class fastMTTBranches(Module):
         self.out.fillBranch("fastMTT_RadionLegWithMet_m", RadionVectorPlusMET.M())
         
         return True
+
+def call_postpoc(files):
+		MTTBranches = lambda: fastMTTBranches(filename)
+		nameStrip=files.strip()
+		filename = (nameStrip.split('/')[-1]).split('.')[-2]
+		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[MTTBranches()], postfix=post,noOut=False,outputbranchsel=outputbranches)
+
+		p.run()
+
+
+if __name__ == "__main__":
+	parser = argparse.ArgumentParser(description='Script to Handle root file preparation to split into channels. Input should be a singular files for each dataset or data already with some basic selections applied')
+	#parser.add_argument('--Channel',help="enter either tt or et or mt. For boostedTau test enter test",required=True,choices=['tt', 'et', 'mt'])
+	parser.add_argument('--inputLocation',help="enter the path to the location of input file set",default="")
+	parser.add_argument('--outputLocation',help="enter the path where yu want the output files to be stored",default ="")
+	parser.add_argument('--ncores',help ="number of cores for parallel processing", default=1)
+	parser.add_argument('--postfix',help="string at the end of output file names", default="")
+	args = parser.parse_args()
+
+	
+
+	#Define Eevnt Selection - all those to be connected by or
+
+	#fnames = ["/data/aloeliger/bbtautauAnalysis/2016/Data.root"]
+	fnames = glob.glob(args.inputLocation + "/*.root")  #making a list of input files
+	#outputDir = "/data/gparida/Background_Samples/bbtautauAnalysis/2016/{}_Channel".format(args.Channel)
+	outputDir = args.outputLocation
+	#outputDir = "."
+	outputbranches = "keep_and_drop.txt"
+	cuts = None
+	#post ="_{}Channel".format(str(args.Channel))
+	post = args.postfix
+	argList = list()
+	filename =""
+	for file in fnames:
+		argList.append(file)
+		#nameStrip = file.strip()
+    	#filename = (nameStrip.split('/')[-1]).split('.')[-2]
+	
+	#print (argList)
+
+	if int(args.ncores) == 1:
+		for arr in argList:
+			#print ("This is what is passed ",arr[1])
+			call_postpoc(arr)
+	
+	else:
+		pool = np.Pool(int(args.ncores))
+		#with np.Pool(object,ncores) as pool:
+		print ("list", argList)
+		res=pool.map(call_postpoc, argList)
