@@ -149,8 +149,6 @@ class fastMTTBranches(Module):
         self.theFastMTTtool.setFirstLepton(firstLepton)
         self.theFastMTTtool.setSecondLepton(secondLepton)
         self.theFastMTTtool.setTheMET(theMET)
-
-        #print ("mass= ",self.theFastMTTtool.getFastMTTmass(),"phi= ",self.theFastMTTtool.getFastMTTphi(),"eta= ",self.theFastMTTtool.getFastMTTeta(),"pt= ", self.theFastMTTtool.getFastMTTpt())
         
         HTTvector = ROOT.TLorentzVector()
         HTTvector.SetPtEtaPhiM(
@@ -159,17 +157,11 @@ class fastMTTBranches(Module):
             self.theFastMTTtool.getFastMTTphi(),
             self.theFastMTTtool.getFastMTTmass())
         
-        #print ("VecorMass= ",HTTvector.M(),"VecotrPhi= ",HTTvector.Phi(),"VectorEta= ", HTTvector.Eta(),"VectorPt= ",HTTvector.Pt())
+        self.out.fillBranch("fastMTT_HTTleg_pt", HTTvector.Pt())
+        self.out.fillBranch("fastMTT_HTTleg_eta", HTTvector.Eta())
+        self.out.fillBranch("fastMTT_HTTleg_phi", HTTvector.Phi())
+        self.out.fillBranch("fastMTT_HTTleg_m", HTTvector.M())
 
-        #self.out.fillBranch("fastMTT_HTTleg_pt", HTTvector.Pt())
-        #self.out.fillBranch("fastMTT_HTTleg_eta", HTTvector.Eta())
-        #self.out.fillBranch("fastMTT_HTTleg_phi", HTTvector.Phi())
-        #self.out.fillBranch("fastMTT_HTTleg_m", HTTvector.M())
-
-        self.out.fillBranch("fastMTT_HTTleg_pt",self.theFastMTTtool.getFastMTTpt())
-        self.out.fillBranch("fastMTT_HTTleg_eta", self.theFastMTTtool.getFastMTTeta())
-        self.out.fillBranch("fastMTT_HTTleg_phi", self.theFastMTTtool.getFastMTTphi())
-        self.out.fillBranch("fastMTT_HTTleg_m", self.theFastMTTtool.getFastMTTmass())
 
         #Now, we can try to reconstruct the radion in different ways as well.
         
