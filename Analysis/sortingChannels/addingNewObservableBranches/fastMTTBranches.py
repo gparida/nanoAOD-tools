@@ -21,10 +21,18 @@ class fastMTTBranches(Module):
     def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
         self.out = wrappedOutputTree
 
+        #HTT created with FastMTT pt,m, and visible eta/phi
         self.out.branch("fastMTT_HTTleg_pt","F")
         self.out.branch("fastMTT_HTTleg_eta","F")
         self.out.branch("fastMTT_HTTleg_phi","F")
         self.out.branch("fastMTT_HTTleg_m", "F")
+
+        #HTT created with FastMTT pt,m, and visible+MET eta/phi
+        self.out.branch("fastMTT_HTTlegWithMet_pt","F")
+        self.out.branch("fastMTT_HTTlegWithMet_eta","F")
+        self.out.branch("fastMTT_HTTlegWithMet_phi","F")
+        self.out.branch("fastMTT_HTTlegWithMet_m", "F")
+
 
         #Radion created from visible HTT components
         self.out.branch("fastMTT_RadionLeg_pt","F")
@@ -53,91 +61,87 @@ class fastMTTBranches(Module):
         secondLepton = fastMTTlepton()
         theMET = fastMTTmet()
 
+        collectionBasedFirstLepton = None
+        collectionBasedSecondLepton = None
+        fastMTTfirstLeptonMass = 0.0
+        fastMTTsecondLeptonMass = 0.0
+        firstLeptonType = ''
+        secondLeptonType = ''
+        firstLeptonTrueMass = 0.0
+        secondLeptonTrueMass = 0.0
+
         if event.channel == 0:
+            firstLeptonType = 'Tau'
+            secondLeptonType = 'Tau'
             if len(gTau) == 2:
-                firstLepton = fastMTTlepton(
-                    pt = gTau[0].pt,
-                    eta = gTau[0].eta,
-                    phi = gTau[0].phi,
-                    m = 0.13957,
-                    tauDecayMode = gTau[0].decayMode,
-                    leptonType = 'Tau')
-                secondLepton = fastMTTlepton(
-                    pt = gTau[1].pt,
-                    eta = gTau[1].eta,
-                    phi = gTau[1].phi,
-                    m = 0.13957,
-                    tauDecayMode = gTau[1].decayMode,
-                    leptonType = 'Tau')
-
+                collectionBasedFirstLepton = gTau[0]
+                collectionBasedSecondLepton = gTau[1]
             elif len(gboostedTau)==2:
-                firstLepton = fastMTTlepton(
-                    pt = gboostedTau[0].pt,
-                    eta = gboostedTau[0].eta,
-                    phi = gboostedTau[0].phi,
-                    m = 0.13957,
-                    tauDecayMode = gboostedTau[0].decayMode,
-                    leptonType = 'Tau')
-                secondLepton = fastMTTlepton(
-                    pt = gboostedTau[1].pt,
-                    eta = gboostedTau[1].eta,
-                    phi = gboostedTau[1].phi,
-                    m = 0.13957,
-                    tauDecayMode = gboostedTau[1].decayMode,
-                    leptonType='Tau')
-
+                collectionBasedFirstLepton = gboostedTau[0]
+                collectionBasedSecondLepton = gboostedTau[1]
+                
             elif (len(gTau)==1 and len(gboostedTau)==1):
-                firstLepton = fastMTTlepton(
-                    pt = gboostedTau[0].pt,
-                    eta = gboostedTau[0].eta,
-                    phi = gboostedTau[0].phi,
-                    m = 0.13957,
-                    tauDecayMode = gboostedTau[0].decayMode,
-                    leptonType='Tau')
-                secondLepton = fastMTTlepton(
-                    pt = gTau[0].pt,
-                    eta = gTau[0].eta,
-                    phi = gTau[0].phi,
-                    m = 0.13957,
-                    tauDecayMode = gTau[0].decayMode,
-                    leptonType = 'Tau')
+                collectionBasedFirstLepton = gboostedTau[0]
+                collectionBasedSecondLepton = gTau[0]
+            fastMTTfirstLeptonMass = collectionBasedFirstLepton.mass
+            fastMTTsecondLeptonMass = collectionBasedSecondLepton.mass
 
         elif event.channel == 1 or event.channel == 2:
+            firstLeptonType = 'Tau'
             if(len(gTau) != 0):
-                firstLepton = fastMTTlepton(
-                    pt = gTau[0].pt,
-                    eta = gTau[0].pt,
-                    phi = gTau[0].pt,
-                    m = 0.13957,
-                    tauDecayMode = gTau[0].decayMode,
-                    leptonType = 'Tau')
+                collectionBasedFirstLepton = gTau[0]
             if(len(gboostedTau) != 0):
-                firstLepton = fastMTTlepton(
-                    pt = gboostedTau[0].pt,
-                    eta = gboostedTau[0].eta,
-                    phi = gboostedTau[0].phi,
-                    m = 0.13957,
-                    tauDecayMode = gboostedTau[0].decayMode,
-                    leptonType = 'Tau')
+                collectionBasedFirstLepton = gboostedTau[0]
+            fastMTTfirstLeptonMass = collectionBasedFirstLepton.mass
 
             if event.channel == 1:
-                secondLepton = fastMTTlepton(
-                    pt = gElectron[0].pt,
-                    eta = gElectron[0].eta,
-                    phi = gElectron[0].phi,
-                    #m = gElectron[0].mass,
-                    #This seems to be another hard set in the tool.
-                    m = 0.000511,
-                    leptonType = 'Electron')
+                secondLeptonType = 'Electron'
+                collectionBasedSecondLepton = gElectron[0]
+                fastMTTsecondLeptonMass = 0.000511 #This seems to be hard set in the tool
+                #Ask Cecile...
 
             elif event.channel == 2:
-                secondLepton = fastMTTlepton(
-                    pt = gMuon[0].pt,
-                    eta = gMuon[0].eta,
-                    phi = gMuon[0].phi,
-                    m = gMuon[0].mass,
-                    leptonType = 'Muon')
+                secondLeptonType = 'Muon'
+                collectionBasedSecondLepton = gMuon[0]
+                fastMTTsecondLeptonMass = collectionBasedSecondLepton.mass
     
+    
+        firstLeptonTrueMass = collectionBasedFirstLepton.mass
+        secondLeptonTrueMass = collectionBasedSecondLepton.mass
+
+        firstLepton = fastMTTlepton(
+            pt = collectionBasedFirstLepton.pt,
+            eta = collectionBasedFirstLepton.eta,
+            phi = collectionBasedFirstLepton.phi,
+            m = fastMTTfirstLeptonMass,
+            leptonType = firstLeptonType
+        )
+        if firstLeptonType == 'Tau':
+            firstLepton.setTauDecayMode(collectionBasedFirstLepton.decayMode)
+            if firstLepton.getTauDecayMode() == 1: #check if we went over any mass bounds
+                #technically fast MTT does this for us, but this should disable warnings
+                if firstLepton.getM() > 1.5:
+                    firstLepton.setM(1.5) 
+                if firstLepton.getM() < 0.3:
+                    firstLepton.setM(0.3)
+            
+        secondLepton = fastMTTlepton(
+            pt = collectionBasedSecondLepton.pt,
+            eta = collectionBasedSecondLepton.eta,
+            phi = collectionBasedSecondLepton.phi,
+            m = fastMTTsecondLeptonMass,
+            leptonType = secondLeptonType,
+        )
+        if secondLeptonType == 'Tau':
+            secondLepton.setTauDecayMode(collectionBasedSecondLepton.decayMode)
+            if secondLepton.getTauDecayMode() == 1: #check if we went over any mass bounds
+                #technically fast MTT does this for us, but this should disable warnings
+                if secondLepton.getM() > 1.5:
+                    secondLepton.setM(1.5) 
+                if secondLepton.getM() < 0.3:
+                    secondLepton.setM(0.3)
+
+                
         theMET = fastMTTmet(
             measuredX = event.MET_pt * math.cos(event.MET_phi),
             measuredY = event.MET_pt * math.sin(event.MET_phi),
@@ -145,25 +149,11 @@ class fastMTTBranches(Module):
             xy = event.MET_covXY,
             yy = event.MET_covYY)
 
-        #okay, now we can compute the HTT vector
-        self.theFastMTTtool.setFirstLepton(firstLepton)
-        self.theFastMTTtool.setSecondLepton(secondLepton)
-        self.theFastMTTtool.setTheMET(theMET)
-        
-        HTTvector = ROOT.TLorentzVector()
-        HTTvector.SetPtEtaPhiM(
-            self.theFastMTTtool.getFastMTTpt(),
-            self.theFastMTTtool.getFastMTTeta(),
-            self.theFastMTTtool.getFastMTTphi(),
-            self.theFastMTTtool.getFastMTTmass())
-        
-        self.out.fillBranch("fastMTT_HTTleg_pt", HTTvector.Pt())
-        self.out.fillBranch("fastMTT_HTTleg_eta", HTTvector.Eta())
-        self.out.fillBranch("fastMTT_HTTleg_phi", HTTvector.Phi())
-        self.out.fillBranch("fastMTT_HTTleg_m", HTTvector.M())
 
+        #Now, we can try to reconstruct the radion in different ways
+        #start with the simple ones
+        #then we try to reconstruct the HTT vertex
 
-        #Now, we can try to reconstruct the radion in different ways as well.
         
         #Hbb vector
         HbbVector = ROOT.TLorentzVector()
@@ -181,11 +171,61 @@ class fastMTTBranches(Module):
             event.MET_phi,
             0.0)
 
+        #okay, now we can compute the HTT vector
+        self.theFastMTTtool.setFirstLepton(firstLepton)
+        self.theFastMTTtool.setSecondLepton(secondLepton)
+        self.theFastMTTtool.setTheMET(theMET)
+        
+        
+        fastMTTHiggsPt = self.theFastMTTtool.getFastMTTpt()
+        fastMTTHiggsMass = self.theFastMTTtool.getFastMTTmass()
+
+        firstLeptonVector = ROOT.TLorentzVector()
+        secondLeptonVector = ROOT.TLorentzVector()
+
+        #we're going to use the true lepton mass for right now
+        #This may need to be the mass given to FastMTT? It's unclear
+        firstLeptonVector.SetPtEtaPhiM(
+            self.theFastMTTtool.getFirstLepton().getPt(),
+            self.theFastMTTtool.getFirstLepton().getEta(),
+            self.theFastMTTtool.getFirstLepton().getPhi(),
+            firstLeptonTrueMass)
+        secondLeptonVector.SetPtEtaPhiM(
+            self.theFastMTTtool.getSecondLepton().getPt(),
+            self.theFastMTTtool.getSecondLepton().getEta(),
+            self.theFastMTTtool.getSecondLepton().getPhi(),
+            secondLeptonTrueMass)
+
+        HTTvectorWithoutMET = ROOT.TLorentzVector()
+        HTTvectorWithMET = ROOT.TLorentzVector()
+
+        HTTvectorWithoutMET.SetPtEtaPhiM(
+            fastMTTHiggsPt,
+            (firstLeptonVector + secondLeptonVector).Eta(),
+            (firstLeptonVector + secondLeptonVector).Phi(),
+            fastMTTHiggsMass)
+
+        HTTvectorWithMET.SetPtEtaPhiM(
+            fastMTTHiggsPt,
+            (firstLeptonVector + secondLeptonVector + METvector).Eta(),
+            (firstLeptonVector + secondLeptonVector + METvector).Phi(),
+            fastMTTHiggsMass)
+
+        self.out.fillBranch("fastMTT_HTTleg_pt", HTTvectorWithoutMET.Pt())
+        self.out.fillBranch("fastMTT_HTTleg_eta", HTTvectorWithoutMET.Eta())
+        self.out.fillBranch("fastMTT_HTTleg_phi", HTTvectorWithoutMET.Phi())
+        self.out.fillBranch("fastMTT_HTTleg_m", HTTvectorWithoutMET.M())
+
+        self.out.fillBranch("fastMTT_HTTlegWithMet_pt", HTTvectorWithMET.Pt())
+        self.out.fillBranch("fastMTT_HTTlegWithMet_eta", HTTvectorWithMET.Eta())
+        self.out.fillBranch("fastMTT_HTTlegWithMet_phi", HTTvectorWithMET.Phi())
+        self.out.fillBranch("fastMTT_HTTlegWithMet_m", HTTvectorWithMET.M())
+
         #Radion vector, without met included
-        RadionVector = HTTvector + HbbVector
+        RadionVector = HTTvectorWithoutMET + HbbVector
 
         #Radion vector with met included
-        RadionVectorPlusMET = HTTvector + METvector + HbbVector
+        RadionVectorPlusMET = HTTvectorWithMET + HbbVector
 
         #read these out to the branches
         self.out.fillBranch("fastMTT_RadionLeg_pt", RadionVector.Pt())
