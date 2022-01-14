@@ -35,8 +35,8 @@ class genMeasurementRadionBranches(Module):
         self.out.branch("ResoGenHiggs_pt","F")
         self.out.branch("ResoGenHiggsWithMet_pt","F")
 
-        self.out.branch("ResoRadion_mass","F")
-        self.out.branch("ResoRadionWithMet_mass","F")
+        self.out.branch("ResoGenRadion_mass","F")
+        self.out.branch("ResoGenRadionWithMet_mass","F")
         self.out.branch("ResoGenRadion_pt","F")
         self.out.branch("ResoGenRadionWithMet_pt","F")
 
@@ -94,10 +94,10 @@ class genMeasurementRadionBranches(Module):
             self.out.fillBranch("genRadion_phi",genParticleRadion[0].phi)
             self.out.fillBranch("genRadion_m",genParticleRadion[0].mass)
 
-            self.out.fillBranch("ResoRadion_mass",(event.fastMTT_RadionLeg_m/genParticleRadion[0].mass))
-            self.out.fillBranch("ResoRadionWithMet_mass",(event.fastMTT_RadionLegWithMet_m/genParticleRadion[0].mass))
-            self.out.fillBranch("ResoRadion_pt",(event.fastMTT_RadionLeg_pt/genParticleRadion[0].pt))
-            self.out.fillBranch("ResoRadionWithMet_pt",(event.fastMTT_RadionLegWithMet_pt/genParticleRadion[0].pt))
+            self.out.fillBranch("ResoGenRadion_mass",(event.fastMTT_RadionLeg_m/genParticleRadion[0].mass))
+            self.out.fillBranch("ResoGenRadionWithMet_mass",(event.fastMTT_RadionLegWithMet_m/genParticleRadion[0].mass))
+            self.out.fillBranch("ResoGenRadion_pt",(event.fastMTT_RadionLeg_pt/genParticleRadion[0].pt))
+            self.out.fillBranch("ResoGenRadionWithMet_pt",(event.fastMTT_RadionLegWithMet_pt/genParticleRadion[0].pt))
 
         
         else:
