@@ -29,15 +29,51 @@ class genMeasurementRadionBranches(Module):
         self.out.branch("RecoGenRadion_phi","F")
         self.out.branch("RecoGenRadion_m", "F")
 
+        #creating pt and mass resolution branches
+        self.out.branch("ResoGenHiggs_mass","F")
+        self.out.branch("ResoGenHiggsWithMet_mass","F")
+        self.out.branch("ResoGenHiggs_pt","F")
+        self.out.branch("ResoGenHiggsWithMet_pt","F")
+
+        self.out.branch("ResoRadion_mass","F")
+        self.out.branch("ResoRadionWithMet_mass","F")
+        self.out.branch("ResoGenRadion_pt","F")
+        self.out.branch("ResoGenRadionWithMet_pt","F")
+
+
+
         def endFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
             pass
     
+
 
     def analyze(self, event):
         genParticles = Collection(event, 'GenPart', 'nGenPart')
 
         genParticleRadion = filter(lambda x: (x.mass==1000 or x.mass==1200 or x.mass==1400 or x.mass == 1600 or x.mass==1800 or x.mass==2000 or x.mass==2500 or x.mass==3000 or x.mass==3500 or x.mass==4000 or x.mass==4500) and x.pt>=1,genParticles)
         genParticlesHiggs = filter(lambda x: x.mass==125,genParticles)
+
+
+        
+        mother_index =[]
+        taucounter = 0
+
+
+        for index, particle in enumerate(genParticles):
+            if abs(particle.pdgId) == 15:
+                if genParticles[particle.genPartIdxMother].mass == 125:
+                    taucounter = taucounter + 1
+                    mother_index.append(particle.genPartIdxMother)
+
+        if (taucounter==2):
+            if mother_index[0] == mother_index[1]:
+                self.out.fillBranch("ResoGenHiggs_mass",(event.fastMTT_HTTleg_m/genParticles[mother_index[0]].mass))
+                self.out.fillBranch("ResoGenHiggsWithMet_mass",(event.fastMTT_HTTlegWithMet_m/genParticles[mother_index[0]].mass))
+                self.out.fillBranch("ResoGenHiggs_pt",(event.fastMTT_HTTleg_pt/genParticles[mother_index[0]].pt))
+                self.out.fillBranch("ResoGenHiggsWithMet_pt",(event.fastMTT_HTTlegWithMet_pt/genParticles[mother_index[0]].pt))
+        
+        else:
+            print ("Not enough taus ",taucounter)
 
         Higgs1 = ROOT.TLorentzVector(0.0,0.0,0.0,0.0)
         Higgs2 = ROOT.TLorentzVector(0.0,0.0,0.0,0.0)
@@ -57,6 +93,12 @@ class genMeasurementRadionBranches(Module):
             self.out.fillBranch("genRadion_eta",genParticleRadion[0].eta)
             self.out.fillBranch("genRadion_phi",genParticleRadion[0].phi)
             self.out.fillBranch("genRadion_m",genParticleRadion[0].mass)
+
+            self.out.fillBranch("ResoRadion_mass",(event.fastMTT_RadionLeg_m/genParticleRadion[0].mass))
+            self.out.fillBranch("ResoRadionWithMet_mass",(event.fastMTT_RadionLegWithMet_m/genParticleRadion[0].mass))
+            self.out.fillBranch("ResoRadion_pt",(event.fastMTT_RadionLeg_pt/genParticleRadion[0].pt))
+            self.out.fillBranch("ResoRadionWithMet_pt",(event.fastMTT_RadionLegWithMet_pt/genParticleRadion[0].pt))
+
         
         else:
             print("!!!!!!!!!!!!!!!!!!!!!!!!!More than one Radion in Signal!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
