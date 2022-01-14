@@ -118,7 +118,7 @@ class fastMTTBranches(Module):
         )
         if firstLeptonType == 'Tau':
             firstLepton.setTauDecayMode(collectionBasedFirstLepton.decayMode)
-            if (firstLepton.getM() > 1.5 and firstLepton.getM() < 0.3):
+            if (firstLepton.getM() > 1.5 or firstLepton.getM() < 0.3):
                 print ("decay mode = ",firstLepton.getTauDecayMode()," Prepare for warning")
             if firstLepton.getTauDecayMode() == 1: #check if we went over any mass bounds
                 #technically fast MTT does this for us, but this should disable warnings
@@ -136,7 +136,7 @@ class fastMTTBranches(Module):
         )
         if secondLeptonType == 'Tau':
             secondLepton.setTauDecayMode(collectionBasedSecondLepton.decayMode)
-            if (secondLepton.getM() > 1.5 and secondLepton.getM() < 0.3):
+            if (secondLepton.getM() > 1.5 or secondLepton.getM() < 0.3):
                 print ("decay mode = ",secondLepton.getTauDecayMode()," Prepare for warning")
             if secondLepton.getTauDecayMode() == 1: #check if we went over any mass bounds
                 #technically fast MTT does this for us, but this should disable warnings
