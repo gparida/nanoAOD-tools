@@ -213,7 +213,7 @@ class fastMTTBranches(Module):
 
         HTTvectorWithoutMET = ROOT.TLorentzVector()
         HTTvectorWithMET = ROOT.TLorentzVector()
-        HTTvectorVisible = ROOT.TTLorentzVector()
+        HTTvectorVisible = ROOT.TLorentzVector()
 
         HTTvectorWithoutMET.SetPtEtaPhiM(
             fastMTTHiggsPt,
