@@ -45,6 +45,17 @@ class fastMTTBranches(Module):
         self.out.branch("fastMTT_RadionLegWithMet_eta", "F")
         self.out.branch("fastMTT_RadionLegWithMet_phi", "F")
         self.out.branch("fastMTT_RadionLegWithMet_m","F")
+
+        #Visible components branches
+        self.out.branch("VisHiggs_m","F")
+        self.out.branch("VisHiggs_pt","F")
+        self.out.branch("VisHiggs_eta","F")
+        self.out.branch("VisHiggs_phi","F")
+
+        self.out.branch("VisRadion_pt","F")
+        self.out.branch("VisRadion_eta","F")
+        self.out.branch("VisRadion_phi","F")
+        self.out.branch("VisRadion_m","F")
         
 
     def endFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
@@ -202,6 +213,7 @@ class fastMTTBranches(Module):
 
         HTTvectorWithoutMET = ROOT.TLorentzVector()
         HTTvectorWithMET = ROOT.TLorentzVector()
+        HTTvectorVisible = ROOT.TTLorentzVector()
 
         HTTvectorWithoutMET.SetPtEtaPhiM(
             fastMTTHiggsPt,
@@ -214,6 +226,15 @@ class fastMTTBranches(Module):
             (firstLeptonVector + secondLeptonVector + METvector).Eta(),
             (firstLeptonVector + secondLeptonVector + METvector).Phi(),
             fastMTTHiggsMass)
+        
+        HTTvectorVisible.SetPtEtaPhiM(
+            (firstLeptonVector + secondLeptonVector).Pt(),
+            (firstLeptonVector + secondLeptonVector).Eta(),
+            (firstLeptonVector + secondLeptonVector).Phi(),
+            event.gMVis_LL)
+
+
+
 
         self.out.fillBranch("fastMTT_HTTleg_pt", HTTvectorWithoutMET.Pt())
         self.out.fillBranch("fastMTT_HTTleg_eta", HTTvectorWithoutMET.Eta())
@@ -225,11 +246,20 @@ class fastMTTBranches(Module):
         self.out.fillBranch("fastMTT_HTTlegWithMet_phi", HTTvectorWithMET.Phi())
         self.out.fillBranch("fastMTT_HTTlegWithMet_m", HTTvectorWithMET.M())
 
+        self.out.fillBranch("VisHiggs_pt",HTTvectorVisible.Pt())
+        self.out.fillBranch("VisHiggs_eta",HTTvectorVisible.Eta())
+        self.out.fillBranch("VisHiggs_phi",HTTvectorVisible.Phi())
+        self.out.fillBranch("VisHiggs_m",HTTvectorVisible.M())
+
+
         #Radion vector, without met included
         RadionVector = HTTvectorWithoutMET + HbbVector
 
         #Radion vector with met included
         RadionVectorPlusMET = HTTvectorWithMET + HbbVector
+
+        #Radion vector with only visible components
+        RadionVectorVisible = HTTvectorVisible + HbbVector
 
         #read these out to the branches
         self.out.fillBranch("fastMTT_RadionLeg_pt", RadionVector.Pt())
@@ -241,6 +271,12 @@ class fastMTTBranches(Module):
         self.out.fillBranch("fastMTT_RadionLegWithMet_eta", RadionVectorPlusMET.Eta())
         self.out.fillBranch("fastMTT_RadionLegWithMet_phi", RadionVectorPlusMET.Phi())
         self.out.fillBranch("fastMTT_RadionLegWithMet_m", RadionVectorPlusMET.M())
+
+        self.out.fillBranch("VisRadion_pt",RadionVectorVisible.Pt())
+        self.out.fillBranch("VisRadion_eta",RadionVectorVisible.Eta())
+        self.out.fillBranch("VisRadion_phi",RadionVectorVisible.Phi())
+        self.out.fillBranch("VisRadion_m",RadionVectorVisible.M())
+
         
         return True
 

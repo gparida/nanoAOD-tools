@@ -40,6 +40,13 @@ class genMeasurementRadionBranches(Module):
         self.out.branch("ResoGenRadion_pt","F")
         self.out.branch("ResoGenRadionWithMet_pt","F")
 
+        #creating visible mass resolution branches
+        self.out.branch("ResoVisHiggs_mass","F")
+        self.out.branch("ResoVisHiggs_pt","F")
+
+        self.out.branch("ResoVisRadion_mass","F")
+        self.out.branch("ResoVisRadion_pt","F")
+
 
 
         def endFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
@@ -71,6 +78,9 @@ class genMeasurementRadionBranches(Module):
                 self.out.fillBranch("ResoGenHiggsWithMet_mass",(event.fastMTT_HTTlegWithMet_m/genParticles[mother_index[0]].mass))
                 self.out.fillBranch("ResoGenHiggs_pt",(event.fastMTT_HTTleg_pt/genParticles[mother_index[0]].pt))
                 self.out.fillBranch("ResoGenHiggsWithMet_pt",(event.fastMTT_HTTlegWithMet_pt/genParticles[mother_index[0]].pt))
+
+                self.out.fillBranch("ResoVisHiggs_mass",(event.VisHiggs_m/genParticles[mother_index[0]].mass))
+                self.out.fillBranch("ResoVisHiggs_pt",(event.VisHiggs_pt/genParticles[mother_index[0]].pt))
         
         else:
             print ("Not enough taus ",taucounter)
@@ -85,6 +95,7 @@ class genMeasurementRadionBranches(Module):
             self.out.fillBranch("RecoGenRadion_eta",abs((Higgs1+Higgs2).Eta()))
             self.out.fillBranch("RecoGenRadion_phi",abs((Higgs1+Higgs2).Phi()))
             self.out.fillBranch("RecoGenRadion_pt",abs((Higgs1+Higgs2).Pt()))
+
         else:
             print ("!!!!!!!!!!!!!!!!!!!!!!!!!More than two Higgs in Signal!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
@@ -98,6 +109,10 @@ class genMeasurementRadionBranches(Module):
             self.out.fillBranch("ResoGenRadionWithMet_mass",(event.fastMTT_RadionLegWithMet_m/genParticleRadion[0].mass))
             self.out.fillBranch("ResoGenRadion_pt",(event.fastMTT_RadionLeg_pt/genParticleRadion[0].pt))
             self.out.fillBranch("ResoGenRadionWithMet_pt",(event.fastMTT_RadionLegWithMet_pt/genParticleRadion[0].pt))
+
+            self.out.fillBranch("ResoVisRadion_mass",(event.VisRadion_m/genParticleRadion[0].mass))
+            self.out.fillBranch("ResoVisRadion_pt",(event.VisRadion_pt/genParticleRadion[0].pt))
+
 
         
         else:
