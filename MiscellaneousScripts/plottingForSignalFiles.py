@@ -2,6 +2,8 @@ import ROOT
 import glob
 import argparse
 
+ROOT.gStyle.SetOptStat(0)
+
 
 #Now we need to take inputs
 parser = argparse.ArgumentParser(description='Script to plot trees directly from root files. Right now I am writing it for singal Files')
@@ -31,8 +33,8 @@ HiggsMassResoMTT = ROOT.gDirectory.Get("HiggsMassResoMTT").Clone()
 HiggsMassResoMTT.SetLineColor(1)
 HiggsMassResoMTT.SetLineWidth(4)
 HiggsMassResoMTT.SetTitle("Higgs Mass Resolution")
-HiggsMassResoMTT.GetXAxis().SetTitle("#Higgs Mass^{Reco}/#Higgs Mass^{True}")
-HiggsMassResoMTT.GetYAxis().SetTitle("Events")
+HiggsMassResoMTT.GetXaxis().SetTitle("#Higgs Mass^{Reco}/#Higgs Mass^{True}")
+HiggsMassResoMTT.GetYaxis().SetTitle("Events")
 
 theTree.Draw("ResoVisHiggs_mass>>HiggsMassResoVis(40,0,2)")
 HiggsMassResoVis = ROOT.gDirectory.Get("HiggsMassResoVis").Clone()
@@ -61,8 +63,8 @@ HiggsptResoMTT = ROOT.gDirectory.Get("HiggsptResoMTT").Clone()
 HiggsptResoMTT.SetLineColor(1)
 HiggsptResoMTT.SetLineWidth(4)
 HiggsptResoMTT.SetTitle("Higgs Pt Resolution")
-HiggsptResoMTT.GetXAxis().SetTitle("#Higgs Pt^{Reco}/#Higgs Pt^{True}")
-HiggsptResoMTT.GetYAxis().SetTitle("Events")
+HiggsptResoMTT.GetXaxis().SetTitle("#Higgs Pt^{Reco}/#Higgs Pt^{True}")
+HiggsptResoMTT.GetYaxis().SetTitle("Events")
 
 theTree.Draw("ResoVisHiggs_pt>>HiggsptResoVis(40,0,2)")
 HiggsptResoVis = ROOT.gDirectory.Get("HiggsptResoVis").Clone()
@@ -92,8 +94,8 @@ RadionMassResoMTT = ROOT.gDirectory.Get("RadionMassResoMTT").Clone()
 RadionMassResoMTT.SetLineColor(1)
 RadionMassResoMTT.SetLineWidth(4)
 RadionMassResoMTT.SetTitle("Radion Mass Resolution")
-RadionMassResoMTT.GetXAxis().SetTitle("#Radion Mass^{Reco}/#Radion Mass^{True}")
-RadionMassResoMTT.GetYAxis().SetTitle("Events")
+RadionMassResoMTT.GetXaxis().SetTitle("#Radion Mass^{Reco}/#Radion Mass^{True}")
+RadionMassResoMTT.GetYaxis().SetTitle("Events")
 
 
 theTree.Draw("ResoGenRadionWithMet_mass>>RadionMassWithMetResoMTT(40,0,2)")
@@ -130,8 +132,8 @@ RadionptResoMTT = ROOT.gDirectory.Get("RadionptResoMTT").Clone()
 RadionptResoMTT.SetLineColor(1)
 RadionptResoMTT.SetLineWidth(4)
 RadionptResoMTT.SetTitle("Radion Pt Resolution")
-RadionptResoMTT.GetXAxis().SetTitle("#Radion Pt^{Reco}/#Radion Pt^{True}")
-RadionptResoMTT.GetYAxis().SetTitle("Events")
+RadionptResoMTT.GetXaxis().SetTitle("#Radion Pt^{Reco}/#Radion Pt^{True}")
+RadionptResoMTT.GetYaxis().SetTitle("Events")
 
 theTree.Draw("ResoGenRadionWithMet_pt>>RadionptWithMetResoMTT(40,0,2)")
 RadionptWithMetResoMTT = ROOT.gDirectory.Get("RadionptWithMetResoMTT").Clone()
