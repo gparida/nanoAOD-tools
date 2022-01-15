@@ -3,6 +3,7 @@ import glob
 import argparse
 
 ROOT.gStyle.SetOptStat(0)
+ROOT.gROOT.SetBatch(ROOT.kFALSE)
 
 
 #Now we need to take inputs
@@ -49,7 +50,7 @@ legend.AddEntry(HiggsMassResoVis,"Visible","ep")
 
 HiggsMass = ROOT.TCanvas("HiggsMass", "HiggsMass")
 #HiggsMass.SetGrid()
-HiggsMassResoMTT.SetMaximum(HiggsMassResoMTT.GetMaximum(),HiggsMassResoVis.GetMaximum())
+HiggsMassResoMTT.SetMaximum(max(HiggsMassResoMTT.GetMaximum(),HiggsMassResoVis.GetMaximum()))
 HiggsMassResoMTT.Draw("ap")
 HiggsMassResoVis.Draw("same p")
 legend.Draw("same")
@@ -80,7 +81,7 @@ legend.AddEntry(HiggsptResoVis,"Visible","ep")
 
 HiggsPt = ROOT.TCanvas("HiggsPt", "HiggsPt")
 #HiggsMass.SetGrid()
-HiggsptResoMTT.SetMaximum(HiggsptResoMTT.GetMaximum(),HiggsptResoVis.GetMaximum())
+HiggsptResoMTT.SetMaximum(max(HiggsptResoMTT.GetMaximum(),HiggsptResoVis.GetMaximum()))
 HiggsptResoMTT.Draw("ap")
 HiggsptResoVis.Draw("same p")
 legend.Draw("same")
@@ -117,7 +118,7 @@ legend.AddEntry(RadionMassVisReso,"Radion with Visible Mass","ep")
 
 RadionMass = ROOT.TCanvas("RadionMass", "RadionMass")
 #HiggsMass.SetGrid()
-RadionMassResoMTT.SetMaximum(RadionMassResoMTT.GetMaximum(),RadionMassResoMTT.GetMaximum(),RadionMassVisReso.GetMaximum())
+RadionMassResoMTT.SetMaximum(max(RadionMassResoMTT.GetMaximum(),RadionMassResoMTT.GetMaximum(),RadionMassVisReso.GetMaximum()))
 RadionMassResoMTT.Draw("ap")
 RadionMassWithMetResoMTT.Draw("same p")
 RadionMassVisReso.Draw("same p")
@@ -154,7 +155,7 @@ legend.AddEntry(RadionptVisReso,"Radion with Visible Mass","ep")
 
 RadionPt = ROOT.TCanvas("RadionPt", "RadionPt")
 #HiggsMass.SetGrid()
-RadionptResoMTT.SetMaximum(RadionptResoMTT.GetMaximum(),RadionptWithMetResoMTT.GetMaximum(),RadionptVisReso.GetMaximum())
+RadionptResoMTT.SetMaximum(max(RadionptResoMTT.GetMaximum(),RadionptWithMetResoMTT.GetMaximum(),RadionptVisReso.GetMaximum()))
 RadionptResoMTT.Draw("ap")
 RadionptWithMetResoMTT.Draw("same p")
 RadionptVisReso.Draw("same p")
