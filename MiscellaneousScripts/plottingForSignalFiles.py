@@ -3,7 +3,7 @@ import glob
 import argparse
 
 ROOT.gStyle.SetOptStat(0)
-ROOT.gROOT.SetBatch(ROOT.kFALSE)
+ROOT.gROOT.SetBatch(ROOT.kTRUE)
 
 
 #Now we need to take inputs
