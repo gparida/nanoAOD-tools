@@ -34,10 +34,10 @@ HiggsMassResoMTT = ROOT.gDirectory.Get("HiggsMassResoMTT").Clone()
 HiggsMassResoMTT.SetLineColor(1)
 HiggsMassResoMTT.SetLineWidth(4)
 HiggsMassResoMTT.SetTitle("Higgs Mass Resolution")
-HiggsMassResoMTT.GetXaxis().SetTitle("#Higgs Mass^{Reco}/#Higgs Mass^{True}")
+HiggsMassResoMTT.GetXaxis().SetTitle("Higgs Mass^{Reco}/Higgs Mass^{True}")
 HiggsMassResoMTT.GetYaxis().SetTitle("Events")
 
-theTree.Draw("ResoVisHiggs_mass>>HiggsMassResoVis(40,0,2)")
+theTree.Draw("ResoVisHiggs_mass>>HiggsMassResoVis(60,0,2)")
 HiggsMassResoVis = ROOT.gDirectory.Get("HiggsMassResoVis").Clone()
 HiggsMassResoVis.SetLineColor(4)
 HiggsMassResoVis.SetLineWidth(4)
@@ -59,12 +59,12 @@ HiggsMass.SaveAs("HiggsM_Reso.pdf")
 
 
 #Higgs pt
-theTree.Draw("ResoGenHiggs_pt>>HiggsptResoMTT(40,0,2)")
+theTree.Draw("ResoGenHiggs_pt>>HiggsptResoMTT(60,0,2)")
 HiggsptResoMTT = ROOT.gDirectory.Get("HiggsptResoMTT").Clone()
 HiggsptResoMTT.SetLineColor(1)
 HiggsptResoMTT.SetLineWidth(4)
 HiggsptResoMTT.SetTitle("Higgs Pt Resolution")
-HiggsptResoMTT.GetXaxis().SetTitle("#Higgs Pt^{Reco}/#Higgs Pt^{True}")
+HiggsptResoMTT.GetXaxis().SetTitle("Higgs Pt^{Reco}/Higgs Pt^{True}")
 HiggsptResoMTT.GetYaxis().SetTitle("Events")
 
 theTree.Draw("ResoVisHiggs_pt>>HiggsptResoVis(40,0,2)")
