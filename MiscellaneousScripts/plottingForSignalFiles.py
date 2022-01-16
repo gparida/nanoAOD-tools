@@ -73,14 +73,14 @@ cmsLatex.SetNDC(True)
 cmsLatex.SetTextFont(61)
 cmsLatex.SetTextAlign(11)
 #cmsLatex.DrawLatex(0.1,0.92,"CMS")
-cmsLatex.DrawLatex(0.1,0.95,"CMS")
+cmsLatex.DrawLatex(0.1,0.96,"CMS")
 cmsLatex.SetTextFont(52)
 #cmsLatex.DrawLatex(0.1+0.08,0.95,"Preliminary")
-cmsLatex.DrawLatex(0.12+0.08,0.95,"Preliminary")
+cmsLatex.DrawLatex(0.12+0.08,0.96,"Preliminary")
 lumiText = '16.81 fb^{-1}, 13 TeV'
 cmsLatex.SetTextFont(42)
-cmsLatex.SetTextSize(0.04)
-cmsLatex.DrawLatex(0.55,0.95,lumiText)
+cmsLatex.SetTextSize(0.05)
+cmsLatex.DrawLatex(0.55,0.96,lumiText)
 
 HiggsMass.SaveAs("HiggsM_Reso.pdf")
 
