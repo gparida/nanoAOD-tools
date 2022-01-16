@@ -55,7 +55,7 @@ HiggsMassResoMTT.SetMaximum(max(HiggsMassResoMTT.GetMaximum(),HiggsMassResoVis.G
 HiggsMassResoMTT.Draw("C")
 HiggsMassResoVis.Draw("C same")
 
-legend = ROOT.TLegend(0.55, 0.92, 0.85, 0.80, "", "brNDC")
+legend = ROOT.TLegend(0.55, 0.87, 0.80, 0.80, "", "brNDC")
 #legend.SetHeader("#tau_{h}-#tau_{h} channels","C")
 legend.SetFillStyle(1001)
 legend.SetLineWidth(0)
@@ -73,14 +73,14 @@ cmsLatex.SetNDC(True)
 cmsLatex.SetTextFont(61)
 cmsLatex.SetTextAlign(11)
 #cmsLatex.DrawLatex(0.1,0.92,"CMS")
-cmsLatex.DrawLatex(0.1,0.92,"CMS")
+cmsLatex.DrawLatex(0.1,0.91,"CMS")
 cmsLatex.SetTextFont(52)
 #cmsLatex.DrawLatex(0.1+0.08,0.95,"Preliminary")
-cmsLatex.DrawLatex(0.12+0.08,0.92,"Preliminary")
+cmsLatex.DrawLatex(0.12+0.08,0.91,"Preliminary")
 lumiText = '16.81 fb^{-1}, 13 TeV'
 cmsLatex.SetTextFont(42)
 cmsLatex.SetTextSize(0.045)
-cmsLatex.DrawLatex(0.55,0.92,lumiText)
+cmsLatex.DrawLatex(0.55,0.91,lumiText)
 
 HiggsMass.SaveAs("HiggsM_Reso.pdf")
 
