@@ -29,7 +29,7 @@ def setUpCanvas(Name):
 
 
 def setUpLegend():
-	legend = ROOT.TLegend(0.70, 0.87, 0.84, 0.77, "", "brNDC")
+	legend = ROOT.TLegend(0.70, 0.87, 0.80, 0.77, "", "brNDC")
 	legend.SetFillStyle(1001)
 	legend.SetLineWidth(0)
 	legend.SetLineStyle(1)
