@@ -50,7 +50,7 @@ HiggsMass.SetFrameLineWidth(1)
 HiggsMass.SetRightMargin(0.15)
 HiggsMass.SetBottomMargin(0.08)
 HiggsMass.SetGrid()
-HiggsMassResoMTT.SetMaximum(max(HiggsMassResoMTT.GetMaximum(),HiggsMassResoVis.GetMaximum()))
+HiggsMassResoMTT.SetMaximum(max(HiggsMassResoMTT.GetMaximum(),HiggsMassResoVis.GetMaximum()+50))
 HiggsMassResoMTT.Draw("C")
 HiggsMassResoVis.Draw("C same")
 
