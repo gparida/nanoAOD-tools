@@ -10,5 +10,5 @@ def setUpHistrogram(Name,XTitle,YTitle,LineColor,ttreeName='',LineWidth=2,Title=
 	Name.SetLineWidth(LineWidth)
 	Name.SetTitle(Title)
 	Name.GetXaxis().SetTitle(XTitle)
-	Name.GetYaxis().SetTiTle(YTitle)
+	Name.GetYaxis().SetTitle(YTitle)
 	return Name
