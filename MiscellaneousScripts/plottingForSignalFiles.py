@@ -25,15 +25,29 @@ theTree = theFile.Get("Events")
 nEntries = theTree.GetEntries()
 
 #Now we Just directly plot the branches in the ttree
+cmsLatex = ROOT.TLatex()
+cmsLatex.SetTextSize(0.06)
+cmsLatex.SetNDC(True)
+cmsLatex.SetTextFont(61)
+cmsLatex.SetTextAlign(11)
+#cmsLatex.DrawLatex(0.1,0.92,"CMS")
+cmsLatex.DrawLatex(0.15,0.92,"CMS")
+cmsLatex.SetTextFont(52)
+#cmsLatex.DrawLatex(0.1+0.08,0.92,"Preliminary")
+cmsLatex.DrawLatex(0.15+0.08,0.92,"Preliminary")
+lumiText = '16.81 fb^{-1}, 13 TeV'
+
 
 #First doing it for Higgs..................................
+
+
 
 #Higgs mass
 theTree.Draw("ResoGenHiggs_mass>>HiggsMassResoMTT(40,0,2)")
 HiggsMassResoMTT = ROOT.gDirectory.Get("HiggsMassResoMTT").Clone()
 HiggsMassResoMTT.SetLineColor(1)
 HiggsMassResoMTT.SetLineWidth(2)
-#HiggsMassResoMTT.SetTitle("Higgs Mass Resolution")
+HiggsMassResoMTT.SetTitle("")
 HiggsMassResoMTT.GetXaxis().SetTitle("Higgs Mass^{Reco}/Higgs Mass^{True}")
 HiggsMassResoMTT.GetYaxis().SetTitle("Events")
 
@@ -65,6 +79,7 @@ legend.SetTextFont(42)
 legend.AddEntry(HiggsMassResoMTT,"FastMTT + MET","ep")
 legend.AddEntry(HiggsMassResoVis,"Visible","ep")
 legend.Draw("same")
+cmsLatex.DrawLatex(0.85,0.87,lumiText)
 
 HiggsMass.SaveAs("HiggsM_Reso.pdf")
 
