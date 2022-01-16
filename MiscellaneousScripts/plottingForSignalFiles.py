@@ -33,9 +33,9 @@ nEntries = theTree.GetEntries()
 
 
 #Higgs mass
-theTree.Draw("ResoGenHiggs_mass>>HiggsMassResoMTT(40,0,2)")
+#theTree.Draw("ResoGenHiggs_mass>>HiggsMassResoMTT(40,0,2)")
 #HiggsMassResoMTT = ROOT.gDirectory.Get("HiggsMassResoMTT").Clone()
-HiggsMassResoMTT= setUpHistrogram(Name="HiggsMassResoMTT",LineColor=1,LineWidth=2,XTitle="Higgs Mass^{Reco}/Higgs Mass^{True}",YTitle="Events")
+HiggsMassResoMTT= setUpHistrogram(Name="HiggsMassResoMTT",LineColor=1,LineWidth=2,XTitle="Higgs Mass^{Reco}/Higgs Mass^{True}",YTitle="Events",ttree=theTree,branch="ResoGenHiggs_mass",Nbins=40,min=0,max=2)
 
 #HiggsMassResoMTT.SetLineColor(1)
 #HiggsMassResoMTT.SetLineWidth(2)
