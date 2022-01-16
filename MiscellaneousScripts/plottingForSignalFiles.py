@@ -1,3 +1,4 @@
+from tokenize import Name
 import ROOT
 import glob
 import argparse
@@ -34,7 +35,7 @@ nEntries = theTree.GetEntries()
 #Higgs mass
 theTree.Draw("ResoGenHiggs_mass>>HiggsMassResoMTT(40,0,2)")
 #HiggsMassResoMTT = ROOT.gDirectory.Get("HiggsMassResoMTT").Clone()
-HiggsMassResoMTT= setUpHistrogram("HiggsMassResoMTT",LineColor=1,LineWidth=2,XTitle="Higgs Mass^{Reco}/Higgs Mass^{True}",YTitle="Events")
+HiggsMassResoMTT= setUpHistrogram(Name="HiggsMassResoMTT",LineColor=1,LineWidth=2,XTitle="Higgs Mass^{Reco}/Higgs Mass^{True}",YTitle="Events")
 
 #HiggsMassResoMTT.SetLineColor(1)
 #HiggsMassResoMTT.SetLineWidth(2)
