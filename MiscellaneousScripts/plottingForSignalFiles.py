@@ -44,7 +44,7 @@ legend = setUpLegend()
 #HiggsMassResoMTT.GetXaxis().SetTitle("Higgs Mass^{Reco}/Higgs Mass^{True}")
 #HiggsMassResoMTT.GetYaxis().SetTitle("Events")
 
-HiggsMassResoVis= setUpHistrogram(name="HiggsMassResoVis",LineColor=4,LineWidth=2,XTitle="Higgs Mass^{Reco}/Higgs Mass^{True}",YTitle="Events",ttree=theTree,branch="ResoVisHiggs_mass",Nbins=40,min=0,max=2)
+HiggsMassResoVis= setUpHistrogram(Name="HiggsMassResoVis",LineColor=4,LineWidth=2,XTitle="Higgs Mass^{Reco}/Higgs Mass^{True}",YTitle="Events",ttree=theTree,branch="ResoVisHiggs_mass",Nbins=40,min=0,max=2)
 
 
 #theTree.Draw("ResoVisHiggs_mass>>HiggsMassResoVis(40,0,2)")
