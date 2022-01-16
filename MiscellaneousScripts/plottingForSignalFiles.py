@@ -30,31 +30,14 @@ nEntries = theTree.GetEntries()
 #Now we Just directly plot the branches in the ttree
 #First doing it for Higgs..................................
 
-
-
 #Higgs mass
-#theTree.Draw("ResoGenHiggs_mass>>HiggsMassResoMTT(40,0,2)")
-#HiggsMassResoMTT = ROOT.gDirectory.Get("HiggsMassResoMTT").Clone()
+
 HiggsMassResoMTT= setUpHistrogram(Name="HiggsMassResoMTT",LineColor=1,LineWidth=2,XTitle="Higgs Mass^{Reco}/Higgs Mass^{True}",YTitle="Events",ttree=theTree,branch="ResoGenHiggs_mass",Nbins=40,min=0,max=2)
-legend = setUpLegend()
-
-#HiggsMassResoMTT.SetLineColor(1)
-#HiggsMassResoMTT.SetLineWidth(2)
-#HiggsMassResoMTT.SetTitle("")
-#HiggsMassResoMTT.GetXaxis().SetTitle("Higgs Mass^{Reco}/Higgs Mass^{True}")
-#HiggsMassResoMTT.GetYaxis().SetTitle("Events")
-
 HiggsMassResoVis= setUpHistrogram(Name="HiggsMassResoVis",LineColor=4,LineWidth=2,XTitle="Higgs Mass^{Reco}/Higgs Mass^{True}",YTitle="Events",ttree=theTree,branch="ResoVisHiggs_mass",Nbins=40,min=0,max=2)
 
-
-#theTree.Draw("ResoVisHiggs_mass>>HiggsMassResoVis(40,0,2)")
-#HiggsMassResoVis = ROOT.gDirectory.Get("HiggsMassResoVis").Clone()
-#HiggsMassResoVis.SetLineColor(4)
-#HiggsMassResoVis.SetLineWidth(2)
-
-
+legend = setUpLegend()
 HiggsMass = setUpCanvas("HiggsMass")
-HiggsMassResoMTT.SetMaximum(max(HiggsMassResoMTT.GetMaximum(),HiggsMassResoVis.GetMaximum()+50))
+HiggsMassResoMTT.SetMaximum(max(HiggsMassResoMTT.GetMaximum(),HiggsMassResoVis.GetMaximum())+50)
 HiggsMassResoMTT.Draw("C")
 HiggsMassResoVis.Draw("C same")
 
@@ -70,6 +53,27 @@ HiggsMass.SaveAs("HiggsM_Reso.pdf")
 
 
 #Higgs pt
+HiggsptResoMTT= setUpHistrogram(Name="HiggsptResoMTT",LineColor=1,LineWidth=2,XTitle="Higgs Pt^{Reco}/Higgs Pt^{True}",YTitle="Events",ttree=theTree,branch="ResoGenHiggs_pt",Nbins=40,min=0,max=2)
+HiggsptResoVis= setUpHistrogram(Name="HiggsptResoVis",LineColor=4,LineWidth=2,XTitle="Higgs Pt^{Reco}/Higgs Pt^{True}",YTitle="Events",ttree=theTree,branch="ResoVisHiggs_pt",Nbins=40,min=0,max=2)
+
+legend = setUpLegend()
+HiggsPt = setUpCanvas("HiggsPt")
+HiggsptResoMTT.SetMaximum(max(HiggsMassResoMTT.GetMaximum(),HiggsMassResoVis.GetMaximum())+50)
+HiggsptResoMTT.Draw("C")
+HiggsptResoVis.Draw("C same")
+
+legend = setUpLegend()
+legend.AddEntry(HiggsptResoMTT,"FastMTT + MET","ep")
+legend.AddEntry(HiggsptResoVis,"Visible","ep")
+legend.Draw("same")
+
+cmsLatex = setUpCmsLatex(2016)
+HiggsPt.SaveAs("HiggsPt_Reso.pdf")
+
+
+
+
+
 theTree.Draw("ResoGenHiggs_pt>>HiggsptResoMTT(30,0,2)")
 HiggsptResoMTT = ROOT.gDirectory.Get("HiggsptResoMTT").Clone()
 HiggsptResoMTT.SetLineColor(1)
