@@ -55,7 +55,7 @@ HiggsMassResoMTT.SetMaximum(max(HiggsMassResoMTT.GetMaximum(),HiggsMassResoVis.G
 HiggsMassResoMTT.Draw("C")
 HiggsMassResoVis.Draw("C same")
 
-legend = ROOT.TLegend(0.85, 0.45, 1.0, 0.75, "", "brNDC")
+legend = ROOT.TLegend(0.64, 0.85, 1.0, 0.75, "", "brNDC")
 #legend.SetHeader("#tau_{h}-#tau_{h} channels","C")
 legend.SetFillStyle(1001)
 legend.SetLineWidth(0)
