@@ -29,15 +29,15 @@ nEntries = theTree.GetEntries()
 #First doing it for Higgs..................................
 
 #Higgs mass
-theTree.Draw("ResoGenHiggs_mass>>HiggsMassResoMTT(40,0,2)")
+theTree.Draw("ResoGenHiggs_mass>>HiggsMassResoMTT(30,0,2)")
 HiggsMassResoMTT = ROOT.gDirectory.Get("HiggsMassResoMTT").Clone()
 HiggsMassResoMTT.SetLineColor(1)
-HiggsMassResoMTT.SetLineWidth(4)
+HiggsMassResoMTT.SetLineWidth(1)
 HiggsMassResoMTT.SetTitle("Higgs Mass Resolution")
 HiggsMassResoMTT.GetXaxis().SetTitle("Higgs Mass^{Reco}/Higgs Mass^{True}")
 HiggsMassResoMTT.GetYaxis().SetTitle("Events")
 
-theTree.Draw("ResoVisHiggs_mass>>HiggsMassResoVis(60,0,2)")
+theTree.Draw("ResoVisHiggs_mass>>HiggsMassResoVis(30,0,2)")
 HiggsMassResoVis = ROOT.gDirectory.Get("HiggsMassResoVis").Clone()
 HiggsMassResoVis.SetLineColor(4)
 HiggsMassResoVis.SetLineWidth(1)
@@ -59,10 +59,10 @@ HiggsMass.SaveAs("HiggsM_Reso.pdf")
 
 
 #Higgs pt
-theTree.Draw("ResoGenHiggs_pt>>HiggsptResoMTT(60,0,2)")
+theTree.Draw("ResoGenHiggs_pt>>HiggsptResoMTT(30,0,2)")
 HiggsptResoMTT = ROOT.gDirectory.Get("HiggsptResoMTT").Clone()
 HiggsptResoMTT.SetLineColor(1)
-HiggsptResoMTT.SetLineWidth(4)
+HiggsptResoMTT.SetLineWidth(1)
 HiggsptResoMTT.SetTitle("Higgs Pt Resolution")
 HiggsptResoMTT.GetXaxis().SetTitle("Higgs Pt^{Reco}/Higgs Pt^{True}")
 HiggsptResoMTT.GetYaxis().SetTitle("Events")
@@ -90,7 +90,7 @@ HiggsPt.SaveAs("HiggsPt_Reso.pdf")
 #Next we do it for Radion
 
 #Radion Mass##
-theTree.Draw("ResoGenRadion_mass>>RadionMassResoMTT(40,0,2)")
+theTree.Draw("ResoGenRadion_mass>>RadionMassResoMTT(30,0,2)")
 RadionMassResoMTT = ROOT.gDirectory.Get("RadionMassResoMTT").Clone()
 RadionMassResoMTT.SetLineColor(1)
 RadionMassResoMTT.SetLineWidth(4)
