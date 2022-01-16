@@ -5,6 +5,8 @@ import argparse
 ROOT.gStyle.SetOptStat(0)
 ROOT.gROOT.SetBatch(ROOT.kTRUE)
 
+from plotSettings import *
+
 
 #Now we need to take inputs
 parser = argparse.ArgumentParser(description='Script to plot trees directly from root files. Right now I am writing it for singal Files')
@@ -31,12 +33,14 @@ nEntries = theTree.GetEntries()
 
 #Higgs mass
 theTree.Draw("ResoGenHiggs_mass>>HiggsMassResoMTT(40,0,2)")
-HiggsMassResoMTT = ROOT.gDirectory.Get("HiggsMassResoMTT").Clone()
-HiggsMassResoMTT.SetLineColor(1)
-HiggsMassResoMTT.SetLineWidth(2)
-HiggsMassResoMTT.SetTitle("")
-HiggsMassResoMTT.GetXaxis().SetTitle("Higgs Mass^{Reco}/Higgs Mass^{True}")
-HiggsMassResoMTT.GetYaxis().SetTitle("Events")
+#HiggsMassResoMTT = ROOT.gDirectory.Get("HiggsMassResoMTT").Clone()
+HiggsMassResoMTT= setUpHistrogram("HiggsMassResoMTT",LineColor=1,LineWidth=2,XTitle="Higgs Mass^{Reco}/Higgs Mass^{True}",YTitle="Events")
+
+#HiggsMassResoMTT.SetLineColor(1)
+#HiggsMassResoMTT.SetLineWidth(2)
+#HiggsMassResoMTT.SetTitle("")
+#HiggsMassResoMTT.GetXaxis().SetTitle("Higgs Mass^{Reco}/Higgs Mass^{True}")
+#HiggsMassResoMTT.GetYaxis().SetTitle("Events")
 
 theTree.Draw("ResoVisHiggs_mass>>HiggsMassResoVis(40,0,2)")
 HiggsMassResoVis = ROOT.gDirectory.Get("HiggsMassResoVis").Clone()
@@ -55,7 +59,7 @@ HiggsMassResoMTT.SetMaximum(max(HiggsMassResoMTT.GetMaximum(),HiggsMassResoVis.G
 HiggsMassResoMTT.Draw("C")
 HiggsMassResoVis.Draw("C same")
 
-legend = ROOT.TLegend(0.55, 0.87, 0.80, 0.80, "", "brNDC")
+legend = ROOT.TLegend(0.55, 0.87, 0.77, 0.80, "", "brNDC")
 #legend.SetHeader("#tau_{h}-#tau_{h} channels","C")
 legend.SetFillStyle(1001)
 legend.SetLineWidth(0)
