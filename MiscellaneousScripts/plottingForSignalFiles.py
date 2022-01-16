@@ -78,7 +78,7 @@ cmsLatex.SetTextFont(52)
 #cmsLatex.DrawLatex(0.1+0.08,0.95,"Preliminary")
 cmsLatex.DrawLatex(0.15+0.08,0.95,"Preliminary")
 lumiText = '16.81 fb^{-1}, 13 TeV'
-cmsLatex.DrawLatex(0.85,0.95,lumiText)
+cmsLatex.DrawLatex(0.75,0.95,lumiText)
 
 HiggsMass.SaveAs("HiggsM_Reso.pdf")
 
