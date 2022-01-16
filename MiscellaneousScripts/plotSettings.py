@@ -24,6 +24,7 @@ def setUpCanvas(Name):
 	Name.SetRightMargin(0.15)
 	Name.SetBottomMargin(0.08)
 	Name.SetGrid()
+	return Name
 
 
 
@@ -54,3 +55,4 @@ def setUpCmsLatex(year):
 	cmsLatex.SetTextFont(42)
 	cmsLatex.SetTextSize(0.045)
 	cmsLatex.DrawLatex(0.55,0.91,lumiText)
+	return cmsLatex
