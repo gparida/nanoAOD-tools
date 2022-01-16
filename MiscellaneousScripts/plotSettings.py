@@ -23,7 +23,7 @@ def setUpCanvas(Name):
 	#HiggsMass.SetBottomMargin(0.27)
 	Name.SetRightMargin(0.15)
 	Name.SetBottomMargin(0.08)
-	Name.SetGrid()
+	#Name.SetGrid()
 	return Name
 
 
