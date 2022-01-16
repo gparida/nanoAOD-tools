@@ -35,14 +35,13 @@ nEntries = theTree.GetEntries()
 HiggsMassResoMTT= setUpHistrogram(Name="HiggsMassResoMTT",LineColor=1,LineWidth=2,XTitle="Higgs Mass^{Reco}/Higgs Mass^{True}",YTitle="Events",ttree=theTree,branch="ResoGenHiggs_mass",Nbins=40,min=0,max=2)
 HiggsMassResoVis= setUpHistrogram(Name="HiggsMassResoVis",LineColor=4,LineWidth=2,XTitle="Higgs Mass^{Reco}/Higgs Mass^{True}",YTitle="Events",ttree=theTree,branch="ResoVisHiggs_mass",Nbins=40,min=0,max=2)
 
-legend = setUpLegend()
 HiggsMass = setUpCanvas("HiggsMass")
 HiggsMassResoMTT.SetMaximum(max(HiggsMassResoMTT.GetMaximum(),HiggsMassResoVis.GetMaximum())+50)
 HiggsMassResoMTT.Draw("C")
 HiggsMassResoVis.Draw("C same")
 
 legend = setUpLegend()
-legend.AddEntry(HiggsMassResoMTT,"FastMTT + MET","ep")
+legend.AddEntry(HiggsMassResoMTT,"FastMTT","ep")
 legend.AddEntry(HiggsMassResoVis,"Visible","ep")
 legend.Draw("same")
 
@@ -56,126 +55,71 @@ HiggsMass.SaveAs("HiggsM_Reso.pdf")
 HiggsptResoMTT= setUpHistrogram(Name="HiggsptResoMTT",LineColor=1,LineWidth=2,XTitle="Higgs Pt^{Reco}/Higgs Pt^{True}",YTitle="Events",ttree=theTree,branch="ResoGenHiggs_pt",Nbins=40,min=0,max=2)
 HiggsptResoVis= setUpHistrogram(Name="HiggsptResoVis",LineColor=4,LineWidth=2,XTitle="Higgs Pt^{Reco}/Higgs Pt^{True}",YTitle="Events",ttree=theTree,branch="ResoVisHiggs_pt",Nbins=40,min=0,max=2)
 
-legend = setUpLegend()
+
 HiggsPt = setUpCanvas("HiggsPt")
 HiggsptResoMTT.SetMaximum(max(HiggsMassResoMTT.GetMaximum(),HiggsMassResoVis.GetMaximum())+50)
 HiggsptResoMTT.Draw("C")
 HiggsptResoVis.Draw("C same")
 
 legend = setUpLegend()
-legend.AddEntry(HiggsptResoMTT,"FastMTT + MET","ep")
+legend.AddEntry(HiggsptResoMTT,"FastMTT","ep")
 legend.AddEntry(HiggsptResoVis,"Visible","ep")
 legend.Draw("same")
 
 cmsLatex = setUpCmsLatex(2016)
 HiggsPt.SaveAs("HiggsPt_Reso.pdf")
 
-
-
-
-
-theTree.Draw("ResoGenHiggs_pt>>HiggsptResoMTT(30,0,2)")
-HiggsptResoMTT = ROOT.gDirectory.Get("HiggsptResoMTT").Clone()
-HiggsptResoMTT.SetLineColor(1)
-HiggsptResoMTT.SetLineWidth(1)
-HiggsptResoMTT.SetTitle("Higgs Pt Resolution")
-HiggsptResoMTT.GetXaxis().SetTitle("Higgs Pt^{Reco}/Higgs Pt^{True}")
-HiggsptResoMTT.GetYaxis().SetTitle("Events")
-
-theTree.Draw("ResoVisHiggs_pt>>HiggsptResoVis(40,0,2)")
-HiggsptResoVis = ROOT.gDirectory.Get("HiggsptResoVis").Clone()
-HiggsptResoVis.SetLineColor(4)
-HiggsptResoVis.SetLineWidth(1)
-
-
-legend = ROOT.TLegend(0.85, 0.45, 1.0, 0.75, "", "brNDC")
-#legend.SetHeader("#tau_{h}-#tau_{h} channels","C")
-legend.SetFillStyle(1001)
-legend.AddEntry(HiggsptResoMTT,"FastMTT","ep")
-legend.AddEntry(HiggsptResoVis,"Visible","ep")
-
-HiggsPt = ROOT.TCanvas("HiggsPt", "HiggsPt")
-#HiggsMass.SetGrid()
-HiggsptResoMTT.SetMaximum(max(HiggsptResoMTT.GetMaximum(),HiggsptResoVis.GetMaximum()))
-HiggsptResoMTT.Draw("L")
-HiggsptResoVis.Draw("L same")
-legend.Draw("same")
-HiggsPt.SaveAs("HiggsPt_Reso.pdf")
-
 #Next we do it for Radion
 
 #Radion Mass##
-theTree.Draw("ResoGenRadion_mass>>RadionMassResoMTT(30,0,2)")
-RadionMassResoMTT = ROOT.gDirectory.Get("RadionMassResoMTT").Clone()
-RadionMassResoMTT.SetLineColor(1)
-RadionMassResoMTT.SetLineWidth(4)
-RadionMassResoMTT.SetTitle("Radion Mass Resolution")
-RadionMassResoMTT.GetXaxis().SetTitle("#Radion Mass^{Reco}/#Radion Mass^{True}")
-RadionMassResoMTT.GetYaxis().SetTitle("Events")
+RadionMassResoMTT= setUpHistrogram(Name="RadionMassResoMTT",LineColor=1,LineWidth=2,XTitle="Radion Mass^{Reco}/Radion Mass^{True}",YTitle="Events",ttree=theTree,branch="ResoGenRadion_mass",Nbins=40,min=0,max=2)
+RadionMassWithMetResoMTT= setUpHistrogram(Name="RadionMassWithMetResoMTT",LineColor=2,LineWidth=2,XTitle="Radion Mass^{Reco}/Radion Mass^{True}",YTitle="Events",ttree=theTree,branch="ResoGenRadionWithMet_mass",Nbins=40,min=0,max=2)
+RadionMassVisReso = setUpHistrogram(Name="RadionMassVisReso",LineColor=4,LineWidth=2,XTitle="Radion Mass^{Reco}/Radion Mass^{True}",YTitle="Events",ttree=theTree,branch="ResoVisRadion_mass",Nbins=40,min=0,max=2)
+
+RadionMass = setUpCanvas("RadionMass")
+HiggsMassResoMTT.SetMaximum(max(RadionMassResoMTT.GetMaximum(),RadionMassWithMetResoMTT.GetMaximum(),RadionMassVisReso.GetMaximum())+50)
+RadionMassResoMTT.Draw("C")
+RadionMassWithMetResoMTT.Draw("C same")
+RadionMassVisReso.Draw("C same")
 
 
-theTree.Draw("ResoGenRadionWithMet_mass>>RadionMassWithMetResoMTT(40,0,2)")
-RadionMassWithMetResoMTT = ROOT.gDirectory.Get("RadionMassWithMetResoMTT").Clone()
-RadionMassWithMetResoMTT.SetLineColor(2)
-RadionMassWithMetResoMTT.SetLineWidth(4)
 
-theTree.Draw("ResoVisRadion_mass>>RadionMassVisReso(40,0,2)")
-RadionMassVisReso = ROOT.gDirectory.Get("RadionMassVisReso").Clone()
-RadionMassVisReso.SetLineColor(4)
-RadionMassVisReso.SetLineWidth(4)
-
-legend = ROOT.TLegend(0.1289398,0.6281513,0.5100287,0.8802521)
-#legend.SetHeader("#tau_{h}-#tau_{h} channels","C")
-legend.SetFillStyle(1001)
-legend.AddEntry(RadionMassResoMTT,"Radion FastMTT ","ep")
-legend.AddEntry(RadionMassWithMetResoMTT,"Radion FastMTT and With MET ","ep")
-legend.AddEntry(RadionMassVisReso,"Radion with Visible Mass","ep")
-
-RadionMass = ROOT.TCanvas("RadionMass", "RadionMass")
-#HiggsMass.SetGrid()
-RadionMassResoMTT.SetMaximum(max(RadionMassResoMTT.GetMaximum(),RadionMassResoMTT.GetMaximum(),RadionMassVisReso.GetMaximum()))
-RadionMassResoMTT.Draw("ap")
-RadionMassWithMetResoMTT.Draw("same p")
-RadionMassVisReso.Draw("same p")
+legend = setUpLegend()
+legend.AddEntry(RadionMassResoMTT,"FastMTT","ep")
+legend.AddEntryRadionMassWithMetResoMTT,"FastMTT + MET","ep")
+legend.AddEntry(RadionMassVisReso,"Visible","ep")
 legend.Draw("same")
-RadionMass.SaveAs("RadionMass_Reso.pdf")
+
+
+cmsLatex = setUpCmsLatex(2016)
+RadionMass.SaveAs("RadionM_Reso.pdf")
+
+#Radion Momemtum##
+RadionptResoMTT= setUpHistrogram(Name="RadionptResoMTT",LineColor=1,LineWidth=2,XTitle="Radion Pt^{Reco}/Radion Pt^{True}",YTitle="Events",ttree=theTree,branch="ResoGenRadion_pt",Nbins=40,min=0,max=2)
+RadionptWithMetResoMTT= setUpHistrogram(Name="RadionptWithMetResoMTT",LineColor=2,LineWidth=2,XTitle="Radion Pt^{Reco}/Radion Pt^{True}",YTitle="Events",ttree=theTree,branch="ResoGenRadionWithMet_pt",Nbins=40,min=0,max=2)
+RadionptVisReso = setUpHistrogram(Name="RadionptVisReso",LineColor=4,LineWidth=2,XTitle="Radion Pt^{Reco}/Radion Pt^{True}",YTitle="Events",ttree=theTree,branch="ResoVisRadion_pt",Nbins=40,min=0,max=2)
+
+Radionpt = setUpCanvas("RadionMass")
+HiggsptResoMTT.SetMaximum(max(RadionptResoMTT.GetMaximum(),RadionptWithMetResoMTT.GetMaximum(),RadionptVisReso.GetMaximum())+50)
+RadionptResoMTT.Draw("C")
+RadionptWithMetResoMTT.Draw("C same")
+RadionptVisReso.Draw("C same")
 
 
 
-#Radion pt##
-theTree.Draw("ResoGenRadion_pt>>RadionptResoMTT(40,0,2)")
-RadionptResoMTT = ROOT.gDirectory.Get("RadionptResoMTT").Clone()
-RadionptResoMTT.SetLineColor(1)
-RadionptResoMTT.SetLineWidth(4)
-RadionptResoMTT.SetTitle("Radion Pt Resolution")
-RadionptResoMTT.GetXaxis().SetTitle("#Radion Pt^{Reco}/#Radion Pt^{True}")
-RadionptResoMTT.GetYaxis().SetTitle("Events")
-
-theTree.Draw("ResoGenRadionWithMet_pt>>RadionptWithMetResoMTT(40,0,2)")
-RadionptWithMetResoMTT = ROOT.gDirectory.Get("RadionptWithMetResoMTT").Clone()
-RadionptWithMetResoMTT.SetLineColor(2)
-RadionptWithMetResoMTT.SetLineWidth(4)
-
-theTree.Draw("ResoVisRadion_pt>>RadionptVisReso(40,0,2)")
-RadionptVisReso = ROOT.gDirectory.Get("RadionptVisReso").Clone()
-RadionptVisReso.SetLineColor(4)
-RadionptVisReso.SetLineWidth(4)
-
-legend = ROOT.TLegend(0.1289398,0.6281513,0.5100287,0.8802521)
-#legend.SetHeader("#tau_{h}-#tau_{h} channels","C")
-legend.SetFillStyle(1001)
-legend.AddEntry(RadionptResoMTT,"Radion with FastMTT ","ep")
-legend.AddEntry(RadionptWithMetResoMTT,"Radion with FastMTT and MET ","ep")
-legend.AddEntry(RadionptVisReso,"Radion with Visible Mass","ep")
-
-RadionPt = ROOT.TCanvas("RadionPt", "RadionPt")
-#HiggsMass.SetGrid()
-RadionptResoMTT.SetMaximum(max(RadionptResoMTT.GetMaximum(),RadionptWithMetResoMTT.GetMaximum(),RadionptVisReso.GetMaximum()))
-RadionptResoMTT.Draw("ap")
-RadionptWithMetResoMTT.Draw("same p")
-RadionptVisReso.Draw("same p")
+legend = setUpLegend()
+legend.AddEntry(RadionptResoMTT,"FastMTT","ep")
+legend.AddEntryRadionptWithMetResoMTT,"FastMTT + MET","ep")
+legend.AddEntry(RadionptVisReso,"Visible","ep")
 legend.Draw("same")
-RadionPt.SaveAs("RadionPt_Reso.pdf")
+
+
+cmsLatex = setUpCmsLatex(2016)
+RadionMass.SaveAs("RadionPt_Reso.pdf")
+
+
+
+
 
 
 
