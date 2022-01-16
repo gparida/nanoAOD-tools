@@ -42,7 +42,7 @@ HiggsMassResoVis = ROOT.gDirectory.Get("HiggsMassResoVis").Clone()
 HiggsMassResoVis.SetLineColor(4)
 HiggsMassResoVis.SetLineWidth(1)
 
-legend = ROOT.TLegend(0.1289398,0.6281513,0.5100287,0.8802521)
+legend = ROOT.TLegend(0.85, 0.45, 1.0, 0.75, "", "brNDC")
 #legend.SetHeader("#tau_{h}-#tau_{h} channels","C")
 legend.SetFillStyle(1001)
 legend.AddEntry(HiggsMassResoMTT,"FastMTT","ep")
@@ -73,7 +73,7 @@ HiggsptResoVis.SetLineColor(4)
 HiggsptResoVis.SetLineWidth(1)
 
 
-legend = ROOT.TLegend(0.1289398,0.6281513,0.5100287,0.8802521)
+legend = ROOT.TLegend(0.85, 0.45, 1.0, 0.75, "", "brNDC")
 #legend.SetHeader("#tau_{h}-#tau_{h} channels","C")
 legend.SetFillStyle(1001)
 legend.AddEntry(HiggsptResoMTT,"FastMTT","ep")
