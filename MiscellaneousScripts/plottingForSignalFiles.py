@@ -29,18 +29,18 @@ nEntries = theTree.GetEntries()
 #First doing it for Higgs..................................
 
 #Higgs mass
-theTree.Draw("ResoGenHiggs_mass>>HiggsMassResoMTT(30,0,2)")
+theTree.Draw("ResoGenHiggs_mass>>HiggsMassResoMTT(40,0,2)")
 HiggsMassResoMTT = ROOT.gDirectory.Get("HiggsMassResoMTT").Clone()
 HiggsMassResoMTT.SetLineColor(1)
-HiggsMassResoMTT.SetLineWidth(1)
+HiggsMassResoMTT.SetLineWidth(1.5)
 HiggsMassResoMTT.SetTitle("Higgs Mass Resolution")
 HiggsMassResoMTT.GetXaxis().SetTitle("Higgs Mass^{Reco}/Higgs Mass^{True}")
 HiggsMassResoMTT.GetYaxis().SetTitle("Events")
 
-theTree.Draw("ResoVisHiggs_mass>>HiggsMassResoVis(30,0,2)")
+theTree.Draw("ResoVisHiggs_mass>>HiggsMassResoVis(40,0,2)")
 HiggsMassResoVis = ROOT.gDirectory.Get("HiggsMassResoVis").Clone()
 HiggsMassResoVis.SetLineColor(4)
-HiggsMassResoVis.SetLineWidth(1)
+HiggsMassResoVis.SetLineWidth(1.5)
 
 legend = ROOT.TLegend(0.85, 0.45, 1.0, 0.75, "", "brNDC")
 #legend.SetHeader("#tau_{h}-#tau_{h} channels","C")
@@ -49,10 +49,10 @@ legend.AddEntry(HiggsMassResoMTT,"FastMTT","ep")
 legend.AddEntry(HiggsMassResoVis,"Visible","ep")
 
 HiggsMass = ROOT.TCanvas("HiggsMass", "HiggsMass")
-#HiggsMass.SetGrid()
+HiggsMass.SetGrid()
 HiggsMassResoMTT.SetMaximum(max(HiggsMassResoMTT.GetMaximum(),HiggsMassResoVis.GetMaximum()))
-HiggsMassResoMTT.Draw("L")
-HiggsMassResoVis.Draw("L same")
+HiggsMassResoMTT.Draw("C")
+HiggsMassResoVis.Draw("C same")
 legend.Draw("same")
 HiggsMass.SaveAs("HiggsM_Reso.pdf")
 
