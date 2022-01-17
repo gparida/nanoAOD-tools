@@ -86,7 +86,7 @@ RadionMassVisReso.Draw("C same")
 
 legend = setUpLegend()
 legend.AddEntry(RadionMassResoMTT,"FastMTT","ep")
-legend.AddEntryRadionMassWithMetResoMTT,"FastMTT + MET","ep")
+legend.AddEntry(RadionMassWithMetResoMTT,"FastMTT + MET","ep")
 legend.AddEntry(RadionMassVisReso,"Visible","ep")
 legend.Draw("same")
 
@@ -109,7 +109,7 @@ RadionptVisReso.Draw("C same")
 
 legend = setUpLegend()
 legend.AddEntry(RadionptResoMTT,"FastMTT","ep")
-legend.AddEntryRadionptWithMetResoMTT,"FastMTT + MET","ep")
+legend.AddEntry(RadionptWithMetResoMTT,"FastMTT + MET","ep")
 legend.AddEntry(RadionptVisReso,"Visible","ep")
 legend.Draw("same")
 
