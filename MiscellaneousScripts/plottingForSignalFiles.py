@@ -100,7 +100,7 @@ RadionptWithMetResoMTT= setUpHistrogram(Name="RadionptWithMetResoMTT",LineColor=
 RadionptVisReso = setUpHistrogram(Name="RadionptVisReso",LineColor=4,LineWidth=2,XTitle="Radion Pt^{Reco}/Radion Pt^{True}",YTitle="Events",ttree=theTree,branch="ResoVisRadion_pt",Nbins=30,min=0,max=2)
 
 Radionpt = setUpCanvas("Radionpt")
-HiggsptResoMTT.SetMaximum(max(RadionptResoMTT.GetMaximum(),RadionptWithMetResoMTT.GetMaximum(),RadionptVisReso.GetMaximum())+50)
+RadionptResoMTT.SetMaximum(max(RadionptResoMTT.GetMaximum(),RadionptWithMetResoMTT.GetMaximum(),RadionptVisReso.GetMaximum())+50)
 RadionptResoMTT.Draw("C")
 RadionptWithMetResoMTT.Draw("C same")
 RadionptVisReso.Draw("C same")
@@ -116,14 +116,4 @@ legend.Draw("same")
 
 cmsLatex = setUpCmsLatex(2016)
 Radionpt.SaveAs("RadionPt_Reso.pdf")
-
-
-
-
-
-
-
-
-
-
 
