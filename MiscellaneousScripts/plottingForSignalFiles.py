@@ -115,7 +115,7 @@ legend.Draw("same")
 
 
 cmsLatex = setUpCmsLatex(2016)
-RadionMass.SaveAs("RadionPt_Reso.pdf")
+Radionpt.SaveAs("RadionPt_Reso.pdf")
 
 
 
