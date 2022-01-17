@@ -117,3 +117,17 @@ legend.Draw("same")
 cmsLatex = setUpCmsLatex(2016)
 Radionpt.SaveAs("RadionPt_Reso.pdf")
 
+
+#Plotting Higgs Mass
+HiggsMass1 = setUpHistrogram(Name="HiggsMass1",LineColor=1,LineWidth=2,XTitle="Higgs MTT Mass",YTitle="Events",ttree=theTree,branch="fastMTT_HTTleg_m",Nbins=20,min=0,max=200)
+
+HMass1 = setUpCanvas("Higgs Mass 1")
+HiggsMass1.SetMaximum(HiggsMass1.GetMaximum()+50)
+HiggsMass1.Draw("C")
+
+legend = setUpLegend()
+legend.AddEntry(HiggsMass1,"1 TeV","el")
+legend.Draw("same")
+
+cmsLatex = setUpCmsLatex(2016)
+HMass1.SaveAs("HMass_1.pdf")
