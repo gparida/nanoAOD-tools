@@ -101,9 +101,9 @@ RadionptVisReso = setUpHistrogram(Name="RadionptVisReso",LineColor=4,LineWidth=2
 
 Radionpt = setUpCanvas("Radionpt")
 RadionptResoMTT.SetMaximum(max(RadionptResoMTT.GetMaximum(),RadionptWithMetResoMTT.GetMaximum(),RadionptVisReso.GetMaximum())+50)
-RadionptResoMTT.Draw("C")
-RadionptWithMetResoMTT.Draw("C same")
-RadionptVisReso.Draw("C same")
+RadionptResoMTT.Draw("Hist")
+RadionptWithMetResoMTT.Draw("HIST same")
+RadionptVisReso.Draw("HIST same")
 
 
 
