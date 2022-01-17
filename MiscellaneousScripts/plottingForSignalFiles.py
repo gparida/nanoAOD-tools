@@ -99,7 +99,7 @@ RadionptResoMTT= setUpHistrogram(Name="RadionptResoMTT",LineColor=1,LineWidth=2,
 RadionptWithMetResoMTT= setUpHistrogram(Name="RadionptWithMetResoMTT",LineColor=2,LineWidth=2,XTitle="Radion Pt^{Reco}/Radion Pt^{True}",YTitle="Events",ttree=theTree,branch="ResoGenRadionWithMet_pt",Nbins=40,min=0,max=2)
 RadionptVisReso = setUpHistrogram(Name="RadionptVisReso",LineColor=4,LineWidth=2,XTitle="Radion Pt^{Reco}/Radion Pt^{True}",YTitle="Events",ttree=theTree,branch="ResoVisRadion_pt",Nbins=40,min=0,max=2)
 
-Radionpt = setUpCanvas("RadionMass")
+Radionpt = setUpCanvas("Radionpt")
 HiggsptResoMTT.SetMaximum(max(RadionptResoMTT.GetMaximum(),RadionptWithMetResoMTT.GetMaximum(),RadionptVisReso.GetMaximum())+50)
 RadionptResoMTT.Draw("C")
 RadionptWithMetResoMTT.Draw("C same")
