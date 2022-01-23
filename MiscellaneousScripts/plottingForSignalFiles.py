@@ -119,15 +119,15 @@ Radionpt.SaveAs("RadionPt_Reso.pdf")
 
 
 #Plotting Higgs Mass
-HiggsMass1 = setUpHistrogram(Name="HiggsMass1",LineColor=1,LineWidth=2,XTitle="Higgs MTT Mass",YTitle="Events",ttree=theTree,branch="fastMTT_HTTleg_m",Nbins=20,min=0,max=200)
+HiggsMassbb = setUpHistrogram(Name="HiggsMassbb",LineColor=1,LineWidth=2,XTitle="Softdrop Mass^{Reco}/Higgs Mass^{True}",YTitle="Events",ttree=theTree,branch="FatJet_msoftdrop/125",Nbins=40,min=0,max=2,cond="(FatJet_particleNetMD_Xbb/(FatJet_particleNetMD_Xbb+FatJet_particleNetMD_QCD))>0.87")
 
-HMass1 = setUpCanvas("Higgs Mass 1")
-HiggsMass1.SetMaximum(HiggsMass1.GetMaximum()+50)
-HiggsMass1.Draw("C")
+HiggsMassbb = setUpCanvas("Soft Drop Mass")
+HiggsMassbb.SetMaximum(HiggsMassbb.GetMaximum()+50)
+HiggsMassbb.Draw("C")
 
 legend = setUpLegend()
-legend.AddEntry(HiggsMass1,"1 TeV","el")
+legend.AddEntry(HiggsMassbb,"SoftDrop Mass","el")
 legend.Draw("same")
 
 cmsLatex = setUpCmsLatex(2016)
-HMass1.SaveAs("HMass_1.pdf")
+HiggsMassbb.SaveAs("HMass_bb.pdf")
