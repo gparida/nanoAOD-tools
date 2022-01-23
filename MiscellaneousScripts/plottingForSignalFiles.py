@@ -121,7 +121,7 @@ Radionpt.SaveAs("RadionPt_Reso.pdf")
 #Plotting Higgs Mass
 HiggsMassbb = setUpHistrogram(Name="HiggsMassbb",LineColor=1,LineWidth=2,XTitle="Softdrop Mass^{Reco}/Higgs Mass^{True}",YTitle="Events",ttree=theTree,branch="gFatJet_msoftdrop",Nbins=40,min=0,max=2,cond="(FatJet_particleNetMD_Xbb/(FatJet_particleNetMD_Xbb+FatJet_particleNetMD_QCD))>0.87")
 
-HiggsMassbb = setUpCanvas("Soft Drop Mass")
+HiggsbbMass = setUpCanvas("Soft Drop Mass")
 HiggsMassbb.SetMaximum(HiggsMassbb.GetMaximum()+50)
 HiggsMassbb.Draw("C")
 
@@ -130,4 +130,4 @@ legend.AddEntry(HiggsMassbb,"SoftDrop Mass","el")
 legend.Draw("same")
 
 cmsLatex = setUpCmsLatex(2016)
-HiggsMassbb.SaveAs("HMass_bb.pdf")
+HiggsbbMass.SaveAs("HMass_bb.pdf")
