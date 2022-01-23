@@ -2,10 +2,10 @@ from re import T
 import ROOT
 
 
-def setUpHistrogram(Name,XTitle,YTitle,LineColor,ttree,branch,Nbins,min,max,LineWidth=2,Title='',HistName='',cond=""):
+def setUpHistrogram(Name,XTitle,YTitle,LineColor,ttree,branch,Nbins,min,max,LineWidth=2,Title='',HistName='',cond="",intHis="hist"):
 	if HistName=='':
-		ttree.Draw(branch+">>"+branch+"("+str(Nbins)+","+str(min)+","+str(max)+")")
-		Name = ROOT.gDirectory.Get(branch).Clone()
+		ttree.Draw(branch+">>"+intHis+"("+str(Nbins)+","+str(min)+","+str(max)+")")
+		Name = ROOT.gDirectory.Get(intHis).Clone()
 	else:
 		Name = ROOT.TH1F(HistName,HistName,Nbins,min,max)
 	Name.SetLineColor(LineColor)
