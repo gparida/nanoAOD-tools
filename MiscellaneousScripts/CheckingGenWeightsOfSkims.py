@@ -64,7 +64,7 @@ for file in files:
             break
         
         tree_bbtt.GetEntry(x)
-        print (str(tree_bbtt.genWeight)+"\n")
+        f.write(str(tree_bbtt.genWeight)+"\n")
     
 
 f.close()
