@@ -385,13 +385,28 @@ if __name__ == "__main__":
 
 	#Define Eevnt Selection - all those to be connected by or
 
+	eventSelectionOR = ["HLT_PFMETNoMu90_PFMHTNoMu90_IDTight",
+            			"HLT_PFMETNoMu110_PFMHTNoMu110_IDTight",
+            			"HLT_PFMETNoMu120_PFMHTNoMu120_IDTight",
+            			"HLT_MonoCentralPFJet80_PFMETNoMu120_PFMHTNoMu120_IDTight",
+            			"HLT_PFMET110_PFMHT110_IDTight",
+            			"HLT_PFMET120_PFMHT120_IDTight",
+            			#"HLT_PFMET170_NoiseCleaned",
+            			"HLT_PFMET170_HBHECleaned",
+            			"HLT_PFMET170_HBHE_BeamHaloCleaned"]
+	
+
+
 	#fnames = ["/data/aloeliger/bbtautauAnalysis/2016/Data.root"]
 	fnames = glob.glob(args.inputLocation + "/*.root")  #making a list of input files
 	#outputDir = "/data/gparida/Background_Samples/bbtautauAnalysis/2016/{}_Channel".format(args.Channel)
 	outputDir = args.outputLocation
 	#outputDir = "."
 	outputbranches = "keep_and_drop.txt"
-	cuts = "&&".join(eventSelectionAND)
+	cut1 = "&&".join(eventSelectionAND)
+	cut2 = "||".join(eventSelectionOR)
+	cuts = "("+cut1+")"+"&&"+"("+cut2+")"
+	print ("cuts = ",cuts)
 	#post ="_{}Channel".format(str(args.Channel))
 	post = args.postfix
 	argList = list()
