@@ -46,7 +46,7 @@ with open(os.environ['CMSSW_BASE']+'/src/PhysicsTools/NanoAODTools/Samples/2016_
     data = json.load(jsonFile)
 
 keys = data.keys()
-save_path = '/UserConfigs/2016_New'
+save_path = '/UserConfigs/2016'
 
 for name in keys:
     with open(os.path.join(save_path,name.replace("-","_")+'Config.py'),'w+') as file_out:
