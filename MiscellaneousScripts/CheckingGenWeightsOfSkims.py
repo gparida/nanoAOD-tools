@@ -60,7 +60,7 @@ for file in files:
     nEntries = tree_bbtt.GetEntries()
     f.write(file+"\t"+str(nEntries)+"\n")
     for x in range(nEntries):
-        if x==5:
+        if x==10:
             break
         
         tree_bbtt.GetEntry(x)
