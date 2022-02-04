@@ -40,10 +40,16 @@ class mergeTauCamilla(Module):
         self.out.fillBranch("{}_mass".format("allTau"),self.get_attributes("mass",colllist))
         self.out.fillBranch("{}_phi".format("allTau"),self.get_attributes("phi",colllist))
         self.out.fillBranch("{}_eta".format("allTau"),self.get_attributes("eta",colllist))
-        for branch in boostedTauBranches.values(): 
-            if (self.filename == "Data" and (branch[0] == "genPartFlav" or branch[0] =="genPartIdx")):
-                continue
-            self.out.fillBranch("{}_{}".format("allTau",branch[0]),self.get_attributes(branch[0],colllist))
+        for branch in boostedTauBranches.values():           
+            for branch2 in TauBranches.values():
+                if branch[0]==branch2[0]:
+                    if (self.filename == "Data" and (branch[0] == "genPartFlav" or branch[0] =="genPartIdx")):
+                        continue
+                    self.out.fillBranch("{}_{}".format("allTau",branch[0]),self.get_attributes(branch[0],colllist))
+                    break    
+            #if (self.filename == "Data" and (branch[0] == "genPartFlav" or branch[0] =="genPartIdx")):
+            #    continue
+            #self.out.fillBranch("{}_{}".format("allTau",branch[0]),self.get_attributes(branch[0],colllist))
 
     def get_attributes(self,variable,collList):
         list = []
