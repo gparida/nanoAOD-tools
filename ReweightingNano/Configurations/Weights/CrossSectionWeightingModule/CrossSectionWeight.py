@@ -70,10 +70,16 @@ def calculateCrossSectionWeight(self, theTree):
     crossSectionWeighting = self.XS * LHCLumi / self.totalNumberOfEvents
 
     genWeighting = 1.0
-    if not self.forcedGenWeight == None:
-        genWeighting = self.forcedGenWeight
-    else:
-        genWeighting = theTree.genWeight
+#    if not self.forcedGenWeight == None:
+#        genWeighting = self.forcedGenWeight
+#    else:
+#        genWeighting = theTree.genWeight
+#    self.value[0] = crossSectionWeighting * genWeighting
+    if theTree.genWeight > 0:
+        genWeighting = 1.0
+    elif theTree.genWeigh < 0:
+        genWeighting = -1.0
+    
     self.value[0] = crossSectionWeighting * genWeighting
     
     

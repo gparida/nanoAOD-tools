@@ -3,6 +3,7 @@ from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collect
 from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
 from addingNewObservableBranches.visibleMassCamilla import VisibleMassCamilla  #Importing modules works if the folders are in the place where the scripts are
 from addingNewObservableBranches.fastMTTBranches import fastMTTBranches
+from addingNewObservableBranches.genMeasurementRadionBranches import genMeasurementRadionBranches
 from sortingTausCamilla import mergeTauCamilla
 import ROOT
 import glob
@@ -210,7 +211,7 @@ class ChannelCamilla(Module):
 
 
 		self.boostedTau.setupCollection(event)
-		self.boostedTau.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAnewDM2017v2 & 2 == 2)) # VLoose ID for newMVA for boosted Taus - but use oldMVA weighttn
+		self.boostedTau.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAnewDM2017v2 & 2 == 2)) # VLoose ID for newMVA for boosted Taus - but use oldMVA weight
 
 		self.Tau.collection =  filter(self.HPStauVeto,self.Tau.collection) #HPS veto applied
 
@@ -229,7 +230,7 @@ class ChannelCamilla(Module):
 		self.Electron.collection = filter(self.Electron.relativeIso,self.Electron.collection)
 
 		self.Muon.setupCollection(event)
-		self.Muon.apply_cut(lambda x: x.pt > 10 and x.mvaId >= 1 and x.pfRelIso03_all < 0.25)
+		self.Muon.apply_cut(lambda x: x.pt > 10 and x.mvaId >= 1 and ((x.TauCorrPfIso/x.pt) < 0.25))
 
 		#filter Objects to remove those within the fatjet cone
 		self.Electron.collection = filter(self.FatJetConeIsolation,self.Electron.collection)
@@ -242,7 +243,7 @@ class ChannelCamilla(Module):
 		#filter the AK4 Jet collection for FatJet and Ak4 Jet overlap, 1.2 distance apart
 		self.Jet.collection = filter(self.JetFatJetIsolation,self.Jet.collection)
 
-		#remove light lepton and tau overlap
+		#remove light lepton and tau overlap dist 0.05
 		self.Tau.collection = filter(self.ElectronTauOverlap,self.Tau.collection)
 		self.Tau.collection = filter(self.MuonTauOverlap,self.Tau.collection)
 
@@ -354,9 +355,11 @@ def call_postpoc(files):
 		letsSortChannels = lambda: ChannelCamilla(filename)
 		tauOdering = lambda: mergeTauCamilla(filename)
 		visibleM = lambda:VisibleMassCamilla()
+		mttBranches = lambda:fastMTTBranches(filename)
+		radBranches = lambda:genMeasurementRadionBranches(filename)
 		nameStrip=files.strip()
 		filename = (nameStrip.split('/')[-1]).split('.')[-2]
-		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[letsSortChannels(),tauOdering(),visibleM(), fastMTTBranches()], postfix=post,noOut=False,outputbranchsel=outputbranches)
+		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[letsSortChannels(),tauOdering(),visibleM(), mttBranches(),radBranches()], postfix=post,noOut=False,outputbranchsel=outputbranches)
 
 		p.run()
 
@@ -372,6 +375,7 @@ if __name__ == "__main__":
 
 	#Define Event Selection - all those to be connected by and
 	eventSelectionAND = ["MET_pt>200",
+						"genWeight>0"
 						"PV_ndof > 4",
 						"abs(PV_z) < 24",
 						"sqrt(PV_x*PV_x+PV_y*PV_y) < 2",

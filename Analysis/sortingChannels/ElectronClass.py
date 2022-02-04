@@ -20,12 +20,12 @@ class Electron(particle):
 
     def relativeIso(self,electronCollectionObject):
         if abs(electronCollectionObject.eta) <= 1.479:
-            if (electronCollectionObject.pfRelIso03_all < 0.175):
+            if ((electronCollectionObject.TauCorrPfIso/electronCollectionObject.pt) < 0.175):
                 return True
             else:
                 return False
         elif ((abs(electronCollectionObject.eta) > 1.479) and (abs(electronCollectionObject.eta) <= 2.5)):
-            if (electronCollectionObject.pfRelIso03_all < 0.159):
+            if ((electronCollectionObject.TauCorrPfIso/electronCollectionObject.pt) < 0.159):
                 return True
             else:
                 return False
