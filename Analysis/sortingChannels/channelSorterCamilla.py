@@ -363,6 +363,8 @@ def call_postpoc(files):
 		radBranches = lambda:genMeasurementRadionBranches(filename)
 		nameStrip=files.strip()
 		filename = (nameStrip.split('/')[-1]).split('.')[-2]
+		if filename == "Data":
+			cuts = "("+cut3+")"+"&&"+"("+cut2+")"
 		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[letsSortChannels(),tauOdering()], postfix=post,noOut=False,outputbranchsel=outputbranches)
 
 		p.run()
@@ -390,6 +392,18 @@ if __name__ == "__main__":
 						"Flag_EcalDeadCellTriggerPrimitiveFilter",
 						"Flag_BadPFMuonFilter",
 						"Flag_eeBadScFilter"]
+	
+	eventSelectionANDData = ["MET_pt>200",
+							"PV_ndof > 4",
+							"abs(PV_z) < 24",
+							"sqrt(PV_x*PV_x+PV_y*PV_y) < 2",
+							"Flag_goodVertices",
+							"Flag_globalSuperTightHalo2016Filter", 
+							"Flag_HBHENoiseIsoFilter",
+							"Flag_HBHENoiseFilter",
+							"Flag_EcalDeadCellTriggerPrimitiveFilter",
+							"Flag_BadPFMuonFilter",
+							"Flag_eeBadScFilter"]
 
 	#Define Eevnt Selection - all those to be connected by or
 
@@ -413,6 +427,7 @@ if __name__ == "__main__":
 	outputbranches = "keep_and_drop.txt"
 	cut1 = "&&".join(eventSelectionAND)
 	cut2 = "||".join(eventSelectionOR)
+	cut3 = "&&".join(eventSelectionANDData)
 	cuts = "("+cut1+")"+"&&"+"("+cut2+")"
 	print ("cuts = ",cuts)
 	#post ="_{}Channel".format(str(args.Channel))
