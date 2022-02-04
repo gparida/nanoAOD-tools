@@ -389,7 +389,7 @@ if __name__ == "__main__":
 
 	#Define Eevnt Selection - all those to be connected by or
 
-	eventSelectionOR = ["HLT_PFMETNoMu90_PFMHTNoMu90_IDTight",
+	eventSelectionOR = [#"HLT_PFMETNoMu90_PFMHTNoMu90_IDTight",
             			"HLT_PFMETNoMu110_PFMHTNoMu110_IDTight",
             			"HLT_PFMETNoMu120_PFMHTNoMu120_IDTight",
             			"HLT_MonoCentralPFJet80_PFMETNoMu120_PFMHTNoMu120_IDTight",
