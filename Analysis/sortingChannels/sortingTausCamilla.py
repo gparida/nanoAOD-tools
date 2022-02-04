@@ -28,7 +28,15 @@ class mergeTauCamilla(Module):
         self.out.branch("{}_eta".format("allTau"),"F",lenVar="n{}".format("allTau"))
         #The boosted Tau branches listed in the dictionary are the ones that are common for both Taus and boosted Taus
         for branch in boostedTauBranches.values():
-            self.out.branch("{}_{}".format("allTau",branch[0]),"{}".format(branch[1]),lenVar="n{}".format("allTau"))
+            for branch2 in TauBranches.values():
+                if branch[0]==branch2[0]:
+                    if (self.filename == "Data" and (branch[0] == "genPartFlav" or branch[0] =="genPartIdx")):
+                        break
+                    self.out.branch("{}_{}".format("allTau",branch[0]),"{}".format(branch[1]),lenVar="n{}".format("allTau"))
+                    break
+
+
+            #self.out.branch("{}_{}".format("allTau",branch[0]),"{}".format(branch[1]),lenVar="n{}".format("allTau"))
     
     def fillBranches(self,colllist):
         if self.event.channel == 0:
