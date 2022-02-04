@@ -62,7 +62,7 @@ boostedTauBranches={
 28:["genPartFlav","I"]
 }
 
-FatJetbranches={
+FatJetBranches={
 1:["area","F"],
 2:["btagCSVV2","F"],
 3:["btagDDBvLV2","F"],
