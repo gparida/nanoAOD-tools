@@ -29,8 +29,8 @@ class particle(object):
 	
 
 	def fillBranches(self,wrappedOutputTree):
-		if self.particleType == "Tau":
-			print("This is filling for tau = ",len(self.collection))
+		#if self.particleType == "Tau":
+			#print("This is filling for tau = ",len(self.collection))
 		wrappedOutputTree.fillBranch("gn{}".format(self.particleType),len(self.collection))
 		wrappedOutputTree.fillBranch("g{}_pt".format(self.particleType),self.get_attributes("pt"))
 		wrappedOutputTree.fillBranch("g{}_mass".format(self.particleType),self.get_attributes("mass"))
