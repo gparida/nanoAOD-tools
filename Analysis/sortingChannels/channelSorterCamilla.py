@@ -250,7 +250,7 @@ class ChannelCamilla(Module):
 		self.boostedTau.collection = filter(self.ElectronTauOverlap,self.boostedTau.collection)
 		self.boostedTau.collection = filter(self.MuonTauOverlap,self.boostedTau.collection)
 
-
+		print ("before channel","boostedTauLength = ",len(self.boostedTau.collection),"Tau length = ",len(self.Tau.collection))
 
 		if (len(self.FatJet.collection)==1 and len(self.Jet.collection)==0):
 			list["bb"]=self.selfPairing(self.boostedTau.collection)
@@ -282,6 +282,7 @@ class ChannelCamilla(Module):
 					self.Tau.collection = [obj for obj in self.Tau.collection if self.Tau.collection.index(obj)==list[Keymax][2]]
 					self.Muon.collection = []
 					self.Electron.collection = []
+					print ("Channel = ",Keymax,"Tau collection length = ",len(self.Tau.collection))
 					#self.Electron.collection = [obj for obj in self.Electron.collection if self.Electron.collection.index(obj)==-1]
 					#self.Muon.collection = [obj for obj in self.Muon.collection if self.Muon.collection.index(obj)==-1]
 					self.out.fillBranch("channel",0)					
@@ -292,6 +293,7 @@ class ChannelCamilla(Module):
 					self.Tau.collection = [obj for obj in self.Tau.collection if self.Tau.collection.index(obj)==list[Keymax][1] or self.Tau.collection.index(obj)==list[Keymax][2]]
 					self.Electron.collection = []
 					self.Muon.collection = []
+					print ("Channel = ",Keymax,"Tau collection length = ",len(self.Tau.collection))
 					#self.Electron.collection = [obj for obj in self.Electron.collection if self.Electron.collection.index(obj)==-1]
 					#self.Muon.collection = [obj for obj in self.Muon.collection if self.Muon.collection.index(obj)==-1]
 					self.out.fillBranch("channel",0)
@@ -302,6 +304,7 @@ class ChannelCamilla(Module):
 					self.Tau.collection = [obj for obj in self.Tau.collection if self.Tau.collection.index(obj)==list[Keymax][1]]
 					self.Electron.collection = [obj for obj in self.Electron.collection if self.Electron.collection.index(obj)==list[Keymax][2]]
 					#self.Muon.collection = [obj for obj in self.Muon.collection if self.Muon.collection.index(obj)==-1]
+					print ("Channel = ",Keymax,"Tau collection length = ",len(self.Tau.collection))
 					self.Muon.collection = []
 					self.out.fillBranch("channel",1)
 				
@@ -320,6 +323,7 @@ class ChannelCamilla(Module):
 					self.Tau.collection = [obj for obj in self.Tau.collection if self.Tau.collection.index(obj)==list[Keymax][1]]
 					#self.Electron.collection = [obj for obj in self.Electron.collection if self.Electron.collection.index(obj)==-1]
 					self.Electron.collection = []
+					print ("Channel = ",Keymax,"Tau collection length = ",len(self.Tau.collection))
 					self.Muon.collection = [obj for obj in self.Muon.collection if self.Muon.collection.index(obj)==list[Keymax][2]]
 					self.out.fillBranch("channel",2)
 
