@@ -227,10 +227,10 @@ class ChannelCamilla(Module):
 
 		self.Electron.setupCollection(event)
 		self.Electron.apply_cut(lambda x: x.mvaFall17V2Iso_WPL and (x.pt > 10))
-		self.Electron.collection = filter(self.Electron.relativeIso,self.Electron.collection)
+		#self.Electron.collection = filter(self.Electron.relativeIso,self.Electron.collection)
 
 		self.Muon.setupCollection(event)
-		self.Muon.apply_cut(lambda x: x.pt > 10 and x.mvaId >= 1 and ((x.TauCorrPfIso/x.pt) < 0.25))
+		#self.Muon.apply_cut(lambda x: x.pt > 10 and x.mvaId >= 1 and ((x.TauCorrPfIso/x.pt) < 0.25))
 
 		#filter Objects to remove those within the fatjet cone
 		self.Electron.collection = filter(self.FatJetConeIsolation,self.Electron.collection)
