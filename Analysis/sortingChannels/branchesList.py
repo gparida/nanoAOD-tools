@@ -156,7 +156,7 @@ MuonBranches={
 30:["nTrackerLayers","I"],
 31:["pdgId","I"],
 32:["tightCharge","I"],
-33:["highPtId","It"],
+33:["highPtId","I"],
 34:["highPurity","O"],
 35:["inTimeMuon","O"],
 36:["isGlobal","O"],
