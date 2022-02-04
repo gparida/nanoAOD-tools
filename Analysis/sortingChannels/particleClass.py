@@ -4,6 +4,7 @@ from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
 import ROOT
 ROOT.PyConfig.IgnoreCommandLineOptions = True  #Find out what does this do ?
 import traceback
+import numpy as np
 
 class particle(object):
 	def __init__(self, particleType):
@@ -46,7 +47,7 @@ class particle(object):
 			print ("Please check ",variable," for ",self.particleType)
 			#print("Error:(")
 			#traceback.print_exc()
-			return []
+			return np.ones(len(self.collection))*(-100)
 
 	
 #############################OLDER ATTEMPTS for REFERENCE###################################################################################################
