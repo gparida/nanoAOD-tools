@@ -44,7 +44,7 @@ class mergeTauCamilla(Module):
             for branch2 in TauBranches.values():
                 if branch[0]==branch2[0]:
                     if (self.filename == "Data" and (branch[0] == "genPartFlav" or branch[0] =="genPartIdx")):
-                        continue
+                        break
                     self.out.fillBranch("{}_{}".format("allTau",branch[0]),self.get_attributes(branch[0],colllist))
                     break    
             #if (self.filename == "Data" and (branch[0] == "genPartFlav" or branch[0] =="genPartIdx")):
