@@ -47,7 +47,7 @@ class particle(object):
 			print ("Please check ",variable," for ",self.particleType)
 			#print("Error:(")
 			#traceback.print_exc()
-			return np.empty(len(self.collection))
+			return np.array([])
 
 	
 #############################OLDER ATTEMPTS for REFERENCE###################################################################################################
