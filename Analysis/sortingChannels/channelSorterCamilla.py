@@ -375,7 +375,7 @@ if __name__ == "__main__":
 
 	#Define Event Selection - all those to be connected by and
 	eventSelectionAND = ["MET_pt>200",
-						"genWeight>0"
+						"genWeight>0",
 						"PV_ndof > 4",
 						"abs(PV_z) < 24",
 						"sqrt(PV_x*PV_x+PV_y*PV_y) < 2",
