@@ -323,7 +323,7 @@ class ChannelCamilla(Module):
 					self.Tau.collection = [obj for obj in self.Tau.collection if self.Tau.collection.index(obj)==list[Keymax][1]]
 					#self.Electron.collection = [obj for obj in self.Electron.collection if self.Electron.collection.index(obj)==-1]
 					self.Electron.collection = []
-					print ("Channel = ",Keymax,"Tau collection length = ",len(self.Tau.collection))
+					#print ("Channel = ",Keymax,"Tau collection length = ",len(self.Tau.collection))
 					self.Muon.collection = [obj for obj in self.Muon.collection if self.Muon.collection.index(obj)==list[Keymax][2]]
 					self.out.fillBranch("channel",2)
 
@@ -363,7 +363,7 @@ def call_postpoc(files):
 		radBranches = lambda:genMeasurementRadionBranches(filename)
 		nameStrip=files.strip()
 		filename = (nameStrip.split('/')[-1]).split('.')[-2]
-		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[letsSortChannels()], postfix=post,noOut=False,outputbranchsel=outputbranches)
+		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[letsSortChannels(),tauOdering(),visibleM(),mttBranches(),radBranches()], postfix=post,noOut=False,outputbranchsel=outputbranches)
 
 		p.run()
 

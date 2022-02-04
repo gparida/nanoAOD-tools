@@ -32,10 +32,10 @@ class particle(object):
 		#if self.particleType == "Tau":
 			#print("This is filling for tau = ",len(self.collection))
 		wrappedOutputTree.fillBranch("gn{}".format(self.particleType),len(self.collection))
-		wrappedOutputTree.fillBranch("g{}_pt".format(self.particleType),self.get_attributes("pt"))
-		wrappedOutputTree.fillBranch("g{}_mass".format(self.particleType),self.get_attributes("mass"))
-		wrappedOutputTree.fillBranch("g{}_phi".format(self.particleType),self.get_attributes("phi"))
-		wrappedOutputTree.fillBranch("g{}_eta".format(self.particleType),self.get_attributes("eta"))	
+		#wrappedOutputTree.fillBranch("g{}_pt".format(self.particleType),self.get_attributes("pt"))
+		#wrappedOutputTree.fillBranch("g{}_mass".format(self.particleType),self.get_attributes("mass"))
+		#wrappedOutputTree.fillBranch("g{}_phi".format(self.particleType),self.get_attributes("phi"))
+		#wrappedOutputTree.fillBranch("g{}_eta".format(self.particleType),self.get_attributes("eta"))	
 
 	def get_attributes(self,variable):
 		try:
