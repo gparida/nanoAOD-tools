@@ -364,8 +364,10 @@ def call_postpoc(files):
 		nameStrip=files.strip()
 		filename = (nameStrip.split('/')[-1]).split('.')[-2]
 		if filename == "Data":
-			cuts = "("+cut3+")"+"&&"+"("+cut2+")"
-		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[letsSortChannels(),tauOdering()], postfix=post,noOut=False,outputbranchsel=outputbranches)
+			p = PostProcessor(outputDir,[files], cut=cutsData,branchsel=outputbranches,modules=[letsSortChannels(),tauOdering()], postfix=post,noOut=False,outputbranchsel=outputbranches)
+		else:
+			p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[letsSortChannels(),tauOdering()], postfix=post,noOut=False,outputbranchsel=outputbranches)
+
 
 		p.run()
 
@@ -429,6 +431,7 @@ if __name__ == "__main__":
 	cut2 = "||".join(eventSelectionOR)
 	cut3 = "&&".join(eventSelectionANDData)
 	cuts = "("+cut1+")"+"&&"+"("+cut2+")"
+	cutsData = "("+cut3+")"+"&&"+"("+cut2+")"
 	print ("cuts = ",cuts)
 	#post ="_{}Channel".format(str(args.Channel))
 	post = args.postfix
