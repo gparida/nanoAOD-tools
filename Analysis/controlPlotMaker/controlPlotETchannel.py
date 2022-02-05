@@ -474,7 +474,7 @@ def main():
 
         ################################Color_Definitions -- Background Fill##############################################
         color_DiBoson="#ff66c4"
-        color_TT="#27510d"
+        color_TT="#8dc315"
         color_WJets="#76dfee"
         color_QCD="#d4ff66"
         color_ST="#66ffe8"
@@ -487,7 +487,7 @@ def main():
         #ST_s_channel_4f.SetFillColor(ROOT.TColor.GetColor("#ffcc66"))
         Signal_Histo.SetLineColor(ROOT.kRed)
         Signal_Histo.Scale(1)
-        Signal_Histo.SetLineWidth(2)
+        Signal_Histo.SetLineWidth(1)
 
         DiBoson_Histo.SetFillColor(ROOT.TColor.GetColor(color_DiBoson))
         TT_Histo.SetFillColor(ROOT.TColor.GetColor(color_TT))
