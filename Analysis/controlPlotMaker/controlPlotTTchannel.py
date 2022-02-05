@@ -384,7 +384,7 @@ def main():
        # DY_Histo = DatasetObjects["DYlow"].HistogramName.Clone() #Zero for MT channel
        # DY_Histo.Add(DatasetObjects["DY"].HistogramName)
         DY_Histo = DatasetObjects["DYJets_HT-100to200"].HistogramName.Clone()
-        DY_Histo.Add(DatasetObjects["DYJetsToLL_M-10to50"].HistogramName)
+        DY_Histo.Add(DatasetObjects["DYJetsToLL_M-10to50git "].HistogramName)
         DY_Histo.Add(DatasetObjects["DYJets_HT-200to400"].HistogramName)
         DY_Histo.Add(DatasetObjects["DYJets_HT-1200to2500"].HistogramName)
         DY_Histo.Add(DatasetObjects["DYJets_HT-2500toinf"].HistogramName)
@@ -416,10 +416,10 @@ def main():
         #QCD_Histo.Add(DatasetObjects["QCD_80to120"].HistogramName) also zero events
         #QCD_Histo.Add(DatasetObjects["QCD_50to80"].HistogramName) also zero events
 
-        QCD_Histo = DatasetObjects["QCD_HT100to200"].HistogramName.Clone()
-        QCD_Histo.Add(DatasetObjects["QCD_HT200to300"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_HT300to500"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_HT500to700"].HistogramName)
+        QCD_Histo = DatasetObjects["QCD_HT500to700"].HistogramName.Clone()
+        #QCD_Histo.Add(DatasetObjects["QCD_HT200to300"].HistogramName)
+        #QCD_Histo.Add(DatasetObjects["QCD_HT300to500"].HistogramName)
+        #QCD_Histo.Add(DatasetObjects["QCD_HT500to700"].HistogramName)
         QCD_Histo.Add(DatasetObjects["QCD_HT700to1000"].HistogramName)
         QCD_Histo.Add(DatasetObjects["QCD_HT1000to1500"].HistogramName)
         QCD_Histo.Add(DatasetObjects["QCD_HT1500to2000"].HistogramName)
