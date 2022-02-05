@@ -191,8 +191,8 @@ def main():
                             "allTau_eta",
                             #"gMuon_pt",
                             #"gMuon_eta",
-                            #"gElectron_pt",
-                            #"gElectron_eta",
+                            "gElectron_pt",
+                            "gElectron_eta",
                             "gDeltaR_LL"])
                             #"boostedTau_pt",
                             #"boostedTau_pt[0]",

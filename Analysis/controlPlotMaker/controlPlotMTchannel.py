@@ -189,8 +189,8 @@ def main():
                             "MET_pt",
                             "allTau_pt",
                             "allTau_eta",
-                            #"gMuon_pt",
-                            #"gMuon_eta",
+                            "gMuon_pt",
+                            "gMuon_eta",
                             #"gElectron_pt",
                             #"gElectron_eta",
                             "gDeltaR_LL"])
