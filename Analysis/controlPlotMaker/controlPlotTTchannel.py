@@ -282,7 +282,7 @@ def main():
                         #"Flag_EcalDeadCellTriggerPrimitiveFilter",
                         #"Flag_BadPFMuonFilter",
                         #"Flag_eeBadScFilter"])
-                        default=["gFatJet_tau2/gFatJet_tau1<0.75","gDeltaR_LL<1.5"])
+                        default=["gDeltaR_LL<1.5","fastMTT_RadionLegWithMet_m>750","fastMTT_RadionLegWithMet_m<4250","gMVis_LL>0"])
     parser.add_argument('--pause',
                         help='pause after drawing each plot to make it easier to view',
                         action='store_true')
@@ -307,7 +307,7 @@ def main():
 
     if args.year == '2016':
         #dataPath = '/data/gparida/Background_Samples/bbtautauAnalysis/2016/ChannelFiles_Camilla/'
-        dataPath = '/data/gparida/Background_Samples/bbtautauAnalysis/2016/tau21_Files_Camilla/'
+        dataPath = '/data/gparida/Background_Samples/bbtautauAnalysis/2016/ChannelFiles_Camilla_28Jan_2022/'
     elif args.year == '2017':
         dataPath = '/data/aloeliger/SMHTT_Selected_2017_Deep/'
     elif args.year == '2018':
@@ -376,15 +376,22 @@ def main():
             break
         
         ########################Signal-Histogram#############################
-        Signal_Histo = SignalObjects["RadionHH_M1000"].HistogramName.Clone()
+        Signal_Histo = SignalObjects["RadionTohhtohtatahbb_M-1000"].HistogramName.Clone()
         #####################################################################
 
 
         #######################DY-Histograms####################################
        # DY_Histo = DatasetObjects["DYlow"].HistogramName.Clone() #Zero for MT channel
        # DY_Histo.Add(DatasetObjects["DY"].HistogramName)
-        DY_Histo = DatasetObjects["DY"].HistogramName.Clone()
-
+        DY_Histo = DatasetObjects["DYJets_HT-100to200"].HistogramName.Clone()
+        DY_Histo.Add(DatasetObjects["DYJetsToLL_M-10to50.root"].HistogramName)
+        DY_Histo.Add(DatasetObjects["DYJets_HT-200to400"].HistogramName)
+        DY_Histo.Add(DatasetObjects["DYJets_HT-1200to2500"].HistogramName)
+        DY_Histo.Add(DatasetObjects["DYJets_HT-2500toinf"].HistogramName)
+        DY_Histo.Add(DatasetObjects["DYJets_HT-400to600"].HistogramName)
+        DY_Histo.Add(DatasetObjects["DYJets_HT-600to800"].HistogramName)
+        DY_Histo.Add(DatasetObjects["DYJets_HT-800to1200"].HistogramName)
+        
 	    
 
         #PF_DY_Histo = DatasetObjects["DYJetsToLL_M-10to50"].PassFailHistogramName.Clone()
@@ -393,6 +400,10 @@ def main():
 #
         ############################ST-Histograms############################################
         ST_Histo = DatasetObjects["ST_s-channel_4f"].HistogramName.Clone()
+        ST_Histo.Add(DatasetObjects["ST_t-channel_antitop_4f"].HistogramName)
+        ST_Histo.Add(DatasetObjects["ST_t-channel_top_4f"].HistogramName)
+        ST_Histo.Add(DatasetObjects["ST_tW_antitop_5f"].HistogramName)
+        ST_Histo.Add(DatasetObjects["ST_tW_top_5f"].HistogramName)
 
         #PF_ST_Histo = DatasetObjects["ST_s-channel_4f"].PassFailHistogramName.Clone()
         #####################################################################################
@@ -405,20 +416,25 @@ def main():
         #QCD_Histo.Add(DatasetObjects["QCD_80to120"].HistogramName) also zero events
         #QCD_Histo.Add(DatasetObjects["QCD_50to80"].HistogramName) also zero events
 
-        QCD_Histo = DatasetObjects["QCD_1400to1800"].HistogramName.Clone()
-        QCD_Histo.Add(DatasetObjects["QCD_1800to2400"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_2400to3200"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_300to470"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_3200toInf"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_470to600"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_800to1000"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_600to800"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_1000to1400"].HistogramName)
+        QCD_Histo = DatasetObjects["QCD_HT100to200"].HistogramName.Clone()
+        QCD_Histo.Add(DatasetObjects["QCD_HT200to300"].HistogramName)
+        QCD_Histo.Add(DatasetObjects["QCD_HT300to500"].HistogramName)
+        QCD_Histo.Add(DatasetObjects["QCD_HT500to700"].HistogramName)
+        QCD_Histo.Add(DatasetObjects["QCD_HT700to1000"].HistogramName)
+        QCD_Histo.Add(DatasetObjects["QCD_HT1000to1500"].HistogramName)
+        QCD_Histo.Add(DatasetObjects["QCD_HT1500to2000"].HistogramName)
+        QCD_Histo.Add(DatasetObjects["QCD_HT2000toinf"].HistogramName)
 
         #####################################################################################
 
         ##################################WJets##############################################
-        WJets_Histo = DatasetObjects["W"].HistogramName.Clone()
+        WJets_Histo = DatasetObjects["WJets_HT-100To200"].HistogramName.Clone()
+        WJets_Histo.Add(DatasetObjects["WJets_HT-1200to2500"].HistogramName)
+        WJets_Histo.Add(DatasetObjects["WJets_HT-200to400"].HistogramName)
+        WJets_Histo.Add(DatasetObjects["WJets_HT-2500toInf"].HistogramName)
+        WJets_Histo.Add(DatasetObjects["WJets_HT-400to600"].HistogramName)
+        WJets_Histo.Add(DatasetObjects["WJets_HT-600to800"].HistogramName)
+        WJets_Histo.Add(DatasetObjects["WJets_HT-800to1200"].HistogramName)
 
         ######################################################################################
 #
@@ -429,9 +445,10 @@ def main():
         ########################################################################################
 #
         ################################DiBoson-Histograms##########################################
-        DiBoson_Histo = DatasetObjects["WW"].HistogramName.Clone()
-        DiBoson_Histo.Add(DatasetObjects["WZ"].HistogramName)
-        DiBoson_Histo.Add(DatasetObjects["ZZ"].HistogramName)
+        DiBoson_Histo = DatasetObjects["WWTo1L1Nu2Q"].HistogramName.Clone()
+        DiBoson_Histo.Add(DatasetObjects["WZTo1L1nu2q"].HistogramName)
+        DiBoson_Histo.Add(DatasetObjects["WZTo2Q2Nu"].HistogramName)
+        DiBoson_Histo.Add(DatasetObjects["ZZTo2Q2Nu"].HistogramName)
         ################################################################################################
 
         ################################Data is represented as points########################################################################
