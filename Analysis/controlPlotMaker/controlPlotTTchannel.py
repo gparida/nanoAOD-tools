@@ -384,7 +384,7 @@ def main():
        # DY_Histo = DatasetObjects["DYlow"].HistogramName.Clone() #Zero for MT channel
        # DY_Histo.Add(DatasetObjects["DY"].HistogramName)
         DY_Histo = DatasetObjects["DYJets_HT-100to200"].HistogramName.Clone()
-        DY_Histo.Add(DatasetObjects["DYJetsToLL_M-10to50.root"].HistogramName)
+        DY_Histo.Add(DatasetObjects["DYJetsToLL_M-10to50"].HistogramName)
         DY_Histo.Add(DatasetObjects["DYJets_HT-200to400"].HistogramName)
         DY_Histo.Add(DatasetObjects["DYJets_HT-1200to2500"].HistogramName)
         DY_Histo.Add(DatasetObjects["DYJets_HT-2500toinf"].HistogramName)
