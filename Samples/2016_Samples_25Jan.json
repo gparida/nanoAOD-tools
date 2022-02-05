@@ -159,14 +159,6 @@
         "XS":3.549,
         "equivalentlumi":118.1
     },
-    "QCD+JT50to100":{
-        "file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData_28Jan2022/QCD+JT50to100.root",
-        "file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/DY.root",
-        "file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/DY.root",
-        "file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/DY.root",
-        "XS": 186100000.0,
-        "equivalentLumi":5.372e-06
-    },
     "QCD_HT100to200":{
         "file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData_28Jan2022/QCD_HT100to200.root",
         "file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/DY.root",
@@ -289,15 +281,6 @@
         "file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/ST_s-channel_4f.root",
         "XS":4.033,
         "equivalentlumi":93.43	
-    },
-    "ZZTo4L":{
-        "file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData_28Jan2022/ZZTo4L.root",
-        "file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/ST_s-channel_4f.root",
-        "file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/ST_s-channel_4f.root",
-        "file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/ST_s-channel_4f.root",
-        "XS":1.212,
-        "equivalentlumi":69.35,
-        "DAS":"RunIISummer20UL16MiniAOD-106X_mcRun2_asymptotic_v13-v1"
     },
     "RadionTohhtohtatahbb_M-1000":{
         "file": "/data/gparida/bbtautauAnalysis/2016/SignalBackgroundData_28Jan2022/RadionTohhtohtatahbb_M-1000.root",
