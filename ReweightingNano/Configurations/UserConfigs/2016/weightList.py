@@ -4,5 +4,4 @@ from Configurations.Weights.pileupWeightingModule.pileupWeight import pileupWeig
 from Configurations.Weights.TauIDModule.TauIDWeight import tauIDWeight_2016 as tauIDWeight
 
 list=[crossSectionWeight,
-    pileupWeight_2016,
-    tauIDWeight]
+    pileupWeight_2016]
