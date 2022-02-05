@@ -474,7 +474,7 @@ def main():
 
         ################################Color_Definitions -- Background Fill##############################################
         color_DiBoson="#ff66c4"
-        color_TT="#8dc315"
+        color_TT="#6d9416"
         color_WJets="#76dfee"
         color_QCD="#d4ff66"
         color_ST="#66ffe8"
