@@ -27,8 +27,8 @@ TauBranches ={
 26:["idDeepTau2017v2p1VSjet","I"],
 27:["idDeepTau2017v2p1VSmu","I"],
 28:["cleanmask","I"],
-#29:["genPartIdx","I"],
-#30:["genPartFlav","I"]
+29:["genPartIdx","I"],
+30:["genPartFlav","I"]
 }
 
 boostedTauBranches={

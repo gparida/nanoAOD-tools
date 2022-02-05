@@ -14,10 +14,10 @@ class particle(object):
 	#Create the new branches to be added for the selected objects. Specific bracnches for objects such as FatJets (softdropmass) can be added by writing a separate class that inherits base particle class
 	def setUpBranches(self, wrappedOutputTree):
 		wrappedOutputTree.branch("gn{}".format(self.particleType),"I")
-		wrappedOutputTree.branch("g{}_pt".format(self.particleType),"F",lenVar="gn{}".format(self.particleType))
-		wrappedOutputTree.branch("g{}_mass".format(self.particleType),"F",lenVar="gn{}".format(self.particleType))
-		wrappedOutputTree.branch("g{}_phi".format(self.particleType),"F",lenVar="gn{}".format(self.particleType))
-		wrappedOutputTree.branch("g{}_eta".format(self.particleType),"F",lenVar="gn{}".format(self.particleType))
+		#wrappedOutputTree.branch("g{}_pt".format(self.particleType),"3,lenVar="gn{}".format(self.particleType))
+		#wrappedOutputTree.branch("g{}_mass".format(self.particleType)3F",lenVar="gn{}".format(self.particleType))
+		#wrappedOutputTree.branch("g{}_phi".format(self.particleType),3",lenVar="gn{}".format(self.particleType))
+		#wrappedOutputTree.branch("g{}_eta".format(self.particleType),3",lenVar="gn{}".format(self.particleType))
 
 	def setupCollection(self, event):
 		self.collection = Collection(event,self.particleType)
