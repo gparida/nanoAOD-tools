@@ -538,7 +538,7 @@ def main():
         backgroundStack.Add(WJets_Histo,'HIST')
         backgroundStack.Add(TT_Histo,'HIST')
         #backgroundStack.Add(DiBoson_Histo,'HIST')
-        backgroundStack.Add(Other_Histo,'HIST')
+        #backgroundStack.Add(Other_Histo,'HIST')
 #
         backgroundStack_Errors = MakeStackErrors(backgroundStack)
 #
