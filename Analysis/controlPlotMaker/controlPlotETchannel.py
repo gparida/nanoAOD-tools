@@ -503,6 +503,7 @@ def main():
         QCD_Histo.SetLineWidth(0)
         ST_Histo.SetLineWidth(0)
         DY_Histo.SetLineWidth(0)
+        Other_Histo.SetLineWidth(0)
         
         ########################################Histograms For Shape Check###############################
         BackgroundShape = Other_Histo.Clone()
