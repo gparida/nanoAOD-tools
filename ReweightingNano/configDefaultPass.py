@@ -6,7 +6,7 @@ configList=[
 "Configurations/UserConfigs/2016/DYJets_HT_2500toinfConfig.py",
 "Configurations/UserConfigs/2016/DYJets_HT_400to600Config.py",
 "Configurations/UserConfigs/2016/DYJets_HT_600to800Config.py",
-"Configurations/UserConfigs/2016/DYJets_HT-800to1200Config.py",
+"Configurations/UserConfigs/2016/DYJets_HT_800to1200Config.py",
 "Configurations/UserConfigs/2016/QCD_HT1000to1500Config.py",
 "Configurations/UserConfigs/2016/QCD_HT100to200Config.py",
 "Configurations/UserConfigs/2016/QCD_HT1500to2000Config.py",
