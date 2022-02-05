@@ -478,7 +478,7 @@ def main():
         color_WJets="#76dfee"
         color_QCD="#d4ff66"
         color_ST="#66ffe8"
-        color_DY="#eee376"
+        color_DY="#e1b93e"
         color_other = "#d620e1" 
         #color_jetfake="#f1cde1"
 
