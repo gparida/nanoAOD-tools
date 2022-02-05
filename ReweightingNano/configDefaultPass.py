@@ -44,5 +44,6 @@ configList=[
 "Configurations/UserConfigs/2016/WWTo1L1Nu2QConfig.py",
 "Configurations/UserConfigs/2016/WZTo1L1nu2qConfig.py",
 "Configurations/UserConfigs/2016/WZTo2Q2NuConfig.py",
-"Configurations/UserConfigs/2016/ZZTo2Q2NuConfig.py"
+"Configurations/UserConfigs/2016/ZZTo2Q2NuConfig.py",
+"Configurations/UserConfigs/2016/DataConfig.py"
 ]           
