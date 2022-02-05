@@ -27,8 +27,8 @@ TauBranches ={
 26:["idDeepTau2017v2p1VSjet","I"],
 27:["idDeepTau2017v2p1VSmu","I"],
 28:["cleanmask","I"],
-29:["genPartIdx","I"],
-30:["genPartFlav","I"]
+#29:["genPartIdx","I"],
+#30:["genPartFlav","I"]
 }
 
 boostedTauBranches={
@@ -58,11 +58,11 @@ boostedTauBranches={
 24:["idMVAnewDM2017v2","I"],
 25:["idMVAoldDM2017v2","I"],
 26:["idMVAoldDMdR032017v2","I"],
-27:["genPartIdx","I"],
-28:["genPartFlav","I"]
+#27:["genPartIdx","I"],
+#28:["genPartFlav","I"]
 }
 
-FatJetbranches={
+FatJetBranches={
 1:["area","F"],
 2:["btagCSVV2","F"],
 3:["btagDDBvLV2","F"],
@@ -117,10 +117,10 @@ FatJetbranches={
 52:["electronIdx3SJ","I"],
 53:["muonIdx3SJ","I"],
 54:["nConstituents","I"],
-55:["genJetAK8Idx","I"],
-56:["hadronFlavour","I"],
-57:["nBHadrons","I"],
-58:["nCHadrons","I"]
+#55:["genJetAK8Idx","I"],
+#56:["hadronFlavour","I"],
+#57:["nBHadrons","I"],
+#58:["nCHadrons","I"]
 }
 
 MuonBranches={
@@ -156,14 +156,14 @@ MuonBranches={
 30:["nTrackerLayers","I"],
 31:["pdgId","I"],
 32:["tightCharge","I"],
-33:["highPtId","It"],
+33:["highPtId","I"],
 34:["highPurity","O"],
 35:["inTimeMuon","O"],
 36:["isGlobal","O"],
 37:["isPFcand","O"],
 38:["isStandalone","O"],
 39:["isTracker","O"],
-40:["jetNDaIged","I"],
+#40:["jetNDaIged","I"],
 41:["looseId","O"],
 42:["mediumId","O"],
 43:["mediumPromptId","O"],
@@ -178,8 +178,8 @@ MuonBranches={
 52:["tightId","O"],
 53:["tkIsoId","I"],
 54:["triggerIdLoose","O"],
-55:["genPartIdx","I"],
-56:["genPartFlav","I"],
+#55:["genPartIdx","I"],
+#56:["genPartFlav","I"],
 57:["cleanmask","I"]
 }
 
@@ -226,7 +226,7 @@ ElectronBranches={
 40:["convVeto","O"],
 41:["cutBased_HEEP","O"],
 42:["isPFcand","O"],
-43:["jetNDaIged","I"],
+#43:["jetNDaIged","I"],
 44:["lostHits","I"],
 45:["mvaFall17V2Iso_WP80","O"],
 46:["mvaFall17V2Iso_WP90","O"],
@@ -235,8 +235,8 @@ ElectronBranches={
 49:["mvaFall17V2noIso_WP90","O"],
 50:["mvaFall17V2noIso_WPL","O"],
 51:["seedGain","I"],
-52:["genPartIdx","I"],
-53:["genPartFlav","I"],
+#52:["genPartIdx","I"],
+#53:["genPartFlav","I"],
 54:["cleanmask","I"]
 }
 

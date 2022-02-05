@@ -3,7 +3,7 @@ from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collect
 from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
 from addingNewObservableBranches.visibleMassCamilla import VisibleMassCamilla  #Importing modules works if the folders are in the place where the scripts are
 from addingNewObservableBranches.fastMTTBranches import fastMTTBranches
-from addingNewObservableBranches.genMeasurementRadionBranches import genMeasurementRadionBranches
+#from addingNewObservableBranches.genMeasurementRadionBranches import genMeasurementRadionBranches
 from sortingTausCamilla import mergeTauCamilla
 import ROOT
 import glob
@@ -360,7 +360,7 @@ def call_postpoc(files):
 		tauOdering = lambda: mergeTauCamilla(filename)
 		visibleM = lambda:VisibleMassCamilla()
 		mttBranches = lambda:fastMTTBranches(filename)
-		radBranches = lambda:genMeasurementRadionBranches(filename)
+		#radBranches = lambda:genMeasurementRadionBranches(filename)
 		nameStrip=files.strip()
 		filename = (nameStrip.split('/')[-1]).split('.')[-2]
 		if filename == "Data":
