@@ -36,17 +36,15 @@ class MakeHistograms(object):
                  theWeight = 'FinalWeighting'):
 
         theTree = theFile.Get('Events')
-        
+
         #print ('g'+variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
         #                 self.CreateCutString(standardCutString,
         #                                 additionalSelections,theWeight))
-        #
+        ##
         #theTree.Draw('g'+variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
         #        self.CreateCutString(standardCutString,
         #                        additionalSelections,theWeight))
-
-        
-        #print ("uhoh No g in it")
+        ##print ("uhoh No g in it")
         print (variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
                          self.CreateCutString(standardCutString,
                                          additionalSelections,theWeight))
@@ -54,8 +52,19 @@ class MakeHistograms(object):
         theTree.Draw(variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
                 self.CreateCutString(standardCutString,
                                 additionalSelections,theWeight))
+            
+
+
+
+        
+        #print ('g'+variable+'>>'+histogramName+'('+variableSettingDictionary[variable]+')',
+        #                     self.CreateCutString(standardCutString,
+        #                                     additionalSelections,theWeight))
+        
+        
+        #3
     #so, if the tree has no entries, root doesn't even hand back an empty histogram
-    # and therefore this ends up trying to get clone a none type
+    #and therefore this ends up trying to get clone a none type
     #pass the None forward, and we can let the Add handle this
         try:
             theHisto = ROOT.gDirectory.Get(histogramName).Clone()
@@ -175,59 +184,69 @@ def main():
                     nargs='+',
                     help='Variables to draw the control plots for',
                     default=["gFatJet_pt",
-                              "gFatJet_eta",
-                              "gFatJet_msoftdrop",
-                              "MET_pt",
-                              "allTau_pt",
-                              "allTau_eta",
-                              #"gMuon_pt",
-                              #"gMuon_eta",
-                              "gElectron_pt",
-                              "gElectron_eta",
-                              "gDeltaR_LL"])                          
-                            ##"Tau_pt[1]",
+                            "gFatJet_eta",
+                            "gFatJet_msoftdrop",
+                            "MET_pt",
+                            "allTau_pt",
+                            "allTau_eta",
+                            #"gMuon_pt",
+                            #"gMuon_eta",
+                            #"gElectron_pt",
+                            #"gElectron_eta",
+                            "gDeltaR_LL"])
+                            #"boostedTau_pt",
+                            #"boostedTau_pt[0]",
+                            #"boostedTau_pt[1]",
+                            #"boostedTau_eta",
+                            #"boostedTau_eta[0]",
+                            #"boostedTau_phi",
+                            #"boostedTau_phi[0]",
+                            #"nTau",
+                            #"Tau_pt",
+                            #"Tau_pt[0]",
+                            #"Tau_pt[1]",
                             #"Tau_eta",
                             #"Tau_eta[0]",
                             #"Tau_phi",
                             #"Tau_phi[0]",
-                            ##"boostedTau_idMVAnewDM2017v2",
-                            #"nMuon",
                             #"nElectron",
+                            #"nMuon",
+                            #"boostedTau_idMVAnewDM2017v2",
                             #"Electron_mvaFall17V2Iso_WPL",
                             #"Electron_mvaFall17V2Iso_WP90",
                             #"Electron_pt",
                             #"Electron_pt[0]",
-                            #"DeltaR_LL",
-                            #"MVis_LL",
-                            ##"Electron_pt[1]",
-                            ##"Muon_mvaId",
-                            ##"Muon_pt",
-                            ##"Muon_eta",
-                            ##"Muon_phi",
+                            #"Electron_pt[1]",
+                            #"Muon_mvaId",
+                            #"Muon_pt",
+                            #"Muon_eta",
+                            #"Muon_phi",
                             #"boostedTau_decayMode",
                             #"boostedTau_idAntiEle2018",
-                            ##"Muon_pt[0]",
-                            ##"Muon_pt[1]",
+                            #"Muon_pt[0]",
+                            #"Muon_pt[1]",
                             #"nFatJet",
                             #"FatJet_pt",
                             #"FatJet_pt[0]",
-                            ##"FatJet_pt[1]",
+                            #"FatJet_pt[1]",
                             #"FatJet_eta",
                             #"FatJet_eta[0]",
                             #"FatJet_phi",
-                            ##"FatJet_eta[1]",
+                            #"FatJet_eta[1]",
                             #"FatJet_msoftdrop",
+                            #"DeltaR_LL",
+                            #"MVis_LL",
                             #"FatJet_msoftdrop[0]"]
-                            ##"FatJet_msoftdrop[1]",
-                            ##"FatJet_particleNet_HbbvsQCD",
-                            ##"FatJet_particleNet_HbbvsQCD[0]",
-                            ##"FatJet_particleNet_HbbvsQCD[1]",
-                            ##"FatJet_particleNetMD_Xbb",
-                            ##"FatJet_particleNetMD_Xbb[0]",
-                            ##"FatJet_particleNetMD_Xbb[1]",
-                            ##"FatJet_tau2/FatJet_tau1",
-                            ##"FatJet_tau2[0]/FatJet_tau1[0]",
-                            ##"FatJet_tau2[1]/FatJet_tau1[1]"]
+                            #"FatJet_msoftdrop[1]",
+                            #"FatJet_particleNet_HbbvsQCD",
+                            #"FatJet_particleNet_HbbvsQCD[0]",
+                            #"FatJet_particleNet_HbbvsQCD[1]",
+                            #"FatJet_particleNetMD_Xbb",
+                            #"FatJet_particleNetMD_Xbb[0]",
+                            #"FatJet_particleNetMD_Xbb[1]",
+                            #"FatJet_tau2/FatJet_tau1",
+                            #"FatJet_tau2[0]/FatJet_tau1[0]",
+                            #"FatJet_tau2[1]/FatJet_tau1[1]"]
                             #)
                     #default=['Tau_pt',
                     #       'Tau_phi',
@@ -263,14 +282,14 @@ def main():
                         #"Flag_EcalDeadCellTriggerPrimitiveFilter",
                         #"Flag_BadPFMuonFilter",
                         #"Flag_eeBadScFilter"])
-                        default=["gDeltaR_LL<1.5"])
+                        default=["gDeltaR_LL<1.5","fastMTT_RadionLegWithMet_m>750","fastMTT_RadionLegWithMet_m<4250","gMVis_LL>0"])
     parser.add_argument('--pause',
                         help='pause after drawing each plot to make it easier to view',
                         action='store_true')
     parser.add_argument('--standardCutString',
                         nargs='?',
                         help='Change the standard cutting definition',
-                        default="channel==0")
+                        default="channel==1")
     parser.add_argument('--changeHistogramBounds',
                         nargs = '?',
                         help = 'Change the standard histogram bounding (affects all histograms)')
@@ -287,8 +306,8 @@ def main():
     
 
     if args.year == '2016':
-        dataPath = '/data/gparida/Background_Samples/bbtautauAnalysis/2016/ChannelFiles_Camilla/'
-        dataPath = '/data/gparida/Background_Samples/bbtautauAnalysis/2016/tau21_Files_Camilla/'
+        #dataPath = '/data/gparida/Background_Samples/bbtautauAnalysis/2016/ChannelFiles_Camilla/'
+        dataPath = '/data/gparida/Background_Samples/bbtautauAnalysis/2016/ChannelFiles_Camilla_28Jan_2022/'
     elif args.year == '2017':
         dataPath = '/data/aloeliger/SMHTT_Selected_2017_Deep/'
     elif args.year == '2018':
@@ -357,15 +376,22 @@ def main():
             break
         
         ########################Signal-Histogram#############################
-        Signal_Histo = SignalObjects["RadionHH_M1000"].HistogramName.Clone()
+        Signal_Histo = SignalObjects["RadionTohhtohtatahbb_M-1000"].HistogramName.Clone()
         #####################################################################
 
 
         #######################DY-Histograms####################################
        # DY_Histo = DatasetObjects["DYlow"].HistogramName.Clone() #Zero for MT channel
        # DY_Histo.Add(DatasetObjects["DY"].HistogramName)
-        DY_Histo = DatasetObjects["DY"].HistogramName.Clone()
-
+        DY_Histo = DatasetObjects["DYJets_HT-100to200"].HistogramName.Clone()
+        #DY_Histo.Add(DatasetObjects["DYJetsToLL_M-10to50"].HistogramName)
+        DY_Histo.Add(DatasetObjects["DYJets_HT-200to400"].HistogramName)
+        DY_Histo.Add(DatasetObjects["DYJets_HT-1200to2500"].HistogramName)
+        DY_Histo.Add(DatasetObjects["DYJets_HT-2500toinf"].HistogramName)
+        DY_Histo.Add(DatasetObjects["DYJets_HT-400to600"].HistogramName)
+        DY_Histo.Add(DatasetObjects["DYJets_HT-600to800"].HistogramName)
+        DY_Histo.Add(DatasetObjects["DYJets_HT-800to1200"].HistogramName)
+        
 	    
 
         #PF_DY_Histo = DatasetObjects["DYJetsToLL_M-10to50"].PassFailHistogramName.Clone()
@@ -374,6 +400,10 @@ def main():
 #
         ############################ST-Histograms############################################
         ST_Histo = DatasetObjects["ST_s-channel_4f"].HistogramName.Clone()
+        ST_Histo.Add(DatasetObjects["ST_t-channel_antitop_4f"].HistogramName)
+        ST_Histo.Add(DatasetObjects["ST_t-channel_top_4f"].HistogramName)
+        ST_Histo.Add(DatasetObjects["ST_tW_antitop_5f"].HistogramName)
+        ST_Histo.Add(DatasetObjects["ST_tW_top_5f"].HistogramName)
 
         #PF_ST_Histo = DatasetObjects["ST_s-channel_4f"].PassFailHistogramName.Clone()
         #####################################################################################
@@ -386,20 +416,25 @@ def main():
         #QCD_Histo.Add(DatasetObjects["QCD_80to120"].HistogramName) also zero events
         #QCD_Histo.Add(DatasetObjects["QCD_50to80"].HistogramName) also zero events
 
-        QCD_Histo = DatasetObjects["QCD_1400to1800"].HistogramName.Clone()
-        QCD_Histo.Add(DatasetObjects["QCD_1800to2400"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_2400to3200"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_300to470"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_3200toInf"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_470to600"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_800to1000"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_600to800"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_1000to1400"].HistogramName)
+        QCD_Histo = DatasetObjects["QCD_HT500to700"].HistogramName.Clone()
+        #QCD_Histo.Add(DatasetObjects["QCD_HT200to300"].HistogramName)
+        #QCD_Histo.Add(DatasetObjects["QCD_HT300to500"].HistogramName)
+        #QCD_Histo.Add(DatasetObjects["QCD_HT500to700"].HistogramName)
+        QCD_Histo.Add(DatasetObjects["QCD_HT700to1000"].HistogramName)
+        QCD_Histo.Add(DatasetObjects["QCD_HT1000to1500"].HistogramName)
+        QCD_Histo.Add(DatasetObjects["QCD_HT1500to2000"].HistogramName)
+        QCD_Histo.Add(DatasetObjects["QCD_HT2000toinf"].HistogramName)
 
         #####################################################################################
 
         ##################################WJets##############################################
-        WJets_Histo = DatasetObjects["W"].HistogramName.Clone()
+        WJets_Histo = DatasetObjects["WJets_HT-100To200"].HistogramName.Clone()
+        WJets_Histo.Add(DatasetObjects["WJets_HT-1200to2500"].HistogramName)
+        WJets_Histo.Add(DatasetObjects["WJets_HT-200to400"].HistogramName)
+        WJets_Histo.Add(DatasetObjects["WJets_HT-2500toInf"].HistogramName)
+        WJets_Histo.Add(DatasetObjects["WJets_HT-400to600"].HistogramName)
+        WJets_Histo.Add(DatasetObjects["WJets_HT-600to800"].HistogramName)
+        WJets_Histo.Add(DatasetObjects["WJets_HT-800to1200"].HistogramName)
 
         ######################################################################################
 #
@@ -410,9 +445,10 @@ def main():
         ########################################################################################
 #
         ################################DiBoson-Histograms##########################################
-        DiBoson_Histo = DatasetObjects["WW"].HistogramName.Clone()
-        DiBoson_Histo.Add(DatasetObjects["WZ"].HistogramName)
-        DiBoson_Histo.Add(DatasetObjects["ZZ"].HistogramName)
+        DiBoson_Histo = DatasetObjects["WWTo1L1Nu2Q"].HistogramName.Clone()
+        DiBoson_Histo.Add(DatasetObjects["WZTo1L1nu2q"].HistogramName)
+        DiBoson_Histo.Add(DatasetObjects["WZTo2Q2Nu"].HistogramName)
+        DiBoson_Histo.Add(DatasetObjects["ZZTo2Q2Nu"].HistogramName)
         ################################################################################################
 
         ################################Data is represented as points########################################################################
@@ -434,7 +470,7 @@ def main():
 
         #ST_s_channel_4f.SetFillColor(ROOT.TColor.GetColor("#ffcc66"))
         Signal_Histo.SetLineColor(ROOT.kBlue)
-        Signal_Histo.Scale(2)
+        Signal_Histo.Scale(1)
         Signal_Histo.SetLineWidth(2)
 
         DiBoson_Histo.SetFillColor(ROOT.TColor.GetColor(color_DiBoson))
@@ -583,7 +619,7 @@ def main():
 
         theLegend = ROOT.TLegend(0.85, 0.45, 1.0, 0.75, "", "brNDC")
         theLegend.SetTextSize(0.03)
-        theLegend.SetHeader("e-#tau Channel")
+        theLegend.SetHeader("#tau-#tau Channel")
         theLegend.SetTextSize(0.03)
         theLegend.SetLineWidth(0)
         theLegend.SetLineStyle(1)
@@ -598,7 +634,7 @@ def main():
         theLegend.AddEntry(QCD_Histo,'QCD','f')
         theLegend.AddEntry(ST_Histo,'ST_s_Channel','f')
         theLegend.AddEntry(DY_Histo,'Drell-Yan','f')
-        theLegend.AddEntry(Signal_Histo,'Radion (#times 2)','l')
+        theLegend.AddEntry(Signal_Histo,'Radion (#times 1)','l')
 
         theLegend.Draw('SAME')
 
@@ -690,7 +726,7 @@ def main():
         theLegend2.AddEntry(N_QCD_Histo,'QCD','f')
         theLegend2.AddEntry(N_ST_Histo,'ST_s_Channel','f')
         theLegend2.AddEntry(N_DY_Histo,'Drell-Yan','f')
-        #theLegend2.AddEntry(Signal_Histo,'Radion (#times 20)','l')
+        #theLegend2.AddEntry(Signal_Histo,'Radion (#times 50)','l')
 
         theLegend2.Draw('SAME')
         cmsLatex = ROOT.TLatex()
@@ -706,10 +742,10 @@ def main():
 
     #############################Saving The Plots####################################
         #theCanvas.SaveAs('QuickControlPlots/'+variable+'_'+args.year+'.png')
-        theCanvas.SaveAs('ETPlots/'+variableAxisTitleDictionary[variable]+'_'+args.year+'.pdf')
+        theCanvas.SaveAs('TTPlots/'+variableAxisTitleDictionary[variable]+'_'+args.year+'.pdf')
         #theCanvas.SaveAs('QuickControlPlots/'+variable+'_'+args.year+'.root')
         #ShapeCanvas.SaveAs('QuickControlPlots/'+ "Normalized" +variable+'_'+args.year+'.png')
-        ShapeCanvas.SaveAs('ETPlots/'+ "Normalized" +variableAxisTitleDictionary[variable]+'_'+args.year+'.pdf')
+        ShapeCanvas.SaveAs('TTPlots/'+ "Normalized" +variableAxisTitleDictionary[variable]+'_'+args.year+'.pdf')
         #ShapeCanvas.SaveAs('QuickControlPlots/'+ "Normalized" +variable+'_'+args.year+'.root')
         #PassFailCanvas.SaveAs('QuickControlPlots/'+"Trigg_PF"+'_'+args.year+'.png')
         #PassFailCanvas.SaveAs('QuickControlPlots/'+"Trigg_PF"+'_'+args.year+'.pdf')
