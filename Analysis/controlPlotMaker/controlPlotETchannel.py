@@ -505,12 +505,13 @@ def main():
         DY_Histo.SetLineWidth(0)
         
         ########################################Histograms For Shape Check###############################
-        BackgroundShape = DY_Histo.Clone()
+        BackgroundShape = Other_Histo.Clone()
         #BackgroundShape.Add(ST_Histo)
         #BackgroundShape.Add(QCD_Histo)
+        BackgroundShape.Add(DY_Histo)
         BackgroundShape.Add(WJets_Histo)
         BackgroundShape.Add(TT_Histo)
-        BackgroundShape.Add(Other_Histo)
+        
         #BackgroundShape.Add(DiBoson_Histo)
         #BackgroundShape.SetOptTitle(0)
 
@@ -530,6 +531,7 @@ def main():
         ###########################################Making the Stack of Histograms#####################################################################
         
         backgroundStack = ROOT.THStack('backgroundStack','backgroundstack')
+        backgroundStack.Add(Other_Histo,'HIST')
         backgroundStack.Add(DY_Histo,'HIST')
         #backgroundStack.Add(ST_Histo,'HIST')
         #backgroundStack.Add(QCD_Histo,'HIST')
