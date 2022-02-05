@@ -619,7 +619,7 @@ def main():
 
         theLegend = ROOT.TLegend(0.85, 0.45, 1.0, 0.75, "", "brNDC")
         theLegend.SetTextSize(0.03)
-        theLegend.SetHeader("#tau-#tau Channel")
+        theLegend.SetHeader("#mu-#tau Channel")
         theLegend.SetTextSize(0.03)
         theLegend.SetLineWidth(0)
         theLegend.SetLineStyle(1)

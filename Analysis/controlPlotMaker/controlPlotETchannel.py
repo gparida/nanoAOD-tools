@@ -619,7 +619,7 @@ def main():
 
         theLegend = ROOT.TLegend(0.85, 0.45, 1.0, 0.75, "", "brNDC")
         theLegend.SetTextSize(0.03)
-        theLegend.SetHeader("#tau-#tau Channel")
+        theLegend.SetHeader("e-#tau Channel")
         theLegend.SetTextSize(0.03)
         theLegend.SetLineWidth(0)
         theLegend.SetLineStyle(1)
@@ -712,7 +712,7 @@ def main():
         ShapeStack.GetXaxis().SetLabelSize(0.0)
 
         theLegend2 = ROOT.TLegend(0.85, 0.45, 1.0, 0.75, "", "brNDC")
-        theLegend2.SetHeader("#mu-#tau_{h} Channel","C")
+        theLegend2.SetHeader("e-#tau_{h} Channel","C")
         theLegend2.SetLineWidth(0)
         theLegend2.SetLineStyle(1)
         theLegend2.SetFillStyle(1001) #0
