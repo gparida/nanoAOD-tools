@@ -364,9 +364,9 @@ def call_postpoc(files):
 		nameStrip=files.strip()
 		filename = (nameStrip.split('/')[-1]).split('.')[-2]
 		if filename == "Data":
-			p = PostProcessor(outputDir,[files], cut=cutsData,branchsel=outputbranches,modules=[letsSortChannels(),tauOdering()], postfix=post,noOut=False,outputbranchsel=outputbranches)
+			p = PostProcessor(outputDir,[files], cut=cutsData,branchsel=outputbranches,modules=[letsSortChannels(),tauOdering(),visibleM(),mttBranches()], postfix=post,noOut=False,outputbranchsel=outputbranches)
 		else:
-			p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[letsSortChannels(),tauOdering()], postfix=post,noOut=False,outputbranchsel=outputbranches)
+			p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[letsSortChannels(),tauOdering(),visibleM(),mttBranches()], postfix=post,noOut=False,outputbranchsel=outputbranches)
 
 
 		p.run()

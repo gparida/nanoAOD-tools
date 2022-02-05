@@ -17,7 +17,7 @@ class Tau(particle):
     def fillBranches(self,wrappedOutputTree):
         super(Tau,self).fillBranches(wrappedOutputTree)
         for branch in TauBranches.values():
-            print ("filling ",branch[0])
+            #print ("filling ",branch[0],self.get_attributes(branch[0]))
             wrappedOutputTree.fillBranch("g{}_{}".format(self.particleType,branch[0]),self.get_attributes(branch[0]))
 
 
