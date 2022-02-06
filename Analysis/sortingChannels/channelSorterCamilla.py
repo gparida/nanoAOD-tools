@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from PhysicsTools.NanoAODTools.postprocessing.framework.postprocessor import PostProcessor
 from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collection 
 from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
@@ -33,18 +35,31 @@ class ChannelCamilla(Module):
 		self.Electron = Electron("Electron")    
 		self.Muon = Muon("Muon")
 		self.Jet = particle("Jet")
-	
+
+
 	def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
+		self.event_num = 0
 		self.countBadevents = 0 #This is to keep track of bad events per file
 		self.out = wrappedOutputTree
 		#self.input = inputTree
-		self.Tau.setUpBranches(self.out) #creating the new branches     
+
+	def setup_branches(self):
+		self.Tau.setUpBranches(self.out) #creating the new branches
 		self.FatJet.setUpBranches(self.out)
 		self.boostedTau.setUpBranches(self.out)
 		self.Electron.setUpBranches(self.out)
 		self.Muon.setUpBranches(self.out)
 		self.out.branch("channel","I") # adding a new branch for channel 0-Di tau, 1- E-tau, 2- M-Tau
-	
+
+	def setup_collection(self, event):
+		self.Jet.setupCollection(event)
+		self.Tau.setupCollection(event)
+		self.boostedTau.setupCollection(event)
+		self.FatJet.setupCollection(event)
+		self.Electron.setupCollection(event)
+		self.Muon.setupCollection(event)
+
+
 	def endFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
 		print ("Number of Bad Events ", self.countBadevents)
 		if self.countBadevents!=0:
@@ -54,7 +69,7 @@ class ChannelCamilla(Module):
 			file = open(complete_Name,"w")
 			file.write("The Bad events for this file "+str(self.filename)+" is "+str(self.countBadevents))
 			file.close()	
-	
+
 
 	def HPStauVeto(self,tauCollectionObject):
 		isTau =""
@@ -67,7 +82,7 @@ class ChannelCamilla(Module):
 			if deltaR <= 0.02:
 				isTau = "bad"
 				break
-		
+
 		if isTau != "bad":
 			return True
 		else:
@@ -84,12 +99,12 @@ class ChannelCamilla(Module):
 			if deltaR <= 0.8:
 				isObj = "bad"
 				break
-		
+
 		if isObj != "bad":
 			return True
 		else:
 			return False
-	
+
 	def JetFatJetIsolation(self,CollectionObject):
 		isObj =""
 		Jet = ROOT.TLorentzVector(0.0,0.0,0.0,0.0)
@@ -101,7 +116,7 @@ class ChannelCamilla(Module):
 			if deltaR <= 1.2:
 				isObj = "bad"
 				break
-		
+
 		if isObj != "bad":
 			return True
 		else:
@@ -137,12 +152,12 @@ class ChannelCamilla(Module):
 			if deltaR <= 0.05:
 				isObj = "bad"
 				break
-		
+
 		if isObj != "bad":
 			return True
 		else:
 			return False
-	
+
 	def MuonTauOverlap(self,CollectionObject):
 		isObj =""
 		tau = ROOT.TLorentzVector(0.0,0.0,0.0,0.0)
@@ -154,7 +169,7 @@ class ChannelCamilla(Module):
 			if deltaR <= 0.05:
 				isObj = "bad"
 				break
-		
+
 		if isObj != "bad":
 			return True
 		else:
@@ -175,7 +190,7 @@ class ChannelCamilla(Module):
 					combinedPt = pt
 					index1 = i
 					index2 = j
-		
+
 		return (combinedPt,index1,index2)
 	
 	def crossPairing(self,col1,col2):
@@ -192,7 +207,7 @@ class ChannelCamilla(Module):
 					combinedPt = pt
 					index1 = i
 					index2 = j
-		
+
 		return (combinedPt,index1,index2)		
 
 
@@ -200,22 +215,22 @@ class ChannelCamilla(Module):
 	def analyze(self, event): 
 		list = {} # to store the combined pt and the indices of the pairs
 
+                self.event_num += 1
+                # if self.event_num > 100:
+		# 	return False
+
+		self.setup_collection(event)
+		self.setup_branches()
+		print("after setup branches")
+
 
 		#Select the AK4 Jets and keep choose Jets with Tight DeepJet ID
-		self.Jet.setupCollection(event)
 		self.Jet.apply_cut(lambda x: (x.pt > 20) and (x.btagDeepB >= 0.8767))
-		
-		self.Tau.setupCollection(event)
 		self.Tau.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idDeepTau2017v2p1VSjet & 1 == 1))  #Deeptau ID for the standard Taus loosest WP
-		
-
-
-		self.boostedTau.setupCollection(event)
-		self.boostedTau.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAnewDM2017v2 & 2 == 2)) # VLoose ID for newMVA for boosted Taus - but use oldMVA weight
+                self.boostedTau.apply_cut(lambda x: (x.pt > 20) and (abs(x.eta) < 2.3) and (x.idMVAnewDM2017v2 & 2 == 2)) # VLoose ID for newMVA for boosted Taus - but use oldMVA weight
 
 		self.Tau.collection =  filter(self.HPStauVeto,self.Tau.collection) #HPS veto applied
 
-		self.FatJet.setupCollection(event)
 		try:
 			#self.FatJet.apply_cut(lambda x: (x.pt > 200) and (abs(x.eta) < 2.4) and (x.msoftdrop > 30) and (x.msoftdrop < 250) and ((x.tau2/x.tau1) < 0.75))
 			self.FatJet.apply_cut(lambda x: (x.pt > 200) and (abs(x.eta) < 2.4) and (x.msoftdrop > 30) and (x.msoftdrop < 250) and x.jetId>=2 and ((x.tau2/x.tau1) < 0.75))	
@@ -225,11 +240,8 @@ class ChannelCamilla(Module):
 			traceback.print_exc()
 			return False
 
-		self.Electron.setupCollection(event)
 		self.Electron.apply_cut(lambda x: x.mvaFall17V2Iso_WPL and (x.pt > 10))
 		#self.Electron.collection = filter(self.Electron.relativeIso,self.Electron.collection)
-
-		self.Muon.setupCollection(event)
 		#self.Muon.apply_cut(lambda x: x.pt > 10 and x.mvaId >= 1 and ((x.TauCorrPfIso/x.pt) < 0.25))
 
 		#filter Objects to remove those within the fatjet cone
@@ -239,7 +251,7 @@ class ChannelCamilla(Module):
 		#Tau and FatJet should be more than 1.5 distance apart
 		self.Tau.collection = filter(self.FatJetTauOverlap,self.Tau.collection)
 		self.boostedTau.collection = filter(self.FatJetTauOverlap,self.boostedTau.collection)
-	
+
 		#filter the AK4 Jet collection for FatJet and Ak4 Jet overlap, 1.2 distance apart
 		self.Jet.collection = filter(self.JetFatJetIsolation,self.Jet.collection)
 
@@ -307,7 +319,7 @@ class ChannelCamilla(Module):
 					print ("Channel = ",Keymax,"Tau collection length = ",len(self.Tau.collection))
 					self.Muon.collection = []
 					self.out.fillBranch("channel",1)
-				
+
 				elif Keymax == "be":
 					self.boostedTau.collection = [obj for obj in self.boostedTau.collection if self.boostedTau.collection.index(obj)==list[Keymax][1]]
 					#self.Tau.collection = [obj for obj in self.Tau.collection if self.Tau.collection.index(obj)==-1]
@@ -337,7 +349,7 @@ class ChannelCamilla(Module):
 					self.out.fillBranch("channel",2)
 				else:
 					print ("This also happens")
-				
+
 				self.Tau.fillBranches(self.out)
 				self.FatJet.fillBranches(self.out)
 				self.boostedTau.fillBranches(self.out)
@@ -349,59 +361,59 @@ class ChannelCamilla(Module):
 
 			else:
 				return False	
-				
+
 		else:
 			return False	
-			
+
 
 
 def call_postpoc(files):
-		letsSortChannels = lambda: ChannelCamilla(filename)
-		tauOdering = lambda: mergeTauCamilla(filename)
-		visibleM = lambda:VisibleMassCamilla()
-		mttBranches = lambda:fastMTTBranches(filename)
-		radBranches = lambda:genMeasurementRadionBranches(filename)
-		nameStrip=files.strip()
-		filename = (nameStrip.split('/')[-1]).split('.')[-2]
-		p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[letsSortChannels()], postfix=post,noOut=False,outputbranchsel=outputbranches)
+	letsSortChannels = lambda: ChannelCamilla(filename)
+	tauOdering = lambda: mergeTauCamilla(filename)
+	visibleM = lambda:VisibleMassCamilla()
+	mttBranches = lambda:fastMTTBranches(filename)
+	radBranches = lambda:genMeasurementRadionBranches(filename)
+	nameStrip=files.strip()
+	filename = (nameStrip.split('/')[-1]).split('.')[-2]
+	p = PostProcessor(outputDir,[files], cut=cuts,branchsel=outputbranches,modules=[letsSortChannels()], postfix=post,noOut=False,outputbranchsel=outputbranches)
 
-		p.run()
+	p.run()
 
 
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(description='Script to Handle root file preparation to split into channels. Input should be a singular files for each dataset or data already with some basic selections applied')
 	#parser.add_argument('--Channel',help="enter either tt or et or mt. For boostedTau test enter test",required=True,choices=['tt', 'et', 'mt'])
-	parser.add_argument('--inputLocation',help="enter the path to the location of input file set",default="")
-	parser.add_argument('--outputLocation',help="enter the path where yu want the output files to be stored",default ="")
+	parser.add_argument('-i', '--inputLocation',help="enter the path to the location of input file set",default="")
+	parser.add_argument('-o', '--outputLocation',help="enter the path where yu want the output files to be stored",default =".")
 	parser.add_argument('--ncores',help ="number of cores for parallel processing", default=1)
 	parser.add_argument('--postfix',help="string at the end of output file names", default="")
 	args = parser.parse_args()
 
 	#Define Event Selection - all those to be connected by and
 	eventSelectionAND = ["MET_pt>200",
-						"genWeight>0",
-						"PV_ndof > 4",
-						"abs(PV_z) < 24",
-						"sqrt(PV_x*PV_x+PV_y*PV_y) < 2",
-						"Flag_goodVertices",
-						"Flag_globalSuperTightHalo2016Filter", 
-						"Flag_HBHENoiseIsoFilter",
-						"Flag_HBHENoiseFilter",
-						"Flag_EcalDeadCellTriggerPrimitiveFilter",
-						"Flag_BadPFMuonFilter",
-						"Flag_eeBadScFilter"]
+			     "genWeight>0",
+			     "PV_ndof > 4",
+			     "abs(PV_z) < 24",
+			     "sqrt(PV_x*PV_x+PV_y*PV_y) < 2",
+			     "Flag_goodVertices",
+			     "Flag_globalSuperTightHalo2016Filter",
+			     "Flag_HBHENoiseIsoFilter",
+			     "Flag_HBHENoiseFilter",
+			     "Flag_EcalDeadCellTriggerPrimitiveFilter",
+			     "Flag_BadPFMuonFilter",
+			     "Flag_eeBadScFilter"]
 
 	#Define Eevnt Selection - all those to be connected by or
 
 	eventSelectionOR = [#"HLT_PFMETNoMu90_PFMHTNoMu90_IDTight",
-            			"HLT_PFMETNoMu110_PFMHTNoMu110_IDTight",
-            			"HLT_PFMETNoMu120_PFMHTNoMu120_IDTight",
-            			"HLT_MonoCentralPFJet80_PFMETNoMu120_PFMHTNoMu120_IDTight",
-            			"HLT_PFMET110_PFMHT110_IDTight",
-            			"HLT_PFMET120_PFMHT120_IDTight",
-            			#"HLT_PFMET170_NoiseCleaned",
-            			"HLT_PFMET170_HBHECleaned",
-            			"HLT_PFMET170_HBHE_BeamHaloCleaned"]
+            	"HLT_PFMETNoMu110_PFMHTNoMu110_IDTight",
+            	"HLT_PFMETNoMu120_PFMHTNoMu120_IDTight",
+            	"HLT_MonoCentralPFJet80_PFMETNoMu120_PFMHTNoMu120_IDTight",
+            	"HLT_PFMET110_PFMHT110_IDTight",
+            	"HLT_PFMET120_PFMHT120_IDTight",
+            	#"HLT_PFMET170_NoiseCleaned",
+            	"HLT_PFMET170_HBHECleaned",
+            	"HLT_PFMET170_HBHE_BeamHaloCleaned"]
 	
 
 
@@ -422,15 +434,15 @@ if __name__ == "__main__":
 	for file in fnames:
 		argList.append(file)
 		#nameStrip = file.strip()
-    	#filename = (nameStrip.split('/')[-1]).split('.')[-2]
-	
+    		#filename = (nameStrip.split('/')[-1]).split('.')[-2]
+
 	#print (argList)
 
 	if int(args.ncores) == 1:
 		for arr in argList:
 			#print ("This is what is passed ",arr[1])
 			call_postpoc(arr)
-	
+
 	else:
 		pool = np.Pool(int(args.ncores))
 		#with np.Pool(object,ncores) as pool:
