@@ -73,6 +73,14 @@ class MakeHistograms(object):
         #return theHisto
         self.HistogramName=theHisto
 
+def clubHistograms(list,histObjects):
+        clubHist = None
+        for name in list:
+            if histObjects[name].HistogramName != None:
+                if clubHist == None:
+                    clubHist = histObjects[name].HistogramName.Clone()
+                clubHist.Add(histObjects[name].HistogramName)
+        return clubHist
 
 def MakeStackErrors(theStack):
     denominatorHistos = theStack.GetHists().At(0).Clone()
@@ -381,91 +389,84 @@ def main():
 
 
         #######################DY-Histograms####################################
-       # DY_Histo = DatasetObjects["DYlow"].HistogramName.Clone() #Zero for MT channel
-       # DY_Histo.Add(DatasetObjects["DY"].HistogramName)
-        DY_Histo = DatasetObjects["DYJets_HT-100to200"].HistogramName.Clone()
-        #DY_Histo.Add(DatasetObjects["DYJetsToLL_M-10to50"].HistogramName)
-        DY_Histo.Add(DatasetObjects["DYJets_HT-200to400"].HistogramName)
-        DY_Histo.Add(DatasetObjects["DYJets_HT-1200to2500"].HistogramName)
-        DY_Histo.Add(DatasetObjects["DYJets_HT-2500toinf"].HistogramName)
-        DY_Histo.Add(DatasetObjects["DYJets_HT-400to600"].HistogramName)
-        DY_Histo.Add(DatasetObjects["DYJets_HT-600to800"].HistogramName)
-        DY_Histo.Add(DatasetObjects["DYJets_HT-800to1200"].HistogramName)
+
+        DY_Histo = clubHistograms(["DYJetsToLL_M-10to50",
+                                   "DYJets_HT-100to200",
+                                   "DYJets_HT-200to400",
+                                   "DYJets_HT-1200to2500",
+                                   "DYJets_HT-2500toinf",
+                                   "DYJets_HT-400to600",
+                                   "DYJets_HT-600to800",
+                                   "DYJets_HT-800to1200"],DatasetObjects)
         
 	    
 
-        #PF_DY_Histo = DatasetObjects["DYJetsToLL_M-10to50"].PassFailHistogramName.Clone()
-        #PF_DY_Histo.Add(DatasetObjects["DYJetsToLL_M-50"].PassFailHistogramName)
         ########################################################################
 #
         ############################ST-Histograms############################################
-        ST_Histo = DatasetObjects["ST_s-channel_4f"].HistogramName.Clone()
-        ST_Histo.Add(DatasetObjects["ST_t-channel_antitop_4f"].HistogramName)
-        ST_Histo.Add(DatasetObjects["ST_t-channel_top_4f"].HistogramName)
-        ST_Histo.Add(DatasetObjects["ST_tW_antitop_5f"].HistogramName)
-        ST_Histo.Add(DatasetObjects["ST_tW_top_5f"].HistogramName)
+        ST_Histo = clubHistograms(["ST_s-channel_4f",
+                                "ST_t-channel_antitop_4f",
+                                "ST_t-channel_top_4f",
+                                "ST_tW_antitop_5f",
+                                "ST_tW_top_5f"],DatasetObjects)
 
         #PF_ST_Histo = DatasetObjects["ST_s-channel_4f"].PassFailHistogramName.Clone()
         #####################################################################################
 #
         ##############################QCD-Histograms##########################################
-        #QCD_Histo = DatasetObjects["QCD_120to170"].HistogramName.Clone() also zero events
-        #QCD_Histo.Add(DatasetObjects["QCD_15to30"].HistogramName)   also zero events
-        #QCD_Histo.Add(DatasetObjects["QCD_170to300"].HistogramName) also zero events
-        #QCD_Histo.Add(DatasetObjects["QCD_30to50"].HistogramName) also zero events
-        #QCD_Histo.Add(DatasetObjects["QCD_80to120"].HistogramName) also zero events
-        #QCD_Histo.Add(DatasetObjects["QCD_50to80"].HistogramName) also zero events
-
-        QCD_Histo = DatasetObjects["QCD_HT500to700"].HistogramName.Clone()
-        #QCD_Histo.Add(DatasetObjects["QCD_HT200to300"].HistogramName)
-        #QCD_Histo.Add(DatasetObjects["QCD_HT300to500"].HistogramName)
-        #QCD_Histo.Add(DatasetObjects["QCD_HT500to700"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_HT700to1000"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_HT1000to1500"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_HT1500to2000"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_HT2000toinf"].HistogramName)
+        QCD_Histo = clubHistograms(["QCD_HT1000to1500",
+                                    "QCD_HT100to200",
+                                    "QCD_HT1500to2000",
+                                    "QCD_HT2000toinf",
+                                    "QCD_HT200to300",
+                                    "QCD_HT300to500",
+                                    "QCD_HT500to700",
+                                    "QCD_HT700to1000"],DatasetObjects)
 
         #####################################################################################
 
         ##################################WJets##############################################
-        WJets_Histo = DatasetObjects["WJets_HT-100To200"].HistogramName.Clone()
-        WJets_Histo.Add(DatasetObjects["WJets_HT-1200to2500"].HistogramName)
-        WJets_Histo.Add(DatasetObjects["WJets_HT-200to400"].HistogramName)
-        WJets_Histo.Add(DatasetObjects["WJets_HT-2500toInf"].HistogramName)
-        WJets_Histo.Add(DatasetObjects["WJets_HT-400to600"].HistogramName)
-        WJets_Histo.Add(DatasetObjects["WJets_HT-600to800"].HistogramName)
-        WJets_Histo.Add(DatasetObjects["WJets_HT-800to1200"].HistogramName)
+        WJets_Histo = clubHistograms(["WJets_HT-100To200", 
+                                      "WJets_HT-1200to2500",
+                                      "WJets_HT-200to400", 
+                                      "WJets_HT-2500toInf",
+                                      "WJets_HT-400to600",
+                                      "WJets_HT-600to800",
+                                      "WJets_HT-800to1200"],DatasetObjects)
 
         ######################################################################################
 #
         ####################################TT-Histograms######################################
-        TT_Histo = DatasetObjects["TTTo2L2Nu"].HistogramName.Clone()
-        TT_Histo.Add(DatasetObjects["TTToHadronic"].HistogramName)
-        TT_Histo.Add(DatasetObjects["TTToSemiLeptonic"].HistogramName)
+        TT_Histo = clubHistograms(["TTTo2L2Nu",          
+                                   "TTToHadronic",      
+                                   "TTToSemiLeptonic"],DatasetObjects)
         ########################################################################################
 #
         ################################DiBoson-Histograms##########################################
-        DiBoson_Histo = DatasetObjects["WWTo1L1Nu2Q"].HistogramName.Clone()
-        DiBoson_Histo.Add(DatasetObjects["WZTo1L1nu2q"].HistogramName)
-        DiBoson_Histo.Add(DatasetObjects["WZTo2Q2Nu"].HistogramName)
-        DiBoson_Histo.Add(DatasetObjects["ZZTo2Q2Nu"].HistogramName)
+        DiBoson_Histo = clubHistograms(["WWTo1L1Nu2Q",
+                                        "WZTo1L1nu2q",
+                                        "WZTo2Q2Nu",
+                                        "ZZTo2Q2Nu"],DatasetObjects)
         ################################################################################################
 
-        ####################################CombiningBackgrounds#############################################################
-        Other_Histo = DatasetObjects["WWTo1L1Nu2Q"].HistogramName.Clone()
-        Other_Histo.Add(DatasetObjects["WZTo1L1nu2q"].HistogramName)
-        Other_Histo.Add(DatasetObjects["WZTo2Q2Nu"].HistogramName)
-        Other_Histo.Add(DatasetObjects["ZZTo2Q2Nu"].HistogramName)
-        Other_Histo.Add(DatasetObjects["QCD_HT700to1000"].HistogramName)
-        Other_Histo.Add(DatasetObjects["QCD_HT1000to1500"].HistogramName)
-        Other_Histo.Add(DatasetObjects["QCD_HT1500to2000"].HistogramName)
-        Other_Histo.Add(DatasetObjects["QCD_HT2000toinf"].HistogramName)
-        Other_Histo.Add(DatasetObjects["QCD_HT500to700"].HistogramName)
-        Other_Histo.Add(DatasetObjects["ST_t-channel_antitop_4f"].HistogramName)
-        Other_Histo.Add(DatasetObjects["ST_t-channel_top_4f"].HistogramName)
-        Other_Histo.Add(DatasetObjects["ST_tW_antitop_5f"].HistogramName)
-        Other_Histo.Add(DatasetObjects["ST_tW_top_5f"].HistogramName)
-        Other_Histo.Add(DatasetObjects["ST_s-channel_4f"].HistogramName)
+         ####################################Combine=ing Backgrounds########################################
+        Other_Histo = clubHistograms(["WWTo1L1Nu2Q",
+                        "WZTo1L1nu2q",
+                        "WZTo2Q2Nu",
+                        "ZZTo2Q2Nu",
+                        "ST_s-channel_4f",    
+                        "ST_t-channel_antitop_4f",
+                        "ST_t-channel_top_4f",    
+                        "ST_tW_antitop_5f",
+                        "ST_tW_top_5f",
+                        "QCD_HT1000to1500",
+                        "QCD_HT100to200",
+                        "QCD_HT1500to2000",
+                        "QCD_HT2000toinf",
+                        "QCD_HT200to300",
+                        "QCD_HT300to500",
+                        "QCD_HT500to700",
+                        "QCD_HT700to1000"],DatasetObjects)
         ################################Data is represented as points########################################################################
 
         DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].HistogramName.SetMarkerStyle(20)
