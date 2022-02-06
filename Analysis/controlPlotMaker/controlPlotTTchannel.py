@@ -174,15 +174,7 @@ def MakeRatioHistograms(dataHisto,backgroundStack,variable):
 
 
 def main():
-    def clubHistograms(list):
-        clubHist = None
-        for name in list:
-            if DatasetObjects[name].HistogramName != None:
-                if clubHist == None:
-                    clubHist = DatasetObjects[name].HistogramName.Clone()
-                clubHist.Add(DatasetObjects[name].HistogramName)
-
-        return clubHist
+    
 
     parser = argparse.ArgumentParser(description='Generate control plots quick.')    
     parser.add_argument('--year',
@@ -340,6 +332,15 @@ def main():
 
     #For loop to draw histograms
     for variable in args.variables:
+        def clubHistograms(list):
+            clubHist = None
+            for name in list:
+                if DatasetObjects[name].HistogramName != None:
+                    if clubHist == None:
+                        clubHist = DatasetObjects[name].HistogramName.Clone()
+                    clubHist.Add(DatasetObjects[name].HistogramName)
+
+            return clubHist
         try:
             variableSettingDictionary[variable] != None
         except KeyError:
