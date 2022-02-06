@@ -12,6 +12,15 @@ class MakeHistograms(object):
         self.userWeight = userWeight
 
     #Cut creating member function
+
+    def clubHistograms(self,list,histObjects):
+        clubHist = None
+        for name in list:
+            if histObjects[name].HistogramName != None:
+                if clubHist == None:
+                    clubHist = histObjects[name].HistogramName.Clone()
+                clubHist.Add(histObjects[name].HistogramName)
+        return clubHist
     def CreateCutString(self,standardCutString,
                     otherCuts,
                     weighting):
@@ -332,15 +341,6 @@ def main():
 
     #For loop to draw histograms
     for variable in args.variables:
-        def clubHistograms(list):
-            clubHist = None
-            for name in list:
-                if DatasetObjects[name].HistogramName != None:
-                    if clubHist == None:
-                        clubHist = DatasetObjects[name].HistogramName.Clone()
-                    clubHist.Add(DatasetObjects[name].HistogramName)
-
-            return clubHist
         try:
             variableSettingDictionary[variable] != None
         except KeyError:
@@ -405,14 +405,14 @@ def main():
         #DY_Histo.Add(DatasetObjects["DYJets_HT-600to800"].HistogramName)
         #DY_Histo.Add(DatasetObjects["DYJets_HT-800to1200"].HistogramName)
 
-        DY_Histo = clubHistograms(["DYJetsToLL_M-10to50",
+        DY_Histo = self.clubHistograms(["DYJetsToLL_M-10to50",
                                    "DYJets_HT-100to200",
                                    "DYJets_HT-200to400",
                                    "DYJets_HT-1200to2500",
                                    "DYJets_HT-2500toinf",
                                    "DYJets_HT-400to600",
                                    "DYJets_HT-600to800",
-                                   "DYJets_HT-800to1200"])
+                                   "DYJets_HT-800to1200"],DatasetNameList)
         
 	    
 
