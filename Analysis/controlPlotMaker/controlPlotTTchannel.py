@@ -491,7 +491,7 @@ def main():
         color_QCD="#d4ff66"
         color_ST="#66ffe8"
         color_DY="#e1b93e"
-        color_other = "#8d3600" 
+        color_other = "#ca35ff" 
         #color_jetfake="#f1cde1"
 
         #################################Filling Color for Backgrounds###############################################################################
