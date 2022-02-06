@@ -169,7 +169,21 @@ def MakeRatioHistograms(dataHisto,backgroundStack,variable):
 
 
 
+
+
+
+
 def main():
+    def clubHistograms(list):
+        clubHist = None
+        for name in list:
+            if DatasetObjects[name].HistogramName != None:
+                if clubHist == None:
+                    clubHist = DatasetObjects[name].HistogramName.Clone()
+                clubHist.Add(DatasetObjects[name].HistogramName)
+
+        return clubHist
+
     parser = argparse.ArgumentParser(description='Generate control plots quick.')    
     parser.add_argument('--year',
                         nargs='?',
@@ -381,16 +395,23 @@ def main():
 
 
         #######################DY-Histograms####################################
-       # DY_Histo = DatasetObjects["DYlow"].HistogramName.Clone() #Zero for MT channel
-       # DY_Histo.Add(DatasetObjects["DY"].HistogramName)
-        DY_Histo = DatasetObjects["DYJets_HT-100to200"].HistogramName.Clone()
-        #DY_Histo.Add(DatasetObjects["DYJetsToLL_M-10to50"].HistogramName)
-        DY_Histo.Add(DatasetObjects["DYJets_HT-200to400"].HistogramName)
-        DY_Histo.Add(DatasetObjects["DYJets_HT-1200to2500"].HistogramName)
-        DY_Histo.Add(DatasetObjects["DYJets_HT-2500toinf"].HistogramName)
-        DY_Histo.Add(DatasetObjects["DYJets_HT-400to600"].HistogramName)
-        DY_Histo.Add(DatasetObjects["DYJets_HT-600to800"].HistogramName)
-        DY_Histo.Add(DatasetObjects["DYJets_HT-800to1200"].HistogramName)
+        #DY_Histo = DatasetObjects["DYJets_HT-100to200"].HistogramName.Clone()
+        ##DY_Histo.Add(DatasetObjects["DYJetsToLL_M-10to50"].HistogramName)
+        #DY_Histo.Add(DatasetObjects["DYJets_HT-200to400"].HistogramName)
+        #DY_Histo.Add(DatasetObjects["DYJets_HT-1200to2500"].HistogramName)
+        #DY_Histo.Add(DatasetObjects["DYJets_HT-2500toinf"].HistogramName)
+        #DY_Histo.Add(DatasetObjects["DYJets_HT-400to600"].HistogramName)
+        #DY_Histo.Add(DatasetObjects["DYJets_HT-600to800"].HistogramName)
+        #DY_Histo.Add(DatasetObjects["DYJets_HT-800to1200"].HistogramName)
+
+        DY_Histo = clubHistograms(["DYJetsToLL_M-10to50",
+                                   "DYJets_HT-100to200",
+                                   "DYJets_HT-200to400",
+                                   "DYJets_HT-1200to2500",
+                                   "DYJets_HT-2500toinf",
+                                   "DYJets_HT-400to600",
+                                   "DYJets_HT-600to800",
+                                   "DYJets_HT-800to1200"])
         
 	    
 
@@ -796,6 +817,7 @@ def main():
         del DatasetObjects
     file.close()
 
+    
 if __name__ == '__main__':
     main()
 
