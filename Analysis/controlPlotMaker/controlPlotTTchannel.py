@@ -13,14 +13,7 @@ class MakeHistograms(object):
 
     #Cut creating member function
 
-    def clubHistograms(self,list,histObjects):
-        clubHist = None
-        for name in list:
-            if histObjects[name].HistogramName != None:
-                if clubHist == None:
-                    clubHist = histObjects[name].HistogramName.Clone()
-                clubHist.Add(histObjects[name].HistogramName)
-        return clubHist
+    
     def CreateCutString(self,standardCutString,
                     otherCuts,
                     weighting):
@@ -82,6 +75,14 @@ class MakeHistograms(object):
         #return theHisto
         self.HistogramName=theHisto
 
+def clubHistograms(list,histObjects):
+        clubHist = None
+        for name in list:
+            if histObjects[name].HistogramName != None:
+                if clubHist == None:
+                    clubHist = histObjects[name].HistogramName.Clone()
+                clubHist.Add(histObjects[name].HistogramName)
+        return clubHist
 
 def MakeStackErrors(theStack):
     denominatorHistos = theStack.GetHists().At(0).Clone()
@@ -405,7 +406,7 @@ def main():
         #DY_Histo.Add(DatasetObjects["DYJets_HT-600to800"].HistogramName)
         #DY_Histo.Add(DatasetObjects["DYJets_HT-800to1200"].HistogramName)
 
-        DY_Histo = self.clubHistograms(["DYJetsToLL_M-10to50",
+        DY_Histo = clubHistograms(["DYJetsToLL_M-10to50",
                                    "DYJets_HT-100to200",
                                    "DYJets_HT-200to400",
                                    "DYJets_HT-1200to2500",
