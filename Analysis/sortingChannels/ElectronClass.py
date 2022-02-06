@@ -8,15 +8,6 @@ class Electron(particle):
     def __init__(self, particleType):
         super(Electron,self).__init__(particleType)
     
-    def setUpBranches(self, wrappedOutputTree):
-        super(Electron,self).setUpBranches(wrappedOutputTree)
-        for branch in ElectronBranches.values():
-            wrappedOutputTree.branch("g{}_{}".format(self.particleType,branch[0]),"{}".format(branch[1]),lenVar="gn{}".format(self.particleType))
-    
-    def fillBranches(self,wrappedOutputTree):
-        super(Electron,self).fillBranches(wrappedOutputTree)
-        for branch in ElectronBranches.values():
-            wrappedOutputTree.fillBranch("g{}_{}".format(self.particleType,branch[0]),self.get_attributes(branch[0]))
 
     def relativeIso(self,electronCollectionObject):
         if abs(electronCollectionObject.eta) <= 1.479:
