@@ -413,7 +413,7 @@ def main():
                                    "DYJets_HT-2500toinf",
                                    "DYJets_HT-400to600",
                                    "DYJets_HT-600to800",
-                                   "DYJets_HT-800to1200"],DatasetNameList)
+                                   "DYJets_HT-800to1200"],DatasetObjects)
         
 	    
 
