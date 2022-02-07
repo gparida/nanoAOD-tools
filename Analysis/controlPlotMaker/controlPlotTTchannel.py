@@ -476,8 +476,8 @@ def main():
                         "QCD_HT300to500",
                         "QCD_HT500to700",
                         "QCD_HT700to1000"],DatasetObjects)
-        new_binning = array('d', [200, 600, 1500])
-        Other_Histo = Other_Histo.Rebin(3, '', new_binning ) # for custom binning
+        new_binning = array('d', [0,200, 600, 1500])
+        Other_Histo = Other_Histo.Rebin(4, '', new_binning ) # for custom binning
         ################################Data is represented as points########################################################################
 
 
