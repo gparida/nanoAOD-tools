@@ -477,10 +477,10 @@ def main():
                         "QCD_HT300to500",
                         "QCD_HT500to700",
                         "QCD_HT700to1000"],DatasetObjects)
-        #new_binning = array('d', [0,(100*6/3),(100*18/3), 1500])
-        #Other_Histo = Other_Histo.Rebin(3, '', new_binning ) # for custom binning
+        new_binning = array('d', [0,(100*6/3),(100*18/3), 1500])
+        Other_Histo = Other_Histo.Rebin(3, '', new_binning ) # for custom binning
 
-        #print ("Number of bins in new histogram = ",Other_Histo.GetNbinsX())
+        print ("Number of bins in new histogram = ",Other_Histo.GetNbinsX())
         ################################Data is represented as points########################################################################
 
 
@@ -648,7 +648,7 @@ def main():
         maxi =max(backgroundStack.GetMaximum(),DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].HistogramName.GetMaximum(),Signal_Histo.GetMaximum())
         backgroundStack.SetMaximum(maxi + 0.5*maxi)
         
-        backgroundStack.Draw()
+        backgroundStack.Draw("NOSTACK")
         backgroundStack_Errors.Draw('SAME e2')
         #backgroundStack.SetTitle(variableAxisTitleDictionary[variable])
         backgroundStack.SetTitle("")
