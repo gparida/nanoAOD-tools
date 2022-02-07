@@ -478,7 +478,9 @@ def main():
                         "QCD_HT500to700",
                         "QCD_HT700to1000"],DatasetObjects)
         new_binning = array('d', [0,200, 600, 1500])
-        Other_Histo = Other_Histo.Rebin(4, '', new_binning ) # for custom binning
+        Other_Histov2 = Other_Histo.Rebin(4, '', new_binning ) # for custom binning
+
+        print ("Number of bins in new histogram = ",Other_Histov2.GetNbinsX())
         ################################Data is represented as points########################################################################
 
 
@@ -549,11 +551,11 @@ def main():
         
         backgroundStack = ROOT.THStack('backgroundStack','backgroundstack')
         backgroundStack.Add(Other_Histo,'HIST')
-        #backgroundStack.Add(DY_Histo,'HIST')
+        backgroundStack.Add(DY_Histo,'HIST')
         #backgroundStack.Add(ST_Histo,'HIST')
         #backgroundStack.Add(QCD_Histo,'HIST')
-        #backgroundStack.Add(WJets_Histo,'HIST')
-        #backgroundStack.Add(TT_Histo,'HIST')
+        backgroundStack.Add(WJets_Histo,'HIST')
+        backgroundStack.Add(TT_Histo,'HIST')
         #backgroundStack.Add(DiBoson_Histo,'HIST')
         #backgroundStack.Add(Other_Histo,'HIST')
 #
