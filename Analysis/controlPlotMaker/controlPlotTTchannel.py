@@ -559,8 +559,8 @@ def main():
         #backgroundStack.Add(DiBoson_Histo,'HIST')
         #backgroundStack.Add(Other_Histo,'HIST')
 
-        new_binning = array('d', [0,(100*6/3),(100*18/3), 1500])
-        backgroundStack = backgroundStack.Rebin(3,'',new_binning)
+        #new_binning = array('d', [0,(100*6/3),(100*18/3), 1500])
+        #backgroundStack = backgroundStack.Rebin(3,'',new_binning)
 #
         backgroundStack_Errors = MakeStackErrors(backgroundStack)
 #
