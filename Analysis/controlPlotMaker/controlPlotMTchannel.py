@@ -625,8 +625,9 @@ def main():
         plotPad.SetFrameLineWidth(1)
         plotPad.SetTickx()
         plotPad.SetTicky()
-#
-        backgroundStack.SetMaximum(max(backgroundStack.GetMaximum(),DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].HistogramName.GetMaximum(),Signal_Histo.GetMaximum()))
+#       
+        maxi =max(backgroundStack.GetMaximum(),DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].HistogramName.GetMaximum(),Signal_Histo.GetMaximum())
+        backgroundStack.SetMaximum(maxi + 0.3*maxi)
         
         backgroundStack.Draw()
         backgroundStack_Errors.Draw('SAME e2')
