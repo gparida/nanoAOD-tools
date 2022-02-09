@@ -477,8 +477,8 @@ def main():
 
         print ("Number of events in TTBar = ",TT_Histo.Integral())
         print ("Number of events in WJets = ",WJets_Histo.Integral())
-        print ("Number of events in DY = ",DY_Histo.Integrate())
-        print ("Number of events in Others = ",Other_Histo.Inegrate())
+        print ("Number of events in DY = ",DY_Histo.Integral())
+        print ("Number of events in Others = ",Other_Histo.Integral())
 
         ################################Color_Definitions -- Background Fill##############################################
         color_DiBoson="#ff66c4"
