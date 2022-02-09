@@ -446,7 +446,8 @@ def main():
         print ("Number of events in TTBar = ",TT_Histo.Integral())
         print ("Number of events in WJets = ",WJets_Histo.Integral())
         print ("Number of events in DY = ",DY_Histo.Integral())
-        print ("Number of events in Others = ",(DiBoson_Histo.Inegrate()+ST_Histo.Inetgrate()+QCD_Histo.Integral()))
+        print ("Number of events in Others = ",(DiBoson_Histo.Integral()+ST_Histo.Integral()+QCD_Histo.Integral()))
+        print ("Number of events of Data = ",DatasetObjects["Data"].HistogramName.Integral())
 
         ################################Color_Definitions -- Background Fill##############################################
         color_DiBoson="#ff66c4"

@@ -322,11 +322,11 @@ def main():
         if args.changeHistogramBounds != None:
             variableSettingDictionary[variable] = args.changeHistogramBounds
 
-        save_path = MYDIR=os.getcwd() + "/countingData"
-        file_name = "Entries_MTChannel.txt"
-        complete_Name =  os. path. join(save_path, file_name)
-        file = open(complete_Name,"a")
-        file.write("variable "+'\t'+ "Data Counts"+'\n')
+        #save_path = MYDIR=os.getcwd() + "/countingData"
+        #file_name = "Entries_MTChannel.txt"
+        #complete_Name =  os. path. join(save_path, file_name)
+        #file = open(complete_Name,"a")
+        #file.write("variable "+'\t'+ "Data Counts"+'\n')
 		
         ####Drawing the Histograms#######  
         DatasetObjects={}
@@ -428,6 +428,7 @@ def main():
         print ("Number of events in WJets = ",WJets_Histo.Integral())
         print ("Number of events in DY = ",DY_Histo.Integral())
         print ("Number of events in Others = ",(DiBoson_Histo.Inegrate()+ST_Histo.Inetgrate()+QCD_Histo.Integral()))
+        print ("Number of events of Data = ",DatasetObjects["Data"].HistogramName.Integral())
 
         ################################Color_Definitions -- Background Fill##############################################
         color_DiBoson="#ff66c4"
