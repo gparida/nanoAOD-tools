@@ -1,3 +1,4 @@
+from numbers import Integral
 import ROOT
 import argparse  ##Importing root and package to take arguments 
 from controlPlotDictionaryCamilla import *
@@ -495,6 +496,7 @@ def main():
         print ("Number of events in WJets = ",WJets_Histo.Integral())
         print ("Number of events in DY = ",DY_Histo.Integral())
         print ("Number of events in Others = ",Other_Histo.Integral())
+        print ("Number of events of Data = ",DatasetObjects["Data"].HistogramName.Integral())
         ################################Color_Definitions -- Background Fill##############################################
         color_DiBoson="#ff66c4"
         color_TT="#6d9416"
