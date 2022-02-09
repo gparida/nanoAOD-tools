@@ -492,7 +492,7 @@ def main():
 
         DataShape = DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].HistogramName.Clone()
 
-        file.write(variable + '\t' + str(DataShape.Integral())+'\n')
+        #file.write(variable + '\t' + str(DataShape.Integral())+'\n')
         
         ScaleData = 1/DataShape.Integral()
 
