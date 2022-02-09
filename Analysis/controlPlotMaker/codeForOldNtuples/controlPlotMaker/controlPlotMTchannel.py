@@ -730,7 +730,7 @@ def main():
 
         #Delete the Objects created to avoid memory leaks
         del DatasetObjects
-    file.close()
+    #file.close()
 
 if __name__ == '__main__':
     main()
