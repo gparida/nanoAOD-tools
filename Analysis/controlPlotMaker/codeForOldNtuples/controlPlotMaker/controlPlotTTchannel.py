@@ -341,11 +341,11 @@ def main():
         if args.changeHistogramBounds != None:
             variableSettingDictionary[variable] = args.changeHistogramBounds
 
-        save_path = MYDIR=os.getcwd() + "/countingData"
-        file_name = "Entries_MTChannel.txt"
-        complete_Name =  os. path. join(save_path, file_name)
-        file = open(complete_Name,"a")
-        file.write("variable "+'\t'+ "Data Counts"+'\n')
+        #save_path = MYDIR=os.getcwd() + "/countingData"
+        #file_name = "Entries_MTChannel.txt"
+        #complete_Name =  os. path. join(save_path, file_name)
+        #file = open(complete_Name,"a")
+        #file.write("variable "+'\t'+ "Data Counts"+'\n')
 		
         ####Drawing the Histograms#######  
         DatasetObjects={}
