@@ -308,7 +308,7 @@ def main():
 
     if args.year == '2016':
         #dataPath = '/data/gparida/Background_Samples/bbtautauAnalysis/2016/ChannelFiles_Camilla/'
-        dataPath = '/data/gparida/Background_Samples/bbtautauAnalysis/2016/tau21_Files_Camilla/'
+        dataPath = '/data/gparida/Background_Samples/bbtautauAnalysis/2016/ChannelFiles_Camilla/MTTAddedFiles/'
     elif args.year == '2017':
         dataPath = '/data/aloeliger/SMHTT_Selected_2017_Deep/'
     elif args.year == '2018':
@@ -445,8 +445,8 @@ def main():
 
         print ("Number of events in TTBar = ",TT_Histo.Integral())
         print ("Number of events in WJets = ",WJets_Histo.Integral())
-        print ("Number of events in DY = ",DY_Histo.Integrate())
-        print ("Number of events in Others = ",(DiBoson_Histo.Inegrate()+ST_Histo.Inetgrate()+QCD_Histo.Integrate()))
+        print ("Number of events in DY = ",DY_Histo.Integral())
+        print ("Number of events in Others = ",(DiBoson_Histo.Inegrate()+ST_Histo.Inetgrate()+QCD_Histo.Integral()))
 
         ################################Color_Definitions -- Background Fill##############################################
         color_DiBoson="#ff66c4"
