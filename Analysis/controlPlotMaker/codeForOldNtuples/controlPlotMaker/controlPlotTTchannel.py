@@ -440,7 +440,7 @@ def main():
         DiBoson_Histo = clubHistograms(["WW",
                                         "WZ",
                                         #"WZTo2Q2Nu",
-                                        "ZZTo2Q2Nu"],DatasetObjects)
+                                        "ZZ"],DatasetObjects)
         
         ################################################################################################
 
@@ -448,7 +448,7 @@ def main():
         Other_Histo = clubHistograms(["WW",
                         "WZ",
                         #"WZTo2Q2Nu",
-                        "ZZTo2Q2Nu",
+                        "ZZ",
                         "ST_s-channel_4f",    
                         #"ST_t-channel_antitop_4f",
                         #"ST_t-channel_top_4f",    
