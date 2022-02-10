@@ -1,7 +1,9 @@
+from numbers import Integral
 import ROOT
 import argparse  ##Importing root and package to take arguments 
 from controlPlotDictionaryCamilla import *
 import os
+from array import array
 
 class MakeHistograms(object):
     #constructor to initialize the objects
@@ -12,6 +14,8 @@ class MakeHistograms(object):
         self.userWeight = userWeight
 
     #Cut creating member function
+
+    
     def CreateCutString(self,standardCutString,
                     otherCuts,
                     weighting):
@@ -73,6 +77,14 @@ class MakeHistograms(object):
         #return theHisto
         self.HistogramName=theHisto
 
+def clubHistograms(list,histObjects):
+        clubHist = None
+        for name in list:
+            if histObjects[name].HistogramName != None:
+                if clubHist == None:
+                    clubHist = histObjects[name].HistogramName.Clone()
+                clubHist.Add(histObjects[name].HistogramName)
+        return clubHist
 
 def MakeStackErrors(theStack):
     denominatorHistos = theStack.GetHists().At(0).Clone()
@@ -169,7 +181,13 @@ def MakeRatioHistograms(dataHisto,backgroundStack,variable):
 
 
 
+
+
+
+
 def main():
+    
+
     parser = argparse.ArgumentParser(description='Generate control plots quick.')    
     parser.add_argument('--year',
                         nargs='?',
@@ -283,7 +301,7 @@ def main():
                         #"Flag_BadPFMuonFilter",
                         #"Flag_eeBadScFilter"])
                         default=["gFatJet_tau2/gFatJet_tau1<0.75","gDeltaR_LL<1.5","fastMTT_RadionLegWithMet_m>750","fastMTT_RadionLegWithMet_m<4250","gMVis_LL>0",
-                        "(HLT_PFMETNoMu110_PFMHTNoMu110_IDTight || HLT_PFMETNoMu120_PFMHTNoMu120_IDTight || HLT_MonoCentralPFJet80_PFMETNoMu120_PFMHTNoMu120_IDTight || HLT_PFMET110_PFMHT110_IDTight || HLT_PFMET120_PFMHT120_IDTight || HLT_PFMET170_HBHECleaned ||HLT_PFMET170_HBHE_BeamHaloCleaned)"])
+"(HLT_PFMETNoMu110_PFMHTNoMu110_IDTight || HLT_PFMETNoMu120_PFMHTNoMu120_IDTight || HLT_MonoCentralPFJet80_PFMETNoMu120_PFMHTNoMu120_IDTight || HLT_PFMET110_PFMHT110_IDTight || HLT_PFMET120_PFMHT120_IDTight || HLT_PFMET170_HBHECleaned ||HLT_PFMET170_HBHE_BeamHaloCleaned)"])
     parser.add_argument('--pause',
                         help='pause after drawing each plot to make it easier to view',
                         action='store_true')
@@ -341,11 +359,11 @@ def main():
         if args.changeHistogramBounds != None:
             variableSettingDictionary[variable] = args.changeHistogramBounds
 
-        #save_path = MYDIR=os.getcwd() + "/countingData"
-        #file_name = "Entries_MTChannel.txt"
-        #complete_Name =  os. path. join(save_path, file_name)
-        #file = open(complete_Name,"a")
-        #file.write("variable "+'\t'+ "Data Counts"+'\n')
+        save_path = MYDIR=os.getcwd() + "/countingData"
+        file_name = "Entries_MTChannel.txt"
+        complete_Name =  os. path. join(save_path, file_name)
+        file = open(complete_Name,"a")
+        file.write("variable "+'\t'+ "Data Counts"+'\n')
 		
         ####Drawing the Histograms#######  
         DatasetObjects={}
@@ -382,88 +400,107 @@ def main():
 
 
         #######################DY-Histograms####################################
-       # DY_Histo = DatasetObjects["DYlow"].HistogramName.Clone() #Zero for MT channel
-       # DY_Histo.Add(DatasetObjects["DY"].HistogramName)
-        DY_Histo = DatasetObjects["DY"].HistogramName.Clone()
 
+        DY_Histo = clubHistograms(["DY",],DatasetObjects)
+        
 	    
 
-        #PF_DY_Histo = DatasetObjects["DYJetsToLL_M-10to50"].PassFailHistogramName.Clone()
-        #PF_DY_Histo.Add(DatasetObjects["DYJetsToLL_M-50"].PassFailHistogramName)
         ########################################################################
 #
         ############################ST-Histograms############################################
-        ST_Histo = DatasetObjects["ST_s-channel_4f"].HistogramName.Clone()
+        ST_Histo = clubHistograms(["ST_s-channel_4f"],DatasetObjects)
 
         #PF_ST_Histo = DatasetObjects["ST_s-channel_4f"].PassFailHistogramName.Clone()
         #####################################################################################
 #
         ##############################QCD-Histograms##########################################
-        #QCD_Histo = DatasetObjects["QCD_120to170"].HistogramName.Clone() also zero events
-        #QCD_Histo.Add(DatasetObjects["QCD_15to30"].HistogramName)   also zero events
-        #QCD_Histo.Add(DatasetObjects["QCD_170to300"].HistogramName) also zero events
-        #QCD_Histo.Add(DatasetObjects["QCD_30to50"].HistogramName) also zero events
-        #QCD_Histo.Add(DatasetObjects["QCD_80to120"].HistogramName) also zero events
-        #QCD_Histo.Add(DatasetObjects["QCD_50to80"].HistogramName) also zero events
-
-        QCD_Histo = DatasetObjects["QCD_1400to1800"].HistogramName.Clone()
-        QCD_Histo.Add(DatasetObjects["QCD_1800to2400"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_2400to3200"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_300to470"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_3200toInf"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_470to600"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_800to1000"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_600to800"].HistogramName)
-        QCD_Histo.Add(DatasetObjects["QCD_1000to1400"].HistogramName)
+        QCD_Histo = clubHistograms(["QCD_1400to1800",
+                                    "QCD_1800to2400",
+                                    "QCD_2400to3200",
+                                    "QCD_300to470",
+                                    "QCD_3200toInf",
+                                    "QCD_470to600",
+                                    "QCD_800to1000",
+                                    "QCD_600to800","QCD_1000to1400"],DatasetObjects)
 
         #####################################################################################
 
         ##################################WJets##############################################
-        WJets_Histo = DatasetObjects["W"].HistogramName.Clone()
+        WJets_Histo = clubHistograms(["W"],DatasetObjects)
 
         ######################################################################################
 #
         ####################################TT-Histograms######################################
-        TT_Histo = DatasetObjects["TTTo2L2Nu"].HistogramName.Clone()
-        TT_Histo.Add(DatasetObjects["TTToHadronic"].HistogramName)
-        TT_Histo.Add(DatasetObjects["TTToSemiLeptonic"].HistogramName)
+        TT_Histo = clubHistograms(["TTTo2L2Nu",          
+                                   "TTToHadronic",      
+                                   "TTToSemiLeptonic"],DatasetObjects)
         ########################################################################################
 #
         ################################DiBoson-Histograms##########################################
-        DiBoson_Histo = DatasetObjects["WW"].HistogramName.Clone()
-        DiBoson_Histo.Add(DatasetObjects["WZ"].HistogramName)
-        DiBoson_Histo.Add(DatasetObjects["ZZ"].HistogramName)
+        DiBoson_Histo = clubHistograms(["WW",
+                                        "WZ",
+                                        #"WZTo2Q2Nu",
+                                        "ZZTo2Q2Nu"],DatasetObjects)
+        
         ################################################################################################
+
+         ####################################Combine=ing Backgrounds########################################
+        Other_Histo = clubHistograms(["WW",
+                        "WZ",
+                        #"WZTo2Q2Nu",
+                        "ZZTo2Q2Nu",
+                        "ST_s-channel_4f",    
+                        #"ST_t-channel_antitop_4f",
+                        #"ST_t-channel_top_4f",    
+                        #"ST_tW_antitop_5f",
+                        #"ST_tW_top_5f",
+                        "QCD_1400to1800",
+                        "QCD_1800to2400",
+                        "QCD_2400to3200",
+                        "QCD_300to470",
+                        "QCD_3200toInf",
+                        "QCD_470to600",
+                        "QCD_800to1000",
+                        "QCD_600to800",
+                        "QCD_1000to1400"],DatasetObjects)
+    
+                
+                
+        #new_binning = array('d', [0,(100*6/3),(100*18/3), 1500])
+        #Other_Histo = Other_Histo.Rebin(3, '', new_binning ) # for custom binning
+
+        #print ("Number of bins in new histogram = ",Other_Histo.GetNbinsX())
+        ################################Data is represented as points########################################################################
+
 
         ################################Data is represented as points########################################################################
 
         DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].HistogramName.SetMarkerStyle(20)
         DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].HistogramName.SetMarkerSize(0.7)
         DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].HistogramName.Sumw2()
-        #######################################################################################################################################
-
+        #########################################Counting the events contributing##########################################################
 
         print ("Number of events in TTBar = ",TT_Histo.Integral())
         print ("Number of events in WJets = ",WJets_Histo.Integral())
         print ("Number of events in DY = ",DY_Histo.Integral())
-        print ("Number of events in Others = ",(DiBoson_Histo.Integral()+ST_Histo.Integral()+QCD_Histo.Integral()))
+        print ("Number of events in Others = ",Other_Histo.Integral())
         print ("Number of events of Data = ",DatasetObjects["Data"].HistogramName.Integral())
-
         ################################Color_Definitions -- Background Fill##############################################
         color_DiBoson="#ff66c4"
-        color_TT="#ff9e66"
-        color_WJets="#ffe866"
+        color_TT="#6d9416"
+        color_WJets="#76dfee"
         color_QCD="#d4ff66"
         color_ST="#66ffe8"
-        color_DY="#bf66ff" 
+        color_DY="#e1b93e"
+        color_other = "#ca35ff" 
         #color_jetfake="#f1cde1"
 
         #################################Filling Color for Backgrounds###############################################################################
 
         #ST_s_channel_4f.SetFillColor(ROOT.TColor.GetColor("#ffcc66"))
-        Signal_Histo.SetLineColor(ROOT.kBlue)
-        Signal_Histo.Scale(2)
-        Signal_Histo.SetLineWidth(2)
+        Signal_Histo.SetLineColor(ROOT.kRed)
+        Signal_Histo.Scale(1)
+        Signal_Histo.SetLineWidth(1)
 
         DiBoson_Histo.SetFillColor(ROOT.TColor.GetColor(color_DiBoson))
         TT_Histo.SetFillColor(ROOT.TColor.GetColor(color_TT))
@@ -471,6 +508,7 @@ def main():
         QCD_Histo.SetFillColor(ROOT.TColor.GetColor(color_QCD))
         ST_Histo.SetFillColor(ROOT.TColor.GetColor(color_ST))
         DY_Histo.SetFillColor(ROOT.TColor.GetColor(color_DY))
+        Other_Histo.SetFillColor(ROOT.TColor.GetColor(color_other))
 
         DiBoson_Histo.SetLineWidth(0)
         TT_Histo.SetLineWidth(0)
@@ -478,21 +516,24 @@ def main():
         QCD_Histo.SetLineWidth(0)
         ST_Histo.SetLineWidth(0)
         DY_Histo.SetLineWidth(0)
+        Other_Histo.SetLineWidth(0)
         
         ########################################Histograms For Shape Check###############################
-        BackgroundShape = DY_Histo.Clone()
-        BackgroundShape.Add(ST_Histo)
-        BackgroundShape.Add(QCD_Histo)
+        BackgroundShape = Other_Histo.Clone()
+        #BackgroundShape.Add(ST_Histo)
+        #BackgroundShape.Add(QCD_Histo)
+        BackgroundShape.Add(DY_Histo)
         BackgroundShape.Add(WJets_Histo)
         BackgroundShape.Add(TT_Histo)
-        BackgroundShape.Add(DiBoson_Histo)
+        
+        #BackgroundShape.Add(DiBoson_Histo)
         #BackgroundShape.SetOptTitle(0)
 
         ScaleBackground = 1/BackgroundShape.Integral()
 
         DataShape = DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].HistogramName.Clone()
 
-        #file.write(variable + '\t' + str(DataShape.Integral())+'\n')
+        file.write(variable + '\t' + str(DataShape.Integral())+'\n')
         
         ScaleData = 1/DataShape.Integral()
 
@@ -504,12 +545,17 @@ def main():
         ###########################################Making the Stack of Histograms#####################################################################
         
         backgroundStack = ROOT.THStack('backgroundStack','backgroundstack')
+        backgroundStack.Add(Other_Histo,'HIST')
         backgroundStack.Add(DY_Histo,'HIST')
-        backgroundStack.Add(ST_Histo,'HIST')
-        backgroundStack.Add(QCD_Histo,'HIST')
+        #backgroundStack.Add(ST_Histo,'HIST')
+        #backgroundStack.Add(QCD_Histo,'HIST')
         backgroundStack.Add(WJets_Histo,'HIST')
         backgroundStack.Add(TT_Histo,'HIST')
-        backgroundStack.Add(DiBoson_Histo,'HIST')
+        #backgroundStack.Add(DiBoson_Histo,'HIST')
+        #backgroundStack.Add(Other_Histo,'HIST')
+
+        #new_binning = array('d', [0,(100*6/3),(100*18/3), 1500])
+        #backgroundStack = backgroundStack.Rebin(3,'',new_binning)
 #
         backgroundStack_Errors = MakeStackErrors(backgroundStack)
 #
@@ -520,21 +566,24 @@ def main():
         N_WJets_Histo = (WJets_Histo.Clone())
         N_TT_Histo = (TT_Histo.Clone())
         N_DiBoson_Histo = (DiBoson_Histo.Clone())
+        N_Other_Histo = (Other_Histo.Clone())
 
         N_DY_Histo.Scale(ScaleBackground)
-        N_ST_Histo.Scale(ScaleBackground) 
-        N_QCD_Histo.Scale(ScaleBackground)
+        #N_ST_Histo.Scale(ScaleBackground) 
+        #N_QCD_Histo.Scale(ScaleBackground)
         N_WJets_Histo.Scale(ScaleBackground)
         N_TT_Histo.Scale(ScaleBackground)
-        N_DiBoson_Histo.Scale(ScaleBackground)
+        #N_DiBoson_Histo.Scale(ScaleBackground)
+        N_Other_Histo.Scale(ScaleBackground)
 
         ShapeStack = ROOT.THStack('ShapeStack','ShapeStack')
         ShapeStack.Add(N_DY_Histo,'HIST')
-        ShapeStack.Add(N_ST_Histo,'HIST')
-        ShapeStack.Add(N_QCD_Histo,'HIST')
+        #ShapeStack.Add(N_ST_Histo,'HIST')
+        #ShapeStack.Add(N_QCD_Histo,'HIST')
         ShapeStack.Add(N_WJets_Histo,'HIST')
         ShapeStack.Add(N_TT_Histo,'HIST')
-        ShapeStack.Add(N_DiBoson_Histo,'HIST')
+        ShapeStack.Add(N_Other_Histo,'HIST')
+        #ShapeStack.Add(N_DiBoson_Histo,'HIST')
 
         ShapeStack_Errors = MakeStackErrors(ShapeStack)
 
@@ -591,7 +640,8 @@ def main():
         plotPad.SetTickx()
         plotPad.SetTicky()
 #
-        backgroundStack.SetMaximum(max(backgroundStack.GetMaximum(),DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].HistogramName.GetMaximum(),Signal_Histo.GetMaximum()))
+        maxi =max(backgroundStack.GetMaximum(),DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].HistogramName.GetMaximum(),Signal_Histo.GetMaximum())
+        backgroundStack.SetMaximum(maxi + 0.5*maxi)
         
         backgroundStack.Draw()
         backgroundStack_Errors.Draw('SAME e2')
@@ -620,13 +670,14 @@ def main():
         theLegend.SetBorderSize(0)
         theLegend.SetTextFont(42)
         theLegend.AddEntry(DatasetObjects[DatasetNameList[len(DatasetNameList)-1]].HistogramName,'Observed','pe')
-        theLegend.AddEntry(DiBoson_Histo,'DiBoson','f')
+        #theLegend.AddEntry(DiBoson_Histo,'DiBoson','f')
         theLegend.AddEntry(TT_Histo,'TTbar','f')
         theLegend.AddEntry(WJets_Histo,'WJets','f')
-        theLegend.AddEntry(QCD_Histo,'QCD','f')
-        theLegend.AddEntry(ST_Histo,'ST_s_Channel','f')
+        #theLegend.AddEntry(QCD_Histo,'QCD','f')
+        #theLegend.AddEntry(ST_Histo,'ST_s_Channel','f')
         theLegend.AddEntry(DY_Histo,'Drell-Yan','f')
-        theLegend.AddEntry(Signal_Histo,'Radion (#times 2)','l')
+        theLegend.AddEntry(Other_Histo,'Others','f')
+        theLegend.AddEntry(Signal_Histo,'Radion (#times 1)','l')
 
         theLegend.Draw('SAME')
 
@@ -712,12 +763,13 @@ def main():
         theLegend2.SetBorderSize(0)
         theLegend2.SetTextFont(42)
         theLegend2.AddEntry(DataShape,'Observed','pe')
-        theLegend2.AddEntry(N_DiBoson_Histo,'DiBoson','f')
+         #theLegend2.AddEntry(N_DiBoson_Histo,'DiBoson','f')
         theLegend2.AddEntry(N_TT_Histo,'TTbar','f')
         theLegend2.AddEntry(N_WJets_Histo,'WJets','f')
-        theLegend2.AddEntry(N_QCD_Histo,'QCD','f')
-        theLegend2.AddEntry(N_ST_Histo,'ST_s_Channel','f')
+        #theLegend2.AddEntry(N_QCD_Histo,'QCD','f')
+        #theLegend2.AddEntry(N_ST_Histo,'ST_s_Channel','f')
         theLegend2.AddEntry(N_DY_Histo,'Drell-Yan','f')
+        theLegend2.AddEntry(N_Other_Histo,'Others','f')
         #theLegend2.AddEntry(Signal_Histo,'Radion (#times 50)','l')
 
         theLegend2.Draw('SAME')
@@ -755,8 +807,9 @@ def main():
 
         #Delete the Objects created to avoid memory leaks
         del DatasetObjects
-    #file.close()
+    file.close()
 
+    
 if __name__ == '__main__':
     main()
 
