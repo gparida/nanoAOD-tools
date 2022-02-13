@@ -263,7 +263,7 @@ def main():
                         #"Flag_EcalDeadCellTriggerPrimitiveFilter",
                         #"Flag_BadPFMuonFilter",
                         #"Flag_eeBadScFilter"])
-                        default=["gFatJet_tau2/gFatJet_tau1<0.75","gDeltaR_LL<1.5","fastMTT_RadionLegWithMet_m>750","fastMTT_RadionLegWithMet_m<4250","gMVis_LL>0",
+                        default=["gFatJet_tau2[0]/gFatJet_tau1[0]<0.75","gDeltaR_LL<1.5","fastMTT_RadionLegWithMet_m>750","fastMTT_RadionLegWithMet_m<4250","gMVis_LL>0",
                         "(HLT_PFMETNoMu110_PFMHTNoMu110_IDTight || HLT_PFMETNoMu120_PFMHTNoMu120_IDTight || HLT_MonoCentralPFJet80_PFMETNoMu120_PFMHTNoMu120_IDTight || HLT_PFMET110_PFMHT110_IDTight || HLT_PFMET120_PFMHT120_IDTight || HLT_PFMET170_HBHECleaned ||HLT_PFMET170_HBHE_BeamHaloCleaned)"])
     parser.add_argument('--pause',
                         help='pause after drawing each plot to make it easier to view',
