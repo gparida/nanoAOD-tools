@@ -26,7 +26,7 @@ for file in fnamesWJetsNew:
 
 
 
-fnamesWJetsOld = glob.glob("/data/gparida/Background_Samples/bbtautauAnalysis/2016/ChannelFiles_Camilla_28Jan_2022/W.root")
+fnamesWJetsOld = glob.glob("/data/gparida/Background_Samples/bbtautauAnalysis/2016/ChannelFiles_Camilla/W.root")
 
 WOldHist = None
 
