@@ -13,7 +13,7 @@ variableAxisTitleDictionary = {
 }
 
 variableSettingDictionary = {
-    "gFatJet_pt":"30,0,2000",
+    "gFatJet_pt":"45,0,1500",
     "gFatJet_eta":"30,-3.14,3.14",
     "gFatJet_msoftdrop":"25,0.0,250.0",
     "MET_pt":"50,0,1000",
