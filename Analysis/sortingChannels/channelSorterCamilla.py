@@ -193,8 +193,72 @@ class ChannelCamilla(Module):
 					index1 = i
 					index2 = j
 		
-		return (combinedPt,index1,index2)		
+		return (combinedPt,index1,index2)
 
+	def applyElectronIsolation (self,electronCollectionObject):
+		isTau = ""
+		Ele = ROOT.TLorentzVector(0.0,0.0,0.0,0.0)
+		boostedtau = ROOT.TLorentzVector(0.0,0.0,0.0,0.0)
+		Ele.SetPtEtaPhiM(electronCollectionObject.pt,electronCollectionObject.eta,electronCollectionObject.phi,electronCollectionObject.mass)
+		for btau in self.boostedTau.collection:
+			boostedtau.SetPtEtaPhiM(btau.pt,btau.eta,btau.phi,btau.mass)
+			deltaR = btau.DeltaR(Ele)
+			if deltaR <= 0.4:
+				isTau = "close"
+				break
+		
+		if isTau == "close":
+			if abs(electronCollectionObject.eta) <= 1.479:
+				if ((electronCollectionObject.TauCorrPfIso/electronCollectionObject.pt) < 0.175):
+					return True
+				else:
+					return False
+			elif ((abs(electronCollectionObject.eta) > 1.479) and (abs(electronCollectionObject.eta) <= 2.5)):
+				if ((electronCollectionObject.TauCorrPfIso/electronCollectionObject.pt) < 0.159):
+					return True
+				else:
+					return False
+			else:
+				return False
+		
+		if isTau =="":
+			if (abs(electronCollectionObject.eta) <= 1.479):
+				if ((electronCollectionObject.pfRelIso03_all) < 0.175):
+					return True
+				else:
+					return False
+			elif ((abs(electronCollectionObject.eta) > 1.479) and (abs(electronCollectionObject.eta) <= 2.5)):
+				if ((electronCollectionObject.pfRelIso03_all) < 0.159):
+					return True
+				else:
+					return False
+			else:
+				return False
+
+
+	def applyMuonIsolation (self,MuonCollectionObject):
+		isTau = ""
+		Muo = ROOT.TLorentzVector(0.0,0.0,0.0,0.0)
+		boostedtau = ROOT.TLorentzVector(0.0,0.0,0.0,0.0)
+		Muo.SetPtEtaPhiM(MuonCollectionObject.pt,MuonCollectionObject.eta,MuonCollectionObject.phi,MuonCollectionObject.mass)
+		for btau in self.boostedTau.collection:
+			boostedtau.SetPtEtaPhiM(btau.pt,btau.eta,btau.phi,btau.mass)
+			deltaR = btau.DeltaR(Muo)
+			if deltaR <= 0.4:
+				isTau = "close"
+				break
+		
+		if isTau == "close":
+			if ((MuonCollectionObject.TauCorrPfIso/MuonCollectionObject.pt) < 0.25):
+				return True
+			else:
+				return False
+		
+		if isTau =="":
+			if ((MuonCollectionObject.pfRelIso03_all) < 0.25):
+				return True
+			else:
+				return False
 
 
 	def analyze(self, event): 
@@ -251,6 +315,8 @@ class ChannelCamilla(Module):
 
 		self.boostedTau.collection = filter(self.ElectronTauOverlap,self.boostedTau.collection)
 		self.boostedTau.collection = filter(self.MuonTauOverlap,self.boostedTau.collection)
+
+
 
 		#print ("before channel","boostedTauLength = ",len(self.boostedTau.collection),"Tau length = ",len(self.Tau.collection))
 
