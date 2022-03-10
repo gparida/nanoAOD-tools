@@ -10,7 +10,7 @@ variableAxisTitleDictionary = {
     "gElectron_pt":"Electron_pt",
     "gElectron_eta":"Electron_eta",
     "gDeltaR_LL":"DeltaR_LL",
-    "gMVis_LL":"Visible Radion Mass"
+    #"gMVis_LL":"Visible Radion Mass"
 }
 
 variableSettingDictionary = {
@@ -25,7 +25,7 @@ variableSettingDictionary = {
     "gElectron_pt":"50,0,1000",
     "gElectron_eta":"30,-3.14,3.14",
     "gDeltaR_LL":"15,0,1.5",
-    "gMVis_LL":"40,0,2000"
+    #"gMVis_LL":"40,0,2000"
 }
 
 DatasetNameList=["QCD_1000to1400",
