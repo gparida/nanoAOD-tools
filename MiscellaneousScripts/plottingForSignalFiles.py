@@ -37,8 +37,11 @@ HiggsMassResoVis= setUpHistrogram(Name="HiggsMassResoVis",LineColor=4,LineWidth=
 
 HiggsMass = setUpCanvas("HiggsMass")
 HiggsMassResoMTT.SetMaximum(max(HiggsMassResoMTT.GetMaximum(),HiggsMassResoVis.GetMaximum())+50)
-HiggsMassResoMTT.Draw("C")
-HiggsMassResoVis.Draw("C same")
+#HiggsMassResoMTT.Draw("C")
+#HiggsMassResoVis.Draw("C same")
+HiggsMassResoMTT.Draw("Hist")
+HiggsMassResoVis.Draw("Hist same")
+
 
 legend = setUpLegend()
 legend.AddEntry(HiggsMassResoMTT,"FastMTT","ep")
@@ -58,8 +61,10 @@ HiggsptResoVis= setUpHistrogram(Name="HiggsptResoVis",LineColor=4,LineWidth=2,XT
 
 HiggsPt = setUpCanvas("HiggsPt")
 HiggsptResoMTT.SetMaximum(max(HiggsMassResoMTT.GetMaximum(),HiggsMassResoVis.GetMaximum())+50)
-HiggsptResoMTT.Draw("C")
-HiggsptResoVis.Draw("C same")
+#HiggsptResoMTT.Draw("C")
+#HiggsptResoVis.Draw("C same")
+HiggsptResoMTT.Draw("Hist")
+HiggsptResoVis.Draw("Hist same")
 
 legend = setUpLegend()
 legend.AddEntry(HiggsptResoMTT,"FastMTT","ep")
