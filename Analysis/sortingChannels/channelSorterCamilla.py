@@ -196,7 +196,7 @@ class ChannelCamilla(Module):
 		return (combinedPt,index1,index2)
 
 	def applyElectronIsolation (self,electronCollectionObject): #passing the inidivial eletrons from the collection to apply the correction
-		print ("Muon Isoaltion computation")
+		print ("Electron Isoaltion computation")
 		isTau = ""
 		#Define the Four vectors for Delta R calculation
 		Ele = ROOT.TLorentzVector(0.0,0.0,0.0,0.0) 
