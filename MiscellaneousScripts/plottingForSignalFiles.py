@@ -40,7 +40,7 @@ HiggsMassResoMTT.SetMaximum(max(HiggsMassResoMTT.GetMaximum(),HiggsMassResoVis.G
 #HiggsMassResoMTT.Draw("C")
 #HiggsMassResoVis.Draw("C same")
 HiggsMassResoMTT.Draw("Hist E1")
-HiggsMassResoVis.Draw("same")
+HiggsMassResoVis.Draw("same E1")
 
 
 legend = setUpLegend()
@@ -64,7 +64,7 @@ HiggsptResoMTT.SetMaximum(max(HiggsMassResoMTT.GetMaximum(),HiggsMassResoVis.Get
 #HiggsptResoMTT.Draw("C")
 #HiggsptResoVis.Draw("C same")
 HiggsptResoMTT.Draw("Hist E1")
-HiggsptResoVis.Draw("same")
+HiggsptResoVis.Draw("same E1")
 
 legend = setUpLegend()
 legend.AddEntry(HiggsptResoMTT,"FastMTT","ep")
