@@ -195,14 +195,15 @@ class ChannelCamilla(Module):
 		
 		return (combinedPt,index1,index2)
 
-	def applyElectronIsolation (self,electronCollectionObject):
+	def applyElectronIsolation (self,electronCollectionObject): #passing the inidivial eletrons from the collection to apply the correction
 		isTau = ""
-		Ele = ROOT.TLorentzVector(0.0,0.0,0.0,0.0)
+		#Define the Four vectors for Delta R calculation
+		Ele = ROOT.TLorentzVector(0.0,0.0,0.0,0.0) 
 		boostedtau = ROOT.TLorentzVector(0.0,0.0,0.0,0.0)
 		Ele.SetPtEtaPhiM(electronCollectionObject.pt,electronCollectionObject.eta,electronCollectionObject.phi,electronCollectionObject.mass)
 		for btau in self.boostedTau.collection:
 			boostedtau.SetPtEtaPhiM(btau.pt,btau.eta,btau.phi,btau.mass)
-			deltaR = btau.DeltaR(Ele)
+			deltaR = boostedtau.DeltaR(Ele)
 			if deltaR <= 0.4:
 				isTau = "close"
 				break
@@ -243,7 +244,7 @@ class ChannelCamilla(Module):
 		Muo.SetPtEtaPhiM(MuonCollectionObject.pt,MuonCollectionObject.eta,MuonCollectionObject.phi,MuonCollectionObject.mass)
 		for btau in self.boostedTau.collection:
 			boostedtau.SetPtEtaPhiM(btau.pt,btau.eta,btau.phi,btau.mass)
-			deltaR = btau.DeltaR(Muo)
+			deltaR = boostedtau.DeltaR(Muo)
 			if deltaR <= 0.4:
 				isTau = "close"
 				break
@@ -315,6 +316,11 @@ class ChannelCamilla(Module):
 
 		self.boostedTau.collection = filter(self.ElectronTauOverlap,self.boostedTau.collection)
 		self.boostedTau.collection = filter(self.MuonTauOverlap,self.boostedTau.collection)
+
+		# With the collection veto applied, now apply the lepton isolation
+
+		self.Electron.collection = filter(self.applyElectronIsolation, self.Electron.collection)
+		self.Muon.collection = filter(self.applyMuonIsolation,self.Muon.collection)
 
 
 
