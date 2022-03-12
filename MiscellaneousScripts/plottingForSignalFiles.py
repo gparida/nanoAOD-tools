@@ -77,9 +77,9 @@ HiggsPt.SaveAs("HiggsPt_Reso.pdf")
 #Next we do it for Radion
 
 #Radion Mass##
-RadionMassResoMTT= setUpHistrogram(Name="RadionMassResoMTT",LineColor=1,LineWidth=2,XTitle="Radion Mass^{Reco}/Radion Mass^{True}",YTitle="Events",ttree=theTree,branch="ResoGenRadion_mass",Nbins=40,min=0,max=2)
-RadionMassWithMetResoMTT= setUpHistrogram(Name="RadionMassWithMetResoMTT",LineColor=2,LineWidth=2,XTitle="Radion Mass^{Reco}/Radion Mass^{True}",YTitle="Events",ttree=theTree,branch="ResoGenRadionWithMet_mass",Nbins=40,min=0,max=2)
-RadionMassVisReso = setUpHistrogram(Name="RadionMassVisReso",LineColor=4,LineWidth=2,XTitle="Radion Mass^{Reco}/Radion Mass^{True}",YTitle="Events",ttree=theTree,branch="ResoVisRadion_mass",Nbins=40,min=0,max=2)
+RadionMassResoMTT= setUpHistrogram(Name="RadionMassResoMTT",LineColor=1,LineWidth=2,XTitle="Mass^{Reco}/Mass^{True}",YTitle="Events",ttree=theTree,branch="ResoGenRadion_mass",Nbins=40,min=0,max=2)
+RadionMassWithMetResoMTT= setUpHistrogram(Name="RadionMassWithMetResoMTT",LineColor=2,LineWidth=2,XTitle="Mass^{Reco}/Mass^{True}",YTitle="Events",ttree=theTree,branch="ResoGenRadionWithMet_mass",Nbins=40,min=0,max=2)
+RadionMassVisReso = setUpHistrogram(Name="RadionMassVisReso",LineColor=4,LineWidth=2,XTitle="Mass^{Reco}/Mass^{True}",YTitle="Events",ttree=theTree,branch="ResoVisRadion_mass",Nbins=40,min=0,max=2)
 
 RadionMass = setUpCanvas("RadionMass")
 HiggsMassResoMTT.SetMaximum(max(RadionMassResoMTT.GetMaximum(),RadionMassWithMetResoMTT.GetMaximum(),RadionMassVisReso.GetMaximum())+50)
@@ -102,9 +102,9 @@ cmsLatex = setUpCmsLatex(2016)
 RadionMass.SaveAs("RadionM_Reso.pdf")
 
 #Radion Momemtum##
-RadionptResoMTT= setUpHistrogram(Name="RadionptResoMTT",LineColor=1,LineWidth=2,XTitle="Radion Pt^{Reco}/Radion Pt^{True}",YTitle="Events",ttree=theTree,branch="ResoGenRadion_pt",Nbins=30,min=0,max=2)
-RadionptWithMetResoMTT= setUpHistrogram(Name="RadionptWithMetResoMTT",LineColor=2,LineWidth=2,XTitle="Radion Pt^{Reco}/Radion Pt^{True}",YTitle="Events",ttree=theTree,branch="ResoGenRadionWithMet_pt",Nbins=30,min=0,max=2)
-RadionptVisReso = setUpHistrogram(Name="RadionptVisReso",LineColor=4,LineWidth=2,XTitle="Radion Pt^{Reco}/Radion Pt^{True}",YTitle="Events",ttree=theTree,branch="ResoVisRadion_pt",Nbins=30,min=0,max=2)
+RadionptResoMTT= setUpHistrogram(Name="RadionptResoMTT",LineColor=1,LineWidth=2,XTitle="Pt^{Reco}/Pt^{True}",YTitle="Events",ttree=theTree,branch="ResoGenRadion_pt",Nbins=30,min=0,max=2)
+RadionptWithMetResoMTT= setUpHistrogram(Name="RadionptWithMetResoMTT",LineColor=2,LineWidth=2,XTitle="Pt^{Reco}/Pt^{True}",YTitle="Events",ttree=theTree,branch="ResoGenRadionWithMet_pt",Nbins=30,min=0,max=2)
+RadionptVisReso = setUpHistrogram(Name="RadionptVisReso",LineColor=4,LineWidth=2,XTitle="Pt^{Reco}/Pt^{True}",YTitle="Events",ttree=theTree,branch="ResoVisRadion_pt",Nbins=30,min=0,max=2)
 
 Radionpt = setUpCanvas("Radionpt")
 RadionptResoMTT.SetMaximum(max(RadionptResoMTT.GetMaximum(),RadionptWithMetResoMTT.GetMaximum(),RadionptVisReso.GetMaximum())+50)
