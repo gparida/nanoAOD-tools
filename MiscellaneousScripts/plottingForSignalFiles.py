@@ -83,10 +83,12 @@ RadionMassVisReso = setUpHistrogram(Name="RadionMassVisReso",LineColor=4,LineWid
 
 RadionMass = setUpCanvas("RadionMass")
 HiggsMassResoMTT.SetMaximum(max(RadionMassResoMTT.GetMaximum(),RadionMassWithMetResoMTT.GetMaximum(),RadionMassVisReso.GetMaximum())+50)
-RadionMassResoMTT.Draw("C")
-RadionMassWithMetResoMTT.Draw("C same")
-RadionMassVisReso.Draw("C same")
-
+#RadionMassResoMTT.Draw("C")
+#RadionMassWithMetResoMTT.Draw("C same")
+#RadionMassVisReso.Draw("C same")
+RadionMassResoMTT.Draw("Hist E1")
+RadionMassWithMetResoMTT.Draw("same Hist E1")
+RadionMassVisReso.Draw("same Hist E1")
 
 
 legend = setUpLegend()
@@ -106,9 +108,9 @@ RadionptVisReso = setUpHistrogram(Name="RadionptVisReso",LineColor=4,LineWidth=2
 
 Radionpt = setUpCanvas("Radionpt")
 RadionptResoMTT.SetMaximum(max(RadionptResoMTT.GetMaximum(),RadionptWithMetResoMTT.GetMaximum(),RadionptVisReso.GetMaximum())+50)
-RadionptResoMTT.Draw("Hist")
-RadionptWithMetResoMTT.Draw("HIST same")
-RadionptVisReso.Draw("HIST same")
+RadionptResoMTT.Draw("Hist E1")
+RadionptWithMetResoMTT.Draw("same Hist E1")
+RadionptVisReso.Draw("same Hist E1")
 
 
 
@@ -128,7 +130,7 @@ HiggsMassbb = setUpHistrogram(Name="HiggsMassbb",LineColor=1,LineWidth=2,XTitle=
 
 HiggsbbMass = setUpCanvas("Soft Drop Mass")
 HiggsMassbb.SetMaximum(HiggsMassbb.GetMaximum()+50)
-HiggsMassbb.Draw("C")
+HiggsMassbb.Draw("Hist E1")
 
 legend = setUpLegend()
 legend.AddEntry(HiggsMassbb,"SoftDrop Mass","el")
