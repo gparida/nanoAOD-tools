@@ -140,12 +140,14 @@ if __name__ == "__main__":
 	parser.add_argument('--postfix',help="string at the end of output file names", default="")
 	args = parser.parse_args()
 
+	fnames = glob.glob(args.inputLocation + "/*.root")  #making a list of input files
+
 	
 
 	#Define Eevnt Selection - all those to be connected by or
 
 	#fnames = ["/data/aloeliger/bbtautauAnalysis/2016/Data.root"]	
-    fnames = glob.glob(args.inputLocation + "/*.root")  #making a list of input files
+    
 	#outputDir = "/data/gparida/Background_Samples/bbtautauAnalysis/2016/{}_Channel".format(args.Channel)
 	outputDir = args.outputLocation
 	#outputDir = "."
