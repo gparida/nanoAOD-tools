@@ -43,7 +43,6 @@ class ChannelCamilla(Module):
 		self.boostedTau.setUpBranches(self.out)
 		self.Electron.setUpBranches(self.out)
 		self.Muon.setUpBranches(self.out)
-		self.Jet.setUpBranches(self.out)
 		self.out.branch("channel","I") # adding a new branch for channel 0-Di tau, 1- E-tau, 2- M-Tau
 	
 	def endFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
@@ -421,7 +420,6 @@ class ChannelCamilla(Module):
 				self.boostedTau.fillBranches(self.out)
 				self.Muon.fillBranches(self.out)
 				self.Electron.fillBranches(self.out)
-				self.Jet.fillBranches(self.out)
 				
 				
 				return True
