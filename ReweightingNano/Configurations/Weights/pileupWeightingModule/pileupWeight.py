@@ -14,7 +14,8 @@ def calculatePileupWeight(self, theTree):
 
     except ZeroDivisionError:
         print ("Zero Division Error has occured ","Numerator = ",self.dataHisto.GetBinContent(self.dataHisto.GetXaxis().FindBin(theTree.Pileup_nPU)),"Denominator = ", self.mcHisto.GetBinContent(self.mcHisto.GetXaxis().FindBin(theTree.Pileup_nPU)))
-         
+        pileupWeighting = 1.0
+        
     self.value[0] = pileupWeighting
 
 def calculatePileupWeight_Up(self, theTree, uncert):
