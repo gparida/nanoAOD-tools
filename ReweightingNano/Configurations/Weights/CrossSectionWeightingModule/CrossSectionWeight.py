@@ -77,7 +77,7 @@ def calculateCrossSectionWeight(self, theTree):
 #    self.value[0] = crossSectionWeighting * genWeighting
     if theTree.genWeight > 0:
         genWeighting = 1.0
-    elif theTree.genWeigh < 0:
+    elif theTree.genWeight < 0:
         genWeighting = -1.0
     
     self.value[0] = crossSectionWeighting * genWeighting
