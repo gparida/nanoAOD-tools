@@ -13,19 +13,33 @@ def calculatePileupWeight(self, theTree):
         pileupWeighting = self.dataHisto.GetBinContent(self.dataHisto.GetXaxis().FindBin(theTree.Pileup_nPU)) / self.mcHisto.GetBinContent(self.mcHisto.GetXaxis().FindBin(theTree.Pileup_nPU))
 
     except ZeroDivisionError:
-        print ("Zero Division Error has occured ","Numerator = ",self.dataHisto.GetBinContent(self.dataHisto.GetXaxis().FindBin(theTree.Pileup_nPU)),"Denominator = ", self.mcHisto.GetBinContent(self.mcHisto.GetXaxis().FindBin(theTree.Pileup_nPU)))
+        print ("Zero Division Error has occured in NOMINAL ","Numerator = ",self.dataHisto.GetBinContent(self.dataHisto.GetXaxis().FindBin(theTree.Pileup_nPU)),"Denominator = ", self.mcHisto.GetBinContent(self.mcHisto.GetXaxis().FindBin(theTree.Pileup_nPU)))
         pileupWeighting = 1.0
-        
+
     self.value[0] = pileupWeighting
 
 def calculatePileupWeight_Up(self, theTree, uncert):
     pileupWeighting_Up = 1.0
-    pileupWeighting_Up = self.dataHistoUp.GetBinContent(self.dataHistoUp.GetXaxis().FindBin(theTree.Pileup_nPU)) / self.mcHisto.GetBinContent(self.mcHisto.GetXaxis().FindBin(theTree.Pileup_nPU))
+
+    try:
+
+        pileupWeighting_Up = self.dataHistoUp.GetBinContent(self.dataHistoUp.GetXaxis().FindBin(theTree.Pileup_nPU)) / self.mcHisto.GetBinContent(self.mcHisto.GetXaxis().FindBin(theTree.Pileup_nPU))
+    
+    except ZeroDivisionError:
+        print ("Zero Error has occured in UP ","Numerator = ", self.dataHistoUp.GetXaxis().FindBin(theTree.Pileup_nPU), "Denominator = ",self.mcHisto.GetBinContent(self.mcHisto.GetXaxis().FindBin(theTree.Pileup_nPU)))
+        pileupWeighting_Up = 1.0 
+    
     self.uncertaintyVariationArrays[uncert][0] = pileupWeighting_Up
 
 def calculatePileupWeight_Down(self, theTree, uncert):
     pileupWeighting_Down = 1.0
-    pileupWeighting_Down = self.dataHistoDown.GetBinContent(self.dataHistoDown.GetXaxis().FindBin(theTree.Pileup_nPU)) / self.mcHisto.GetBinContent(self.mcHisto.GetXaxis().FindBin(theTree.Pileup_nPU))
+
+    try:
+        pileupWeighting_Down = self.dataHistoDown.GetBinContent(self.dataHistoDown.GetXaxis().FindBin(theTree.Pileup_nPU)) / self.mcHisto.GetBinContent(self.mcHisto.GetXaxis().FindBin(theTree.Pileup_nPU))
+    
+    except:
+        print ("Zero Error has occured in DOWN","Numerator = ",self.dataHistoDown.GetXaxis().FindBin(theTree.Pileup_nPU),"Denominator = ",self.mcHisto.GetBinContent(self.mcHisto.GetXaxis().FindBin(theTree.Pileup_nPU)))
+
     self.uncertaintyVariationArrays[uncert][0] = pileupWeighting_Down
 
 
