@@ -8,8 +8,13 @@ b2gWeightPath = os.environ['CMSSW_BASE'] + '/src/PhysicsTools/NanoAODTools/pytho
 def calculatePileupWeight(self, theTree):
     pileupWeighting = 1.0
 
-    pileupWeighting = self.dataHisto.GetBinContent(self.dataHisto.GetXaxis().FindBin(theTree.Pileup_nPU)) / self.mcHisto.GetBinContent(self.mcHisto.GetXaxis().FindBin(theTree.Pileup_nPU))
+    try:
 
+        pileupWeighting = self.dataHisto.GetBinContent(self.dataHisto.GetXaxis().FindBin(theTree.Pileup_nPU)) / self.mcHisto.GetBinContent(self.mcHisto.GetXaxis().FindBin(theTree.Pileup_nPU))
+
+    except ZeroDivisionError:
+        print ("Zero Division Error has occured ","Numerator = ",self.dataHisto.GetBinContent(self.dataHisto.GetXaxis().FindBin(theTree.Pileup_nPU)),"Denominator = ", self.mcHisto.GetBinContent(self.mcHisto.GetXaxis().FindBin(theTree.Pileup_nPU)))
+         
     self.value[0] = pileupWeighting
 
 def calculatePileupWeight_Up(self, theTree, uncert):
