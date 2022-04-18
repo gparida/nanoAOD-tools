@@ -86,13 +86,13 @@ HiggsMassResoMTT.SetMaximum(max(RadionMassResoMTT.GetMaximum(),RadionMassWithMet
 #RadionMassResoMTT.Draw("C")
 #RadionMassWithMetResoMTT.Draw("C same")
 #RadionMassVisReso.Draw("C same")
-RadionMassResoMTT.Draw("Hist E1")
+#RadionMassResoMTT.Draw("Hist E1")
 RadionMassWithMetResoMTT.Draw("same Hist E1")
 RadionMassVisReso.Draw("same Hist E1")
 
 
 legend = setUpLegend()
-legend.AddEntry(RadionMassResoMTT,"FastMTT","ep")
+#legend.AddEntry(RadionMassResoMTT,"FastMTT","ep")
 legend.AddEntry(RadionMassWithMetResoMTT,"FastMTT + MET","ep")
 legend.AddEntry(RadionMassVisReso,"Visible","ep")
 legend.Draw("same")
@@ -108,14 +108,14 @@ RadionptVisReso = setUpHistrogram(Name="RadionptVisReso",LineColor=4,LineWidth=2
 
 Radionpt = setUpCanvas("Radionpt")
 RadionptResoMTT.SetMaximum(max(RadionptResoMTT.GetMaximum(),RadionptWithMetResoMTT.GetMaximum(),RadionptVisReso.GetMaximum())+50)
-RadionptResoMTT.Draw("Hist E1")
+#RadionptResoMTT.Draw("Hist E1")
 RadionptWithMetResoMTT.Draw("same Hist E1")
 RadionptVisReso.Draw("same Hist E1")
 
 
 
 legend = setUpLegend()
-legend.AddEntry(RadionptResoMTT,"FastMTT","ep")
+#legend.AddEntry(RadionptResoMTT,"FastMTT","ep")
 legend.AddEntry(RadionptWithMetResoMTT,"FastMTT + MET","ep")
 legend.AddEntry(RadionptVisReso,"Visible","ep")
 legend.Draw("same")
