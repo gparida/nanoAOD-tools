@@ -92,7 +92,7 @@ RadionMassVisReso.Draw("same Hist E1")
 
 
 legend = setUpLegend()
-#legend.AddEntry(RadionMassResoMTT,"FastMTT","ep")
+legend.AddEntry(RadionMassResoMTT,"FastMTT","ep")
 legend.AddEntry(RadionMassWithMetResoMTT,"FastMTT + MET","ep")
 legend.AddEntry(RadionMassVisReso,"Visible","ep")
 legend.Draw("same")
