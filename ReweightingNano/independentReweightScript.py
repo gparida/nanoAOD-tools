@@ -120,6 +120,7 @@ if __name__ == "__main__":
                         for uncertainty in weight.uncertaintyVariationList:
                             weight.uncertaintyVariationFunctions[uncertainty](weight,theTree,uncertainty)                            
                     #the nominal final weight is a product of all available nominal weights
+                    print ("Final Weight in stages:",theFinalWeight[0],weight.value[0])
                     theFinalWeight[0] = theFinalWeight[0] * weight.value[0]
                     #if this weight has an up/down uncertainty, let's find it's branch and get it properly modified
                     if weight.hasUpDownUncertainties:

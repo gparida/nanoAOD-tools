@@ -9,11 +9,11 @@ def calculateTriggerWeight(self, theTree):
     triggerWeighting = 1.0
 
     if (theTree.MET_pt >= 1000):
-        print ("The trigger Scale Factor is for MET > 1000 = ", self.sfHisto.GetBinContent(self.sfHisto.GetXaxis().FindBin(theTree.MET_pt)))
+        #print ("The trigger Scale Factor is for MET > 1000 = ", self.sfHisto.GetBinContent(self.sfHisto.GetXaxis().FindBin(theTree.MET_pt)))
         triggerWeighting = self.sfHisto.GetBinContent(self.sfHisto.GetNbinsX())
 
     else:
-        print ("The trigger Scale Factor is = ", self.sfHisto.GetBinContent(self.sfHisto.GetXaxis().FindBin(theTree.MET_pt)))
+        #print ("The trigger Scale Factor is = ", self.sfHisto.GetBinContent(self.sfHisto.GetXaxis().FindBin(theTree.MET_pt)))
         triggerWeighting = self.sfHisto.GetBinContent(self.sfHisto.GetXaxis().FindBin(theTree.MET_pt))
 
 
