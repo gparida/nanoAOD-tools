@@ -112,6 +112,7 @@ if __name__ == "__main__":
                             uncertaintyName = 'FinalWeighting_'+uncertainty
                             finalWeightVariations[uncertaintyName][0] = 1.0                            
                 #okay, let's loop over each weight
+                print ("Beginning of the Event")
                 for weight in theConfig.listOfWeights:
                     #calculate the nominal value                    
                     weight.CalculateWeight(weight,theTree)
