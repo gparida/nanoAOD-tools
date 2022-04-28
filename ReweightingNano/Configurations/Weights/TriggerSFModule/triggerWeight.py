@@ -48,7 +48,7 @@ def calculateTriggerWeight(self, theTree):
 triggerWeight_2016 = Weight()
 triggerWeight_2016.name = 'triggerWeighting'
 triggerWeight_2016.sfFilePath = triggerWeightPath+'MetTriggerSFs.root'
-triggerWeight_2016.sfHistoFile = ROOT.TFile(triggerWeight_2016.mcHistoFilePath)
+triggerWeight_2016.sfHistoFile = ROOT.TFile(triggerWeight_2016.sfFilePath)
 triggerWeight_2016.sfHistoDir = triggerWeight_2016.sfHistoFile.GetDirectory("SF")
 triggerWeight_2016.sfHisto = triggerWeight_2016.sfHistoDir.Get("MET_SFRebin")
 triggerWeight_2016.CalculateWeight = calculateTriggerWeight
