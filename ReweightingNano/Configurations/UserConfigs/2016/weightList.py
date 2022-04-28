@@ -6,6 +6,6 @@ from Configurations.Weights.TriggerSFModule.triggerWeight import triggerWeight_2
 
 
 list=[crossSectionWeight,
-    pileupWeight_2016]
+    pileupWeight_2016,triggerWeight_2016]
 
 #list = [triggerWeight_2016]
