@@ -14,7 +14,7 @@ def calculateTriggerWeight(self, theTree):
 
     else:
         print ("The trigger Scale Factor is = ", self.sfHisto.GetBinContent(self.sfHisto.GetXaxis().FindBin(theTree.MET_pt)))
-        triggerWeighting = self.GetBinContent(self.sfHisto.GetXaxis().FindBin(theTree.MET_pt))
+        triggerWeighting = self.sfHisto.GetBinContent(self.sfHisto.GetXaxis().FindBin(theTree.MET_pt))
 
 
     self.value[0] = triggerWeighting
