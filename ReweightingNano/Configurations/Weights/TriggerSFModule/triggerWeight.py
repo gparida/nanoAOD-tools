@@ -19,10 +19,33 @@ def calculateTriggerWeight(self, theTree):
 
     self.value[0] = triggerWeighting
 
-#def calculatePileupWeight_Up(self, theTree, uncert):
-#    pileupWeighting_Up = 1.0
-#
-#    try:
+def calculateTriggerWeight_Up(self, theTree, uncert):
+    triggerWeighting_Up = 1.0
+
+    if (theTree.MET_pt >= 1000):
+        triggerWeighting_Up = self.sfHisto.GetBinContent(self.sfHisto.GetNbinsX()) + 0.02*self.sfHisto.GetBinContent(self.sfHisto.GetNbinsX())
+
+    else:
+        triggerWeighting_Up = self.sfHisto.GetBinContent(self.sfHisto.GetXaxis().FindBin(theTree.MET_pt)) + 0.02*self.sfHisto.GetBinContent(self.sfHisto.GetXaxis().FindBin(theTree.MET_pt))
+
+    self.uncertaintyVariationArrays[uncert][0] = triggerWeighting_Up
+
+
+
+def calculateTriggerWeight_Down(self, theTree, uncert):
+    triggerWeighting_Down = 1.0
+
+    if (theTree.MET_pt >= 1000):
+        triggerWeighting_Down = self.sfHisto.GetBinContent(self.sfHisto.GetNbinsX()) - 0.02*self.sfHisto.GetBinContent(self.sfHisto.GetNbinsX())
+
+    else:
+        triggerWeighting_Down = self.sfHisto.GetBinContent(self.sfHisto.GetXaxis().FindBin(theTree.MET_pt)) - 0.02*self.sfHisto.GetBinContent(self.sfHisto.GetXaxis().FindBin(theTree.MET_pt))
+
+    self.uncertaintyVariationArrays[uncert][0] = triggerWeighting_Down
+
+
+
+    
 #
 #        pileupWeighting_Up = self.dataHistoUp.GetBinContent(self.dataHistoUp.GetXaxis().FindBin(theTree.Pileup_nPU)) / self.mcHisto.GetBinContent(self.mcHisto.GetXaxis().FindBin(theTree.Pileup_nPU))
 #    
@@ -53,6 +76,15 @@ triggerWeight_2016.sfHistoFile = ROOT.TFile(triggerWeight_2016.sfFilePath)
 triggerWeight_2016.sfHistoDir = triggerWeight_2016.sfHistoFile.GetDirectory("SF")
 triggerWeight_2016.sfHisto = triggerWeight_2016.sfHistoDir.Get("MET_SFRebin")
 triggerWeight_2016.CalculateWeight = calculateTriggerWeight
+triggerWeight_2016.hasUpDownUncertainties = True
+triggerWeight_2016.uncertaintyVariationList = ["triggerWeight_UP","triggerWeight_DOWN"]
+triggerWeight_2016.InitUncertaintyVariations()
+triggerWeight_2016.uncertaintyVariationFunctions = {
+    "triggerWeight_UP":calculateTriggerWeight_Up,
+    "triggerWeight_DOWN":calculateTriggerWeight_Down
+}
+
+
 
 #pileupWeight_2016.mcHisto = pileupWeight_2016.mcHistoFile.Get('pu_mc')
 #pileupWeight_2016.dataHistoFilePath = b2gWeightPath+'PileupHistogram-UL2016-100bins_withVar.root'

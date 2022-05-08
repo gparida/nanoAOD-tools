@@ -10,6 +10,10 @@ from tqdm import tqdm
 import Utilities.BranchRemovalTool as branchRemovalTool
 from configDefaultPass import *
 
+#*******IMPORTANT-NOTE***********
+#When we want to add a new weight, we need to first remove all the old weights and the associated branches (using --Remove option) - this will prevent the creation of duplicate branches which 
+# is a pain - as it gives erroneous weights
+# This also means that - each time a  new 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Handle script for performing final reweighting of events')
     parser.add_argument('--ConfigFiles',nargs = '+',help="Python based config files used to specify samples",default=configList)
