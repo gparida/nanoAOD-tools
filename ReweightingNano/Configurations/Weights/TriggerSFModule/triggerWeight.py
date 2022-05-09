@@ -7,6 +7,7 @@ triggerWeightPath = os.environ['CMSSW_BASE'] + '/src/PhysicsTools/NanoAODTools/p
 
 def calculateTriggerWeight(self, theTree):
     triggerWeighting = 1.0
+    print ("MET in the event",theTree.MET_pt)
 
     if (theTree.MET_pt >= 1000):
         #print ("The trigger Scale Factor is for MET > 1000 = ", self.sfHisto.GetBinContent(self.sfHisto.GetXaxis().FindBin(theTree.MET_pt)))
