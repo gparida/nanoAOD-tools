@@ -130,8 +130,8 @@ btagWeight_2016.uncertaintyVariationList = [
     ]
 btagWeight_2016.InitUncertaintyVariations()
 btagWeight_2016.uncertaintyVariationFunctions = {
-    "pileupWeight_UP":calculatebtagWeight_Up,
-    "pileupWeight_DOWN":calculatebtagWeight_Down
+    "btagWeight_UP":calculatebtagWeight_Up,
+    "btagWeight_DOWN":calculatebtagWeight_Down
 }
 
 
