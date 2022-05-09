@@ -118,8 +118,9 @@ def calculatebtagWeight_Down(self, theTree, uncert):
 
 btagWeight_2016 = Weight()
 btagWeight_2016.name = 'btagWeighting'
-btagWeight_2016.jsonSFFile = '2016SF.json'
-with open(btagWeight_2016.jsonSFFile,'r') as jsonFile:
+btagWeight_2016.jsonSFFilePath = os.environ['CMSSW_BASE']+'/src/PhysicsTools/NanoAODTools/ReweightingNano/Configurations/Weights/BtagWeightingModule/2016SF.json' 
+#btagWeight_2016.jsonSFFile = '2016SF.json'
+with open(btagWeight_2016.jsonSFFilePath,'r') as jsonFile:
     jsonInfo = json.load(jsonFile)
 btagWeight_2016.CalculateWeight = calculatebtagWeight
 btagWeight_2016.hasUpDownUncertainties = True
