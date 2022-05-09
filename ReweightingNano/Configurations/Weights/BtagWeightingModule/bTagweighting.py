@@ -7,7 +7,7 @@ import json
 def calculatebtagWeight(self, theTree):
     btagWeighting = 1.0
 
-    print ("fatjet_pt ",theTree.gFatJet_pt)
+    print ("fatjet_pt ",theTree.gFatJet_pt[0])
 
     if (theTree.gFatJet_pt >= 200 and theTree.gFatJet_pt < 250):
         btagWeighting = jsonInfo["200_250"]["nominal"]
