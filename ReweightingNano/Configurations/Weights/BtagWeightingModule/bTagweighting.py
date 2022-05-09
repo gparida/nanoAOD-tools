@@ -75,7 +75,7 @@ def calculatebtagWeight_Up(self, theTree, uncert):
     elif (theTree.gFatJet_pt[0] >= 800):
         btagWeighting_Up = jsonInfo["800_Inf"]["nominal"] + jsonInfo["800_Inf"]["up"]
 
-
+    print ("the up value btag =",btagWeighting_Up)
     self.uncertaintyVariationArrays[uncert][0] = btagWeighting_Up
 
 def calculatebtagWeight_Down(self, theTree, uncert):
