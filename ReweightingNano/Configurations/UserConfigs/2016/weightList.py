@@ -5,6 +5,6 @@ from Configurations.Weights.TauIDModule.TauIDWeight import tauIDWeight_2016 as t
 from Configurations.Weights.TriggerSFModule.triggerWeight import triggerWeight_2016
 from Configurations.Weights.BtagWeightingModule.bTagweighting import btagWeight_2016
 
-list=[crossSectionWeight, pileupWeight_2016,triggerWeight_2016,btagWeight_2016]
+list=[crossSectionWeight, pileupWeight_2016,triggerWeight_2016]
  
 #list = [triggerWeight_2016]
