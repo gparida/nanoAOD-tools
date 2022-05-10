@@ -86,7 +86,7 @@ if __name__ == "__main__":
                 weightsBranchesDictionary[weight.name]=theTree.Branch(weight.name,weight.value,weight.name+'/F')
                 if weight.hasUpDownUncertainties:
                     for uncertainty in weight.uncertaintyVariationList:
-                        theTree.Branch(uncertainty,weight.uncertaintyVariationArrays[uncertainty],uncertainty+'/F')
+                        weightsVariationBranchesDictionary[uncertainty] = theTree.Branch(uncertainty,weight.uncertaintyVariationArrays[uncertainty],uncertainty+'/F')
             print("Creating final weights...")
             #Let's create a final weighting branch
             theFinalWeight = array('f',[0.])
