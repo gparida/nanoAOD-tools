@@ -43,6 +43,7 @@ def calculatebtagWeight(self, theTree):
 
 
 def calculatebtagWeight_Up(self, theTree, uncert):
+    print ("Entering Btagging Up")
     btagWeighting_Up = 1.0
     
     if (theTree.gFatJet_pt[0] >= 200 and theTree.gFatJet_pt[0] < 250):
