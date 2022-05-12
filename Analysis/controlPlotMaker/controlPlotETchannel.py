@@ -33,7 +33,7 @@ class MakeHistograms(object):
                  standardCutString,
                  additionalSelections,
                  histogramName,
-                 theWeight = 'triggerWeighting*pileupWeighting*crossSectionWeighting'):
+                 theWeight = 'FinalWeighting'):
 
         theTree = theFile.Get('Events')
 
@@ -304,6 +304,7 @@ def main():
     
     parser.add_argument('--logScale', help='make log plots', action='store_true')
     parser.add_argument('--Path',help='path to the files',required=True)
+    parser.add_argument('--Weight',help='weight to be added to MC', default='FinalWeighting')
 
     args = parser.parse_args()
 
@@ -375,7 +376,7 @@ def main():
                     variable,
                     args.standardCutString,
                     args.additionalSelections,
-                    DatasetNameList[index])
+                    DatasetNameList[index],theWeight=args.Weight)
                    # DatasetObjects[DatasetNameList[index]].userWeight)  
                 #DatasetObjects[DatasetNameList[index]].FillEvents((DatasetObjects[DatasetNameList[index]].RootFileName),DatasetNameList[index])
 
