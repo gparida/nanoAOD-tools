@@ -315,6 +315,7 @@ def main():
     parser.add_argument('--logScale', help='make log plots', action='store_true')
 
     parser.add_argument('--Path',help='path to the files',required=True)
+    parser.add_argument('--Weight',help='weight to be added to MC', default='FinalWeighting')
 
     args = parser.parse_args()
 
@@ -375,13 +376,20 @@ def main():
 
         for index in range(len(DatasetNameList)):
             print DatasetNameList[index]
-            DatasetObjects[DatasetNameList[index]].StandardDraw(DatasetObjects[DatasetNameList[index]].RootFileName,
+            if DatasetNameList[index] == "Data":
+                DatasetObjects[DatasetNameList[index]].StandardDraw(DatasetObjects[DatasetNameList[index]].RootFileName,
                 variable,
                 args.standardCutString,
                 args.additionalSelections,
-                DatasetNameList[index])
-               # DatasetObjects[DatasetNameList[index]].userWeight)  
-            #DatasetObjects[DatasetNameList[index]].FillEvents((DatasetObjects[DatasetNameList[index]].RootFileName),DatasetNameList[index])
+                DatasetNameList[index],theWeight='1')
+            else:
+                DatasetObjects[DatasetNameList[index]].StandardDraw(DatasetObjects[DatasetNameList[index]].RootFileName,
+                    variable,
+                    args.standardCutString,
+                    args.additionalSelections,
+                    DatasetNameList[index],theWeight=args.Weight)
+                   # DatasetObjects[DatasetNameList[index]].userWeight)  
+                #DatasetObjects[DatasetNameList[index]].FillEvents((DatasetObjects[DatasetNameList[index]].RootFileName),DatasetNameList[index])
 
         SignalObjects={}
         for index in range(len(SignalNameList)):
