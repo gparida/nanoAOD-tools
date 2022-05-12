@@ -37,7 +37,7 @@ class MakeHistograms(object):
                  standardCutString,
                  additionalSelections,
                  histogramName,
-                 theWeight = 'btagWeighting*pileupWeighting*crossSectionWeighting'):
+                 theWeight = 'FinalWeighting'):
 
         theTree = theFile.Get('Events')
 
