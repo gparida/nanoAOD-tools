@@ -33,7 +33,7 @@ class MakeHistograms(object):
                  standardCutString,
                  additionalSelections,
                  histogramName,
-                 theWeight = 'FinalWeighting'):
+                 theWeight = 'triggerWeighting*pileupWeighting*crossSectionWeighting'):
 
         theTree = theFile.Get('Events')
 
@@ -290,7 +290,7 @@ def main():
                         #"Flag_EcalDeadCellTriggerPrimitiveFilter",
                         #"Flag_BadPFMuonFilter",
                         #"Flag_eeBadScFilter"])
-                        default=["gDeltaR_LL<1.5","fastMTT_RadionLegWithMet_m>750","fastMTT_RadionLegWithMet_m<4250","gMVis_LL>0","(gFatJet_particleNetMD_Xbb/(gFatJet_particleNetMD_Xbb+gFatJet_particleNetMD_QCD))>0.87"])
+                        default=["gDeltaR_LL<1.5","fastMTT_RadionLegWithMet_m>750","fastMTT_RadionLegWithMet_m<4250","gMVis_LL>0"])
     parser.add_argument('--pause',
                         help='pause after drawing each plot to make it easier to view',
                         action='store_true')
@@ -364,13 +364,20 @@ def main():
 
         for index in range(len(DatasetNameList)):
             print DatasetNameList[index]
-            DatasetObjects[DatasetNameList[index]].StandardDraw(DatasetObjects[DatasetNameList[index]].RootFileName,
+            if DatasetNameList[index] == "Data":
+                DatasetObjects[DatasetNameList[index]].StandardDraw(DatasetObjects[DatasetNameList[index]].RootFileName,
                 variable,
                 args.standardCutString,
                 args.additionalSelections,
-                DatasetNameList[index])
-               # DatasetObjects[DatasetNameList[index]].userWeight)  
-            #DatasetObjects[DatasetNameList[index]].FillEvents((DatasetObjects[DatasetNameList[index]].RootFileName),DatasetNameList[index])
+                DatasetNameList[index],theWeight='1')
+            else:
+                DatasetObjects[DatasetNameList[index]].StandardDraw(DatasetObjects[DatasetNameList[index]].RootFileName,
+                    variable,
+                    args.standardCutString,
+                    args.additionalSelections,
+                    DatasetNameList[index])
+                   # DatasetObjects[DatasetNameList[index]].userWeight)  
+                #DatasetObjects[DatasetNameList[index]].FillEvents((DatasetObjects[DatasetNameList[index]].RootFileName),DatasetNameList[index])
 
         SignalObjects={}
         for index in range(len(SignalNameList)):
