@@ -322,8 +322,9 @@ class ChannelCamilla(Module):
 
 		# With the collection veto applied, now apply the lepton isolation
 
-		self.Electron.collection = filter(self.applyElectronIsolation, self.Electron.collection)
-		self.Muon.collection = filter(self.applyMuonIsolation,self.Muon.collection)
+		#Removing the lepton isolation for the checks
+		#self.Electron.collection = filter(self.applyElectronIsolation, self.Electron.collection)
+		#self.Muon.collection = filter(self.applyMuonIsolation,self.Muon.collection)
 
 
 
