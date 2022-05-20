@@ -290,7 +290,7 @@ def main():
                         #"Flag_EcalDeadCellTriggerPrimitiveFilter",
                         #"Flag_BadPFMuonFilter",
                         #"Flag_eeBadScFilter"])
-                        default=["gDeltaR_LL<1.5","fastMTT_RadionLegWithMet_m>750","fastMTT_RadionLegWithMet_m<4250","gMVis_LL>0"])
+                        default=["gDeltaR_LL<1.5","fastMTT_RadionLegWithMet_m>750","fastMTT_RadionLegWithMet_m<4250","gMVis_LL>0","(gFatJet_particleNetMD_Xbb / (gFatJet_particleNetMD_Xbb + gFatJet_particleNetMD_QCD))>=0.87"])
     parser.add_argument('--pause',
                         help='pause after drawing each plot to make it easier to view',
                         action='store_true')
