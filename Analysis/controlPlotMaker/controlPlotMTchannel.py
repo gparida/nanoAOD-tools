@@ -160,6 +160,7 @@ def MakeRatioHistograms(dataHisto,backgroundStack,variable):
     finalRatioHist.GetXaxis().SetTitle(variableAxisTitleDictionary[variable])
     #finalRatioHist.GetXaxis().SetTitleSize(0.14)
     finalRatioHist.GetXaxis().SetTitleSize(0.17)
+    finalRatioHist.GetYaxis().SetRangeUser(0.0,2.0)
 
     MCErrors = ratioHist.Clone()
     MCErrors.Reset()

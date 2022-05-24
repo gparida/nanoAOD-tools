@@ -158,6 +158,7 @@ def MakeRatioHistograms(dataHisto,backgroundStack,variable):
     finalRatioHist.GetXaxis().SetTitleOffset(0.83)
     finalRatioHist.SetMaximum(1.3)
     finalRatioHist.SetMinimum(0.7)
+    finalRatioHist.GetYaxis().SetRangeUser(0.0,2.0)
 
     finalRatioHist.GetXaxis().SetLabelSize(0.15)
 
