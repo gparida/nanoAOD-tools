@@ -287,7 +287,7 @@
         "file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/RadionHH_M1000.root",
         "file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/RadionHH_M1000.root",
         "file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/RadionHH_M1000.root",
-        "XS":1.0
+        "XS":0.06206400165
         },
     "RadionTohhtohtatahbb_M-1200":{
         "file": "/data/gparida/Background_Samples/bbtautauAnalysis/2016/ChannelFiles_Camilla_28Jan_2022/Files_Without_Tau_Lepton_Isolation/RadionTohhtohtatahbb_M-1200.root",
@@ -322,35 +322,35 @@
         "file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/RadionHH_M2000.root",
         "file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/RadionHH_M2000.root",
         "file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/RadionHH_M2000.root",
-        "XS":1.0
+        "XS":0.0033872266
         },
     "Radiontohhtohtatahbb_M-2500":{
         "file": "/data/gparida/Background_Samples/bbtautauAnalysis/2016/ChannelFiles_Camilla_28Jan_2022/Files_Without_Tau_Lepton_Isolation/Radiontohhtohtatahbb_M-2500.root",
         "file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/RadionHH_M2500.root",
         "file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/RadionHH_M2500.root",
         "file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/RadionHH_M2500.root",
-        "XS":1.0
+        "XS":0.00101943837
         },
     "Radiontohhtohtatahbb_M-3000":{
         "file": "/data/gparida/Background_Samples/bbtautauAnalysis/2016/ChannelFiles_Camilla_28Jan_2022/Files_Without_Tau_Lepton_Isolation/Radiontohhtohtatahbb_M-3000.root",
         "file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/RadionHH_M3000.root",
         "file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/RadionHH_M3000.root",
         "file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/RadionHH_M3000.root",
-        "XS":1.0
+        "XS":0.0003270393
         },
      "Radiontohhtohtatahbb_M-3500":{
         "file": "/data/gparida/Background_Samples/bbtautauAnalysis/2016/ChannelFiles_Camilla_28Jan_2022/Files_Without_Tau_Lepton_Isolation/Radiontohhtohtatahbb_M-3500.root",
         "file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/RadionHH_M3500.root",
         "file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/RadionHH_M3500.root",
         "file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/RadionHH_M3500.root",
-        "XS":1.0
+        "XS":0.00011137347
         },
     "Radiontohhtohtatahbb_M-4000":{
         "file": "/data/gparida/Background_Samples/bbtautauAnalysis/2016/ChannelFiles_Camilla_28Jan_2022/Files_Without_Tau_Lepton_Isolation/Radiontohhtohtatahbb_M-4000.root",
         "file_tt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/tt_Channel/RadionHH_M4000.root",
         "file_et":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/et_Channel/RadionHH_M4000.root",
         "file_mt":"/data/gparida/Background_Samples/bbtautauAnalysis/2016/mt_Channel/RadionHH_M4000.root",
-        "XS":1.0
+        "XS":0.0000616161
         },
     "Radiontohhtohtatahbb_M-4500":{
         "file": "/data/gparida/Background_Samples/bbtautauAnalysis/2016/ChannelFiles_Camilla_28Jan_2022/Files_Without_Tau_Lepton_Isolation/Radiontohhtohtatahbb_M-4500.root",
