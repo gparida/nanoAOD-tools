@@ -103,7 +103,7 @@ legend.AddEntry(masspointEff_without_Lep_Tau_Iso,"All except Lep, Tau Isolation"
 can2 = ROOT.TCanvas("canvas2", "efficiency")
 can2.SetGrid()
 masspointEff.Draw("P")
-legend.Drae("same")
+legend.Draw("same")
 can2.SaveAs("Signal_Efficiency.pdf")
 
 
