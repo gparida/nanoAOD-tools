@@ -29,7 +29,7 @@ listOfSignalFilesProcessing = ["RadionTohhtohtatahbb_M-1000","Radiontohhtohtatah
 for index, file in enumerate(listOfSignalFilesProcessing):
     #nameStrip = file.strip()
     #filename = (nameStrip.split('/')[-1]).split('.')[-2]
-    rootfile = ROOT.TFile(args.inputFile+"/"+file)
+    rootfile = ROOT.TFile(args.inputFile+"/"+file+".root")
     initialEvents = rootfile.cutflow.GetBinContent(1)
     tree_rootfile = rootfile.Get('Events')
     finalEvents = tree_rootfile.GetEntries()
