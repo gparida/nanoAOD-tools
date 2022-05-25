@@ -39,6 +39,11 @@ for index, file in enumerate(listOfSignalFilesProcessing):
 masspointEff.SetMarkerColor(4)
 masspointEff.SetMarkerStyle(34)
 masspointEff.SetMarkerSize(1.5)
+masspointEff.GetXaxis().SetTitle("Mass Point")
+masspointEff.GetYaxis().SetTitle("Efficiency")
+masspointEff.GetYaxis().SetRangeUser(0.0,1.5)
+
+
 
 can2 = ROOT.TCanvas("canvas2", "efficiency")
 can2.SetGrid()
