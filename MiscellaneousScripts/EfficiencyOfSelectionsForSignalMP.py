@@ -47,7 +47,7 @@ masspointEff.GetYaxis().SetRangeUser(0.0,1.5)
 
 can2 = ROOT.TCanvas("canvas2", "efficiency")
 can2.SetGrid()
-masspointEff.Draw("ap")
+masspointEff.Draw()
 can2.SaveAs("Signal_Efficiency.pdf")
 
 
