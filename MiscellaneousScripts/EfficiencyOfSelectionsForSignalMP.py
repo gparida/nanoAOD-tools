@@ -41,7 +41,7 @@ masspointEff.SetMarkerStyle(34)
 masspointEff.SetMarkerSize(1.5)
 masspointEff.GetXaxis().SetTitle("Mass Point")
 masspointEff.GetYaxis().SetTitle("Efficiency")
-masspointEff.GetYaxis().SetRangeUser(0.0,1.5)
+masspointEff.GetYaxis().SetRangeUser(0.0,0.2)
 
 
 
