@@ -80,7 +80,7 @@ masspointEff.GetYaxis().SetTitle("Efficiency")
 masspointEff.GetYaxis().SetRangeUser(0.0,0.2)
 
 masspointEff_without_Lep_Iso.SetMarkerColor(2)
-masspointEff_without_Lep_Iso.SetMarkerStyle(9)
+masspointEff_without_Lep_Iso.SetMarkerStyle(21)
 masspointEff_without_Lep_Iso.SetMarkerSize(1.5)
 masspointEff_without_Lep_Iso.GetXaxis().SetTitle("Mass Point")
 masspointEff_without_Lep_Iso.GetYaxis().SetTitle("Efficiency")
