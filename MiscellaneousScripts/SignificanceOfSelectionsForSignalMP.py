@@ -58,7 +58,7 @@ for index, file in enumerate(listOfSignalFilesProcessing):
     #initialEvents = rootfile.cutflow.GetBinContent(1)
     tree_rootfile = rootfile.Get('Events')
     finalEvents = tree_rootfile.GetEntries()
-    print (float(finalEvents/totalbackground), finalEvents)
+    print (float(float(finalEvents)/float(totalbackground)), finalEvents)
     masspointEff.SetBinContent(index+1,float(finalEvents/totalbackground))
 
 
