@@ -103,7 +103,7 @@ masspointEff.SetMarkerStyle(34)
 masspointEff.SetMarkerSize(1.5)
 masspointEff.GetXaxis().SetTitle("Mass Point")
 masspointEff.GetYaxis().SetTitle("S/B")
-masspointEff.GetYaxis().SetRangeUser(0.0,0.04)
+#masspointEff.GetYaxis().SetRangeUser(0.0,0.04)
 
 masspointEff_without_Lep_Iso.SetMarkerColor(2)
 masspointEff_without_Lep_Iso.SetMarkerStyle(21)
@@ -128,7 +128,7 @@ legend.AddEntry(masspointEff_without_Lep_Tau_Iso,"All except Lep, Tau Isolation"
 
 can2 = ROOT.TCanvas("canvas2", "efficiency")
 can2.SetGrid()
-can2.SetLogy()
+#can2.SetLogy()
 masspointEff.Draw("P")
 masspointEff_without_Lep_Iso.Draw("same P")
 masspointEff_without_Lep_Tau_Iso.Draw("same P")
