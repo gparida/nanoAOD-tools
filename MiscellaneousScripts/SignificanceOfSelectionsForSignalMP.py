@@ -103,7 +103,7 @@ masspointEff.SetMarkerStyle(34)
 masspointEff.SetMarkerSize(1.5)
 masspointEff.GetXaxis().SetTitle("Mass Point")
 masspointEff.GetYaxis().SetTitle("S/B")
-#masspointEff.GetYaxis().SetRangeUser(0.0,0.15)
+masspointEff.GetYaxis().SetRangeUser(0.0,0.04)
 
 masspointEff_without_Lep_Iso.SetMarkerColor(2)
 masspointEff_without_Lep_Iso.SetMarkerStyle(21)
