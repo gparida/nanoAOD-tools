@@ -68,6 +68,8 @@ for file in glob.glob(args.inputFile2+ "/Background/*.root"):
     tree_rootfile = rootfile.Get('Events')
     totalbackground = totalbackground + tree_rootfile.GetEntries()
 
+print (totalbackground)
+
 
 for index, file in enumerate(listOfSignalFilesProcessing):
     #nameStrip = file.strip()
