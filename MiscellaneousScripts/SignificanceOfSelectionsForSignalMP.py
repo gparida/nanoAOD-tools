@@ -58,8 +58,8 @@ for index, file in enumerate(listOfSignalFilesProcessing):
     #initialEvents = rootfile.cutflow.GetBinContent(1)
     tree_rootfile = rootfile.Get('Events')
     finalEvents = tree_rootfile.GetEntries()
-    print (float(float(finalEvents)/float(totalbackground)), finalEvents)
-    masspointEff.SetBinContent(index+1,float(finalEvents/totalbackground))
+    #print (float(float(finalEvents)/float(totalbackground)), finalEvents)
+    masspointEff.SetBinContent(index+1,float(float(finalEvents)/float(totalbackground)))
 
 
 totalbackground = 0
@@ -79,7 +79,7 @@ for index, file in enumerate(listOfSignalFilesProcessing):
     #initialEvents = rootfile.cutflow.GetBinContent(1)
     tree_rootfile = rootfile.Get('Events')
     finalEvents = tree_rootfile.GetEntries()
-    masspointEff_without_Lep_Iso.SetBinContent(index+1,finalEvents/totalbackground)
+    masspointEff_without_Lep_Iso.SetBinContent(index+1,float(float(finalEvents)/float(totalbackground)))
 
 totalbackground = 0
 for file in glob.glob(args.inputFile3+ "/Background/*.root"):
@@ -95,7 +95,7 @@ for index, file in enumerate(listOfSignalFilesProcessing):
     #initialEvents = rootfile.cutflow.GetBinContent(1)
     tree_rootfile = rootfile.Get('Events')
     finalEvents = tree_rootfile.GetEntries()
-    masspointEff_without_Lep_Tau_Iso.SetBinContent(index+1,finalEvents/totalbackground)
+    masspointEff_without_Lep_Tau_Iso.SetBinContent(index+1,float(float(finalEvents)/float(totalbackground)))
 
 
 masspointEff.SetMarkerColor(4)
@@ -128,7 +128,7 @@ legend.AddEntry(masspointEff_without_Lep_Tau_Iso,"All except Lep, Tau Isolation"
 
 can2 = ROOT.TCanvas("canvas2", "efficiency")
 can2.SetGrid()
-#can2.SetLogy()
+can2.SetLogy()
 masspointEff.Draw("P")
 masspointEff_without_Lep_Iso.Draw("same P")
 masspointEff_without_Lep_Tau_Iso.Draw("same P")
