@@ -58,6 +58,7 @@ for index, file in enumerate(listOfSignalFilesProcessing):
     #initialEvents = rootfile.cutflow.GetBinContent(1)
     tree_rootfile = rootfile.Get('Events')
     finalEvents = tree_rootfile.GetEntries()
+    print (finalEvents/totalbackground)
     masspointEff.SetBinContent(index+1,finalEvents/totalbackground)
 
 
@@ -68,7 +69,7 @@ for file in glob.glob(args.inputFile2+ "/Background/*.root"):
     tree_rootfile = rootfile.Get('Events')
     totalbackground = totalbackground + tree_rootfile.GetEntries()
 
-print (totalbackground)
+#print (totalbackground)
 
 
 for index, file in enumerate(listOfSignalFilesProcessing):
