@@ -38,14 +38,34 @@ class ChannelCamilla(Module):
 		self.countBadevents = 0 #This is to keep track of bad events per file
 		self.out = wrappedOutputTree
 		#self.input = inputTree
-		self.Tau.setUpBranches(self.out) #creating the new branches     
+		#self.Tau.setUpBranches(self.out) #creating the new branches     
+		#self.FatJet.setUpBranches(self.out)
+		#self.boostedTau.setUpBranches(self.out)
+		#self.Electron.setUpBranches(self.out)
+		#self.Muon.setUpBranches(self.out)
+		#self.Jet.setUpBranches(self.out)
+		#self.out.branch("channel","I") # adding a new branch for channel 0-Di tau, 1- E-tau, 2- M-Tau
+	
+    
+	def setup_branches(self):
+		self.Tau.setUpBranches(self.out) #creating the new branches
 		self.FatJet.setUpBranches(self.out)
 		self.boostedTau.setUpBranches(self.out)
 		self.Electron.setUpBranches(self.out)
 		self.Muon.setUpBranches(self.out)
 		self.Jet.setUpBranches(self.out)
 		self.out.branch("channel","I") # adding a new branch for channel 0-Di tau, 1- E-tau, 2- M-Tau
-	
+
+	def setup_collection(self, event):
+		self.Jet.setupCollection(event)
+		self.Tau.setupCollection(event)
+		self.boostedTau.setupCollection(event)
+		self.FatJet.setupCollection(event)
+		self.Electron.setupCollection(event)
+		self.Muon.setupCollection(event)
+
+
+
 	def endFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
 		print ("Number of Bad Events ", self.countBadevents)
 		if self.countBadevents!=0:
@@ -267,6 +287,14 @@ class ChannelCamilla(Module):
 
 	def analyze(self, event): 
 		list = {} # to store the combined pt and the indices of the pairs
+
+		self.event_num += 1
+                # if self.event_num > 100:
+		# 	return False
+
+		self.setup_collection(event)
+		self.setup_branches()
+		print("after setup branches")
 
 
 		#Select the AK4 Jets and keep choose Jets with Tight DeepJet ID

@@ -17,22 +17,31 @@ class mergeTauCamilla(Module):
         #self.channel = channel # Specify the channel
         self.filename = filename
         self.event =None
+        self.branch_names_tau = dict()
+        self.branch_names_btau = dict()
     
     #lets define the branches that need to be filled
     def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
         self.out = wrappedOutputTree
         self.out.branch("nallTau","I")
-        self.out.branch("{}_pt".format("allTau"),"F",lenVar="n{}".format("allTau"))
-        self.out.branch("{}_mass".format("allTau"),"F",lenVar="n{}".format("allTau"))
-        self.out.branch("{}_phi".format("allTau"),"F",lenVar="n{}".format("allTau"))
-        self.out.branch("{}_eta".format("allTau"),"F",lenVar="n{}".format("allTau"))
-        #The boosted Tau branches listed in the dictionary are the ones that are common for both Taus and boosted Taus
-        for branch in boostedTauBranches.values():
-            for branch2 in TauBranches.values():
-                if branch[0]==branch2[0]:
-                    if (self.filename == "Data" and (branch[0] == "genPartFlav" or branch[0] =="genPartIdx")):
+        type_dict = {"Float_t" : "F", "Int_t": "I", "Bool_t" : "O", "UChar_t": "I"}
+        for leaf in inputTree.GetListOfLeaves():
+            lName = leaf.GetName()
+            if "_" not in lName:
+                continue
+            partName = lName[:lName.index("_")]
+            varName = lName[lName.index("_")+1:]
+            if partName == "boostedTau":
+                self.branch_names_btau[varName] = type_dict[leaf.GetTypeName()]
+            if partName == "Tau":
+                self.branch_names_tau[varName] = type_dict[leaf.GetTypeName()]
+
+        for branch,branchType in self.branch_names_btau.iteritems(): 
+            for branch2, branchType2 in self.branch_names_tau.iteritems():
+                if branch==branch2:
+                    if (self.filename == "Data" and (branch == "genPartFlav" or branch =="genPartIdx")):
                         break
-                    self.out.branch("{}_{}".format("allTau",branch[0]),"{}".format(branch[1]),lenVar="n{}".format("allTau"))
+                    self.out.branch("{}_{}".format("allTau",branch),"{}".format(branchType),lenVar="n{}".format("allTau"))
                     break
 
 
@@ -44,16 +53,12 @@ class mergeTauCamilla(Module):
         else:
             length =1
         self.out.fillBranch("nallTau",length)
-        self.out.fillBranch("{}_pt".format("allTau"),self.get_attributes("pt",colllist))
-        self.out.fillBranch("{}_mass".format("allTau"),self.get_attributes("mass",colllist))
-        self.out.fillBranch("{}_phi".format("allTau"),self.get_attributes("phi",colllist))
-        self.out.fillBranch("{}_eta".format("allTau"),self.get_attributes("eta",colllist))
-        for branch in boostedTauBranches.values():           
-            for branch2 in TauBranches.values():
-                if branch[0]==branch2[0]:
-                    if (self.filename == "Data" and (branch[0] == "genPartFlav" or branch[0] =="genPartIdx")):
+        for branch in self.branch_names_btau.keys():           
+            for branch2 in self.branch_names_btau.keys():
+                if branch==branch2:
+                    if (self.filename == "Data" and (branch == "genPartFlav" or branch=="genPartIdx")):
                         break
-                    self.out.fillBranch("{}_{}".format("allTau",branch[0]),self.get_attributes(branch[0],colllist))
+                    self.out.fillBranch("{}_{}".format("allTau",branch),self.get_attributes(branch,colllist))
                     break    
             #if (self.filename == "Data" and (branch[0] == "genPartFlav" or branch[0] =="genPartIdx")):
             #    continue
@@ -75,6 +80,7 @@ class mergeTauCamilla(Module):
         self.event = event
         tauCollection = Collection(event, "gTau","gnTau")
         boostedtauCollection = Collection(event, "gboostedTau","gnboostedTau")
+
         #channelCollection = Collection(event,"channel")
         #print ("channel",channelCollection[0].channel)
         colllist =[]
