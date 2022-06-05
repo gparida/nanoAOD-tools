@@ -31,9 +31,9 @@ class mergeTauCamilla(Module):
                 continue
             partName = lName[:lName.index("_")]
             varName = lName[lName.index("_")+1:]
-            if partName == "boostedTau":
+            if partName == "gboostedTau":
                 self.branch_names_btau[varName] = type_dict[leaf.GetTypeName()]
-            if partName == "Tau":
+            if partName == "gTau":
                 self.branch_names_tau[varName] = type_dict[leaf.GetTypeName()]
 
         for branch,branchType in self.branch_names_btau.iteritems(): 
