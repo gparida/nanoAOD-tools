@@ -288,7 +288,7 @@ class ChannelCamilla(Module):
 	def analyze(self, event): 
 		list = {} # to store the combined pt and the indices of the pairs
 
-		self.event_num += 1
+		#self.event_num += 1
                 # if self.event_num > 100:
 		# 	return False
 
