@@ -112,7 +112,7 @@ class mergeTauCamilla(Module):
     def analyze(self,event):
         self.event = event
         self.tauCollection = Collection(event, "gTau","gnTau")
-        print ("type of the collection = ",type(self.tauCollection),)
+        #print ("type of the collection = ",type(self.tauCollection),)
         self.boostedtauCollection = Collection(event, "gboostedTau","gnboostedTau")
         self.createBranches()
         self.setUp = "Done"
