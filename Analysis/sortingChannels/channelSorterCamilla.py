@@ -296,11 +296,11 @@ class ChannelCamilla(Module):
 		#self.event_num += 1
                 # if self.event_num > 100:
 		# 	return False
-
-		self.setup_collection(event)
-		self.setup_branches()
-		#print("after setup branches")
-		self.setUp = "Done"
+		if self.setUp==None:
+			self.setup_collection(event)
+			self.setup_branches()
+			#print("after setup branches")
+			self.setUp = "Done"
 
 
 		#Select the AK4 Jets and keep choose Jets with Tight DeepJet ID
