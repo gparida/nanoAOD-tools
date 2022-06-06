@@ -60,22 +60,10 @@ class mergeTauCamilla(Module):
                 continue
             partName = lName[:lName.index("_")]
             varName = lName[lName.index("_")+1:]
-            #if partName == "gboostedTau":
-            #    self.branch_names_btau[varName] = type_dict[leaf.GetTypeName()]
-            if partName == "gTau":
-                self.branch_names_tau[varName] = type_dict[leaf.GetTypeName()]
-        
-        for leaf in self.boostedtauCollection._event._tree.GetListOfLeaves():
-            print (leaf)
-            lName = leaf.GetName()
-            if "_" not in lName:
-                continue
-            partName = lName[:lName.index("_")]
-            varName = lName[lName.index("_")+1:]
-            if partName == "gboostedTau":
+            if partName == "boostedTau":
                 self.branch_names_btau[varName] = type_dict[leaf.GetTypeName()]
-            #if partName == "gTau":
-            #    self.branch_names_tau[varName] = type_dict[leaf.GetTypeName()]
+            if partName == "Tau":
+                self.branch_names_tau[varName] = type_dict[leaf.GetTypeName()]
         
         print (self.branch_names_btau,self.branch_names_tau)
 
