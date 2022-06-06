@@ -50,7 +50,7 @@ class mergeTauCamilla(Module):
 #                    self.out.branch("{}_{}".format("allTau",branch),"{}".format(branchType),lenVar="n{}".format("allTau"))
 #                    break
 
-    def createBranches(self, event):
+    def createBranches(self):
         self.out.branch("nallTau","I")
         type_dict = {"Float_t" : "F", "Int_t": "I", "Bool_t" : "O", "UChar_t": "I"}
         for leaf in self.tauCollection._event._tree.GetListOfLeaves:
@@ -119,8 +119,9 @@ class mergeTauCamilla(Module):
             
 
     def analyze(self,event):
-        self.event = event
+        #self.event = event
         tauCollection = Collection(event, "gTau","gnTau")
+        print ("type of the collection = ",type(tauCollection))
         boostedtauCollection = Collection(event, "gboostedTau","gnboostedTau")
         self.createBranches(self.event)
 
