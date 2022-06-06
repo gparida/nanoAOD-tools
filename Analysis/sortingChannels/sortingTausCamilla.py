@@ -83,7 +83,7 @@ class mergeTauCamilla(Module):
         else:
             length =1
         self.out.fillBranch("nallTau",length)
-        for branch in self.branch_names_btau.keys():           
+        for branch in self.branch_names_tau.keys():           
             for branch2 in self.branch_names_btau.keys():
                 if branch==branch2:
                     if (self.filename == "Data" and (branch == "genPartFlav" or branch=="genPartIdx")):
