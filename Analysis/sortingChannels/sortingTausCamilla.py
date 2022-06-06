@@ -27,29 +27,6 @@ class mergeTauCamilla(Module):
     #lets define the branches that need to be filled
     def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
         self.out = wrappedOutputTree
-#        self.out.branch("nallTau","I")
-#        type_dict = {"Float_t" : "F", "Int_t": "I", "Bool_t" : "O", "UChar_t": "I"}
-#        for leaf in inputTree.GetListOfLeaves():
-#            print (leaf)
-#            lName = leaf.GetName()
-#            if "_" not in lName:
-#                continue
-#            partName = lName[:lName.index("_")]
-#            varName = lName[lName.index("_")+1:]
-#            if partName == "gboostedTau":
-#                self.branch_names_btau[varName] = type_dict[leaf.GetTypeName()]
-#            if partName == "gTau":
-#                self.branch_names_tau[varName] = type_dict[leaf.GetTypeName()]
-#        
-#        print (self.branch_names_btau,self.branch_names_tau)
-#
-#        for branch,branchType in self.branch_names_btau.iteritems(): 
-#            for branch2, branchType2 in self.branch_names_tau.iteritems():
-#                if branch==branch2:
-#                    if (self.filename == "Data" and (branch == "genPartFlav" or branch =="genPartIdx")):
-#                        break
-#                    self.out.branch("{}_{}".format("allTau",branch),"{}".format(branchType),lenVar="n{}".format("allTau"))
-#                    break
 
     def createBranches(self):
         if self.setUp != None:
@@ -57,7 +34,6 @@ class mergeTauCamilla(Module):
         self.out.branch("nallTau","I")
         type_dict = {"Float_t" : "F", "Int_t": "I", "Bool_t" : "O", "UChar_t": "I"}
         for leaf in self.tauCollection._event._tree.GetListOfLeaves():
-            #print (leaf)
             lName = leaf.GetName()
             if "_" not in lName:
                 continue
@@ -68,8 +44,7 @@ class mergeTauCamilla(Module):
             if partName == "Tau":
                 self.branch_names_tau[varName] = type_dict[leaf.GetTypeName()]
         
-        #print (self.branch_names_btau,self.branch_names_tau)
-
+        
         for branch,branchType in self.branch_names_btau.iteritems(): 
             for branch2, branchType2 in self.branch_names_tau.iteritems():
                 if branch==branch2:
@@ -78,7 +53,7 @@ class mergeTauCamilla(Module):
                     self.out.branch("{}_{}".format("allTau",branch),"{}".format(branchType),lenVar="n{}".format("allTau"))
                     break
 
-            #self.out.branch("{}_{}".format("allTau",branch[0]),"{}".format(branch[1]),lenVar="n{}".format("allTau"))
+            
     
     def fillBranches(self,colllist):
         if self.event.channel == 0:
@@ -93,35 +68,26 @@ class mergeTauCamilla(Module):
                         break
                     self.out.fillBranch("{}_{}".format("allTau",branch),self.get_attributes(branch,colllist))
                     break    
-            #if (self.filename == "Data" and (branch[0] == "genPartFlav" or branch[0] =="genPartIdx")):
-            #    continue
-            #self.out.fillBranch("{}_{}".format("allTau",branch[0]),self.get_attributes(branch[0],colllist))
 
     def get_attributes(self,variable,collList):
         list = []
         for coll in collList:
             for obj in coll:
                 list.append(obj[variable])
-        #if variable == "pt":
-            #print (list)
         return list
 
-        #return [obj[variable] for obj in self.allTauCollection]
             
 
     def analyze(self,event):
         self.event = event
         self.tauCollection = Collection(event, "gTau","gnTau")
-        #print ("type of the collection = ",type(self.tauCollection),)
         self.boostedtauCollection = Collection(event, "gboostedTau","gnboostedTau")
-        self.createBranches()
-        self.setUp = "Done"
+        if self.setUp == None:
+            self.createBranches()
+            self.setUp = "Done"
 
-        #channelCollection = Collection(event,"channel")
-        #print ("channel",channelCollection[0].channel)
         colllist =[]
-        #print ("Type of the collection", type(tauCollection))
-        #print ("MET",event.MET_pt)
+
         if event.channel == 0:
             if (len(self.tauCollection)==2):
                 #self.allTauCollection = tauCollection

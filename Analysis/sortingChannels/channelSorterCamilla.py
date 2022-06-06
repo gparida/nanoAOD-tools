@@ -38,14 +38,6 @@ class ChannelCamilla(Module):
 	def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
 		self.countBadevents = 0 #This is to keep track of bad events per file
 		self.out = wrappedOutputTree
-		#self.input = inputTree
-		#self.Tau.setUpBranches(self.out) #creating the new branches     
-		#self.FatJet.setUpBranches(self.out)
-		#self.boostedTau.setUpBranches(self.out)
-		#self.Electron.setUpBranches(self.out)
-		#self.Muon.setUpBranches(self.out)
-		#self.Jet.setUpBranches(self.out)
-		#self.out.branch("channel","I") # adding a new branch for channel 0-Di tau, 1- E-tau, 2- M-Tau
 	
     
 	def setup_branches(self):
