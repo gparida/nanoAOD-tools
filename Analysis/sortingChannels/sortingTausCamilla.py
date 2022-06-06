@@ -19,13 +19,41 @@ class mergeTauCamilla(Module):
         self.event =None
         self.branch_names_tau = dict()
         self.branch_names_btau = dict()
+        #self.tauCollection =  None
+        #self.boostedtauCollection = None
+        self.event = None
     
     #lets define the branches that need to be filled
     def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
         self.out = wrappedOutputTree
+#        self.out.branch("nallTau","I")
+#        type_dict = {"Float_t" : "F", "Int_t": "I", "Bool_t" : "O", "UChar_t": "I"}
+#        for leaf in inputTree.GetListOfLeaves():
+#            print (leaf)
+#            lName = leaf.GetName()
+#            if "_" not in lName:
+#                continue
+#            partName = lName[:lName.index("_")]
+#            varName = lName[lName.index("_")+1:]
+#            if partName == "gboostedTau":
+#                self.branch_names_btau[varName] = type_dict[leaf.GetTypeName()]
+#            if partName == "gTau":
+#                self.branch_names_tau[varName] = type_dict[leaf.GetTypeName()]
+#        
+#        print (self.branch_names_btau,self.branch_names_tau)
+#
+#        for branch,branchType in self.branch_names_btau.iteritems(): 
+#            for branch2, branchType2 in self.branch_names_tau.iteritems():
+#                if branch==branch2:
+#                    if (self.filename == "Data" and (branch == "genPartFlav" or branch =="genPartIdx")):
+#                        break
+#                    self.out.branch("{}_{}".format("allTau",branch),"{}".format(branchType),lenVar="n{}".format("allTau"))
+#                    break
+
+    def createBranches(self, event):
         self.out.branch("nallTau","I")
         type_dict = {"Float_t" : "F", "Int_t": "I", "Bool_t" : "O", "UChar_t": "I"}
-        for leaf in inputTree.GetListOfLeaves():
+        for leaf in event.GetListOfLeaves():
             print (leaf)
             lName = leaf.GetName()
             if "_" not in lName:
@@ -46,7 +74,6 @@ class mergeTauCamilla(Module):
                         break
                     self.out.branch("{}_{}".format("allTau",branch),"{}".format(branchType),lenVar="n{}".format("allTau"))
                     break
-
 
             #self.out.branch("{}_{}".format("allTau",branch[0]),"{}".format(branch[1]),lenVar="n{}".format("allTau"))
     
@@ -80,9 +107,10 @@ class mergeTauCamilla(Module):
             
 
     def analyze(self,event):
-        self.event = event
+        self.event - event
         tauCollection = Collection(event, "gTau","gnTau")
         boostedtauCollection = Collection(event, "gboostedTau","gnboostedTau")
+        self.createBranches(self.event)
 
         #channelCollection = Collection(event,"channel")
         #print ("channel",channelCollection[0].channel)
