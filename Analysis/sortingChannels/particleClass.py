@@ -25,8 +25,7 @@ class particle(object):
 		
 		self.branches_setup = True
 
-
-	def setupCollection(self, event):
+	def setupCollectionforInitialization(self, event):
 		self.collection = Collection(event,self.particleType)
 		if self.branch_names:
 			return
@@ -41,6 +40,14 @@ class particle(object):
 			varName = lName[lName.index("_")+1:]
 			if partName == self.particleType:
 				self.branch_names[varName] = type_dict[leaf.GetTypeName()]
+
+
+	def setupCollection(self, event):
+		self.collection = Collection(event,self.particleType)
+		if self.branch_names:
+			return
+		
+		print("here", self.particleType)
 
 	
 	#Cuts more complicated for some objects could be added in a separate class that inherits particle class

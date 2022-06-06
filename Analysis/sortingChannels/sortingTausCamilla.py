@@ -57,7 +57,7 @@ class mergeTauCamilla(Module):
         self.out.branch("nallTau","I")
         type_dict = {"Float_t" : "F", "Int_t": "I", "Bool_t" : "O", "UChar_t": "I"}
         for leaf in self.tauCollection._event._tree.GetListOfLeaves():
-            print (leaf)
+            #print (leaf)
             lName = leaf.GetName()
             if "_" not in lName:
                 continue
@@ -68,7 +68,7 @@ class mergeTauCamilla(Module):
             if partName == "Tau":
                 self.branch_names_tau[varName] = type_dict[leaf.GetTypeName()]
         
-        print (self.branch_names_btau,self.branch_names_tau)
+        #print (self.branch_names_btau,self.branch_names_tau)
 
         for branch,branchType in self.branch_names_btau.iteritems(): 
             for branch2, branchType2 in self.branch_names_tau.iteritems():

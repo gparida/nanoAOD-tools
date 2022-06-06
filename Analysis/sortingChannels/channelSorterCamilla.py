@@ -62,12 +62,12 @@ class ChannelCamilla(Module):
 	def setup_collection(self, event):
 		if self.setUp!=None:
 			return
-		self.Jet.setupCollection(event)
-		self.Tau.setupCollection(event)
-		self.boostedTau.setupCollection(event)
-		self.FatJet.setupCollection(event)
-		self.Electron.setupCollection(event)
-		self.Muon.setupCollection(event)
+		self.Jet.setupCollectionforInitialization(event)
+		self.Tau.setupCollectionforInitialization(event)
+		self.boostedTau.setupCollectionforInitialization(event)
+		self.FatJet.setupCollectionforInitialization(event)
+		self.Electron.setupCollectionforInitialization(event)
+		self.Muon.setupCollectionforInitialization(event)
 
 
 
