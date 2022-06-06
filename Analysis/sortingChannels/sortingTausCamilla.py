@@ -53,7 +53,7 @@ class mergeTauCamilla(Module):
     def createBranches(self, event):
         self.out.branch("nallTau","I")
         type_dict = {"Float_t" : "F", "Int_t": "I", "Bool_t" : "O", "UChar_t": "I"}
-        for leaf in event.GetListOfLeaves():
+        for leaf in event._tree.GetListOfLeaves():
             print (leaf)
             lName = leaf.GetName()
             if "_" not in lName:
