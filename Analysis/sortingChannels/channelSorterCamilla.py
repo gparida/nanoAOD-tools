@@ -531,7 +531,7 @@ if __name__ == "__main__":
 
 
 	#fnames = ["/data/aloeliger/bbtautauAnalysis/2016/Data.root"]
-	fnames = glob.glob(args.inputLocation + "/WJets_HT-400to600*.root")  #making a list of input files
+	fnames = glob.glob(args.inputLocation + "/RadionTohhtohtatahbb_M-1000*.root")  #making a list of input files
 	#outputDir = "/data/gparida/Background_Samples/bbtautauAnalysis/2016/{}_Channel".format(args.Channel)
 	outputDir = args.outputLocation
 	#outputDir = "."
