@@ -53,7 +53,7 @@ class mergeTauCamilla(Module):
     def createBranches(self):
         self.out.branch("nallTau","I")
         type_dict = {"Float_t" : "F", "Int_t": "I", "Bool_t" : "O", "UChar_t": "I"}
-        for leaf in self.tauCollection._event._tree.GetListOfLeaves:
+        for leaf in self.tauCollection._event._tree.GetListOfLeaves():
             print (leaf)
             lName = leaf.GetName()
             if "_" not in lName:
@@ -65,7 +65,7 @@ class mergeTauCamilla(Module):
             if partName == "gTau":
                 self.branch_names_tau[varName] = type_dict[leaf.GetTypeName()]
         
-        for leaf in self.boostedtauCollection._event._tree.GetListOfLeaves:
+        for leaf in self.boostedtauCollection._event._tree.GetListOfLeaves():
             print (leaf)
             lName = leaf.GetName()
             if "_" not in lName:
@@ -131,32 +131,32 @@ class mergeTauCamilla(Module):
         #print ("Type of the collection", type(tauCollection))
         #print ("MET",event.MET_pt)
         if event.channel == 0:
-            if (len(tauCollection)==2):
+            if (len(self.tauCollection)==2):
                 #self.allTauCollection = tauCollection
-                colllist.append(tauCollection)
-            if (len(boostedtauCollection)==2):
+                colllist.append(self.tauCollection)
+            if (len(self.boostedtauCollection)==2):
                 #self.allTauCollection = boostedtauCollection
-                colllist.append(boostedtauCollection)
-            if (len(tauCollection)==1 or len(boostedtauCollection)==1):
-                if tauCollection[0].pt >= boostedtauCollection[0].pt:
-                    colllist.append(tauCollection)
-                    colllist.append(boostedtauCollection)
+                colllist.append(self.boostedtauCollection)
+            if (len(self.tauCollection)==1 or len(self.boostedtauCollection)==1):
+                if self.tauCollection[0].pt >= self.boostedtauCollection[0].pt:
+                    colllist.append(self.tauCollection)
+                    colllist.append(self.boostedtauCollection)
                     #self.allTauCollection = tauCollection
                     #self.allTauCollection.extend(boostedtauCollection)
 
                 else:
-                    colllist.append(boostedtauCollection)
-                    colllist.append(tauCollection)
+                    colllist.append(self.boostedtauCollection)
+                    colllist.append(self.tauCollection)
                     #allTauCollection = boostedtauCollection
                     #allTauCollection.extend(tauCollection)
             self.fillBranches(colllist)
             return True    
         
         if (event.channel == 1  or event.channel == 2):
-            if (len(tauCollection)==1):
-                colllist.append(tauCollection)
-            if (len(boostedtauCollection)==1):
-                colllist.append(boostedtauCollection)
+            if (len(self.tauCollection)==1):
+                colllist.append(self.tauCollection)
+            if (len(self.boostedtauCollection)==1):
+                colllist.append(self.boostedtauCollection)
             self.fillBranches(colllist)
             return True
         
