@@ -33,6 +33,7 @@ class ChannelCamilla(Module):
 		self.Electron = Electron("Electron")    
 		self.Muon = Muon("Muon")
 		self.Jet = particle("Jet")
+		self.setUp = None
 	
 	def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
 		self.countBadevents = 0 #This is to keep track of bad events per file
@@ -48,6 +49,8 @@ class ChannelCamilla(Module):
 	
     
 	def setup_branches(self):
+		if self.setUp!=None:
+			return
 		self.Tau.setUpBranches(self.out) #creating the new branches
 		self.FatJet.setUpBranches(self.out)
 		self.boostedTau.setUpBranches(self.out)
@@ -57,6 +60,8 @@ class ChannelCamilla(Module):
 		self.out.branch("channel","I") # adding a new branch for channel 0-Di tau, 1- E-tau, 2- M-Tau
 
 	def setup_collection(self, event):
+		if self.setUp!=None:
+			return
 		self.Jet.setupCollection(event)
 		self.Tau.setupCollection(event)
 		self.boostedTau.setupCollection(event)
@@ -295,6 +300,7 @@ class ChannelCamilla(Module):
 		self.setup_collection(event)
 		self.setup_branches()
 		#print("after setup branches")
+		self.setUp = "Done"
 
 
 		#Select the AK4 Jets and keep choose Jets with Tight DeepJet ID
