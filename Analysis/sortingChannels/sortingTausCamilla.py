@@ -120,9 +120,9 @@ class mergeTauCamilla(Module):
 
     def analyze(self,event):
         #self.event = event
-        tauCollection = Collection(event, "gTau","gnTau")
-        print ("type of the collection = ",type(tauCollection))
-        boostedtauCollection = Collection(event, "gboostedTau","gnboostedTau")
+        self.tauCollection = Collection(event, "gTau","gnTau")
+        print ("type of the collection = ",type(self.tauCollection),)
+        self.boostedtauCollection = Collection(event, "gboostedTau","gnboostedTau")
         self.createBranches()
 
         #channelCollection = Collection(event,"channel")
