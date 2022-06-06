@@ -107,7 +107,7 @@ class mergeTauCamilla(Module):
             
 
     def analyze(self,event):
-        self.event - event
+        self.event = event
         tauCollection = Collection(event, "gTau","gnTau")
         boostedtauCollection = Collection(event, "gboostedTau","gnboostedTau")
         self.createBranches(self.event)
