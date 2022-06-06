@@ -22,6 +22,7 @@ class mergeTauCamilla(Module):
         self.tauCollection =  None
         self.boostedtauCollection = None
         self.event = None
+        self.setUp = None
     
     #lets define the branches that need to be filled
     def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
@@ -51,6 +52,8 @@ class mergeTauCamilla(Module):
 #                    break
 
     def createBranches(self):
+        if self.setUp != None:
+            return
         self.out.branch("nallTau","I")
         type_dict = {"Float_t" : "F", "Int_t": "I", "Bool_t" : "O", "UChar_t": "I"}
         for leaf in self.tauCollection._event._tree.GetListOfLeaves():
@@ -107,6 +110,7 @@ class mergeTauCamilla(Module):
             
 
     def analyze(self,event):
+        self.setUp = "Done"
         self.event = event
         self.tauCollection = Collection(event, "gTau","gnTau")
         print ("type of the collection = ",type(self.tauCollection),)
