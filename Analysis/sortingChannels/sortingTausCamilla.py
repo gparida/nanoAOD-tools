@@ -19,8 +19,8 @@ class mergeTauCamilla(Module):
         self.event =None
         self.branch_names_tau = dict()
         self.branch_names_btau = dict()
-        #self.tauCollection =  None
-        #self.boostedtauCollection = None
+        self.tauCollection =  None
+        self.boostedtauCollection = None
         self.event = None
     
     #lets define the branches that need to be filled
@@ -53,7 +53,19 @@ class mergeTauCamilla(Module):
     def createBranches(self, event):
         self.out.branch("nallTau","I")
         type_dict = {"Float_t" : "F", "Int_t": "I", "Bool_t" : "O", "UChar_t": "I"}
-        for leaf in event._tree.GetListOfLeaves():
+        for leaf in self.tauCollection._event._tree.GetListOfLeaves:
+            print (leaf)
+            lName = leaf.GetName()
+            if "_" not in lName:
+                continue
+            partName = lName[:lName.index("_")]
+            varName = lName[lName.index("_")+1:]
+            #if partName == "gboostedTau":
+            #    self.branch_names_btau[varName] = type_dict[leaf.GetTypeName()]
+            if partName == "gTau":
+                self.branch_names_tau[varName] = type_dict[leaf.GetTypeName()]
+        
+        for leaf in self.boostedtauCollection._event._tree.GetListOfLeaves:
             print (leaf)
             lName = leaf.GetName()
             if "_" not in lName:
@@ -62,8 +74,8 @@ class mergeTauCamilla(Module):
             varName = lName[lName.index("_")+1:]
             if partName == "gboostedTau":
                 self.branch_names_btau[varName] = type_dict[leaf.GetTypeName()]
-            if partName == "gTau":
-                self.branch_names_tau[varName] = type_dict[leaf.GetTypeName()]
+            #if partName == "gTau":
+            #    self.branch_names_tau[varName] = type_dict[leaf.GetTypeName()]
         
         print (self.branch_names_btau,self.branch_names_tau)
 
