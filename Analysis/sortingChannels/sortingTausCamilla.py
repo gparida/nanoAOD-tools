@@ -123,7 +123,7 @@ class mergeTauCamilla(Module):
         tauCollection = Collection(event, "gTau","gnTau")
         print ("type of the collection = ",type(tauCollection))
         boostedtauCollection = Collection(event, "gboostedTau","gnboostedTau")
-        self.createBranches(self.event)
+        self.createBranches()
 
         #channelCollection = Collection(event,"channel")
         #print ("channel",channelCollection[0].channel)
