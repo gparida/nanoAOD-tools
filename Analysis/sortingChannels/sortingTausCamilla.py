@@ -35,6 +35,8 @@ class mergeTauCamilla(Module):
                 self.branch_names_btau[varName] = type_dict[leaf.GetTypeName()]
             if partName == "gTau":
                 self.branch_names_tau[varName] = type_dict[leaf.GetTypeName()]
+        
+        print (self.branch_names_btau,self.branch_names_tau)
 
         for branch,branchType in self.branch_names_btau.iteritems(): 
             for branch2, branchType2 in self.branch_names_tau.iteritems():

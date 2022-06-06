@@ -24,7 +24,7 @@ theFile = ROOT.TFile(jsonInfo[{refinedName}Config.name]['file'])
 totalNumberOfEvents = theFile.cutflow.GetBinContent(1)
 theFile.Close()
 
-{refinedName}Config.inputFile = jsonInfo[{refinedName}Config.name]['file']
+{refinedName}Config.inputFile = jsonInfo[{refinedName}Config.name]['file']3
 {refinedName}Config.inputFile_tt = jsonInfo[{refinedName}Config.name]['file_tt']
 {refinedName}Config.inputFile_et = jsonInfo[{refinedName}Config.name]['file_et']
 {refinedName}Config.inputFile_mt = jsonInfo[{refinedName}Config.name]['file_mt']
