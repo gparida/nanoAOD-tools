@@ -26,6 +26,7 @@ class mergeTauCamilla(Module):
         self.out.branch("nallTau","I")
         type_dict = {"Float_t" : "F", "Int_t": "I", "Bool_t" : "O", "UChar_t": "I"}
         for leaf in inputTree.GetListOfLeaves():
+            print (leaf)
             lName = leaf.GetName()
             if "_" not in lName:
                 continue
